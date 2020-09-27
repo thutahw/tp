@@ -1,4 +1,4 @@
-#About Us
+# About Us
 
 We are [Team](https://github.com/AY2021S1-CS2103T-W12-3/tp) Baymax.
 
@@ -56,7 +56,7 @@ We are a team based in the [School of Computing, National University of Singapor
 ---
 ### Hui Ling
 
-<img src="images/porkeypine.png" width="200px">
+<img src="images/porkeypine.png" width="200px" style="border-radius:50%">
 
 [[github](http://github.com/porkeypine)]
 [[portfolio](team/johndoe.md)]
