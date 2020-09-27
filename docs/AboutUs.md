@@ -1,59 +1,68 @@
----
-layout: page
-title: About Us
----
+#About Us
+
+We are [Team](https://github.com/AY2021S1-CS2103T-W12-3/tp) Baymax.
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Jianhan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jianhandev.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](http://github.com/jianhandev)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Leader
+* Responsibilities: Integration, Git Expert
+* Features: Utilize Calendar to View All Appointments
+* Components: UI, Logic 
+---
+### Thuta 
 
-### Jane Doe
+<img src="images/thutahw.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/thutahw)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
+* Responsibilities: Code Quality, UML Expert
+* Features: Manage Patient Information
+* Components: Common, Storage 
+---
+### Kaitlyn
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/kaitlynng)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Documentation
+* Features: Utilize Calendar to View All Appointments
+* Components: Common, Storage
+---
+### Reuben
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/theyellowfellow)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Deliverables & Deadlines, Scheduling & Tracking
+* Features: Manage Appointments
+* Components: UI, Model
+---
+### Hui Ling
+
+<img src="images/porkeypine.png" width="200px">
+
+[[github](http://github.com/porkeypine)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, IntelliJ Expert
+* Features: Manage Appointments
+* Components: Model, Logic
+---
