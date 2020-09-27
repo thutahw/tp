@@ -2,21 +2,21 @@
 
 ![Ui](docs/images/Ui.png)
 
-#Baymax
+# Baymax
 * Baymax is a clinic appointment manager, that helps to make scheduling simple and efficient, designed with optimising 
   user experience in mind. <br>
 * Baymax is a desktop application targeted at clinic receptionists who want managing appointments to be more seamless.
 * Baymax has a Graphic User Interface optimised for healthcare professionals who can work well with the Command Line 
   Interface. 
 
-#Sitemap
+# Sitemap
 * User Guide <br>
 * Developer Guide <br>
 * About Us <br>
 * Contact Us <br>
 
-#Acknowledgements
+# Acknowledgements
 * Original source code, AddressBook-Level3, was created by SE-EDU initiative.
 * Libraries used: JavaFX, Jackson, JUnit5
 
-#License: MIT
+# License: MIT
