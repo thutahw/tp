@@ -250,16 +250,27 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
-
+| -------- | ------------------------------------------ | ------------------------------ | ----------------------------------------------------------- |
+| `* * *`  | forgetful receptionist of a clinic         | display all available commands | refer to the list of commands when I forget them            |
+| `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
+| `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
+| `* * *`  | receptionist of a clinic                   | add a patient's contact information | contact them if needed                                 |
+| `* * *`  | receptionist of a clinic                   | add a patient's emergency contact information | contact the patient's family members in times of emergencies |
+| `* * *`  | receptionist of a clinic                   | view a patient's profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | delete a patient profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
+| `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
+| `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
+| `* * *`  | receptionist of a clinic                   | delete an existing appointment | remove cancelled appointments                               |
+| `* *`    | busy receptionist of a clinic              | find patients by name          | quickly retrieve the patient's information given just the patient's name |
+| `* *`    | receptionist of a busy clinic              | find patient by NRIC           | find patients using a unique ID if there are multiple patients with the same name |
+| `* *`    | receptionist of a clinic using the app for the first time | clear all current patient data | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | receptionist of a clinic with busy patients | change a patient's appointment date | accommodate for last-minute changes in the patient's schedule |
+| `* *`    | receptionist of a clinic                   | delete all existing appointments of a patient | change all of a patient's appointments in the case of recovery or a serious change in medical condition |
+| `* *`    | receptionist of a clinic                   | mark an appointment as missed | keep track of which appointments did not occur due to various circumstances, and possibly arrange for other appointments in its place |
+| `*`      | receptionist of a patient-centric clinic     | add preferred but currently unavailable slots for patient's appointments | give patients their more preferred slot if it is becomes available |
+| `*`      | careless receptionist in the clinic          | undo appointment deletion       | restore appointments that I accidentally delete           |
+| `*`      | careless receptionist in the clinic          | backdate an appointment         | add in appointments that I accidentally missed out        |
 
 ### Use cases
 (Contributed by Li Jianhan)
