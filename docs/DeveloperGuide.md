@@ -271,6 +271,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | receptionist of a patient-centric clinic     | add preferred but currently unavailable slots for patient's appointments | give patients their more preferred slot if it is becomes available |
 | `*`      | careless receptionist in the clinic          | undo appointment deletion       | restore appointments that I accidentally delete           |
 | `*`      | careless receptionist in the clinic          | backdate an appointment         | add in appointments that I accidentally missed out        |
+| `* *`    | receptionist of a clinic                   | view all the coming appointments in a particular year | have a gauge of the business of the clinic over that year |
+| `* *`    | receptionist of a clinic                   | display daily availability status of a month |                                                |
+| `* *`    | receptionist of a clinic                   | display the coming appointments in the next n days | gauge the business of the clinic in the next few days |
+| `* *`    | receptionist of a clinic                   | display all the appointments on a particular day | check the availability of the clinic on that day to arrange for other appointments |
+| `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
+
 
 ### Use cases
 (Contributed by Li Jianhan)
