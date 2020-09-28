@@ -234,16 +234,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+(Contributed by Thuta Htun Wai)
+
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* need to manage significant number of patients and appointments
+* want to keep track of patients and appointments efficiently
+* want to look up patients and/or appointments easily by using matching words
+* want to look at current and past appointments through a calendar view
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: 
+* A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
+* Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
 ### User stories
 
