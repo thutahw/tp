@@ -234,16 +234,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+(Contributed by Thuta Htun Wai)
+
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* need to manage significant number of patients and appointments
+* want to keep track of patients and appointments efficiently
+* want to look up patients and/or appointments easily by using matching words
+* want to look at current and past appointments through a calendar view
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: 
+* A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
+* Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
 ### User stories
 
@@ -260,32 +266,110 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+
 ### Use cases
+(Contributed by Li Jianhan)
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
 
-**Use case: Delete a person**
+#### Patient Profile Management
+
+> **Use case: Edit a patient’s profile**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to displays the patient’s profile
+2. Baymax displays the patient profile
+3. User requests to edit the patient’s profile
+4. Baymax saves the changes
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Patient does not exist
+	* 1a1. Baymax displays a not found message
+    
+    Use case ends
+    
+* 2a. The given user ID is invalid
+	* 2a1. Baymax displays an error message
+	
+	Use case ends.<br><br>
 
-  Use case ends.
+> **Use case: Delete a patient’s profile**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+1. User requests to display the patient’s profile
+2. Baymax displays the patient's profile
+3. User requests to delete the patient’s profile
+4. Baymax deletes the patient profile
 
-      Use case resumes at step 2.
+    Use case ends.
+    
+**Extensions**
+
+* 1a. Patient does not exist
+	* 1a1. Baymax displays a not found message
+    
+    Use case ends
+    
+* 2a. The given user ID is invalid
+	* 2a1. Baymax displays an error message
+	
+	Use case ends.<br><br>
+
+#### Appointment Management
+
+> **Use case: Change the date of an appointment**
+
+**MSS**
+
+1. User requests to display an appointment
+2. Baymax displays the requested appointment
+3. User requests to change the date of appointment
+4. Baymax changes the date of the appointment
+
+    Use case ends. <br><br>
+
+> **Use case: Delete an appointment on a particular day**
+
+**MSS**
+1. User requests to <ins>list out all appointments on a particular day</ins>
+2. Baymax displays the appointments
+3. User requests to delete the appointment
+4. Baymax deletes the appointment
+
+    Use case ends. <br><br>
+
+#### Calendar
+
+> **Use case: List all appointments on a particular day**
+
+**MSS**
+
+1. User requests to set the calendar to a particular year
+2. Baymax calendar switches to the stipulated year
+3. User requests to set the calendar to a particular month
+4. Baymax calendar switches to the stipulated month in the given year
+5. User requests to list all appointments on a given day in that month
+6. Baymax displays a list of appointments on that given day
+
+    Use case ends. <br><br>
+    
+> **Use case: List all appointments in the next *n* days**
+
+**MSS**
+
+1. User requests to set the calendar to a particular year
+2. Baymax calendar switches to the stipulated year
+3. User requests to set the calendar to a particular month
+4. Baymax calendar switches to the stipulated month in the given year
+5. User requests to list all appointments in the next 7 days
+6. Baymax displays a list of appointments in the next 7 days
+
+    Use case ends. <br><br>
 
 *{More to be added}*
 
