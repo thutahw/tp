@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/jianhandev.png" width="200px">
 
 [[github](http://github.com/jianhandev)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jianhandev.md)]
 
 * Role: Team Leader
 * Responsibilities: Integration, Git Expert
@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/thutahw.png" width="200px">
 
 [[github](http://github.com/thutahw)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/thutahw.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality, UML Expert
@@ -32,10 +32,10 @@ We are a team based in the [School of Computing, National University of Singapor
 ---
 ### Kaitlyn
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kaitlynng.png" width="200px">
 
 [[github](http://github.com/kaitlynng)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kaitlynng.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
@@ -44,10 +44,10 @@ We are a team based in the [School of Computing, National University of Singapor
 ---
 ### Reuben
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/theyellowfellow.png" width="200px">
 
 [[github](http://github.com/theyellowfellow)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/theyellowfellow.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables & Deadlines, Scheduling & Tracking
@@ -59,7 +59,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/porkeypine.png" width="200px" style="border-radius:50%">
 
 [[github](http://github.com/porkeypine)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/porkeypine.md)]
 
 * Role: Developer
 * Responsibilities: Documentation, IntelliJ Expert
