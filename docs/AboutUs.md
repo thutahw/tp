@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Leader
 * Responsibilities: Integration, Git Expert
-* Features: Utilize Calendar to View All Appointments
+* Features: Calendar
 * Components: UI, Logic 
 ---
 ### Thuta 
@@ -27,7 +27,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Code Quality, UML Expert
-* Features: Manage Patient Information
+* Features: Patient Information Management
 * Components: Common, Storage 
 ---
 ### Kaitlyn
@@ -39,7 +39,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Testing, Documentation
-* Features: Utilize Calendar to View All Appointments
+* Features: Calendar
 * Components: Common, Storage
 ---
 ### Reuben
@@ -51,7 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Deliverables & Deadlines, Scheduling & Tracking
-* Features: Manage Appointments
+* Features: Appointment Management
 * Components: UI, Model
 ---
 ### Hui Ling
@@ -63,6 +63,6 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Documentation, IntelliJ Expert
-* Features: Manage Appointments
+* Features: Appointment Management
 * Components: Model, Logic
 ---
