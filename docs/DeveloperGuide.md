@@ -435,7 +435,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 * Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
 
 #### *OOP*
-* Short for Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
+* Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
 
 #### *CLI*
 * Abbreviation for Command Line Interface, referring to an interface which accepts user inputs and commands in the form of text.
@@ -444,7 +444,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 * Abbreviation for Main Success Scenario, describing the most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 
 #### *OS*
-* Short for Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
+* Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
 
 #### *Private contact detail*
 * A contact detail that is not meant to be shared with others
