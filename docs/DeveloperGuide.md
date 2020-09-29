@@ -40,7 +40,7 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-Each of the four components,
+Each of the four components
 
 * defines its *API* in an `interface` with the same name as the Component.
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
@@ -393,11 +393,23 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+* Application should work on any mainstream OS as long as it has Java 11 or above installed.
+* Application should work without requiring an installer.
+* Application should not depend on a remote server or other remote resources.
+* Application should work without an online connection.
+* Application should work on both 32-bit and 64-bit environments.
+* Application should be able to save and load 200 patients’ worth of data without any noticeable delay in performance.
+* Application should respond within 2 seconds to all commands.
+* Application data should load correctly on any mainstream OS given the data file is transferred properly. 
+* Application data should never be lost or removed except when user explicitly deletes something. 
+* Application should be easily extended by developers looking to improve or expand it.
+* A user with above-average typing speed for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
+* Application should be easy to use for a new user when following the User Guide or `help` instructions.
+* Application is intended for a single user.
+* Application should have a user-friendly graphical user interface and display.
+* Application is not required to handle detailed medical information about patients.
+* Application is not required to handle the printing of patient profiles or saving them in a user-friendly manner (only displaying). 
+* The project is expected to adhere to a schedule that delivers a feature set every two weeks.
 
 ### Glossary
 
