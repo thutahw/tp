@@ -35,8 +35,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
+* [**`UI`**](#ui-component): Handles the UI of the App.
+* [**`Logic`**](#logic-component): Executes commands.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
@@ -252,19 +252,37 @@ _{Explain here how the data archiving feature will be implemented}_
 * Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
 ### User stories
+(Contributed by Kaitlyn Ng)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| -------- | ------------------------------------------ | ------------------------------ | ----------------------------------------------------------- |
+| `* * *`  | forgetful receptionist of a clinic         | display all available commands | refer to the list of commands when I forget them            |
+| `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
+| `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
+| `* * *`  | receptionist of a clinic                   | add a patient's contact information | contact them if needed                                 |
+| `* * *`  | receptionist of a clinic                   | add a patient's emergency contact information | contact the patient's family members in times of emergencies |
+| `* * *`  | receptionist of a clinic                   | view a patient's profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | delete a patient profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
+| `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
+| `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
+| `* * *`  | receptionist of a clinic                   | delete an existing appointment | remove cancelled appointments                               |
+| `* *`    | busy receptionist of a clinic              | find patients by name          | quickly retrieve the patient's information given just the patient's name |
+| `* *`    | receptionist of a busy clinic              | find patient by NRIC           | find patients using a unique ID if there are multiple patients with the same name |
+| `* *`    | receptionist of a clinic using the app for the first time | clear all current patient data | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | receptionist of a clinic with busy patients | change a patient's appointment date | accommodate for last-minute changes in the patient's schedule |
+| `* *`    | receptionist of a clinic                   | delete all existing appointments of a patient | change all of a patient's appointments in the case of recovery or a serious change in medical condition |
+| `* *`    | receptionist of a clinic                   | mark an appointment as missed | keep track of which appointments did not occur due to various circumstances, and possibly arrange for other appointments in its place |
+| `*`      | receptionist of a patient-centric clinic     | add preferred but currently unavailable slots for patient's appointments | give patients their more preferred slot if it is becomes available |
+| `*`      | careless receptionist in the clinic          | undo appointment deletion       | restore appointments that I accidentally delete           |
+| `*`      | careless receptionist in the clinic          | backdate an appointment         | add in appointments that I accidentally missed out        |
+| `* *`    | receptionist of a clinic                   | view all the coming appointments in a particular year | have a gauge of the business of the clinic over that year |
+| `* *`    | receptionist of a clinic                   | display daily availability status of a month |                                                |
+| `* *`    | receptionist of a clinic                   | display the coming appointments in the next n days | gauge the business of the clinic in the next few days |
+| `* *`    | receptionist of a clinic                   | display all the appointments on a particular day | check the availability of the clinic on that day to arrange for other appointments |
+| `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
 
 
 ### Use cases
@@ -375,11 +393,39 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Technical Environment**
+* Application should work on any mainstream OS as long as it has Java 11 or above installed.
+* Application should work without requiring an installer.
+* Application should not depend on a remote server or other remote resources.
+* Application should work without an online connection.
+* Application should work on both 32-bit and 64-bit environments.
 
-*{More to be added}*
+**Performance**
+* Application should be able to save and load 200 patients’ worth of data without any noticeable delay in performance.
+* Application should respond within 2 seconds to all commands.
+
+**Quality**
+* A user with above-average typing speed for regular English text should be able to accomplish most of the tasks faster by typing commands than using the mouse.
+* Application should be easy to use for a new user when following the User Guide or `help` instructions.
+* Application should have a user-friendly graphical user interface and display.
+
+**Data**
+* Application data should load correctly on any mainstream OS given the data file is transferred properly. 
+* Application data should never be lost or removed except when user explicitly deletes something. 
+
+**Project Scope**
+* Application is not required to handle detailed medical information about patients.
+* Application is not required to handle the printing of patient profiles or saving them in a user-friendly manner (only displaying). 
+* Application is not required to handle multiple users.
+
+**Process**
+* The project is expected to adhere to a schedule that delivers a feature set every two weeks.
+
+**Extensibility & Documentation**
+* Application should be easily extended by developers looking to improve or expand it.
+* Application should be well-documented such that new developers can be on-boarded quickly just by reading through documentation.
+
+
 
 ### Glossary
 
