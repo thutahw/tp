@@ -230,9 +230,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## Appendix A: Product scope
 
 (Contributed by Thuta Htun Wai)
 
@@ -251,7 +249,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
 * Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
-### User stories
+## Appendix B: User stories
 (Contributed by Kaitlyn Ng)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -285,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
 
 
-### Use cases
+## Appendix C: Use cases
 (Contributed by Li Jianhan)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
@@ -391,7 +389,8 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 *{More to be added}*
 
-### Non-Functional Requirements
+## Appendix D: Non-Functional Requirements
+(Contributed by Shi Hui Ling))
 
 **Technical Environment**
 * Application should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -427,14 +426,32 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 
 
-### Glossary
+## Appendix E: Glossary
+(Contributed by Reuben Teng)
+#### *UI*
+* Abbreviation for User Interface, representing the point of human-computer interaction and communication.
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+#### *API*
+* Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
+
+#### *OOP*
+* Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
+
+#### *CLI*
+* Abbreviation for Command Line Interface, referring to an interface which accepts user inputs and commands in the form of text.
+
+#### *MSS*
+* Abbreviation for Main Success Scenario, describing the most straightforward interaction for a given use case, which assumes that nothing goes wrong.
+
+#### *OS*
+* Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
+
+#### *Private contact detail*
+* A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
