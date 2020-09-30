@@ -68,13 +68,6 @@
           <Tab>
             <graphic>
               <ImageView>
-                <Image url="@/images/IconAppointment.png"></Image>
-              </ImageView>
-            </graphic>
-          </Tab>
-          <Tab>
-            <graphic>
-              <ImageView>
                 <Image url="@/images/IconPatientInfo.png"></Image>
               </ImageView>
             </graphic>
@@ -86,6 +79,20 @@
                 <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
               </VBox>
             </content>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconAppointment.png"></Image>
+              </ImageView>
+            </graphic>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconInfo.png"></Image>
+              </ImageView>
+            </graphic>
           </Tab>
         </TabPane>
 
