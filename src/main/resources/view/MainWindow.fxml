@@ -50,49 +50,56 @@
           </padding>
         </StackPane>
 
-        <TabPane fx:id="tabPane" minWidth="450" minHeight="600" side="LEFT" tabClosingPolicy="UNAVAILABLE">
-          <Tab>
+        <TabPane fx:id="sideTabPane" minWidth="450" minHeight="600" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+          <Tab fx:id="dashboardTab">
             <graphic>
               <ImageView>
                 <Image url="@/images/IconHome.png"></Image>
               </ImageView>
             </graphic>
+            <content>
+              <StackPane fx:id="dashboardTabContentPlaceholder"></StackPane>
+            </content>
           </Tab>
-          <Tab>
+          <Tab fx:id="calendarTab">
             <graphic>
               <ImageView>
                 <Image url="@/images/IconCalendar.png"></Image>
               </ImageView>
             </graphic>
+            <content>
+              <StackPane fx:id="calendarTabContentPlaceholder"></StackPane>
+            </content>
           </Tab>
-          <Tab>
+          <Tab fx:id="patientInfoTab">
             <graphic>
               <ImageView>
                 <Image url="@/images/IconPatientInfo.png"></Image>
               </ImageView>
             </graphic>
             <content>
-              <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-                <padding>
-                  <Insets top="10" right="10" bottom="10" left="10"/>
-                </padding>
-                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-              </VBox>
+              <StackPane fx:id="patientTabContentPlaceholder"></StackPane>
             </content>
           </Tab>
-          <Tab>
+          <Tab fx:id="appointmentTab">
             <graphic>
               <ImageView>
                 <Image url="@/images/IconAppointment.png"></Image>
               </ImageView>
             </graphic>
+            <content>
+              <StackPane fx:id="appointmentTabContentPlaceholder"></StackPane>
+            </content>
           </Tab>
-          <Tab>
+          <Tab fx:id="infoTab">
             <graphic>
               <ImageView>
                 <Image url="@/images/IconInfo.png"></Image>
               </ImageView>
             </graphic>
+            <content>
+              <StackPane fx:id="infoTabContentPlaceholder"></StackPane>
+            </content>
           </Tab>
         </TabPane>
 
