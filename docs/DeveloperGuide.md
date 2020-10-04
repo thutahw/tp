@@ -35,8 +35,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
+* [**`UI`**](#ui-component): Handles the UI of the App.
+* [**`Logic`**](#logic-component): Executes commands.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
@@ -230,22 +230,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix A: Product scope
 
-### Product scope
+(Contributed by Thuta Htun Wai)
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* need to manage significant number of patients and appointments
+* want to keep track of patients and appointments efficiently
+* want to look up patients and/or appointments easily by using matching words
+* want to look at current and past appointments through a calendar view
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+* A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
+* Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
-
-### User stories
+## Appendix B: User stories
 (Contributed by Kaitlyn Ng)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -279,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
 
 
-### Use cases
+## Appendix C: Use cases
 (Contributed by Li Jianhan)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
@@ -385,22 +389,69 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 *{More to be added}*
 
-### Non-Functional Requirements
+## Appendix D: Non-Functional Requirements
+(Contributed by Shi Hui Ling))
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+**Technical Environment**
+* Application should work on any mainstream OS as long as it has Java 11 or above installed.
+* Application should work without requiring an installer.
+* Application should not depend on a remote server or other remote resources.
+* Application should work without an online connection.
+* Application should work on both 32-bit and 64-bit environments.
 
-*{More to be added}*
+**Performance**
+* Application should be able to save and load 200 patients’ worth of data without any noticeable delay in performance.
+* Application should respond within 2 seconds to all commands.
 
-### Glossary
+**Quality**
+* A user with above-average typing speed for regular English text should be able to accomplish most of the tasks faster by typing commands than using the mouse.
+* Application should be easy to use for a new user when following the User Guide or `help` instructions.
+* Application should have a user-friendly graphical user interface and display.
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+**Data**
+* Application data should load correctly on any mainstream OS given the data file is transferred properly. 
+* Application data should never be lost or removed except when user explicitly deletes something. 
+
+**Project Scope**
+* Application is not required to handle detailed medical information about patients.
+* Application is not required to handle the printing of patient profiles or saving them in a user-friendly manner (only displaying). 
+* Application is not required to handle multiple users.
+
+**Process**
+* The project is expected to adhere to a schedule that delivers a feature set every two weeks.
+
+**Extensibility & Documentation**
+* Application should be easily extended by developers looking to improve or expand it.
+* Application should be well-documented such that new developers can be on-boarded quickly just by reading through documentation.
+
+
+
+## Appendix E: Glossary
+(Contributed by Reuben Teng)
+#### *UI*
+* Abbreviation for User Interface, representing the point of human-computer interaction and communication.
+
+#### *API*
+* Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
+
+#### *OOP*
+* Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
+
+#### *CLI*
+* Abbreviation for Command Line Interface, referring to an interface which accepts user inputs and commands in the form of text.
+
+#### *MSS*
+* Abbreviation for Main Success Scenario, describing the most straightforward interaction for a given use case, which assumes that nothing goes wrong.
+
+#### *OS*
+* Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
+
+#### *Private contact detail*
+* A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 

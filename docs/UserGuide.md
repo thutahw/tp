@@ -10,11 +10,11 @@
 Welcome to Baymax! Are you a healthcare professional looking for a reliable app to keep track of patients and 
 appointments? You have come to the right place! <br>
 
-Baymax is a Command Line Interface Focused desktop application, it helps you manage customer appointments using just 
+Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just 
 the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments, 
-cancel appointments and manage customer information easily with just a few keystrokes. On top of that, it has a few 
+cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few 
 neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in calendar that 
-helps you to see at a glance how available is a particular day, so that customers can make quick decisions on the 
+helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the 
 ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ## 2. Quick start
@@ -58,10 +58,75 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### 3.1 Managing Patient Information
+
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient and list 
+all the patients in the system. 
+
+#### 3.1.1 Add a new patient: `addpatient`
+You can use this command to add a new patient who has not yet been registered. 
+
+Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
+
+Parameter Name | Description
+---------------|------------
+NAME          | The name of the patient. It must consist solely of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
+CONTACT       | The hand phone number which the patient wishes to be contacted by. It must consist solely of numbers. E.g. 91710012
+GENDER        | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’.
+
+**Format:**<br>
+`addpatient name/NAME contact/CONTACT gender/GENDER`
+
+**Example:**<br>
+1. Type `addpatient name/Alice contact/91710012 gender/F` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+If the command is valid (i.e. valid fields are entered):
+1. In the dashboard, a success message will be displayed. <br>
+   e.g Alice has been added.
+
+[insert screenshot]
+
+#### 3.1.2 List all patients: `list`
+You can use this command to list all the patients in the system.
+
+**Format:**<br>
+`list`
+
+**Example:**<br>
+1. Type `list` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+1. All the patients in the system will be listed in the dashboard.
+   
+[insert screenshot]
+
+#### 3.1.3 Delete a patient profile: `delete`
+You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `list` command
+to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent 
+accidental deletes.
+
+**Format:**<br>
+`delete id/PATIENT_ID`
+
+**Example:**<br>
+1. Type `delete 2` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+If the _PATIENT_ID_ (i.e 2) is valid:
+1. A success message will be displayed in the dashboard. 
+2. The patient at index 2 in the list will be deleted.
+   
+[insert screenshot]
+
+   
 ### 3.3 Utilizing the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule 
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to 
@@ -107,7 +172,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 
 [Insert Screenshot]
 
-#### 3.2.2 Displaying appointments on a particular day in the current month
+#### 3.3.3 Displaying appointments on a particular day in the current month
 You can use this command to display all appointments on a particular day.
 
 Parameter Name | Description
@@ -128,7 +193,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 
 [Insert Screenshot]
 
-#### 3.3.1 Displaying appointments within the next n days
+#### 3.3.4 Displaying appointments within the next n days
 You can use this command to display all appointments within the next n days. For example, choosing n to be 7, Baymax 
 will display all appointments in the upcoming week (7 days).
 
