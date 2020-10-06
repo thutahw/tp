@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.patient;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.patient.AddPatientCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;

@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patient.ListCommand;
 import seedu.address.logic.commands.patient.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.patient.*;
 
 /**
  * Parses user input.

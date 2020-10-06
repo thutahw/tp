@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.patient.AddPatientCommand;
+import seedu.address.logic.parser.patient.AddCommandParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
