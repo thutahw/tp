@@ -1,0 +1,5 @@
+.tab {
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-padding: -9 9 -9 9;
+}

@@ -31,12 +31,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GENDER + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_GENDER + "johndoe@example.com "
             + PREFIX_REMARK + "likes to code";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -88,11 +88,20 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(patientToEdit.getPhone());
+<<<<<<< HEAD
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(patientToEdit.getTags());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(patientToEdit.getRemark());
 
         return new Patient(updatedName, updatedPhone, updatedEmail, updatedTags, updatedRemark);
+=======
+        Gender updatedGender = editPersonDescriptor.getEmail().orElse(patientToEdit.getGender());
+//        Address updatedAddress = editPersonDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(patientToEdit.getTags());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(patientToEdit.getRemark());
+
+        return new Patient(updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     }
 
     @Override
@@ -120,7 +129,12 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
+<<<<<<< HEAD
         private Email email;
+=======
+        private Gender gender;
+//        private Address address;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         private Set<Tag> tags;
         private Remark remark;
 
@@ -133,7 +147,12 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
+<<<<<<< HEAD
             setEmail(toCopy.email);
+=======
+            setGender(toCopy.gender);
+//            setAddress(toCopy.address);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
             setTags(toCopy.tags);
             setRemark(toCopy.remark);
         }
@@ -142,7 +161,11 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
+<<<<<<< HEAD
             return CollectionUtil.isAnyNonNull(name, phone, email, tags, remark);
+=======
+            return CollectionUtil.isAnyNonNull(name, phone, gender, tags, remark);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         }
 
         public void setName(Name name) {
@@ -161,14 +184,25 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Gender> getEmail() {
+            return Optional.ofNullable(gender);
         }
 
+<<<<<<< HEAD
+=======
+//        public void setAddress(Address address) {
+//            this.address = address;
+//        }
+
+//        public Optional<Address> getAddress() {
+//            return Optional.ofNullable(address);
+//        }
+
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -212,6 +246,10 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+<<<<<<< HEAD
+=======
+//                    && getAddress().equals(e.getAddress())
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
                     && getTags().equals(e.getTags())
                     && getRemark().equals(e.getRemark());
         }

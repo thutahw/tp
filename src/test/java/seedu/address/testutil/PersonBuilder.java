@@ -20,7 +20,12 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
+<<<<<<< HEAD
     private Email email;
+=======
+    private Gender gender;
+//    private Address address;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     private Set<Tag> tags;
     private Remark remark;
 
@@ -30,7 +35,12 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
+<<<<<<< HEAD
         email = new Email(DEFAULT_EMAIL);
+=======
+        gender = new Gender(DEFAULT_EMAIL);
+//        address = new Address(DEFAULT_ADDRESS);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
     }
@@ -41,7 +51,12 @@ public class PersonBuilder {
     public PersonBuilder(Patient patientToCopy) {
         name = patientToCopy.getName();
         phone = patientToCopy.getPhone();
+<<<<<<< HEAD
         email = patientToCopy.getEmail();
+=======
+        gender = patientToCopy.getGender();
+//        address = patientToCopy.getAddress();
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         tags = new HashSet<>(patientToCopy.getTags());
         remark = patientToCopy.getRemark();
     }
@@ -63,6 +78,17 @@ public class PersonBuilder {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Sets the {@code Address} of the {@code Person} that we are building.
+     */
+//    public PersonBuilder withAddress(String address) {
+//        this.address = new Address(address);
+//        return this;
+//    }
+
+    /**
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -74,7 +100,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.gender = new Gender(email);
         return this;
     }
 
@@ -84,7 +110,11 @@ public class PersonBuilder {
     }
 
     public Patient build() {
+<<<<<<< HEAD
         return new Patient(name, phone, email, tags, remark);
+=======
+        return new Patient(name, phone, gender, tags, remark);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     }
 
 }

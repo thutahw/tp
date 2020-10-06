@@ -4,10 +4,14 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+<<<<<<< HEAD
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Remark;
 
 import java.util.List;
+=======
+import seedu.address.model.patient.Remark;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 

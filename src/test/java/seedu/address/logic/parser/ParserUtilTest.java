@@ -14,7 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+<<<<<<< HEAD
 import seedu.address.model.patient.Email;
+=======
+import seedu.address.model.patient.Gender;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.tag.Tag;
@@ -101,50 +105,50 @@ public class ParserUtilTest {
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
+//    @Test
+//    public void parseAddress_null_throwsNullPointerException() {
+//        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+//    }
+//
+//    @Test
+//    public void parseAddress_invalidValue_throwsParseException() {
+//        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+//    }
+//
+//    @Test
+//    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+//        Address expectedAddress = new Address(VALID_ADDRESS);
+//        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+//    }
+//
+//    @Test
+//    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+//        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
+//        Address expectedAddress = new Address(VALID_ADDRESS);
+//        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+//    }
+
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseGender_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGender((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseGender_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_EMAIL));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
+        Gender expectedGender = new Gender(VALID_EMAIL);
+        assertEquals(expectedGender, ParserUtil.parseGender(VALID_EMAIL));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
-    }
-
-    @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
-    }
-
-    @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+    public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+        Gender expectedGender = new Gender(VALID_EMAIL);
+        assertEquals(expectedGender, ParserUtil.parseGender(emailWithWhitespace));
     }
 
     @Test

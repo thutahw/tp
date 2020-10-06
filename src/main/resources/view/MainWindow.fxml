@@ -11,16 +11,20 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.ImageView?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Baymax" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@TabPane.css" />
       </stylesheets>
 
       <VBox>
@@ -46,12 +50,60 @@
           </padding>
         </StackPane>
 
+<<<<<<< HEAD
         <VBox fx:id="patientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
+=======
+        <TabPane fx:id="tabPane" minWidth="450" minHeight="600" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconHome.png"></Image>
+              </ImageView>
+            </graphic>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconCalendar.png"></Image>
+              </ImageView>
+            </graphic>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconPatientInfo.png"></Image>
+              </ImageView>
+            </graphic>
+            <content>
+              <VBox fx:id="patientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </content>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconAppointment.png"></Image>
+              </ImageView>
+            </graphic>
+          </Tab>
+          <Tab>
+            <graphic>
+              <ImageView>
+                <Image url="@/images/IconInfo.png"></Image>
+              </ImageView>
+            </graphic>
+          </Tab>
+        </TabPane>
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

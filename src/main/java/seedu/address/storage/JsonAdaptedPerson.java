@@ -22,7 +22,12 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
+<<<<<<< HEAD
     private final String email;
+=======
+    private final String gender;
+//    private final String address;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String remark;
 
@@ -31,11 +36,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("gender") String gender,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
+<<<<<<< HEAD
         this.email = email;
+=======
+        this.gender = gender;
+//        this.address = address;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -48,7 +58,12 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Patient source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+<<<<<<< HEAD
         email = source.getEmail().value;
+=======
+        gender = source.getGender().gender;
+//        address = source.getAddress().value;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -82,21 +97,36 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Gender modelGender = new Gender(gender);
 
+<<<<<<< HEAD
+=======
+//        if (address == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+//        }
+//        if (!Address.isValidAddress(address)) {
+//            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+//        }
+//        final Address modelAddress = new Address(address);
+
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+<<<<<<< HEAD
         return new Patient(modelName, modelPhone, modelEmail, modelTags, modelRemark);
+=======
+        return new Patient(modelName, modelPhone, modelGender, modelTags, modelRemark);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     }
 
 }

@@ -7,14 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentList;
-import seedu.address.model.appointment.AppointmentStatus;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Patient in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable. Appointments may change.
+ * Represents a Person in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patient {
 
@@ -25,20 +22,18 @@ public class Patient {
 
     // Data fields
 //    private final Address address;
-    private final AppointmentList appointments;
-    private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Gender gender, AppointmentList appointments, Set<Tag> tags, Remark remark) {
+    public Patient(Name name, Phone phone, Gender gender, Set<Tag> tags, Remark remark) {
         requireAllNonNull(name, phone, gender, tags, remark);
         this.name = name;
         this.phone = phone;
         this.gender = gender;
 //        this.address = address;
-        this.appointments = appointments;
         this.tags.addAll(tags);
         this.remark = remark;
     }
@@ -59,8 +54,8 @@ public class Patient {
 //        return address;
 //    }
 
-    public AppointmentList getAppointments() {
-        return appointments;
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -69,10 +64,6 @@ public class Patient {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    public Remark getRemark() {
-        return remark;
     }
 
     /**
@@ -108,15 +99,14 @@ public class Patient {
                 && otherPatient.getPhone().equals(getPhone())
                 && otherPatient.getGender().equals(getGender())
 //                && otherPatient.getAddress().equals(getAddress())
-                && otherPatient.getAppointments().equals(getAppointments())
                 && otherPatient.getTags().equals(getTags())
-                && otherPatient.getRemark().equals(getRemark());
+                && otherPatient.getRemark().equals((getRemark()));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, gender, appointments, tags, remark);
+        return Objects.hash(name, phone, gender, tags, remark);
     }
 
     @Override
@@ -129,12 +119,9 @@ public class Patient {
                 .append(getGender())
 //                .append(" Address: ")
 //                .append(getAddress())
-                .append(" Appointments: ")
-                .append(getAppointments())
                 .append(" Remark: ")
                 .append(getRemark())
-                .append(" Tags: ")
-                .append(getTags());
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

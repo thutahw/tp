@@ -5,7 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+<<<<<<< HEAD
 import seedu.address.model.appointment.AppointmentList;
+=======
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePersonList;
 

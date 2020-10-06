@@ -28,8 +28,13 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
+<<<<<<< HEAD
         sb.append(PREFIX_EMAIL + patient.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
+=======
+        sb.append(PREFIX_GENDER + patient.getGender().gender + " ");
+//        sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         sb.append(PREFIX_REMARK + patient.getRemark().value + " ");
         patient.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -44,8 +49,8 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_GENDER).append(email.gender).append(" "));
+//        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
