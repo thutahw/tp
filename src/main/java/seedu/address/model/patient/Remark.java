@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.patient;
 
 import static java.util.Objects.requireNonNull;
 
@@ -18,7 +18,7 @@ public class Remark {
      * @param remark A valid remark.
      */
     public Remark(String remark) {
-        requireNonNull(remark);
+//        requireNonNull(remark);
         value = remark;
     }
 
