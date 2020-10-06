@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -39,6 +42,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private TabPane sideTabPane;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -204,6 +210,10 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            // switches to the concerned tab
+            SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
+            selectionModel.select(commandResult.getTabId().getZeroBased());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

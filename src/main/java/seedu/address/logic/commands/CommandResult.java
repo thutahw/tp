@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.index.Index;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
@@ -17,21 +19,25 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Switch to the tab indicated by tabId */
+    private final Index tabId;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabId) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.tabId = tabId;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+    public CommandResult(String feedbackToUser, Index tabId) {
+        this(feedbackToUser, false, false, tabId);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +50,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public Index getTabId() {
+        return tabId;
     }
 
     @Override
@@ -60,12 +70,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && tabId == otherCommandResult.tabId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, tabId);
     }
 
 }
