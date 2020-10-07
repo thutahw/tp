@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.Patient;
 
 /**
  * A ui for the patient information page.
@@ -16,18 +16,18 @@ public class PatientInfoPage extends UiPart<Region> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
-    private PersonListPanel personListPanel;
+    private PatientListPanel patientListPanel;
 
     /**
      * Creates a {@code PatientInfoPage} with the given {@code ObservableList}.
      */
-    public PatientInfoPage(ObservableList<Person> personList) {
+    public PatientInfoPage(ObservableList<Patient> patientList) {
         super(FXML);
-        personListPanel = new PersonListPanel(personList);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        patientListPanel = new PatientListPanel(patientList);
+        personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public PatientListPanel getPersonListPanel() {
+        return patientListPanel;
     }
 }

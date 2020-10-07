@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -13,27 +13,25 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Patient {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final Gender gender;
 
     // Data fields
-    private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Remark remark) {
-        requireAllNonNull(name, phone, email, address, tags, remark);
+    public Patient(Name name, Phone phone, Gender gender, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(name, phone, gender, tags, remark);
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.gender = gender;
         this.tags.addAll(tags);
         this.remark = remark;
     }
@@ -46,12 +44,8 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
+    public Gender getGender() {
+        return gender;
     }
 
     public Remark getRemark() {
@@ -70,14 +64,14 @@ public class Person {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Patient otherPatient) {
+        if (otherPatient == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherPatient != null
+                && otherPatient.getName().equals(getName())
+                && (otherPatient.getPhone().equals(getPhone()) || otherPatient.getGender().equals(getGender()));
     }
 
     /**
@@ -90,23 +84,22 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Patient)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getRemark().equals((getRemark()));
+        Patient otherPatient = (Patient) other;
+        return otherPatient.getName().equals(getName())
+                && otherPatient.getPhone().equals(getPhone())
+                && otherPatient.getGender().equals(getGender())
+                && otherPatient.getTags().equals(getTags())
+                && otherPatient.getRemark().equals((getRemark()));
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, remark);
+        return Objects.hash(name, phone, gender, tags, remark);
     }
 
     @Override
@@ -115,11 +108,9 @@ public class Person {
         builder.append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append("Remark: ")
+                .append(" Gender: ")
+                .append(getGender())
+                .append(" Remark: ")
                 .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
