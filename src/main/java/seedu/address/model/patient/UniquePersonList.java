@@ -9,7 +9,11 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.exceptions.DuplicatePersonException;
+<<<<<<< HEAD:src/main/java/seedu/address/model/patient/UniquePersonList.java
+import seedu.address.model.patient.exceptions.PatientNotFoundException;
+=======
 import seedu.address.model.patient.exceptions.PersonNotFoundException;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef:src/main/java/seedu/address/model/person/UniquePersonList.java
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -58,7 +62,7 @@ public class UniquePersonList implements Iterable<Patient> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new PatientNotFoundException();
         }
 
         if (!target.isSamePerson(editedPatient) && contains(editedPatient)) {
@@ -75,7 +79,7 @@ public class UniquePersonList implements Iterable<Patient> {
     public void remove(Patient toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new PatientNotFoundException();
         }
     }
 

@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+<<<<<<< HEAD:src/test/java/seedu/address/storage/JsonAdaptedPatientTest.java
+import seedu.address.model.patient.Email;
+=======
 import seedu.address.model.patient.Gender;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef:src/test/java/seedu/address/storage/JsonAdaptedPersonTest.java
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
 

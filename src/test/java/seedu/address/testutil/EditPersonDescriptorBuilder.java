@@ -30,8 +30,12 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(patient.getName());
         descriptor.setPhone(patient.getPhone());
+<<<<<<< HEAD
+        descriptor.setEmail(patient.getEmail());
+=======
         descriptor.setGender(patient.getGender());
 //        descriptor.setAddress(patient.getAddress());
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         descriptor.setTags(patient.getTags());
         descriptor.setRemark(patient.getRemark());
     }
@@ -60,6 +64,8 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
@@ -67,6 +73,7 @@ public class EditPersonDescriptorBuilder {
 //        descriptor.setAddress(new Address(address));
 //        return this;
 //    }
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}

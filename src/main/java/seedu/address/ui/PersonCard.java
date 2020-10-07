@@ -52,8 +52,12 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(patient.getName().fullName);
         phone.setText(patient.getPhone().value);
+<<<<<<< HEAD
+        email.setText(patient.getEmail().value);
+=======
 //        address.setText(patient.getAddress().value);
         gender.setText(patient.getGender().gender);
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         remark.setText(patient.getRemark().value);
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

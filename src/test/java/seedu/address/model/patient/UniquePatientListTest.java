@@ -14,8 +14,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD:src/test/java/seedu/address/model/patient/UniquePatientListTest.java
+import seedu.address.model.patient.exceptions.DuplicatePatientException;
+import seedu.address.model.patient.exceptions.PatientNotFoundException;
+=======
 import seedu.address.model.patient.exceptions.DuplicatePersonException;
 import seedu.address.model.patient.exceptions.PersonNotFoundException;
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef:src/test/java/seedu/address/model/person/UniquePersonListTest.java
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePatientListTest {
@@ -54,7 +59,7 @@ public class UniquePatientListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+        assertThrows(DuplicatePatientException.class, () -> uniquePersonList.add(ALICE));
     }
 
     @Test
@@ -69,7 +74,7 @@ public class UniquePatientListTest {
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
+        assertThrows(PatientNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
     }
 
     @Test
@@ -105,7 +110,7 @@ public class UniquePatientListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertThrows(DuplicatePatientException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -115,7 +120,7 @@ public class UniquePatientListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.remove(ALICE));
+        assertThrows(PatientNotFoundException.class, () -> uniquePersonList.remove(ALICE));
     }
 
     @Test
@@ -158,7 +163,11 @@ public class UniquePatientListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Patient> listWithDuplicatePatients = Arrays.asList(ALICE, ALICE);
+<<<<<<< HEAD:src/test/java/seedu/address/model/patient/UniquePatientListTest.java
+        assertThrows(DuplicatePatientException.class, () -> uniquePersonList.setPersons(listWithDuplicatePatients));
+=======
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePatients));
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef:src/test/java/seedu/address/model/person/UniquePersonListTest.java
     }
 
     @Test
