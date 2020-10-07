@@ -61,6 +61,8 @@ public class ParserUtil {
         }
         return new Phone(trimmedPhone);
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Parses a {@code String address} into an {@code Address}.
@@ -77,6 +79,7 @@ public class ParserUtil {
 //        return new Address(trimmedAddress);
 //    }
 
+>>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     /**
      * Parses a {@code String gender} into an {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
