@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.exceptions.DuplicatePersonException;
+import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -46,16 +46,13 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-<<<<<<< HEAD
-        Patient editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-=======
+
         Patient editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPatients);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePatientException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -77,11 +74,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-<<<<<<< HEAD
-        Patient editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-=======
         Patient editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }

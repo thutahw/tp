@@ -21,9 +21,9 @@ public class Gender {
     public final String gender;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs an {@code Gender}.
      *
-     * @param gender A valid email address.
+     * @param gender A valid gender.
      */
     public Gender(String gender) {
         requireNonNull(gender);
@@ -32,7 +32,7 @@ public class Gender {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
         return test.matches(VALIDATION_REGEX);

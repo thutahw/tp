@@ -1,19 +1,15 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 
 public class Appointment implements Comparator<Appointment> {
     private final Patient patient;
@@ -35,7 +31,8 @@ public class Appointment implements Comparator<Appointment> {
     }
 
     //Constructor with status option, used for backdating appointments
-    public Appointment(Patient patient, LocalDateTime dateTime, AppointmentStatus status, Set<Tag> tags, Remark remark) {
+    public Appointment(Patient patient, LocalDateTime dateTime, AppointmentStatus status, Set<Tag> tags,
+                       Remark remark) {
         this.patient = patient;
         this.dateTime = dateTime;
         this.status = status;

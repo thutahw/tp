@@ -1,8 +1,8 @@
 package seedu.address.model.appointment;
 
-import seedu.address.model.patient.Remark;
-
 import java.util.ArrayList;
+
+import seedu.address.model.patient.Remark;
 
 /**
  * Contains a list for adding, deleting, updating,
@@ -18,7 +18,7 @@ public class AppointmentList {
      *
      * @param t task to be added
      */
-        public void addAppointment(Appointment t) {
+     public void addAppointment(Appointment t) {
             appointmentList.add(t);
         }
 
@@ -27,7 +27,7 @@ public class AppointmentList {
      *
      * @param appointmentNumber index of the task to be deleted in <code>appointmentList</code>
      */
-        public void deleteAppointment(int appointmentNumber) {
+     public void deleteAppointment(int appointmentNumber) {
             appointmentList.remove(appointmentNumber);
         }
 
@@ -38,20 +38,20 @@ public class AppointmentList {
      * @param newAppointmentRemark new description to update the appointment to
      * @return            the edited appointment
      */
-        public void updateAppointmentRemark(int appointmentNumber, Remark newAppointmentRemark) {
-            Appointment appointmentToBeEdited = appointmentList.get(appointmentNumber);
-            appointmentToBeEdited = appointmentToBeEdited.editDescription(newAppointmentRemark);
-        }
+    public void updateAppointmentRemark(int appointmentNumber, Remark newAppointmentRemark) {
+        Appointment appointmentToBeEdited = appointmentList.get(appointmentNumber);
+        appointmentToBeEdited = appointmentToBeEdited.editDescription(newAppointmentRemark);
+    }
 
     /**
      * Marks a specified task as done by calling the <code>Task</code> method <code>markAsDone</code>.
      *
      * @param appointmentNumber  index of the appointment to be updated in <code>appointmentList</code>
      */
-        public void markAsDone(int appointmentNumber, AppointmentStatus status) {
-            Appointment appointmentToBeEdited = appointmentList.get(appointmentNumber);
-            appointmentToBeEdited = appointmentToBeEdited.editAppointmentStatus(status);
-        }
+    public void markAsDone(int appointmentNumber, AppointmentStatus status) {
+        Appointment appointmentToBeEdited = appointmentList.get(appointmentNumber);
+        appointmentToBeEdited = appointmentToBeEdited.editAppointmentStatus(status);
+    }
 
 //    /**
 //     * Searches for all tasks whose description contains a specified keyword,
@@ -103,11 +103,11 @@ public class AppointmentList {
 //        return foundAppointments;
 //    }
 
-        public int getSize() {
+    public int getSize() {
             return appointmentList.size();
         }
 
-        public Appointment getAppointment(int i) {
+    public Appointment getAppointment(int i) {
             return appointmentList.get(i);
         }
 }
