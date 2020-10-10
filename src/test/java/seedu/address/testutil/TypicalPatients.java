@@ -21,47 +21,47 @@ import seedu.address.model.patient.Patient;
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalPatients {
 
-    public static final Patient ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withGender("female")
+    public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
+            .withGender("F")
             .withPhone("94351253")
             .withTags("friends").build();
 
     // Manually added
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Patient BENSON = new PersonBuilder().withName("Benson Meier")
-            .withGender("male").withPhone("98765432")
+    public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
+            .withGender("M").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
-    public static final Patient CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withGender("male").build();
-    public static final Patient DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withGender("male").withTags("friends").build();
-    public static final Patient ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withGender("female").build();
-    public static final Patient FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withGender("female").build();
-    public static final Patient GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withGender("male").build();
+    public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
+            .withGender("F").build();
+    public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
+            .withGender("M").withTags("friends").build();
+    public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224")
+            .withGender("F").build();
+    public static final Patient FIONA = new PatientBuilder().withName("Fiona Kunz").withPhone("9482427")
+            .withGender("F").build();
+    public static final Patient GEORGE = new PatientBuilder().withName("George Best").withPhone("9482442")
+            .withGender("M").build();
 
     // Manually added
-    public static final Patient HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withGender("female").build();
-    public static final Patient IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withGender("female").build();
+    public static final Patient HOON = new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
+            .withGender("F").build();
+    public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
+            .withGender("F").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Patient AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withGender(VALID_GENDER_AMY).withTags(VALID_TAG_FRIEND)
             .withRemark(VALID_REMARK_AMY).build();
-    public static final Patient BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withRemark(VALID_REMARK_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPatients() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -69,7 +69,7 @@ public class TypicalPersons {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Patient patient : getTypicalPersons()) {
-            ab.addPerson(patient);
+            ab.addPatient(patient);
         }
         return ab;
     }

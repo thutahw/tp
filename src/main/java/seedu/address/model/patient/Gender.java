@@ -10,13 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should be specified as either male or female";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Gender should be specified as either M (male) or F (female)";
 
     public final String gender;
 
@@ -35,7 +29,7 @@ public class Gender {
      * Returns if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("M") || test.equals("F");
     }
 
     @Override

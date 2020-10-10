@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -40,12 +39,10 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_GENDER + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_GENDER + "johndoe@example.com "
+            + PREFIX_GENDER + "M"
             + PREFIX_REMARK + "likes to code";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -97,7 +94,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Gender updatedGender = editPersonDescriptor.getEmail().orElse(patientToEdit.getGender());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(patientToEdit.getGender());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(patientToEdit.getTags());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(patientToEdit.getRemark());
 
@@ -174,12 +171,8 @@ public class EditCommand extends Command {
             this.gender = gender;
         }
 
-        public Optional<Gender> getEmail() {
+        public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
-        }
-
-        public Gender getGender() {
-            return gender;
         }
 
         /**
@@ -224,7 +217,6 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
                     && getGender().equals(e.getGender())
                     && getTags().equals(e.getTags())
                     && getRemark().equals(e.getRemark());

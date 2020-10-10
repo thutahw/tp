@@ -2,13 +2,13 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "gender": "F",
     "tagged": [ "friends" ],
     "remark": "Likes to code"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "gender": "F",
     "remark": "Likes to code"
   } ]
 }

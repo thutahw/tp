@@ -1,13 +1,13 @@
 {
   "persons": [ {
-    "name": "Valid Person",
+    "name": "Valid Patient",
     "phone": "9482424",
-    "email": "hans@example.com",
+    "gender": "M",
     "remark": "Likes to code"
   }, {
-    "name": "Person With Invalid Phone Field",
+    "name": "Patient With Invalid Phone Field",
     "phone": "948asdf2424",
-    "email": "hans@example.com",
+    "gender": "M",
     "remark": "Likes to code"
   } ]
 }

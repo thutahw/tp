@@ -1,14 +1,14 @@
 package seedu.address.model.appointment;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 public class Appointment implements Comparator<Appointment> {
@@ -16,28 +16,19 @@ public class Appointment implements Comparator<Appointment> {
     private final LocalDateTime dateTime;
     private final AppointmentStatus status;
     private final Set<Tag> tags;
-    private final Remark remark;
+    private final Description description;
 
-    //Default constructor
-    public Appointment(Patient patient, LocalDateTime dateTime, Set<Tag> tags, Remark remark) {
-        requireNonNull(patient);
-        requireNonNull(dateTime);
-        requireNonNull(remark);
+    /**
+     * Every field must be present and not null.
+     */
+    public Appointment(Patient patient, LocalDateTime dateTime, Set<Tag> tags, Description description,
+                       AppointmentStatus status) {
+        requireAllNonNull(patient, dateTime, tags, description);
         this.patient = patient;
         this.dateTime = dateTime;
-        this.remark = remark;
+        this.description = description;
         this.tags = tags;
-        status = AppointmentStatus.UPCOMING;
-    }
-
-    //Constructor with status option, used for backdating appointments
-    public Appointment(Patient patient, LocalDateTime dateTime, AppointmentStatus status, Set<Tag> tags,
-                       Remark remark) {
-        this.patient = patient;
-        this.dateTime = dateTime;
         this.status = status;
-        this.tags = tags;
-        this.remark = remark;
     }
 
     public Patient getPatient() {
@@ -48,57 +39,43 @@ public class Appointment implements Comparator<Appointment> {
         return dateTime;
     }
 
+    public Description getDescription() {
+        return description;
+    }
+
     public AppointmentStatus getStatus() {
         return status;
     }
 
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public Remark getRemark() {
-        return remark;
-    }
-
-    public Appointment editPatient(Patient newPatient) {
-        return new Appointment(newPatient, getDateTime(), getStatus(), getTags(), getRemark());
-    }
-
-    public Appointment editDateTime(LocalDateTime newDateTime) {
-        return new Appointment(getPatient(), newDateTime, getStatus(), getTags(), getRemark());
-    }
-
-    public Appointment editTag(Set<Tag> newTags) {
-        return new Appointment(getPatient(), getDateTime(), getStatus(), newTags, getRemark());
-    }
-
-    public Appointment editDescription(Remark newRemark) {
-        return new Appointment(getPatient(), getDateTime(), getStatus(), getTags(), newRemark);
-    }
-
-    public Appointment editAppointmentStatus(AppointmentStatus newStatus) {
-        return new Appointment(getPatient(), getDateTime(), newStatus, getTags(), getRemark());
-    }
-
-    /* Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public boolean isSameAppointment(Appointment otherAppt) {
-        if (otherAppt == this) {
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /** Returns true if both appointments have the same date and time.
+     * This defines a weaker notion of equality between two appointments.
+     */
+    public boolean isSameAppointment(Appointment otherAppointment) {
+        if (otherAppointment == this) {
             return true;
         }
 
-        return otherAppt != null
-                && otherAppt.getRemark().equals(getRemark());
+        return otherAppointment != null
+                && otherAppointment.getPatient().equals(getPatient())
+                && otherAppointment.getDateTime().equals(getDateTime());
     }
 
     @Override
-    public int compare(Appointment appointment, Appointment t1) {
-        return t1.getDateTime().compareTo(appointment.getDateTime());
+    public int compare(Appointment a1, Appointment a2) {
+        return a2.getDateTime().compareTo(a1.getDateTime());
     }
 
-    /* Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+    /**
+     * Returns true if both appointments have the same identity and data fields.
+     * This defines a stronger notion of equality between two appointments.
      */
     @Override
     public boolean equals(Object other) {
@@ -116,19 +93,19 @@ public class Appointment implements Comparator<Appointment> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(patient, remark);
+        return Objects.hash(patient, dateTime, status, tags, description);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getPatient())
-                .append(getDateTime().toString())
-                .append(getStatus())
-                .append(getTags())
-                .append(" Remarks: ")
-                .append(getRemark());
+                .append(" Date time: ")
+                .append(getDateTime())
+                .append(" Description: ")
+                .append(getDescription())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
         return builder.toString();
     }
 }
