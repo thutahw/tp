@@ -57,7 +57,7 @@ public class AddPatientCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_ID);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_NUMBER);
     }
 
     @Override

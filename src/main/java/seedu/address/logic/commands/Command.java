@@ -9,7 +9,7 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
-    public static final Index TAB_ID = Index.fromOneBased(3);
+    public static final Index TAB_NUMBER = Index.fromOneBased(3);
 
     /**
      * Executes the command and returns the result message.

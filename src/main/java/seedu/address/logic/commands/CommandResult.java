@@ -19,8 +19,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Switch to the tab indicated by tabId */
-    private final Index tabId;
+    /** Switch to the tab indicated by tabNumber */
+    private final Index tabNumber;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -29,7 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.tabId = tabId;
+        this.tabNumber = tabId;
     }
 
     /**
@@ -53,7 +53,7 @@ public class CommandResult {
     }
 
     public Index getTabId() {
-        return tabId;
+        return tabNumber;
     }
 
     @Override
@@ -71,12 +71,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && tabId == otherCommandResult.tabId;
+                && tabNumber == otherCommandResult.tabNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, tabId);
+        return Objects.hash(feedbackToUser, showHelp, exit, tabNumber);
     }
 
 }
