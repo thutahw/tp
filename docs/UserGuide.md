@@ -126,7 +126,7 @@ If the _PATIENT_ID_ (i.e 2) is valid:
 
 [insert screenshot]
 
-   
+
 ### 3.3 Utilizing the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
