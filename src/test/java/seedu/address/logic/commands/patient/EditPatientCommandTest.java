@@ -57,7 +57,8 @@ public class EditPatientCommandTest {
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(indexLastPatient, descriptor);
 
@@ -71,7 +72,8 @@ public class EditPatientCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT, new EditPatientCommand.EditPatientDescriptor());
+        EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT,
+                new EditPatientCommand.EditPatientDescriptor());
         Patient editedPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);

@@ -31,7 +31,8 @@ public class JsonAppointmentBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyAppointmentBook> readAppointmentBook(String filePath) throws Exception {
-        return new JsonAppointmentBookStorage(Paths.get(filePath)).readAppointmentBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonAppointmentBookStorage(Paths.get(filePath))
+                .readAppointmentBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
