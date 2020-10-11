@@ -14,14 +14,14 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Remark;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing patient.
  */
-public class RemarkCommand extends Command {
+public class RemarkPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Patient: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Patient: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the remark of the person identified "
@@ -38,10 +38,10 @@ public class RemarkCommand extends Command {
     private final Remark remark;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
-     * @param remark of the person to be updated to
+     * @param index of the patient in the filtered patient list to edit the remark
+     * @param remark of the patient to be updated to
      */
-    public RemarkCommand(Index index, Remark remark) {
+    public RemarkPatientCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 
         this.index = index;
@@ -68,7 +68,7 @@ public class RemarkCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
-     * {@code personToEdit}.
+     * {@code patientToEdit}.
      */
     private String generateSuccessMessage(Patient patientToEdit) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
@@ -83,12 +83,12 @@ public class RemarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemarkCommand)) {
+        if (!(other instanceof RemarkPatientCommand)) {
             return false;
         }
 
         // state check
-        RemarkCommand e = (RemarkCommand) other;
+        RemarkPatientCommand e = (RemarkPatientCommand) other;
         return index.equals(e.index)
                 && remark.equals(e.remark);
     }

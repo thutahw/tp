@@ -10,18 +10,18 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patient.AddPatientCommand;
-import seedu.address.logic.commands.patient.ClearCommand;
-import seedu.address.logic.commands.patient.DeleteCommand;
-import seedu.address.logic.commands.patient.EditCommand;
-import seedu.address.logic.commands.patient.FindCommand;
-import seedu.address.logic.commands.patient.ListCommand;
-import seedu.address.logic.commands.patient.RemarkCommand;
+import seedu.address.logic.commands.patient.ClearPatientCommand;
+import seedu.address.logic.commands.patient.DeletePatientCommand;
+import seedu.address.logic.commands.patient.EditPatientCommand;
+import seedu.address.logic.commands.patient.FindPatientCommand;
+import seedu.address.logic.commands.patient.ListPatientCommand;
+import seedu.address.logic.commands.patient.RemarkPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.patient.AddCommandParser;
-import seedu.address.logic.parser.patient.DeleteCommandParser;
-import seedu.address.logic.parser.patient.EditCommandParser;
-import seedu.address.logic.parser.patient.FindCommandParser;
-import seedu.address.logic.parser.patient.RemarkCommandParser;
+import seedu.address.logic.parser.patient.AddPatientCommandParser;
+import seedu.address.logic.parser.patient.DeletePatientCommandParser;
+import seedu.address.logic.parser.patient.EditPatientCommandParser;
+import seedu.address.logic.parser.patient.FindPatientCommandParser;
+import seedu.address.logic.parser.patient.RemarkPatientCommandParser;
 
 /**
  * Parses user input.
@@ -51,22 +51,22 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddPatientCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddPatientCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPatientCommand.COMMAND_WORD:
+            return new EditPatientCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePatientCommand.COMMAND_WORD:
+            return new DeletePatientCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearPatientCommand.COMMAND_WORD:
+            return new ClearPatientCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPatientCommand.COMMAND_WORD:
+            return new FindPatientCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListPatientCommand.COMMAND_WORD:
+            return new ListPatientCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -74,8 +74,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
+        case RemarkPatientCommand.COMMAND_WORD:
+            return new RemarkPatientCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

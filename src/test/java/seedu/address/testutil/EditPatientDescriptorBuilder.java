@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.patient.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.patient.EditPatientCommand.EditPersonDescriptor;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;

@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalPatients.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.patient.AddPatientCommand;
-import seedu.address.logic.parser.patient.AddCommandParser;
+import seedu.address.logic.parser.patient.AddPatientCommandParser;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
@@ -40,7 +40,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddPatientCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddPatientCommandParser parser = new AddPatientCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

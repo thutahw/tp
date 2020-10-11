@@ -8,29 +8,29 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.patient.FindCommand;
-import seedu.address.logic.parser.patient.FindCommandParser;
+import seedu.address.logic.commands.patient.FindPatientCommand;
+import seedu.address.logic.parser.patient.FindPatientCommandParser;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 
-public class FindCommandParserTest {
+public class FindPatientCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindPatientCommandParser parser = new FindPatientCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCommand.MESSAGE_USAGE));
+                FindPatientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        FindPatientCommand expectedFindPatientCommand =
+                new FindPatientCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, "Alice Bob", expectedFindPatientCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindPatientCommand);
     }
 
 }
