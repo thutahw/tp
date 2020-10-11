@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,7 +15,7 @@ import seedu.address.model.patient.Remark;
 /**
  * Changes the remark of an existing patient.
  */
-public class RemarkPatientCommand extends Command {
+public class RemarkPatientCommand extends PatientCommand {
 
     public static final String COMMAND_WORD = "remark";
 
