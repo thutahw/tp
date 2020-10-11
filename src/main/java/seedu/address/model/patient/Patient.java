@@ -21,7 +21,6 @@ public class Patient {
     private final Gender gender;
 
     // Data fields
-//    private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -33,7 +32,6 @@ public class Patient {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
-//        this.address = address;
         this.tags.addAll(tags);
         this.remark = remark;
     }
@@ -49,10 +47,6 @@ public class Patient {
     public Gender getGender() {
         return gender;
     }
-
-//    public Address getAddress() {
-//        return address;
-//    }
 
     public Remark getRemark() {
         return remark;
@@ -98,7 +92,6 @@ public class Patient {
         return otherPatient.getName().equals(getName())
                 && otherPatient.getPhone().equals(getPhone())
                 && otherPatient.getGender().equals(getGender())
-//                && otherPatient.getAddress().equals(getAddress())
                 && otherPatient.getTags().equals(getTags())
                 && otherPatient.getRemark().equals((getRemark()));
     }
@@ -116,7 +109,7 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Gender: ")
-                .append(getGender())\
+                .append(getGender())
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Tags: ");

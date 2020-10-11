@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.appointment.AppointmentList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePatientList;
 
@@ -16,8 +15,6 @@ import seedu.address.model.patient.UniquePatientList;
 public class AppointmentBook implements ReadOnlyAppointmentBook {
 
     private final UniquePatientList patients;
-
-    private final AppointmentList appointments = new AppointmentList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication

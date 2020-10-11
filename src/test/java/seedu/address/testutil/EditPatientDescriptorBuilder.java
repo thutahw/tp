@@ -4,8 +4,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.patient.*;
+import seedu.address.logic.commands.patient.EditPatientCommand.EditPersonDescriptor;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,8 +58,8 @@ public class EditPatientDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPatientDescriptorBuilder withEmail(String email) {
-        descriptor.setGender(new Gender(email));
+    public EditPatientDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
         return this;
     }
 
@@ -69,6 +73,9 @@ public class EditPatientDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPatientDescriptorBuilder withRemark(String remark) {
         descriptor.setRemark(new Remark(remark));
         return this;

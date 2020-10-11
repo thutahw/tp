@@ -3,7 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -12,9 +16,9 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PatientBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_NAME = "Daniel Gryffin";
+    public static final String DEFAULT_PHONE = "81053636";
+    public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_REMARK = "Likes to code";
 
     private Name name;
@@ -29,7 +33,7 @@ public class PatientBuilder {
     public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        gender = new Gender(DEFAULT_EMAIL);
+        gender = new Gender(DEFAULT_GENDER);
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
     }
@@ -72,11 +76,14 @@ public class PatientBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PatientBuilder withEmail(String email) {
-        this.gender = new Gender(email);
+    public PatientBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
     public PatientBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;

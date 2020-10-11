@@ -6,37 +6,35 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AppointmentBook} with sample data.
  */
 public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Gender("alexyeoh@example.com"),
-//                new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"),
                 new Remark("Likes to swim")),
             new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Gender("berniceyu@example.com"),
-//                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"),
                 new Remark("Likes to dance")),
             new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Gender("charlotte@example.com"),
-//                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"),
                 new Remark("Likes to sing")),
             new Patient(new Name("David Li"), new Phone("91031282"), new Gender("lidavid@example.com"),
-//                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"),
                 new Remark("Likes to run")),
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Gender("irfan@example.com"),
-//                new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"),
                 new Remark("Likes to read")),
             new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Gender("royb@example.com"),
-//                new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"),
                 new Remark("Likes to game"))
         };

@@ -1,0 +1,13 @@
+{
+  "persons": [ {
+    "name": "Valid Patient",
+    "phone": "9482424",
+    "gender": "M",
+    "remark": "Likes to code"
+  }, {
+    "name": "Patient With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "gender": "M",
+    "remark": "Likes to code"
+  } ]
+}

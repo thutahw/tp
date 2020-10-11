@@ -22,12 +22,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_GENDER = "123";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_GENDER = "M";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -106,19 +106,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseGender_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
-        Gender expectedGender = new Gender(VALID_EMAIL);
-        assertEquals(expectedGender, ParserUtil.parseGender(VALID_EMAIL));
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Gender expectedGender = new Gender(VALID_EMAIL);
+        String emailWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
+        Gender expectedGender = new Gender(VALID_GENDER);
         assertEquals(expectedGender, ParserUtil.parseGender(emailWithWhitespace));
     }
 
