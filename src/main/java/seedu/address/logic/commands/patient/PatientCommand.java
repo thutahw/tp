@@ -1,13 +1,14 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.patient;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
-public abstract class Command {
+public abstract class PatientCommand {
 
     public static final Index TAB_NUMBER = Index.fromOneBased(3);
 
