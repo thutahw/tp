@@ -7,14 +7,14 @@
 
 ## 1. Introduction
 
-Welcome to Baymax! Are you a healthcare professional looking for a reliable app to keep track of patients and 
+Welcome to Baymax! Are you a healthcare professional looking for a reliable app to keep track of patients and
 appointments? You have come to the right place! <br>
 
-Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just 
-the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments, 
-cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few 
-neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in calendar that 
-helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the 
+Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just
+the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments,
+cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few
+neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in calendar that
+helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the
 ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ## 2. Quick start
@@ -25,7 +25,7 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -64,11 +64,11 @@ Format: `help`
 
 ### 3.1 Managing Patient Information
 
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient and list 
-all the patients in the system. 
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient and list
+all the patients in the system.
 
 #### 3.1.1 Add a new patient: `addpatient`
-You can use this command to add a new patient who has not yet been registered. 
+You can use this command to add a new patient who has not yet been registered.
 
 Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
 
@@ -104,12 +104,12 @@ You can use this command to list all the patients in the system.
 
 **Outcome:**<br>
 1. All the patients in the system will be listed in the dashboard.
-   
+
 [insert screenshot]
 
 #### 3.1.3 Delete a patient profile: `delete`
 You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `list` command
-to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent 
+to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent
 accidental deletes.
 
 **Format:**<br>
@@ -121,20 +121,20 @@ accidental deletes.
 
 **Outcome:**<br>
 If the _PATIENT_ID_ (i.e 2) is valid:
-1. A success message will be displayed in the dashboard. 
+1. A success message will be displayed in the dashboard.
 2. The patient at index 2 in the list will be deleted.
-   
+
 [insert screenshot]
 
    
 ### 3.3 Utilizing the Calendar
-This feature allows you to display the availability status of each day in a month, as well as the appointment schedule 
-for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to 
+This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
+for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
 set the calendar to a particular year and month.
 
 #### 3.3.1 Switching to a particular year
-You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments 
-scheduled one year in advance, you can use this function to switch to the following year. The year set by this command 
+You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
+scheduled one year in advance, you can use this function to switch to the following year. The year set by this command
 will affect the command we will discuss in Section 3.3.2 (Switching to a particular month).
 
 **Format:**<br>
@@ -151,8 +151,8 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 [insert screenshot]
 
 #### 3.3.2 Switching to a particular month
-You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the 
-current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month 
+You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
+current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
 January by default.
 
 Parameter Name | Description
@@ -163,7 +163,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 `month MONTH`
 
 **Example:**<br>
-1. Type year 2020 into the command box and press enter to switch to the year 2020. 
+1. Type year 2020 into the command box and press enter to switch to the year 2020.
 2. Type month 3 into the command box.
 3. Press enter on your keyboard.
 
@@ -183,7 +183,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 `day DAY`
 
 **Example:**<br>
-1. Type year 2020 into the command box and press enter to switch to the year 2020. 
+1. Type year 2020 into the command box and press enter to switch to the year 2020.
 2. Type month 1 into the command box and press enter to switch to the month January.
 3. Type day 13 into the command box.
 4. Press enter on your keyboard.
@@ -194,14 +194,14 @@ DAY            | The day of the month you want to switch to. It must be a positi
 [Insert Screenshot]
 
 #### 3.3.4 Displaying appointments within the next n days
-You can use this command to display all appointments within the next n days. For example, choosing n to be 7, Baymax 
+You can use this command to display all appointments within the next n days. For example, choosing n to be 7, Baymax
 will display all appointments in the upcoming week (7 days).
 
 **Format:**<br>
 `next DAYS`
 
 **Example:**<br>
-1. Type year 2020 into the command box and press enter to switch to the year 2020. 
+1. Type year 2020 into the command box and press enter to switch to the year 2020.
 2. Type month 3 into the command box and press enter to switch to March.
 3. Type day 1 into the command box and press enter to switch to the first day of March.
 4. Type  next 7 into the command box.

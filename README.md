@@ -4,11 +4,11 @@
 ![Ui](docs/images/Ui.png)
 
 # Baymax
-* Baymax is a clinic appointment manager, that helps to make scheduling simple and efficient, designed with optimising 
+* Baymax is a clinic appointment manager, that helps to make scheduling simple and efficient, designed with optimising
   user experience in mind. <br>
 * Baymax is a desktop application targeted at clinic receptionists who want managing appointments to be more seamless.
-* Baymax has a Graphic User Interface optimised for healthcare professionals who can work well with the Command Line 
-  Interface. 
+* Baymax has a Graphic User Interface optimised for healthcare professionals who can work well with the Command Line
+  Interface.
 
 # Sitemap
 * User Guide <br>
