@@ -10,7 +10,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public class PatientBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -19,43 +19,28 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-<<<<<<< HEAD
-    private Email email;
-=======
     private Gender gender;
-//    private Address address;
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     private Set<Tag> tags;
     private Remark remark;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code PatientBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-<<<<<<< HEAD
-        email = new Email(DEFAULT_EMAIL);
-=======
         gender = new Gender(DEFAULT_EMAIL);
-//        address = new Address(DEFAULT_ADDRESS);
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PatientBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Patient patientToCopy) {
+    public PatientBuilder(Patient patientToCopy) {
         name = patientToCopy.getName();
         phone = patientToCopy.getPhone();
-<<<<<<< HEAD
-        email = patientToCopy.getEmail();
-=======
         gender = patientToCopy.getGender();
-//        address = patientToCopy.getAddress();
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         tags = new HashSet<>(patientToCopy.getTags());
         remark = patientToCopy.getRemark();
     }
@@ -63,7 +48,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public PatientBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -71,26 +56,15 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PatientBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-//    public PersonBuilder withAddress(String address) {
-//        this.address = new Address(address);
-//        return this;
-//    }
-
-    /**
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public PatientBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
@@ -98,22 +72,18 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public PatientBuilder withEmail(String email) {
         this.gender = new Gender(email);
         return this;
     }
 
-    public PersonBuilder withRemark(String remark) {
+    public PatientBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }
 
     public Patient build() {
-<<<<<<< HEAD
-        return new Patient(name, phone, email, tags, remark);
-=======
         return new Patient(name, phone, gender, tags, remark);
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     }
 
 }

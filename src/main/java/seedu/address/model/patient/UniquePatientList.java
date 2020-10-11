@@ -8,12 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.patient.exceptions.DuplicatePersonException;
-<<<<<<< HEAD:src/main/java/seedu/address/model/patient/UniquePersonList.java
+import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.model.patient.exceptions.PatientNotFoundException;
-=======
-import seedu.address.model.patient.exceptions.PersonNotFoundException;
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef:src/main/java/seedu/address/model/person/UniquePersonList.java
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -26,7 +22,7 @@ import seedu.address.model.patient.exceptions.PersonNotFoundException;
  *
  * @see Patient#isSamePerson(Patient)
  */
-public class UniquePersonList implements Iterable<Patient> {
+public class UniquePatientList implements Iterable<Patient> {
 
     private final ObservableList<Patient> internalList = FXCollections.observableArrayList();
     private final ObservableList<Patient> internalUnmodifiableList =
@@ -47,7 +43,7 @@ public class UniquePersonList implements Iterable<Patient> {
     public void add(Patient toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePatientException();
         }
         internalList.add(toAdd);
     }
@@ -57,7 +53,7 @@ public class UniquePersonList implements Iterable<Patient> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
         int index = internalList.indexOf(target);
@@ -66,7 +62,7 @@ public class UniquePersonList implements Iterable<Patient> {
         }
 
         if (!target.isSamePerson(editedPatient) && contains(editedPatient)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePatientException();
         }
 
         internalList.set(index, editedPatient);
@@ -83,7 +79,7 @@ public class UniquePersonList implements Iterable<Patient> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPatients(UniquePatientList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -92,10 +88,10 @@ public class UniquePersonList implements Iterable<Patient> {
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Patient> patients) {
+    public void setPatients(List<Patient> patients) {
         requireAllNonNull(patients);
         if (!personsAreUnique(patients)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePatientException();
         }
 
         internalList.setAll(patients);
@@ -116,8 +112,8 @@ public class UniquePersonList implements Iterable<Patient> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniquePatientList // instanceof handles nulls
+                        && internalList.equals(((UniquePatientList) other).internalList));
     }
 
     @Override

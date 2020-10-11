@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 /**
  * A utility class for Person.
  */
-public class PersonUtil {
+public class PatientUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.
@@ -28,13 +28,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
-<<<<<<< HEAD
-        sb.append(PREFIX_EMAIL + patient.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
-=======
         sb.append(PREFIX_GENDER + patient.getGender().gender + " ");
-//        sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
         sb.append(PREFIX_REMARK + patient.getRemark().value + " ");
         patient.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

@@ -116,9 +116,7 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Gender: ")
-                .append(getGender())
-//                .append(" Address: ")
-//                .append(getAddress())
+                .append(getGender())\
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Tags: ");
