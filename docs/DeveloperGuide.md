@@ -245,7 +245,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
 
-**Value proposition**: 
+**Value proposition**:
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
 * Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
@@ -305,12 +305,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 * 1a. Patient does not exist
 	* 1a1. Baymax displays a not found message
-    
+
     Use case ends
-    
+
 * 2a. The given user ID is invalid
 	* 2a1. Baymax displays an error message
-	
+
 	Use case ends.<br><br>
 
 > **Use case: Delete a patient’s profile**
@@ -323,17 +323,17 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 4. Baymax deletes the patient profile
 
     Use case ends.
-    
+
 **Extensions**
 
 * 1a. Patient does not exist
 	* 1a1. Baymax displays a not found message
-    
+
     Use case ends
-    
+
 * 2a. The given user ID is invalid
 	* 2a1. Baymax displays an error message
-	
+
 	Use case ends.<br><br>
 
 #### Appointment Management
@@ -373,7 +373,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 6. Baymax displays a list of appointments on that given day
 
     Use case ends. <br><br>
-    
+
 > **Use case: List all appointments in the next *n* days**
 
 **MSS**
@@ -409,12 +409,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 * Application should have a user-friendly graphical user interface and display.
 
 **Data**
-* Application data should load correctly on any mainstream OS given the data file is transferred properly. 
-* Application data should never be lost or removed except when user explicitly deletes something. 
+* Application data should load correctly on any mainstream OS given the data file is transferred properly.
+* Application data should never be lost or removed except when user explicitly deletes something.
 
 **Project Scope**
 * Application is not required to handle detailed medical information about patients.
-* Application is not required to handle the printing of patient profiles or saving them in a user-friendly manner (only displaying). 
+* Application is not required to handle the printing of patient profiles or saving them in a user-friendly manner (only displaying).
 * Application is not required to handle multiple users.
 
 **Process**

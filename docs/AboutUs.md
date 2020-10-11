@@ -16,9 +16,9 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Leader
 * Responsibilities: Integration, Git Expert
 * Features: Calendar
-* Components: UI, Logic 
+* Components: UI, Logic
 ---
-### Thuta 
+### Thuta
 
 <img src="images/thutahw.png" width="200px">
 
@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Code Quality, UML Expert
 * Features: Patient Information Management
-* Components: Common, Storage 
+* Components: Common, Storage
 ---
 ### Kaitlyn
 
