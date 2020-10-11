@@ -77,8 +77,8 @@ public class Appointment implements Comparator<Appointment> {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both patients have the same identity and data fields.
+     * This defines a stronger notion of equality between two patients.
      */
     @Override
     public boolean equals(Object other) {
@@ -90,8 +90,8 @@ public class Appointment implements Comparator<Appointment> {
             return false;
         }
 
-        Appointment otherPerson = (Appointment) other;
-        return otherPerson.getPatient().equals(getPatient());
+        Appointment otherPatient = (Appointment) other;
+        return otherPatient.getPatient().equals(getPatient());
     }
 
     @Override

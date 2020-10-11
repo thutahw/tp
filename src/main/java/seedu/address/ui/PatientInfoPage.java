@@ -14,7 +14,7 @@ public class PatientInfoPage extends UiPart<Region> {
     private static final String FXML = "PatientInfoPage.fxml";
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane patientListPanelPlaceholder;
 
     private PatientListPanel patientListPanel;
 
@@ -24,10 +24,10 @@ public class PatientInfoPage extends UiPart<Region> {
     public PatientInfoPage(ObservableList<Patient> patientList) {
         super(FXML);
         patientListPanel = new PatientListPanel(patientList);
-        personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+        patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
     }
 
-    public PatientListPanel getPersonListPanel() {
+    public PatientListPanel getPatientListPanel() {
         return patientListPanel;
     }
 }
