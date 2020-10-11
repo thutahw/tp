@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patient.AddPatientCommand;
@@ -15,6 +14,7 @@ import seedu.address.logic.commands.patient.DeletePatientCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand;
 import seedu.address.logic.commands.patient.FindPatientCommand;
 import seedu.address.logic.commands.patient.ListPatientCommand;
+import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.logic.commands.patient.RemarkPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.patient.AddPatientCommandParser;
@@ -22,6 +22,7 @@ import seedu.address.logic.parser.patient.DeletePatientCommandParser;
 import seedu.address.logic.parser.patient.EditPatientCommandParser;
 import seedu.address.logic.parser.patient.FindPatientCommandParser;
 import seedu.address.logic.parser.patient.RemarkPatientCommandParser;
+
 
 /**
  * Parses user input.

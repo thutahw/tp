@@ -15,8 +15,8 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand;
+import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
@@ -77,7 +77,8 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(PatientCommand command, Model actualModel, CommandResult expectedCommandResult,
+    public static void assertCommandSuccess(PatientCommand command, Model actualModel,
+                                            CommandResult expectedCommandResult,
                                             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
