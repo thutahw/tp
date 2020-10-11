@@ -29,8 +29,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.patient.EditCommand;
+import seedu.address.logic.commands.patient.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.patient.EditCommandParser;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
@@ -117,7 +118,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + GENDER_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditCommand.EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

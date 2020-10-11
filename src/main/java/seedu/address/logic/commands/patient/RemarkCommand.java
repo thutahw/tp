@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.patient;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
@@ -61,7 +63,7 @@ public class RemarkCommand extends Command {
         model.setPerson(patientToEdit, editedPatient);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPatient));
+        return new CommandResult(generateSuccessMessage(editedPatient), TAB_NUMBER);
     }
 
     /**

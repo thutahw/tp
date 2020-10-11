@@ -11,6 +11,10 @@ import java.util.Set;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents an Appointment in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Appointment implements Comparator<Appointment> {
     private final Patient patient;
     private final LocalDateTime dateTime;
@@ -64,7 +68,6 @@ public class Appointment implements Comparator<Appointment> {
         }
 
         return otherAppointment != null
-                && otherAppointment.getPatient().equals(getPatient())
                 && otherAppointment.getDateTime().equals(getDateTime());
     }
 
@@ -74,8 +77,8 @@ public class Appointment implements Comparator<Appointment> {
     }
 
     /**
-     * Returns true if both appointments have the same identity and data fields.
-     * This defines a stronger notion of equality between two appointments.
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
