@@ -9,7 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.patient.*;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -61,25 +64,7 @@ public class ParserUtil {
         }
         return new Phone(trimmedPhone);
     }
-<<<<<<< HEAD
-=======
 
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-//    public static Address parseAddress(String address) throws ParseException {
-//        requireNonNull(address);
-//        String trimmedAddress = address.trim();
-//        if (!Address.isValidAddress(trimmedAddress)) {
-//            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Address(trimmedAddress);
-//    }
-
->>>>>>> 4f043b0927b895a9c6a0fb5ec9ee744d7d02adef
     /**
      * Parses a {@code String gender} into an {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
@@ -122,6 +107,9 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code String remark} into a {@code Remark}.
+     */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
