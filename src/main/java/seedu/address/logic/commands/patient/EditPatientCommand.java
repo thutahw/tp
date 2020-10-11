@@ -28,14 +28,14 @@ import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing patient in the address book.
  */
 public class EditPatientCommand extends PatientCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
+            + "by the index number used in the displayed patient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -46,23 +46,23 @@ public class EditPatientCommand extends PatientCommand {
             + PREFIX_GENDER + "M"
             + PREFIX_REMARK + "likes to code";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the patient in the filtered patient list to edit
+     * @param editPatientDescriptor details to edit the patient with
      */
-    public EditPatientCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPatientCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editPatientDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
     }
 
     @Override
@@ -75,29 +75,29 @@ public class EditPatientCommand extends PatientCommand {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = createEditedPerson(patientToEdit, editPersonDescriptor);
+        Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
-        if (!patientToEdit.isSamePerson(editedPatient) && model.hasPatient(editedPatient)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPatient), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TAB_NUMBER);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
+     * edited with {@code editPatientDescriptor}.
      */
-    private static Patient createEditedPerson(Patient patientToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
         assert patientToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(patientToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Gender updatedGender = editPersonDescriptor.getGender().orElse(patientToEdit.getGender());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(patientToEdit.getTags());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(patientToEdit.getRemark());
+        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
+        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Gender updatedGender = editPatientDescriptor.getGender().orElse(patientToEdit.getGender());
+        Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
+        Remark updatedRemark = editPatientDescriptor.getRemark().orElse(patientToEdit.getRemark());
 
         return new Patient(updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
     }
@@ -117,27 +117,27 @@ public class EditPatientCommand extends PatientCommand {
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editPatientDescriptor.equals(e.editPatientDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
-    public static class EditPersonDescriptor {
+    public static class EditPatientDescriptor {
         private Name name;
         private Phone phone;
         private Gender gender;
         private Set<Tag> tags;
         private Remark remark;
 
-        public EditPersonDescriptor() {}
+        public EditPatientDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
@@ -209,12 +209,12 @@ public class EditPatientCommand extends PatientCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPatientDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditPatientDescriptor e = (EditPatientDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

@@ -61,6 +61,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
+        System.out.println("Here 1!");
         return model.getFilteredPatientList();
     }
 

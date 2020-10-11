@@ -20,17 +20,17 @@ import seedu.address.model.AppointmentBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 
 public class JsonAppointmentBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAppointmentBookStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readAppointmentBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readAppointmentBook(null));
     }
 
-    private java.util.Optional<ReadOnlyAppointmentBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyAppointmentBook> readAppointmentBook(String filePath) throws Exception {
         return new JsonAppointmentBookStorage(Paths.get(filePath)).readAppointmentBook(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,69 +42,69 @@ public class JsonAppointmentBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readAppointmentBook("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormat.json"));
+        assertThrows(DataConversionException.class, () -> readAppointmentBook("notJsonFormat.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPatientStorage.json"));
+    public void readAppointmentBook_invalidPatientAppointmentBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAppointmentBook("invalidPatientStorage.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPatient.json"));
+    public void readAppointmentBook_invalidAndValidPatientAppointmentBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAppointmentBook("invalidAndValidPatient.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveAppointmentBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AppointmentBook original = getTypicalAppointmentBook();
-        JsonAppointmentBookStorage jsonAddressBookStorage = new JsonAppointmentBookStorage(filePath);
+        JsonAppointmentBookStorage jsonAppointmentBookStorage = new JsonAppointmentBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAppointmentBook(original, filePath);
-        ReadOnlyAppointmentBook readBack = jsonAddressBookStorage.readAppointmentBook(filePath).get();
+        jsonAppointmentBookStorage.saveAppointmentBook(original, filePath);
+        ReadOnlyAppointmentBook readBack = jsonAppointmentBookStorage.readAppointmentBook(filePath).get();
         assertEquals(original, new AppointmentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPatient(HOON);
         original.removePatient(ALICE);
-        jsonAddressBookStorage.saveAppointmentBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAppointmentBook(filePath).get();
+        jsonAppointmentBookStorage.saveAppointmentBook(original, filePath);
+        readBack = jsonAppointmentBookStorage.readAppointmentBook(filePath).get();
         assertEquals(original, new AppointmentBook(readBack));
 
         // Save and read without specifying file path
         original.addPatient(IDA);
-        jsonAddressBookStorage.saveAppointmentBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAppointmentBook().get(); // file path not specified
+        jsonAppointmentBookStorage.saveAppointmentBook(original); // file path not specified
+        readBack = jsonAppointmentBookStorage.readAppointmentBook().get(); // file path not specified
         assertEquals(original, new AppointmentBook(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveAppointmentBook_nullAppointmentBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAppointmentBook(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code appointmentBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAppointmentBook addressBook, String filePath) {
+    private void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook, String filePath) {
         try {
             new JsonAppointmentBookStorage(Paths.get(filePath))
-                    .saveAppointmentBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveAppointmentBook(appointmentBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new AppointmentBook(), null));
+    public void saveAppointmentBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAppointmentBook(new AppointmentBook(), null));
     }
 }

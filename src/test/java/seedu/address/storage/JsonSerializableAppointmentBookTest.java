@@ -22,24 +22,24 @@ public class JsonSerializableAppointmentBookTest {
     private static final Path DUPLICATE_PATIENT_FILE = TEST_DATA_FOLDER.resolve("duplicatePatients.json");
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+    public void toModelType_typicalPatientsFile_success() throws Exception {
+        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PATIENTS_FILE,
                 JsonSerializableAppointmentBook.class).get();
         AppointmentBook appointmentBookFromFile = dataFromFile.toModelType();
-        AppointmentBook typicalPersonsAppointmentBook = TypicalPatients.getTypicalAppointmentBook();
-        assertEquals(appointmentBookFromFile, typicalPersonsAppointmentBook);
+        AppointmentBook typicalPatientsAppointmentBook = TypicalPatients.getTypicalAppointmentBook();
+        assertEquals(appointmentBookFromFile, typicalPatientsAppointmentBook);
     }
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
+    public void toModelType_invalidPatientsFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(INVALID_PATIENT_FILE,
                 JsonSerializableAppointmentBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+    public void toModelType_duplicatePatients_throwsIllegalValueException() throws Exception {
+        JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PATIENT_FILE,
                 JsonSerializableAppointmentBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAppointmentBook.MESSAGE_DUPLICATE_PATIENT,
                 dataFromFile::toModelType);

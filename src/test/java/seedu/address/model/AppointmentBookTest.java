@@ -19,7 +19,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.DuplicatePatientException;
-import seedu.address.model.patient.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PatientBuilder;
 
 public class AppointmentBookTest {
@@ -44,8 +43,8 @@ public class AppointmentBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePatients_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+    public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
+        // Two patients with the same identity fields
         Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
@@ -55,23 +54,23 @@ public class AppointmentBookTest {
     }
 
     @Test
-    public void hasPerson_nullPatient_throwsNullPointerException() {
+    public void hasPatient_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> appointmentBook.hasPatient(null));
     }
 
     @Test
-    public void hasPerson_patientNotInAddressBook_returnsFalse() {
+    public void hasPatient_patientNotInAddressBook_returnsFalse() {
         assertFalse(appointmentBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_patientInAddressBook_returnsTrue() {
+    public void hasPatient_patientInAddressBook_returnsTrue() {
         appointmentBook.addPatient(ALICE);
         assertTrue(appointmentBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
         appointmentBook.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -79,12 +78,12 @@ public class AppointmentBookTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getPatientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> appointmentBook.getPatientList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose patients list can violate interface constraints.
      */
     private static class AppointmentBookStub implements ReadOnlyAppointmentBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();

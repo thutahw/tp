@@ -24,7 +24,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
 
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent patient as the given argument.
      */
     public boolean contains(Appointment toCheck) {
         requireNonNull(toCheck);

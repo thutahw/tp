@@ -15,11 +15,19 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
 import seedu.address.model.AppointmentBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
 import seedu.address.storage.AppointmentBookStorage;
+import seedu.address.storage.JsonAppointmentBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -48,7 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AppointmentBookStorage appointmentBookStorage = new JsonAppointmentBookStorage(userPrefs.getAppointmentBookFilePath());
+        AppointmentBookStorage appointmentBookStorage = new JsonAppointmentBookStorage(
+                userPrefs.getAppointmentBookFilePath());
         storage = new StorageManager(appointmentBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -61,19 +70,20 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s appointment book and {@code userPrefs}. <br>
+     * The data from the sample appointment book will be used instead if {@code storage}'s appointment book is not
+     * found, or an empty appointment book will be used instead if errors occur when reading {@code storage}'s
+     * appointment book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAppointmentBook> addressBookOptional;
+        Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
         ReadOnlyAppointmentBook initialData;
         try {
-            addressBookOptional = storage.readAppointmentBook();
-            if (!addressBookOptional.isPresent()) {
+            appointmentBookOptional = storage.readAppointmentBook();
+            if (!appointmentBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AppointmentBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
+            initialData = appointmentBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AppointmentBook");
             initialData = new AppointmentBook();

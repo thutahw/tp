@@ -120,6 +120,8 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
+        System.out.println("In model.getfilteredpatientlist()");
+        System.out.println(filteredPatients);
         return filteredPatients;
     }
 

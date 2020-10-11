@@ -77,7 +77,8 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     /**
      * Replaces the given patient {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the appointment book.
-     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the appointment book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the
+     * appointment book.
      */
     public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);

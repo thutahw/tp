@@ -136,7 +136,10 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        System.out.println("Hello!");
         PatientInfoPage patientInfoPage = new PatientInfoPage(logic.getFilteredPatientList());
+        System.out.println(patientInfoPage);
+        System.out.println(patientInfoPage.getRoot());
         patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
 
         AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage();

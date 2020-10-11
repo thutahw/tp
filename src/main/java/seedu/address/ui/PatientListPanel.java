@@ -20,7 +20,7 @@ public class PatientListPanel extends UiPart<Region> {
     @FXML
     private ListView<Patient> patientListView;
 
-    /**
+    /**s
      * Creates a {@code PatientListPanel} with the given {@code ObservableList}.
      */
     public PatientListPanel(ObservableList<Patient> patientList) {

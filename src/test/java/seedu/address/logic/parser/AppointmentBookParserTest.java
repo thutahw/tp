@@ -19,7 +19,6 @@ import seedu.address.logic.commands.patient.AddPatientCommand;
 import seedu.address.logic.commands.patient.ClearPatientCommand;
 import seedu.address.logic.commands.patient.DeletePatientCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand;
-import seedu.address.logic.commands.patient.EditPatientCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.patient.FindPatientCommand;
 import seedu.address.logic.commands.patient.ListPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -56,9 +55,9 @@ public class AppointmentBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Patient patient = new PatientBuilder().build();
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
         assertEquals(new EditPatientCommand(INDEX_FIRST_PATIENT, descriptor), command);
     }
 

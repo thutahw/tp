@@ -23,7 +23,7 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FindCommandTest {
+public class FindPatientCommandTest {
     private Model model = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
 
@@ -50,12 +50,12 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different patient -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noPatientFound() {
         String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
@@ -65,7 +65,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multiplePatientsFound() {
         String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);

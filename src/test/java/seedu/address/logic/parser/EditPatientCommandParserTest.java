@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.patient.EditPatientCommand;
-import seedu.address.logic.commands.patient.EditPatientCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import seedu.address.logic.parser.patient.EditPatientCommandParser;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
@@ -108,7 +108,7 @@ public class EditPatientCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + GENDER_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
@@ -121,7 +121,7 @@ public class EditPatientCommandParserTest {
         Index targetIndex = INDEX_FIRST_PATIENT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + GENDER_DESC_AMY;
 
-        EditPatientCommand.EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder()
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_AMY).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
@@ -134,7 +134,7 @@ public class EditPatientCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PATIENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -164,7 +164,7 @@ public class EditPatientCommandParserTest {
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + GENDER_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
@@ -177,7 +177,7 @@ public class EditPatientCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PATIENT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -195,7 +195,7 @@ public class EditPatientCommandParserTest {
         Index targetIndex = INDEX_THIRD_PATIENT;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

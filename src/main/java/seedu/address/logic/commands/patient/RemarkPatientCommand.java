@@ -46,7 +46,7 @@ public class RemarkPatientCommand extends PatientCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
