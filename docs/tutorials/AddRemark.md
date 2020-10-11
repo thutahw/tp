@@ -241,7 +241,7 @@ Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get 
 
 Simply add the following to [`seedu.address.ui.PatientCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-0c6b6abcfac8c205e075294f25e851fe).
 
-**`PersonCard.java`:**
+**`PatientCard.java`:**
 
 ``` java
 @FXML
@@ -253,7 +253,7 @@ private Label remark;
 
 Then insert the following into [`main/resources/view/PersonListCard.fxml`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-12580431f55d7880578aa4c16f249e71).
 
-**`PersonListCard.fxml`:**
+**`PatientListCard.fxml`:**
 
 ``` xml
 <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />

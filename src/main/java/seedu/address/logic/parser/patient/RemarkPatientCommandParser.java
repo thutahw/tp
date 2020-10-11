@@ -23,8 +23,7 @@ public class RemarkPatientCommandParser implements Parser<RemarkPatientCommand> 
      */
     public RemarkPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_REMARK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
 
         Index index;
 

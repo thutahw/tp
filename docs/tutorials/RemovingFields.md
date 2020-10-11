@@ -60,7 +60,7 @@ Places of interest to look out for would be resources used by the application. `
 
 A quick look at the `PersonCard` class and its `fxml` file quickly reveals why it slipped past the automated refactoring.
 
-**`PersonCard.java`**
+**`PatientCard.java`**
 
 ``` java
 ...
@@ -69,7 +69,7 @@ private Label address;
 ...
 ```
 
-**`PersonCard.fxml`**
+**`PatientCard.fxml`**
 
 ``` xml
 ...
@@ -92,7 +92,7 @@ In `src/test/data/`, data meant for testing purposes are stored. While keeping t
 ```json
 {
   "patients": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "name": "Patient with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "gender": "hans@example.com",
     "address": "4th street"
