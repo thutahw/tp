@@ -5,8 +5,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.AppointmentBook;
 
+import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -23,7 +23,7 @@ class RemarkPatientCommandTest {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new PatientBuilder(firstPatient).withRemark(REMARK_STUB).build();
 
-       RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(INDEX_FIRST_PATIENT,
+        RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(INDEX_FIRST_PATIENT,
                 new Remark(editedPatient.getRemark().value));
 
         String expectedMessage = String.format(RemarkPatientCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPatient);

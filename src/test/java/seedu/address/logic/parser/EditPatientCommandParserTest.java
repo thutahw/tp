@@ -134,7 +134,8 @@ public class EditPatientCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PATIENT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withName(VALID_NAME_AMY).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -177,7 +178,8 @@ public class EditPatientCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PATIENT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
