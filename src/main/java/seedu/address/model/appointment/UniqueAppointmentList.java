@@ -12,8 +12,7 @@ import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
 
 /**
- * Contains a list for adding, deleting, updating,
- * appointments in the list.
+ * Contains a list for adding, deleting, updating, appointments in the list.
  */
 
 public class UniqueAppointmentList implements Iterable<Appointment> {
@@ -21,7 +20,6 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     private final ObservableList<Appointment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Appointment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
 
     /**
      * Returns true if the list contains an equivalent patient as the given argument.
@@ -93,6 +91,31 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Appointment> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    @Override
+    public Iterator<Appointment> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueAppointmentList // instanceof handles nulls
+                && internalList.equals(((UniqueAppointmentList) other).internalList));
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+
+
+    /**
      * Returns true if {@code appointments} contains only unique appointments.
      */
     private boolean appointmentsAreUnique(List<Appointment> appointments) {
@@ -106,15 +129,4 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         return true;
     }
 
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<Appointment> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-
-    @Override
-    public Iterator<Appointment> iterator() {
-        return internalList.iterator();
-    }
 }
