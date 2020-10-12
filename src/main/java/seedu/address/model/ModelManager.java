@@ -101,7 +101,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Patient patient) {
-        addressBook.addPerson(patient);
+        addressBook.addPatient(patient);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     public void setPerson(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPerson(target, editedPatient);
+        addressBook.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Person List Accessors =============================================================

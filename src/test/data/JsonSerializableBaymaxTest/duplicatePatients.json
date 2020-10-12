@@ -1,0 +1,14 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "gender": "F",
+    "tagged": [ "friends" ],
+    "remark": "Likes to code"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "gender": "F",
+    "remark": "Likes to code"
+  } ]
+}
