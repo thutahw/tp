@@ -72,8 +72,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
         setAppointments(newData.getAppointmentList());
     }
 
-
-    // patient-level and appointmnt-level operations
+    // patient-level and appointment-level operations
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the appointment book.

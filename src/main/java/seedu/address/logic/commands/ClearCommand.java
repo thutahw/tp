@@ -1,18 +1,18 @@
-package seedu.address.logic.commands.patient;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the appointment book.
  */
-public class ClearPatientCommand extends PatientCommand {
+public class ClearCommand extends PatientCommand {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Appointment book has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {
