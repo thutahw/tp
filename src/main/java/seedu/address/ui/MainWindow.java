@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -31,7 +34,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +44,28 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private TabPane sideTabPane;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane dashboardTabContentPlaceholder;
+
+    @FXML
+    private StackPane patientTabContentPlaceholder;
+
+    @FXML
+    private StackPane appointmentTabContentPlaceholder;
+
+    @FXML
+    private StackPane calendarTabContentPlaceholder;
+
+    @FXML
+    private StackPane infoTabContentPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,9 +127,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +135,21 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        PatientInfoPage patientInfoPage = new PatientInfoPage(logic.getFilteredPersonList());
+        patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
+
+        AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage();
+        appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
+
+        CalendarPage calendarPage = new CalendarPage();
+        calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
+
+        Dashboard dashboard = new Dashboard();
+        dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());
+
+        InfoPage infoPage = new InfoPage();
+        infoTabContentPlaceholder.getChildren().add(infoPage.getRoot());
     }
 
     /**
@@ -163,10 +192,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -185,6 +210,10 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            // switches to the concerned tab
+            SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
+            selectionModel.select(commandResult.getTabId().getZeroBased());
 
             return commandResult;
         } catch (CommandException | ParseException e) {
