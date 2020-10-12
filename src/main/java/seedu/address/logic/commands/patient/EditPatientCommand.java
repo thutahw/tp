@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
@@ -28,7 +27,7 @@ import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the address book.
+ * Edits the details of an existing patient in the appointment book.
  */
 public class EditPatientCommand extends PatientCommand {
 
@@ -40,15 +39,14 @@ public class EditPatientCommand extends PatientCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_GENDER + "M"
-            + PREFIX_REMARK + "likes to code";
+            + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book.";
 
     private final Index index;
     private final EditPatientDescriptor editPatientDescriptor;
