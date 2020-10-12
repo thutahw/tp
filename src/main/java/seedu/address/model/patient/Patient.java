@@ -116,5 +116,4 @@ public class Patient {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }
