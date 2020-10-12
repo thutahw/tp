@@ -27,6 +27,10 @@ public class Description {
                 && value.equals(((Description) other).value)); // state check
     }
 
+    public static boolean isValidDescription(String test) {
+        return test.trim().length() != 0;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
