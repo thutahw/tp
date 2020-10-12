@@ -20,9 +20,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Patient}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedPatient {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -31,12 +31,13 @@ class JsonAdaptedPerson {
     private final String remark;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("gender") String gender,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("remark") String remark) {
+    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                              @JsonProperty("gender") String gender,
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                              @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
@@ -47,9 +48,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Patient} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Patient source) {
+    public JsonAdaptedPatient(Patient source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().gender;
@@ -60,14 +61,14 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> patientTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            patientTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -99,8 +100,7 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
+        final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelName, modelPhone, modelGender, modelTags, modelRemark);
     }
 

@@ -1,6 +1,6 @@
 {
   "_comment": "Baymax save file which contains the same Patient values as in TypicalPatients#getTypicalAddressBook()",
-  "persons" : [ {
+  "patients" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "gender" : "F",

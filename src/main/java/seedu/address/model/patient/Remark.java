@@ -1,7 +1,7 @@
 package seedu.address.model.patient;
 
 /**
- * Represents a Person's remark in the Address book.
+ * Represents a Patient's remark in the Address book.
  * Guarantees: immutable;}
  */
 public class Remark {

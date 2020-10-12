@@ -3,7 +3,7 @@ package seedu.address.logic.commands.patient;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearPatientCommand extends PatientCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAppointmentBook(new AppointmentBook());
         return new CommandResult(MESSAGE_SUCCESS, TAB_NUMBER);
     }
 }

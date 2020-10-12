@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
 import seedu.address.model.patient.Patient;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Patient} objects to be used in tests.
  */
 public class TypicalPatients {
 
@@ -30,7 +30,7 @@ public class TypicalPatients {
 
     // Manually added
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withGender("M").withPhone("98765432")
             .withTags("owesMoney", "friends").build();
@@ -64,17 +64,17 @@ public class TypicalPatients {
     private TypicalPatients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AppointmentBook} with all the typical patients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Patient patient : getTypicalPersons()) {
+    public static AppointmentBook getTypicalAppointmentBook() {
+        AppointmentBook ab = new AppointmentBook();
+        for (Patient patient : getTypicalPatients()) {
             ab.addPatient(patient);
         }
         return ab;
     }
 
-    public static List<Patient> getTypicalPersons() {
+    public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

@@ -23,15 +23,13 @@ public class RemarkPatientCommand extends PatientCommand {
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Patient: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Edits the remark of the patient identified "
+            + "by the index number used in the last patient listing. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "r/ [REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
     private final Remark remark;
@@ -49,18 +47,18 @@ public class RemarkPatientCommand extends PatientCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(),
                 patientToEdit.getGender(), patientToEdit.getTags(), remark);
 
-        model.setPerson(patientToEdit, editedPatient);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patientToEdit, editedPatient);
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
         return new CommandResult(generateSuccessMessage(editedPatient), TAB_NUMBER);
     }
