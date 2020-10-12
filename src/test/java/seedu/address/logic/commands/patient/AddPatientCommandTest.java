@@ -21,6 +21,7 @@ import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PatientBuilder;
 
@@ -102,7 +103,8 @@ public class AddPatientCommandTest {
 
         @Override
         public Path getAppointmentBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
@@ -112,7 +114,13 @@ public class AddPatientCommandTest {
 
         @Override
         public void addPatient(Patient patient) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(
+                    "This method should not be called.");
+        }
+
+        @Override
+        public void addAppointment(Appointment appointment) {
+
         }
 
         @Override
@@ -131,7 +139,17 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public boolean hasAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePatient(Patient target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAppointment(Appointment target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -141,12 +159,27 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public void setAppointment(Appointment target, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public ObservableList<Appointment> getFilteredAppointmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

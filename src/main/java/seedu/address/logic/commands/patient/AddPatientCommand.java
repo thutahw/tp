@@ -22,7 +22,7 @@ public class AddPatientCommand extends PatientCommand {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_GENDER + "EMAIL "
+            + PREFIX_GENDER + "GENDER "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,7 +37,7 @@ public class AddPatientCommand extends PatientCommand {
     private final Patient toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Patient}
+     * Creates an AddPatientCommand to add the specified {@code Patient}
      */
     public AddPatientCommand(Patient patient) {
         requireNonNull(patient);

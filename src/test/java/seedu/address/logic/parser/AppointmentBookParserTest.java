@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.patient.AddPatientCommand;
-import seedu.address.logic.commands.patient.ClearPatientCommand;
 import seedu.address.logic.commands.patient.DeletePatientCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand;
 import seedu.address.logic.commands.patient.FindPatientCommand;
@@ -41,8 +41,8 @@ public class AppointmentBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearPatientCommand.COMMAND_WORD) instanceof ClearPatientCommand);
-        assertTrue(parser.parseCommand(ClearPatientCommand.COMMAND_WORD + " 3") instanceof ClearPatientCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test

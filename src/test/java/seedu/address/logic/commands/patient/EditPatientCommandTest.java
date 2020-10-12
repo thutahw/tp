@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
@@ -163,7 +164,7 @@ public class EditPatientCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearPatientCommand()));
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_SECOND_PATIENT, DESC_AMY)));
