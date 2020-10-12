@@ -9,7 +9,6 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;

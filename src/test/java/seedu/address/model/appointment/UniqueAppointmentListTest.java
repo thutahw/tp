@@ -1,19 +1,20 @@
 package seedu.address.model.appointment;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
-import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
-import seedu.address.testutil.AppointmentBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAppointments.APT1;
 import static seedu.address.testutil.TypicalAppointments.APT2;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.address.testutil.AppointmentBuilder;
 
 public class UniqueAppointmentListTest {
     private final UniqueAppointmentList uniqueAppointmentList = new UniqueAppointmentList();
