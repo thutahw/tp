@@ -20,7 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.userprefs.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.PatientBuilder;
@@ -198,7 +198,7 @@ public class AddPatientCommandTest {
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return this.patient.isSamePatient(patient);
+            return this.patient.isSame(patient);
         }
     }
 
@@ -211,7 +211,7 @@ public class AddPatientCommandTest {
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return patientsAdded.stream().anyMatch(patient::isSamePatient);
+            return patientsAdded.stream().anyMatch(patient::isSame);
         }
 
         @Override

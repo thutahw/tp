@@ -1,9 +1,8 @@
-package seedu.address.model;
+package seedu.address.model.userprefs;
 
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
@@ -12,9 +11,12 @@ import seedu.address.commons.core.GuiSettings;
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
+    private static final Path DEFAULT_STORAGE_PATH =Path.of("data");
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+
+    private Path patientStorageFilePath =DEFAULT_STORAGE_PATH.resolve("patients.json");
+    private Path appointmentStorageFilePath = DEFAULT_STORAGE_PATH.resolve("appointments.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +37,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAppointmentBookFilePath(newUserPrefs.getAppointmentBookFilePath());
+        setPatientStorageFilePath(newUserPrefs.getPatientStorageFilePath());
+        setAppointmentStorageFilePath(newUserPrefs.getAppointmentStorageFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +50,22 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAppointmentBookFilePath() {
-        return addressBookFilePath;
+    public Path getPatientStorageFilePath() {
+        return patientStorageFilePath;
     }
 
-    public void setAppointmentBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public Path getAppointmentStorageFilePath() {
+        return appointmentStorageFilePath;
+    }
+
+    public void setPatientStorageFilePath(Path patientStorageFilePath) {
+        requireNonNull(patientStorageFilePath);
+        this.patientStorageFilePath = patientStorageFilePath;
+    }
+
+    public void setAppointmentStorageFilePath(Path appointmentStorageFilePath) {
+        requireNonNull(appointmentStorageFilePath);
+        this.appointmentStorageFilePath = appointmentStorageFilePath;
     }
 
     @Override
@@ -68,19 +80,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && patientStorageFilePath.equals(o.patientStorageFilePath)
+                && appointmentStorageFilePath.equals(o.appointmentStorageFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, patientStorageFilePath, appointmentStorageFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nPatient data file location : " + patientStorageFilePath);
+        sb.append("\nAppointment data file location : " + appointmentStorageFilePath);
         return sb.toString();
     }
 

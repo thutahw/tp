@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.listmanagers.PatientManager;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
@@ -40,12 +42,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAppointmentBook getSampleAppointmentBook() {
-        AppointmentBook sampleAb = new AppointmentBook();
+    public static ReadOnlyListManager<Patient> getSamplePatientManager() {
+        PatientManager samplePM = new PatientManager();
         for (Patient samplePatient : getSamplePatients()) {
-            sampleAb.addPatient(samplePatient);
+            samplePM.addPatient(samplePatient);
         }
-        return sampleAb;
+        return samplePM;
     }
 
     /**

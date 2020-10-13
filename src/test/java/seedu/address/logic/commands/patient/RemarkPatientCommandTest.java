@@ -2,21 +2,21 @@ package seedu.address.logic.commands.patient;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.listmanagers.ModelManager;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Remark;
 import seedu.address.testutil.PatientBuilder;
 
 class RemarkPatientCommandTest {
     private static final String REMARK_STUB = "Some remark";
-    private final Model model = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalPatientManager(), new UserPrefs());
 
     @Test
     void execute_addRemarkUnfilteredList_success() {

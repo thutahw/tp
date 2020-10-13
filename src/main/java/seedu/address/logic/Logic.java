@@ -7,7 +7,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -24,19 +27,34 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AppointmentBook.
+     * Returns the PatientManager.
      *
-     * @see seedu.address.model.Model#getAppointmentBook()
+     * @see Model#getPatientManager() ()
      */
-    ReadOnlyAppointmentBook getAppointmentBook();
+    ReadOnlyListManager<Patient> getPatientManager();
+
+    /**
+     * Returns the AppointmentManager.
+     *
+     * @see Model#getAppointmentManager() ()
+     */
+    ReadOnlyListManager<Appointment> getAppointmentManager();
 
     /** Returns an unmodifiable view of the filtered list of patients */
     ObservableList<Patient> getFilteredPatientList();
 
+    /** Returns an unmodifiable view of the filtered list of appointments */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
     /**
-     * Returns the user prefs' appointment book file path.
+     * Returns the user prefs' patient manager file path.
      */
-    Path getAppointmentBookFilePath();
+    Path getPatientStorageFilePath();
+
+    /**
+     * Returns the user prefs' appointment manager file path.
+     */
+    Path getAppointmentStorageFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

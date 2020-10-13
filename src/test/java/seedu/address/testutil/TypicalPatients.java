@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AppointmentBook;
+import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -66,8 +67,8 @@ public class TypicalPatients {
     /**
      * Returns an {@code AppointmentBook} with all the typical patients.
      */
-    public static AppointmentBook getTypicalAppointmentBook() {
-        AppointmentBook ab = new AppointmentBook();
+    public static PatientManager getTypicalPatientManager() {
+        PatientManager ab = new PatientManager();
         for (Patient patient : getTypicalPatients()) {
             ab.addPatient(patient);
         }

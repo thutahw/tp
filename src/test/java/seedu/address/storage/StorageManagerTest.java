@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
 import java.nio.file.Path;
 
@@ -11,9 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AppointmentBook;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.listmanagers.PatientManager;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.storage.patient.JsonPatientManagerStorage;
+import seedu.address.storage.userprefs.JsonUserPrefsStorage;
 
 public class StorageManagerTest {
 
@@ -24,7 +27,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAppointmentBookStorage addressBookStorage = new JsonAppointmentBookStorage(getTempFilePath("ab"));
+        JsonPatientManagerStorage addressBookStorage = new JsonPatientManagerStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -48,21 +51,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void patientManagerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAppointmentBookStorage} class.
+         * {@link JsonPatientManagerStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AppointmentBook original = getTypicalAppointmentBook();
-        storageManager.saveAppointmentBook(original);
-        ReadOnlyAppointmentBook retrieved = storageManager.readAppointmentBook().get();
-        assertEquals(original, new AppointmentBook(retrieved));
+        PatientManager original = getTypicalPatientManager();
+        storageManager.savePatients(original);
+        ReadOnlyListManager<Patient> retrieved = storageManager.readPatients().get();
+        assertEquals(original, new PatientManager(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAppointmentBookFilePath());
+        assertNotNull(storageManager.getPatientManagerStorageFilePath());
     }
 
 }

@@ -8,12 +8,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.uniquelist.UniqueListElement;
 
 /**
  * Represents a Patient in the appointment book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Patient {
+public class Patient implements UniqueListElement {
 
     // Identity fields
     private final Name name;
@@ -64,12 +65,19 @@ public class Patient {
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSamePatient(Patient otherPatient) {
-        if (otherPatient == this) {
+    @Override
+    public boolean isSame(UniqueListElement other) {
+        if (other == this) {
             return true;
         }
 
-        return otherPatient != null
+        if (!(other instanceof Patient)) {
+            return false;
+        }
+
+        Patient otherPatient = (Patient) other;
+
+        return other != null
                 && otherPatient.getName().equals(getName())
                 && (otherPatient.getPhone().equals(getPhone()) || otherPatient.getGender().equals(getGender()));
     }

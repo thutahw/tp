@@ -1,14 +1,7 @@
-package seedu.address.storage;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+package seedu.address.storage.appointment;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
@@ -16,11 +9,18 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedTag;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Patient}.
  */
-class JsonAdaptedPatient {
+class JsonAdaptedAppointment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
@@ -34,10 +34,10 @@ class JsonAdaptedPatient {
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("gender") String gender,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                              @JsonProperty("remark") String remark) {
+    public JsonAdaptedAppointment(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                  @JsonProperty("gender") String gender,
+                                  @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                                  @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.gender = gender;
@@ -50,7 +50,7 @@ class JsonAdaptedPatient {
     /**
      * Converts a given {@code Patient} into this class for Jackson use.
      */
-    public JsonAdaptedPatient(Patient source) {
+    public JsonAdaptedAppointment(Patient source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         gender = source.getGender().gender;
