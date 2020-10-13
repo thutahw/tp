@@ -72,7 +72,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && tabNumber == otherCommandResult.getTabNumber();
+                && tabNumber.equals(otherCommandResult.getTabNumber());
     }
 
     @Override
