@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,9 +15,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/CommandTestUtil.java
 import seedu.address.logic.commands.patient.EditPatientCommand;
 import seedu.address.logic.commands.patient.PatientCommand;
+=======
+import seedu.address.model.AppointmentBook;
+>>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9:src/test/java/seedu/address/logic/commands/patient/PatientCommandTestUtil.java
 import seedu.address.model.Model;
 import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
@@ -27,7 +33,7 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 /**
  * Contains helper methods for testing commands.
  */
-public class CommandTestUtil {
+public class PatientCommandTestUtil {
 
     public static final String VALID_NRIC_AMY = "T1234567A";
     public static final String VALID_NRIC_BOB = "S3322115E";
@@ -81,9 +87,9 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(PatientCommand command, Model actualModel,
-                                            CommandResult expectedCommandResult,
-                                            Model expectedModel) {
+    public static void assertPatientCommandSuccess(Command command, Model actualModel,
+                                                   CommandResult expectedCommandResult,
+                                                   Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -94,13 +100,13 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(PatientCommand, Model, CommandResult, Model)}
+     * Convenience wrapper to {@link #assertPatientCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(PatientCommand command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, command.TAB_NUMBER);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    public static void assertPatientCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                   Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, command.getTabNumber());
+        assertPatientCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
     /**
@@ -109,7 +115,7 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the patient manager, filtered patient list and selected patient in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(PatientCommand command, Model actualModel, String expectedMessage) {
+    public static void assertPatientCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         PatientManager expectedPatientManager = new PatientManager(actualModel.getPatientManager());

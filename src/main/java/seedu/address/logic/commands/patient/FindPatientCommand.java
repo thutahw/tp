@@ -3,6 +3,8 @@ package seedu.address.logic.commands.patient;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
@@ -11,7 +13,7 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
  * Finds and lists all patients in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindPatientCommand extends PatientCommand {
+public class FindPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -32,13 +34,19 @@ public class FindPatientCommand extends PatientCommand {
         model.updateFilteredPatientList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
-                        model.getFilteredPatientList().size()), TAB_NUMBER);
+                        model.getFilteredPatientList().size()), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindPatientCommand // instanceof handles nulls
-                && predicate.equals(((FindPatientCommand) other).predicate)); // state check
+                && predicate.equals(((FindPatientCommand) other).predicate))
+                && getTabNumber().equals(((FindPatientCommand) other).getTabNumber()); // state check
     }
 }

@@ -2,9 +2,8 @@ package seedu.address.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
@@ -39,7 +38,7 @@ public class DeletePatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
 
-        assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -47,7 +46,7 @@ public class DeletePatientCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertPatientCommandFailure(deletePatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -63,7 +62,7 @@ public class DeletePatientCommandTest {
         expectedModel.deletePatient(patientToDelete);
         showNoPatient(expectedModel);
 
-        assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -76,7 +75,7 @@ public class DeletePatientCommandTest {
 
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertPatientCommandFailure(deletePatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test

@@ -15,6 +15,13 @@ public class Description {
         value = description;
     }
 
+    /**
+     * Returns true if a given string is a valid description.
+     */
+    public static boolean isValidDescription(String test) {
+        return test.trim() != "";
+    }
+
     @Override
     public String toString() {
         return value;

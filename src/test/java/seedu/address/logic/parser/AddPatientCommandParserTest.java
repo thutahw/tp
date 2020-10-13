@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
@@ -25,6 +26,30 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+=======
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.INVALID_GENDER_DESC;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+>>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPatients.AMY;

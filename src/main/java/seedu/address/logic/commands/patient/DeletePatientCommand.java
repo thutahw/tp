@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,7 +15,7 @@ import seedu.address.model.patient.Patient;
 /**
  * Deletes a patient identified using it's displayed index from the address book.
  */
-public class DeletePatientCommand extends PatientCommand {
+public class DeletePatientCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -42,13 +43,19 @@ public class DeletePatientCommand extends PatientCommand {
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeletePatientCommand // instanceof handles nulls
-                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)
+                && getTabNumber().equals(((DeletePatientCommand) other).getTabNumber())); // state check
     }
 }

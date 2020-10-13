@@ -3,11 +3,18 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+=======
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_AMY;
+>>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.AMY;
 

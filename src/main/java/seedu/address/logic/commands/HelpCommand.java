@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.patient.PatientCommand;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends PatientCommand {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
@@ -17,6 +17,11 @@ public class HelpCommand extends PatientCommand {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, TAB_NUMBER);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(1);
     }
 }

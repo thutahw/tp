@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
@@ -28,9 +32,13 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label dateTime;
+    @FXML
     private Label description;
     @FXML
-    private Label patient;
+    private Label patientName;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
@@ -39,8 +47,12 @@ public class AppointmentCard extends UiPart<Region> {
         super(FXML);
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
+        patientName.setText(appointment.getPatient().getName().fullName);
+        dateTime.setText(appointment.getDateTime().toString());
         description.setText(appointment.getDescription().toString());
-        patient.setText(appointment.getPatient().getName().fullName);
+        appointment.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

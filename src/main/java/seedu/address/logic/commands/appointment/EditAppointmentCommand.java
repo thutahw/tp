@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.time.DateTime;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details (date-and-time, description, tags) of an existing appointment in the appointment book.
  */
-public class EditAppointmentCommand extends AppointmentCommand {
+public class EditAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "editAppt";
 
@@ -36,7 +37,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATETIME + "2020-10-15 12pm ";
+            + PREFIX_DATETIME + "2020-10-24 11:00AM ";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -76,7 +77,12 @@ public class EditAppointmentCommand extends AppointmentCommand {
 
         model.setAppointment(appointmentToEdit, editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(4);
     }
 
     /**

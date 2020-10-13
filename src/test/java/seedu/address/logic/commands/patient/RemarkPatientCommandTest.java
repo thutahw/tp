@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.patient;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
@@ -34,6 +33,6 @@ class RemarkPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
 
-        assertCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);
     }
 }
