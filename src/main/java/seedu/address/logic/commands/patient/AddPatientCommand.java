@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,9 +16,10 @@ import seedu.address.model.patient.Patient;
 /**
  * Adds a patient to the address book.
  */
-public class AddPatientCommand extends PatientCommand {
+public class AddPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final Index TAB_NUMBER = Index.fromOneBased(3);
+    public static final String COMMAND_WORD = "addPatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
             + "Parameters: "
@@ -54,6 +57,11 @@ public class AddPatientCommand extends PatientCommand {
 
         model.addPatient(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 
     @Override

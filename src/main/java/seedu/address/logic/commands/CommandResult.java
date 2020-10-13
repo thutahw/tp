@@ -53,7 +53,7 @@ public class CommandResult {
         return exit;
     }
 
-    public Index getTabId() {
+    public Index getTabNumber() {
         return tabNumber;
     }
 
@@ -72,7 +72,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && tabNumber == otherCommandResult.tabNumber;
+                && tabNumber == otherCommandResult.getTabNumber();
     }
 
     @Override

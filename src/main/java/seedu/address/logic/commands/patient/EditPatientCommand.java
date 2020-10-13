@@ -16,6 +16,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,8 +30,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing patient in the appointment book.
  */
-public class EditPatientCommand extends PatientCommand {
+public class EditPatientCommand extends Command {
 
+    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
@@ -82,6 +84,11 @@ public class EditPatientCommand extends PatientCommand {
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 
     /**

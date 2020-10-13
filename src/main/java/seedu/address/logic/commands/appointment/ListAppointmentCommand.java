@@ -3,14 +3,17 @@ package seedu.address.logic.commands.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
  * Lists all patients in the appointment book to the user.
  */
-public class ListAppointmentCommand extends AppointmentCommand {
+public class ListAppointmentCommand extends Command {
 
+    public static final Index TAB_NUMBER = Index.fromOneBased(4);
     public static final String COMMAND_WORD = "listAppt";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
@@ -21,5 +24,10 @@ public class ListAppointmentCommand extends AppointmentCommand {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(MESSAGE_SUCCESS, TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 }

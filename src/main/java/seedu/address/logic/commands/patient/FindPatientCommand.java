@@ -3,6 +3,8 @@ package seedu.address.logic.commands.patient;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
@@ -11,8 +13,9 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
  * Finds and lists all patients in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindPatientCommand extends PatientCommand {
+public class FindPatientCommand extends Command {
 
+    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names contain any of "
@@ -33,6 +36,11 @@ public class FindPatientCommand extends PatientCommand {
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
                         model.getFilteredPatientList().size()), TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 
     @Override

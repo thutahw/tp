@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Description;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Phone;
@@ -115,4 +119,34 @@ public class ParserUtil {
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
     }
+
+    /**
+     * Parses {@code String description} into a {@code Description}.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses {@code String dateTime} (e.g. "2020-10-12 23:39PM") into a {@code LocalDateTime}.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        LocalDateTime dt;
+        try {
+            dt = LocalDateTime.parse(trimmedDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mma"));
+        } catch (DateTimeParseException ex) {
+            throw new ParseException(ex.getMessage());
+        }
+        return dt;
+    }
+
+
+
 }

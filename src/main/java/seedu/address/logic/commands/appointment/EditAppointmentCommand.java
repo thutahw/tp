@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,8 +25,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details (date-and-time, description, tags) of an existing appointment in the appointment book.
  */
-public class EditAppointmentCommand extends AppointmentCommand {
+public class EditAppointmentCommand extends Command {
 
+    public static final Index TAB_NUMBER = Index.fromOneBased(4);
     public static final String COMMAND_WORD = "editAppt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
@@ -77,6 +79,11 @@ public class EditAppointmentCommand extends AppointmentCommand {
         model.setAppointment(appointmentToEdit, editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 
     /**

@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,8 +15,9 @@ import seedu.address.model.patient.Patient;
 /**
  * Deletes a patient identified using it's displayed index from the address book.
  */
-public class DeletePatientCommand extends PatientCommand {
+public class DeletePatientCommand extends Command {
 
+    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -43,6 +45,11 @@ public class DeletePatientCommand extends PatientCommand {
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePatient(patientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), TAB_NUMBER);
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return TAB_NUMBER;
     }
 
     @Override
