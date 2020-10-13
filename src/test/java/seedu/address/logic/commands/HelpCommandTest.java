@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandSuccess;
 import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +19,6 @@ public class HelpCommandTest {
                 true,
                 false,
                 HelpCommand.TAB_NUMBER);
-        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+        assertPatientCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

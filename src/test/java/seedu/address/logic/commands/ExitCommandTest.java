@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandSuccess;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;
@@ -19,6 +19,6 @@ public class ExitCommandTest {
                 false,
                 true,
                 ExitCommand.TAB_NUMBER);
-        assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
+        assertPatientCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }
