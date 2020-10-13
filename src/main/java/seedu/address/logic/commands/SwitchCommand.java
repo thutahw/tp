@@ -27,6 +27,6 @@ public class SwitchCommand extends Command {
 
     @Override
     public Index getTabNumber() {
-        return this.tabNumber;
+        return tabNumber;
     }
 }

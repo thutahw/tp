@@ -11,7 +11,6 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(1);
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Appointment book has been cleared!";
 
@@ -19,11 +18,11 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAppointmentBook(new AppointmentBook());
-        return new CommandResult(MESSAGE_SUCCESS, TAB_NUMBER);
+        return new CommandResult(MESSAGE_SUCCESS, getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(1);
     }
 }

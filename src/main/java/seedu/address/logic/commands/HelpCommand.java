@@ -8,7 +8,6 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(1);
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
@@ -18,11 +17,11 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, TAB_NUMBER);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(1);
     }
 }

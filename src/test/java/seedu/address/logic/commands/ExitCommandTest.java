@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assert
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
@@ -18,7 +19,7 @@ public class ExitCommandTest {
                 MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 false,
                 true,
-                ExitCommand.TAB_NUMBER);
+                Index.fromOneBased(1));
         assertPatientCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }
