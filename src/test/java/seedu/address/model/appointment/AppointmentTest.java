@@ -24,20 +24,20 @@ public class AppointmentTest {
     @Test
     public void isSameAppointment() {
         // same dateTime -> return True
-        assertTrue(APT1.isSameAppointment(APT2));
+        assertTrue(APT1.isSameAppointment(APT4));
         // different dateTime -> return False
         assertFalse(APT1.isSameAppointment(APT3));
         //same patient but different dateTime -> False
-        assertFalse(APT1.isSameAppointment(APT4));
+        assertFalse(APT1.isSameAppointment(APT2));
 
     }
 
     @Test
     public void equals() {
         // same Patient -> True
-        assertEquals(APT4, APT1);
+        assertEquals(APT2, APT1);
         // different Patient -> False
-        assertNotEquals(APT2, APT1);
+        assertNotEquals(APT3, APT1);
 
     }
 
@@ -46,7 +46,7 @@ public class AppointmentTest {
         // same Patient
         assertEquals(ALICE, APT1.getPatient());
         // different Patient
-        assertNotEquals(ALICE, APT2.getPatient());
+        assertNotEquals(ALICE, APT4.getPatient());
     }
 
 }

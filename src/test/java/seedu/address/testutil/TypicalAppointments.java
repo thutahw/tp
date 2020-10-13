@@ -19,13 +19,13 @@ public class TypicalAppointments {
     public static final Appointment APT1 = new Appointment(ALICE, LocalDateTime.parse("2020-10-11T12:45:30"),
             new HashSet<>(), new Description("long term patient"), AppointmentStatus.DONE);
 
-    public static final Appointment APT2 = new Appointment(BOB, LocalDateTime.parse("2020-10-12T12:45:30"),
+    public static final Appointment APT2 = new Appointment(ALICE, LocalDateTime.parse("2020-10-12T12:45:30"),
             new HashSet<>(), new Description("long term patient"), AppointmentStatus.UPCOMING);
 
     public static final Appointment APT3 = new Appointment(CARL, LocalDateTime.parse("2002-11-11T11:30:20"),
             new HashSet<>(), new Description("long term patient"), AppointmentStatus.DONE);
 
-    public static final Appointment APT4 = new Appointment(ALICE, LocalDateTime.parse("2002-12-11T11:30:20"),
+    public static final Appointment APT4 = new Appointment(BOB, LocalDateTime.parse("2020-10-11T12:45:30"),
             new HashSet<>(), new Description("long term patient"), AppointmentStatus.UPCOMING);
 
 }
