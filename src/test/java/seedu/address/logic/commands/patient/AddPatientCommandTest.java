@@ -17,12 +17,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.PatientManager;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.ReadOnlyUserPrefs;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddPatientCommandTest {
@@ -55,8 +55,8 @@ public class AddPatientCommandTest {
 
     @Test
     public void equals() {
-        Patient alice = new PatientBuilder().withName("Alice").build();
-        Patient bob = new PatientBuilder().withName("Bob").build();
+        Patient alice = new PatientBuilder().withNric("S7589462A").withName("Alice").build();
+        Patient bob = new PatientBuilder().withNric("T6543891D").withName("Bob").build();
         AddPatientCommand addAliceCommand = new AddPatientCommand(alice);
         AddPatientCommand addBobCommand = new AddPatientCommand(bob);
 
@@ -102,13 +102,24 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public Path getAppointmentBookFilePath() {
+        public Path getPatientStorageFilePath() {
             throw new AssertionError(
                     "This method should not be called.");
         }
 
         @Override
-        public void setAppointmentBookFilePath(Path appointmentBookFilePath) {
+        public Path getAppointmentStorageFilePath() {
+            throw new AssertionError(
+                    "This method should not be called.");
+        }
+
+        @Override
+        public void setPatientStorageFilePath(Path patientStorageFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAppointmentStorageFilePath(Path appointmentStorageFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -120,16 +131,27 @@ public class AddPatientCommandTest {
 
         @Override
         public void addAppointment(Appointment appointment) {
-
+            throw new AssertionError(
+                    "This method should not be called.");
         }
 
         @Override
-        public void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook) {
+        public void setPatientManager(ReadOnlyListManager<Patient> patientManager) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAppointmentBook getAppointmentBook() {
+        public void setAppointmentManager(ReadOnlyListManager<Appointment> appointmentManager) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListManager<Patient> getPatientManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListManager<Appointment> getAppointmentManager() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -182,6 +204,11 @@ public class AddPatientCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetAllListManagers() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -198,7 +225,7 @@ public class AddPatientCommandTest {
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return this.patient.isSamePatient(patient);
+            return this.patient.isSame(patient);
         }
     }
 
@@ -211,7 +238,7 @@ public class AddPatientCommandTest {
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return patientsAdded.stream().anyMatch(patient::isSamePatient);
+            return patientsAdded.stream().anyMatch(patient::isSame);
         }
 
         @Override
@@ -221,8 +248,8 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public ReadOnlyAppointmentBook getAppointmentBook() {
-            return new AppointmentBook();
+        public ReadOnlyListManager<Patient> getPatientManager() {
+            return new PatientManager();
         }
     }
 

@@ -7,25 +7,31 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.ReadOnlyUserPrefs;
+import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.storage.patient.PatientManagerStorage;
+import seedu.address.storage.userprefs.UserPrefsStorage;
 
 /**
- * Manages storage of AppointmentBook data in local storage.
+ * Manages storage of Baymax data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AppointmentBookStorage appointmentBookStorage;
+    private PatientManagerStorage patientManagerStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AppointmentBookStorage} and {@code UserPrefStorage}.
+     * Creates a new {@code StorageManager}
+     * @param patientManagerStorage     the patient manager storage
+     * @param userPrefsStorage          the user prefs storage
      */
-    public StorageManager(AppointmentBookStorage appointmentBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(PatientManagerStorage patientManagerStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
-        this.appointmentBookStorage = appointmentBookStorage;
+        this.patientManagerStorage = patientManagerStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,34 +52,35 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-    // ================ AppointmentBook methods ==============================
+    // ================ Patientmanager methods ==============================
 
     @Override
-    public Path getAppointmentBookFilePath() {
-        return appointmentBookStorage.getAppointmentBookFilePath();
+    public Path getPatientManagerStorageFilePath() {
+        return patientManagerStorage.getPatientManagerStorageFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook() throws DataConversionException, IOException {
-        return readAppointmentBook(appointmentBookStorage.getAppointmentBookFilePath());
+    public Optional<ReadOnlyListManager<Patient>> readPatients() throws DataConversionException, IOException {
+        return readPatients(patientManagerStorage.getPatientManagerStorageFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(Path filePath)
+    public Optional<ReadOnlyListManager<Patient>> readPatients(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return appointmentBookStorage.readAppointmentBook(filePath);
+        return patientManagerStorage.readPatients(filePath);
+    }
+
+
+    @Override
+    public void savePatients(ReadOnlyListManager<Patient> patientManager) throws IOException {
+        savePatients(patientManager, patientManagerStorage.getPatientManagerStorageFilePath());
     }
 
     @Override
-    public void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook) throws IOException {
-        saveAppointmentBook(appointmentBook, appointmentBookStorage.getAppointmentBookFilePath());
-    }
-
-    @Override
-    public void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook, Path filePath) throws IOException {
+    public void savePatients(ReadOnlyListManager<Patient> patientManager, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        appointmentBookStorage.saveAppointmentBook(appointmentBook, filePath);
+        patientManagerStorage.savePatients(patientManager, filePath);
     }
 
 }

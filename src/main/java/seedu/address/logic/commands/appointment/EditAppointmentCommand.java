@@ -6,12 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -70,7 +70,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
         Appointment appointmentToEdit = lastShownList.get(index.getZeroBased());
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor);
 
-        if (!appointmentToEdit.isSameAppointment(editedAppointment) && model.hasAppointment(editedAppointment)) {
+        if (!appointmentToEdit.isSame(editedAppointment) && model.hasAppointment(editedAppointment)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
@@ -89,7 +89,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
 
         Patient updatedPatient = editAppointmentDescriptor.getPatient()
                 .orElse(appointmentToEdit.getPatient());
-        LocalDateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
+        DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
         Set<Tag> updatedTags = editAppointmentDescriptor.getTags()
                 .orElse(appointmentToEdit.getTags());
@@ -97,7 +97,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
                 .orElse(appointmentToEdit.getDescription());
         AppointmentStatus status = appointmentToEdit.getStatus();
 
-        return new Appointment(updatedPatient, updatedDateTime, updatedTags, updatedDescription, status);
+        return new Appointment(updatedPatient, updatedDateTime, status, updatedDescription, updatedTags);
     }
 
     @Override

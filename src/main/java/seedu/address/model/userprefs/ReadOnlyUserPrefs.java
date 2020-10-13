@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.userprefs;
 
 import java.nio.file.Path;
 
@@ -11,6 +11,8 @@ public interface ReadOnlyUserPrefs {
 
     GuiSettings getGuiSettings();
 
-    Path getAppointmentBookFilePath();
+    Path getPatientStorageFilePath();
+
+    Path getAppointmentStorageFilePath();
 
 }

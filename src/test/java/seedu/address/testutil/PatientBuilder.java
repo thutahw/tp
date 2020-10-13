@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Remark;
@@ -16,11 +17,13 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PatientBuilder {
 
+    public static final String DEFAULT_NRIC = "T0123456A";
     public static final String DEFAULT_NAME = "Daniel Gryffin";
     public static final String DEFAULT_PHONE = "81053636";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_REMARK = "Likes to code";
 
+    private Nric nric;
     private Name name;
     private Phone phone;
     private Gender gender;
@@ -31,6 +34,7 @@ public class PatientBuilder {
      * Creates a {@code PatientBuilder} with the default details.
      */
     public PatientBuilder() {
+        nric = new Nric(DEFAULT_NRIC);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         gender = new Gender(DEFAULT_GENDER);
@@ -42,11 +46,20 @@ public class PatientBuilder {
      * Initializes the PatientBuilder with the data of {@code patientToCopy}.
      */
     public PatientBuilder(Patient patientToCopy) {
+        nric = patientToCopy.getNric();
         name = patientToCopy.getName();
         phone = patientToCopy.getPhone();
         gender = patientToCopy.getGender();
         tags = new HashSet<>(patientToCopy.getTags());
         remark = patientToCopy.getRemark();
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@Code Patient} that we are building.
+     */
+    public PatientBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
     }
 
     /**
@@ -90,7 +103,7 @@ public class PatientBuilder {
     }
 
     public Patient build() {
-        return new Patient(name, phone, gender, tags, remark);
+        return new Patient(nric, name, phone, gender, tags, remark);
     }
 
 }

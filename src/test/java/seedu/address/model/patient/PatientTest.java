@@ -25,32 +25,32 @@ public class PatientTest {
     @Test
     public void isSamePatient() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePatient(ALICE));
+        assertTrue(ALICE.isSame(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePatient(null));
+        assertFalse(ALICE.isSame(null));
 
-        // different phone and gender -> returns false
+        // different phone and gender -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB).build();
-        assertFalse(ALICE.isSamePatient(editedAlice));
+        assertTrue(ALICE.isSame(editedAlice));
 
-        // different name -> returns false
+        // different name -> returns true
         editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePatient(editedAlice));
+        assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePatient(editedAlice));
+        assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same gender, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePatient(editedAlice));
+        assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same phone, same gender, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePatient(editedAlice));
+        assertTrue(ALICE.isSame(editedAlice));
     }
 
     @Test
@@ -71,20 +71,20 @@ public class PatientTest {
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
-        // different name -> returns false
+        // different name -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
+        // different phone -> returns true
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different gender -> returns false
+        // different gender -> returns true
         editedAlice = new PatientBuilder(ALICE).withGender(VALID_GENDER_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different tags -> returns true
         editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
     }
 }

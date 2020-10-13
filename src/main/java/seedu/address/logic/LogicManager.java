@@ -13,7 +13,8 @@ import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
 import seedu.address.storage.Storage;
 
@@ -46,7 +47,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAppointmentBook(model.getAppointmentBook());
+            storage.savePatients(model.getPatientManager());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,19 +56,33 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAppointmentBook getAppointmentBook() {
-        return model.getAppointmentBook();
+    public ReadOnlyListManager<Patient> getPatientManager() {
+        return model.getPatientManager();
+    }
+
+    @Override
+    public ReadOnlyListManager<Appointment> getAppointmentManager() {
+        return model.getAppointmentManager();
     }
 
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
-        System.out.println("Here 1!");
         return model.getFilteredPatientList();
     }
 
     @Override
-    public Path getAppointmentBookFilePath() {
-        return model.getAppointmentBookFilePath();
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return model.getFilteredAppointmentList();
+    }
+
+    @Override
+    public Path getPatientStorageFilePath() {
+        return model.getPatientStorageFilePath();
+    }
+
+    @Override
+    public Path getAppointmentStorageFilePath() {
+        return model.getAppointmentStorageFilePath();
     }
 
     @Override

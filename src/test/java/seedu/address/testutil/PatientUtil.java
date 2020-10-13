@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -30,6 +31,7 @@ public class PatientUtil {
      */
     public static String getPatientDetails(Patient patient) {
         StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NRIC + patient.getNric().nric + " ");
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
         sb.append(PREFIX_GENDER + patient.getGender().gender + " ");
