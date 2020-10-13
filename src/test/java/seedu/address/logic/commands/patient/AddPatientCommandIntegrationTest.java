@@ -1,13 +1,7 @@
 package seedu.address.logic.commands.patient;
 
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
-=======
 import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
-import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
->>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9
+import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,14 +38,9 @@ public class AddPatientCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePatient_throwsCommandException() {
-<<<<<<< HEAD
         Patient patientInList = model.getPatientManager().getReadOnlyList().get(0);
-        assertCommandFailure(new AddPatientCommand(patientInList), model, AddPatientCommand.MESSAGE_DUPLICATE_PATIENT);
-=======
-        Patient patientInList = model.getAppointmentBook().getPatientList().get(0);
         assertPatientCommandFailure(new AddPatientCommand(patientInList),
                 model, AddPatientCommand.MESSAGE_DUPLICATE_PATIENT);
->>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9
     }
 
 }

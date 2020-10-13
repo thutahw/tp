@@ -18,12 +18,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/CommandTestUtil.java
-import seedu.address.logic.commands.patient.EditPatientCommand;
-import seedu.address.logic.commands.patient.PatientCommand;
-=======
-import seedu.address.model.AppointmentBook;
->>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9:src/test/java/seedu/address/logic/commands/patient/PatientCommandTestUtil.java
 import seedu.address.model.Model;
 import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;

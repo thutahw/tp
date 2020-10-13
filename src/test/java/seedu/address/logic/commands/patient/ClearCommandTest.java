@@ -1,11 +1,6 @@
 package seedu.address.logic.commands.patient;
 
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
-=======
-import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
->>>>>>> ba12137bef33d2a8d2ac76085dc45493a22cb1c9
 
 import org.junit.jupiter.api.Test;
 
