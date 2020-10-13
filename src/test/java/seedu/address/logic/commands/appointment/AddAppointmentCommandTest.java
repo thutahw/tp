@@ -23,7 +23,7 @@ public class AddAppointmentCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null,
-                null,null, null));
+                null, null, null));
     }
 
     @Test

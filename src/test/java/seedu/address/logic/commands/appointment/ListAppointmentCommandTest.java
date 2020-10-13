@@ -27,11 +27,9 @@ public class ListAppointmentCommandTest {
     }
 
     // TODO
-//    @Test
-//    public void execute_listIsFiltered_showsEverything() {
-//        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
-//        PatientCommandTestUtil.assertPatientCommandSuccess(new ListPatientCommand(), model,
-//                ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
-//    }
-    
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
+
+    }
+
 }
