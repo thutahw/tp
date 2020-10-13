@@ -2,9 +2,8 @@ package seedu.address.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandFailure;
-import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandSuccess;
-import static seedu.address.logic.commands.PatientCommandTestUtil.showPatientAtIndex;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.PatientCommandTestUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;

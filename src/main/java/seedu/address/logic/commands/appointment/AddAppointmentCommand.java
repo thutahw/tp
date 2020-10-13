@@ -27,7 +27,7 @@ public class AddAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
             + "Parameters: "
-            + PREFIX_ID + "ID "
+            + PREFIX_ID + "PATIENT_ID "
             + PREFIX_DATETIME + "DATETIME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -41,6 +41,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
             + "appointment book";
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist";
 
     private final Index patientIndex;
     private final LocalDateTime dateTime;
@@ -61,6 +62,9 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (patientIndex.getZeroBased() >= model.getFilteredPatientList().size()) {
+            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
+        }
 
         Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
         Appointment toAdd = new Appointment(patient, dateTime, tags, description, AppointmentStatus.UPCOMING);

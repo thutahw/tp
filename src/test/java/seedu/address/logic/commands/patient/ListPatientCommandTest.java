@@ -1,14 +1,12 @@
 package seedu.address.logic.commands.patient;
 
-import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandSuccess;
-import static seedu.address.logic.commands.PatientCommandTestUtil.showPatientAtIndex;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.PatientCommandTestUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;

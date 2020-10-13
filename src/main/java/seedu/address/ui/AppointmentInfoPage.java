@@ -19,6 +19,9 @@ public class AppointmentInfoPage extends UiPart<Region> {
 
     private AppointmentListPanel appointmentListPanel;
 
+    /**
+     * Creates an {@code AppointmentInfoPage} with the given {@code ObservableList}.
+     */
     public AppointmentInfoPage(ObservableList<Appointment> appointmentList) {
         super(FXML);
         appointmentListPanel = new AppointmentListPanel(appointmentList);

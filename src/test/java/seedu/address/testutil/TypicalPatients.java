@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_GENDER_AMY;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_GENDER_BOB;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_REMARK_AMY;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;

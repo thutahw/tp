@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.PatientCommandTestUtil.assertPatientCommandSuccess;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
