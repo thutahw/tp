@@ -1,5 +1,7 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Appointment descriptions can take any values, "
             + "and it should not be blank";
@@ -12,7 +14,12 @@ public class Description {
      * @param description A valid description.
      */
     public Description(String description) {
-        value = description;
+        requireNonNull(description);
+        if (isValidDescription(description)) {
+            value = description;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
