@@ -20,13 +20,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
-import seedu.address.model.AppointmentBook;
-import seedu.address.model.AppointmentManager;
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
+import seedu.address.model.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
 import seedu.address.model.listmanagers.PatientManager;
-import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 

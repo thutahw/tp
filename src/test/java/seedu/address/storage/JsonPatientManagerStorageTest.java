@@ -22,7 +22,8 @@ import seedu.address.model.patient.Patient;
 import seedu.address.storage.patient.JsonPatientManagerStorage;
 
 public class JsonPatientManagerStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonPatientManagerStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonPatientManagerStorageTest");
 
     @TempDir
     public Path testFolder;

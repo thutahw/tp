@@ -1,12 +1,12 @@
 package seedu.address.storage.patient;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.listmanagers.ReadOnlyListManager;
-import seedu.address.model.patient.Patient;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
+import seedu.address.model.patient.Patient;
 
 public interface PatientManagerStorage {
     /**
@@ -15,8 +15,8 @@ public interface PatientManagerStorage {
     Path getPatientManagerStorageFilePath();
 
     /**
-     * Returns PatientManager data as a {@link ReadOnlyListManager<Patient>}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns PatientManager data as a {@link ReadOnlyListManager}.
+     * Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */

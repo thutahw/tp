@@ -1,15 +1,15 @@
-package seedu.address.model;
+package seedu.address.model.listmanagers;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.listmanagers.ReadOnlyListManager;
-import seedu.address.model.util.uniquelist.UniqueList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.util.uniquelist.UniqueList;
+
 
 /**
  * Wraps all data at the AppointmentManager level
@@ -43,7 +43,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     }
 
     /**
-     * Resets the existing data of this {@code AppointmentBook} with {@code newData}.
+     * Resets the existing data of this {@code AppointmentManager} with {@code newData}.
      */
     public void resetData(ReadOnlyListManager<Appointment> newData) {
         requireNonNull(newData);
@@ -88,7 +88,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     }
 
     /**
-     * Removes {@code key} from this {@code AppointmentBook}.
+     * Removes {@code key} from this {@code AppointmentManager}.
      * {@code key} must exist in the appointment manager.
      */
     public void removeAppointment(Appointment key) {
@@ -101,7 +101,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public String toString() {
         return "AppointmentManager:\n"
                 + appointments.stream().map(Appointment::toString).collect(Collectors.joining("\n"))
-                +"\nTotal number of appointments: " +appointments.size();
+                + "\nTotal number of appointments: " + appointments.size();
     }
 
     @Override

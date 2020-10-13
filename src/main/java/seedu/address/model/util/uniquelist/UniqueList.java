@@ -1,17 +1,21 @@
 package seedu.address.model.util.uniquelist;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.util.uniquelist.exceptions.DuplicateElementException;
 import seedu.address.model.util.uniquelist.exceptions.ElementNotFoundException;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Stream;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list that enforces uniqueness between its elements and does not allow nulls.
@@ -34,6 +38,27 @@ public class UniqueList<T extends UniqueListElement> implements Iterable<T> {
     public boolean contains(T toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSame);
+    }
+
+    /**
+     * Returns true if the list contains at least one element that fulfills {@code pred}, false otherwise.
+     */
+    public boolean contains(Predicate<? super T> pred) {
+        requireNonNull(pred);
+        return internalList.stream().anyMatch(pred);
+    }
+
+    /**
+     * Returns the element matching the given predicate. If no element matches the
+     * predicate given, an {@code ElementNotFoundException} is thrown.
+     */
+    public T getByPredicate(Predicate<? super T> pred) throws ElementNotFoundException {
+        requireNonNull(pred);
+        Optional<T> optionalElement = internalList.stream().filter(pred).findFirst();
+        if (optionalElement.isEmpty()) {
+            throw new ElementNotFoundException();
+        }
+        return optionalElement.get();
     }
 
     public void sort(Comparator<T> cmp) {
@@ -92,19 +117,6 @@ public class UniqueList<T extends UniqueListElement> implements Iterable<T> {
      * Replaces the contents of this list with {@code elements}.
      * {@code elements} must not contain duplicate patients.
      */
-    public void setPatients(List<T> elements) {
-        requireAllNonNull(elements);
-        if (!elementsAreUnique(elements)) {
-            throw new DuplicateElementException();
-        }
-
-        internalList.setAll(elements);
-    }
-
-    /**
-     * Replaces the contents of this list with {@code elements}.
-     * {@code elements} must not contain duplicate patients.
-     */
     public void setElements(List<T> elements) {
         requireAllNonNull(elements);
         if (!elementsAreUnique(elements)) {
@@ -143,9 +155,16 @@ public class UniqueList<T extends UniqueListElement> implements Iterable<T> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniqueList // instanceof handles nulls
-                && internalList.equals(((UniqueList<T>) other).internalList));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueList)) {
+            return false;
+        }
+
+        @SuppressWarnings("unchecked") UniqueList<T> otherList = (UniqueList<T>) other;
+        return internalList.equals(otherList.internalList);
     }
 
     @Override

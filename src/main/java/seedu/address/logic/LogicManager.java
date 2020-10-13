@@ -13,7 +13,6 @@ import seedu.address.logic.commands.patient.PatientCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAppointmentBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;

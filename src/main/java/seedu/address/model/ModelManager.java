@@ -1,4 +1,4 @@
-package seedu.address.model.listmanagers;
+package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -11,12 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.AppointmentManager;
-import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.AppointmentManager;
+import seedu.address.model.listmanagers.PatientManager;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.userprefs.ReadOnlyUserPrefs;
 import seedu.address.model.userprefs.UserPrefs;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.patient.Patient;
 
 /**
  * Represents the in-memory model of the appointment book data.
@@ -147,8 +148,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
-        System.out.println("In model.getFilteredPatientlist()");
-        System.out.println(filteredPatientsList);
         return filteredPatientsList;
     }
 

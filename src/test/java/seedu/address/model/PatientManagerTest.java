@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.exceptions.DuplicatePatientException;
+import seedu.address.model.util.uniquelist.exceptions.DuplicateElementException;
 import seedu.address.testutil.PatientBuilder;
 
 public class PatientManagerTest {
@@ -45,19 +45,19 @@ public class PatientManagerTest {
     }
 
     @Test
-    public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
+    public void resetData_withDuplicatePatients_throwsDuplicateElementException() {
         // Two patients with the same identity fields
         Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         PatientManagerStub newData = new PatientManagerStub(newPatients);
 
-        assertThrows(DuplicatePatientException.class, () -> patientManager.resetData(newData));
+        assertThrows(DuplicateElementException.class, () -> patientManager.resetData(newData));
     }
 
     @Test
     public void hasPatient_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> patientManager.hasPatient(null));
+        assertThrows(NullPointerException.class, () -> patientManager.hasPatient((Patient) null));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class PatientManagerTest {
     }
 
     /**
-     * A stub ReadOnlyListManager<Patient> whose patients list can violate interface constraints.
+     * A stub ReadOnlyListManager whose patients list can violate interface constraints.
      */
     private static class PatientManagerStub implements ReadOnlyListManager<Patient> {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();

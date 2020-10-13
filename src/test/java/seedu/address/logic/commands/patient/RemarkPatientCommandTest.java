@@ -6,17 +6,19 @@ import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
-import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.model.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
+import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Remark;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.testutil.PatientBuilder;
 
 class RemarkPatientCommandTest {
     private static final String REMARK_STUB = "Some remark";
-    private final Model model = new ModelManager(getTypicalPatientManager(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalPatientManager(),
+            new AppointmentManager(), new UserPrefs());
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
@@ -28,7 +30,8 @@ class RemarkPatientCommandTest {
 
         String expectedMessage = String.format(RemarkPatientCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPatient);
 
-        Model expectedModel = new ModelManager(new AppointmentBook(model.getAppointmentBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
+                new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
 
         assertCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);

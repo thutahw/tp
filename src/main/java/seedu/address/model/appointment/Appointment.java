@@ -2,11 +2,11 @@ package seedu.address.model.appointment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.uniquelist.UniqueListElement;
@@ -17,7 +17,7 @@ import seedu.address.model.util.uniquelist.UniqueListElement;
  */
 public class Appointment implements UniqueListElement {
     private final Patient patient;
-    private final LocalDateTime dateTime;
+    private final DateTime dateTime;
     private final AppointmentStatus status;
     private final Set<Tag> tags;
     private final Description description;
@@ -25,8 +25,8 @@ public class Appointment implements UniqueListElement {
     /**
      * Every field must be present and not null.
      */
-    public Appointment(Patient patient, LocalDateTime dateTime, Set<Tag> tags, Description description,
-                       AppointmentStatus status) {
+    public Appointment(Patient patient, DateTime dateTime, AppointmentStatus status,
+                       Description description, Set<Tag> tags) {
         requireAllNonNull(patient, dateTime, tags, description);
         this.patient = patient;
         this.dateTime = dateTime;
@@ -39,7 +39,7 @@ public class Appointment implements UniqueListElement {
         return patient;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -96,8 +96,12 @@ public class Appointment implements UniqueListElement {
             return false;
         }
 
-        Appointment otherPatient = (Appointment) other;
-        return otherPatient.getPatient().equals(getPatient());
+        Appointment otherAppointment = (Appointment) other;
+        return getPatient().equals(otherAppointment.getPatient())
+                && getDateTime().equals(otherAppointment.getDateTime())
+                && getStatus().equals(otherAppointment.getStatus())
+                && getDescription().equals(otherAppointment.getDescription())
+                && getTags().equals(otherAppointment.getTags());
     }
 
     @Override

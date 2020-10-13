@@ -7,11 +7,11 @@ import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AppointmentManager;
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
-import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.model.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.testutil.PatientBuilder;
 
 /**

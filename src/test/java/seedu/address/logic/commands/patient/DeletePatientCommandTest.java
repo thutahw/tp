@@ -13,11 +13,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AppointmentManager;
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
-import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.model.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.UserPrefs;
+
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -34,7 +35,8 @@ public class DeletePatientCommandTest {
 
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
+                new AppointmentManager(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
 
         assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);

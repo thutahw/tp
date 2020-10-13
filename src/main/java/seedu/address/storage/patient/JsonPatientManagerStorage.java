@@ -16,7 +16,7 @@ import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
 
 /**
- * A class to access AppointmentBook data stored as a json file on the hard disk.
+ * A class to access PatientManager data stored as a json file on the hard disk.
  */
 public class JsonPatientManagerStorage implements PatientManagerStorage {
 

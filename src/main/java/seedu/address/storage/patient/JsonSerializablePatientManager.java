@@ -14,10 +14,10 @@ import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
 
 /**
- * An Immutable AppointmentBook that is serializable to JSON format.
+ * An Immutable PatientManager that is serializable to JSON format.
  */
 @JsonRootName(value = "patientmanager")
-class JsonSerializablePatientManager {
+public class JsonSerializablePatientManager {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
 

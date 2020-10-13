@@ -1,14 +1,16 @@
 package seedu.address.model.listmanagers;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.util.uniquelist.UniqueList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.util.uniquelist.UniqueList;
+import seedu.address.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 /**
  * Wraps all data at the PatientManager level
@@ -67,6 +69,14 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     }
 
     /**
+     * Returns true if a patient with the same nric as {@code nric} exists in the patient list.
+     */
+    public boolean hasPatient(Nric nric) {
+        requireNonNull(nric);
+        return patients.contains((patient) -> patient.getNric().equals(nric));
+    }
+
+    /**
      * Adds a patient to the PatientManager.
      * The patient must not already exist in the PatientManager.
      */
@@ -94,13 +104,19 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
         patients.remove(key);
     }
 
-    // util methods
+    /**
+     * Returns a patient matching the given nric, if it exists, otherwise th4rows an {@code ElementNotFoundException}
+     */
+    public Patient getPatientByNric(Nric nric) throws ElementNotFoundException {
+        return patients.getByPredicate((patient) -> patient.getNric().equals(nric));
+    }
 
+    // util methods
     @Override
     public String toString() {
         return "PatientManager:\n"
                 + patients.stream().map(Patient::toString).collect(Collectors.joining("\n"))
-                +"\nTotal number of patients: " +patients.size();
+                + "\nTotal number of patients: " + patients.size();
     }
 
     @Override

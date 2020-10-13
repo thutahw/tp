@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.patient.EditPatientCommand;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Remark;
@@ -32,11 +33,20 @@ public class EditPatientDescriptorBuilder {
      */
     public EditPatientDescriptorBuilder(Patient patient) {
         descriptor = new EditPatientCommand.EditPatientDescriptor();
+        descriptor.setNric(patient.getNric());
         descriptor.setName(patient.getName());
         descriptor.setPhone(patient.getPhone());
         descriptor.setGender(patient.getGender());
         descriptor.setTags(patient.getTags());
         descriptor.setRemark(patient.getRemark());
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code EditPatientDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
+        return this;
     }
 
     /**

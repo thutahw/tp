@@ -15,21 +15,21 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AppointmentManager;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.listmanagers.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
 import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.userprefs.ReadOnlyUserPrefs;
 import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 import seedu.address.storage.patient.JsonPatientManagerStorage;
 import seedu.address.storage.patient.PatientManagerStorage;
 import seedu.address.storage.userprefs.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
 import seedu.address.storage.userprefs.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -99,10 +99,10 @@ public class MainApp extends Application {
             }
             initialPatientManager = patientManagerOptional.orElseGet(SampleDataUtil::getSamplePatientManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AppointmentBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty PatientManager");
             initialPatientManager = new PatientManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty PatientManager");
             initialPatientManager = new PatientManager();
         }
 
@@ -116,7 +116,7 @@ public class MainApp extends Application {
      * appointment manager.
      */
     private ReadOnlyListManager<Appointment> initAppointmentManager(Storage storage) {
-       return new AppointmentManager();
+        return new AppointmentManager();
     }
 
     private void initLogging(Config config) {
@@ -177,7 +177,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty UserPrefs");
             initializedPrefs = new UserPrefs();
         }
 
@@ -193,7 +193,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AppointmentBook " + MainApp.VERSION);
+        logger.info("Starting Baymax " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

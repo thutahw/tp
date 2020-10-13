@@ -1,11 +1,11 @@
 package seedu.address.logic.commands.appointment;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.appointment.AppointmentStatus;
 import seedu.address.model.appointment.Description;
@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditAppointmentDescriptor {
     private Patient patient;
-    private LocalDateTime dateTime;
+    private DateTime dateTime;
     private AppointmentStatus status;
     private Set<Tag> tags;
     private Description description;
@@ -52,11 +52,11 @@ public class EditAppointmentDescriptor {
         return Optional.ofNullable(patient);
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(DateTime dateTime) {
         this.dateTime = dateTime;
     }
 
-    public Optional<LocalDateTime> getDateTime() {
+    public Optional<DateTime> getDateTime() {
         return Optional.ofNullable(dateTime);
     }
 

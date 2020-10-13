@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLA
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,13 +24,13 @@ import seedu.address.logic.commands.patient.AddPatientCommand;
 import seedu.address.logic.commands.patient.ListPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
+import seedu.address.model.ModelManager;
 import seedu.address.model.listmanagers.ReadOnlyListManager;
-import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.storage.StorageManager;
 import seedu.address.storage.patient.JsonPatientManagerStorage;
 import seedu.address.storage.userprefs.JsonUserPrefsStorage;
-import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PatientBuilder;
 
 public class LogicManagerTest {
@@ -79,8 +80,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddPatientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + REMARK_DESC_AMY;
+        String addCommand = AddPatientCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + REMARK_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPatient(expectedPatient);
@@ -129,7 +130,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPatientManager(),
+                model.getAppointmentManager(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

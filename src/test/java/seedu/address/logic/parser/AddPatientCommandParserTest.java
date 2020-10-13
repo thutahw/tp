@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -47,38 +49,39 @@ public class AddPatientCommandParserTest {
         Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple genders - last gender accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple remarks - last remark accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_FRIEND
-                + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND
-                + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatientMultipleTags));
+        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
+                new AddPatientCommand(expectedPatientMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY + REMARK_DESC_AMY,
-                new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser, NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
+                        + REMARK_DESC_AMY, new AddPatientCommand(expectedPatient));
     }
 
     @Test
@@ -109,28 +112,29 @@ public class AddPatientCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid gender
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + REMARK_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + GENDER_DESC_BOB + REMARK_DESC_BOB,
+        assertParseFailure(parser, NRIC_DESC_BOB + INVALID_NAME_DESC + INVALID_PHONE_DESC
+                        + GENDER_DESC_BOB + REMARK_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
     }
 }

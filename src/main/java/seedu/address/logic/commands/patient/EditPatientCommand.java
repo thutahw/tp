@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Remark;
@@ -91,13 +92,14 @@ public class EditPatientCommand extends PatientCommand {
     private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
         assert patientToEdit != null;
 
+        Nric updateNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Gender updatedGender = editPatientDescriptor.getGender().orElse(patientToEdit.getGender());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Remark updatedRemark = editPatientDescriptor.getRemark().orElse(patientToEdit.getRemark());
 
-        return new Patient(updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
+        return new Patient(updateNric, updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
     }
 
     @Override
@@ -123,6 +125,7 @@ public class EditPatientCommand extends PatientCommand {
      * corresponding field value of the patient.
      */
     public static class EditPatientDescriptor {
+        private Nric nric;
         private Name name;
         private Phone phone;
         private Gender gender;
@@ -136,6 +139,7 @@ public class EditPatientCommand extends PatientCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
+            setNric(toCopy.nric);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
@@ -148,6 +152,14 @@ public class EditPatientCommand extends PatientCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, gender, tags, remark);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
         }
 
         public void setName(Name name) {

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -17,8 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.patient.EditPatientCommand;
 import seedu.address.logic.commands.patient.PatientCommand;
-import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
+import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
@@ -28,6 +29,8 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_NRIC_AMY = "T1234567A";
+    public static final String VALID_NRIC_BOB = "S3322115E";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -39,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_AMY = "Likes to code";
     public static final String VALID_REMARK_BOB = "Likes to dance";
 
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -49,7 +54,6 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -63,10 +67,10 @@ public class CommandTestUtil {
     public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY)
                 .withTags(VALID_TAG_FRIEND).withRemark(VALID_REMARK_AMY).build();
-        DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withRemark(VALID_REMARK_BOB).build();
@@ -103,16 +107,16 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered patient list and selected patient in {@code actualModel} remain unchanged
+     * - the patient manager, filtered patient list and selected patient in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(PatientCommand command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AppointmentBook expectedAppointmentBook = new AppointmentBook(actualModel.getAppointmentBook());
+        PatientManager expectedPatientManager = new PatientManager(actualModel.getPatientManager());
         List<Patient> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPatientList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAppointmentBook, actualModel.getAppointmentBook());
+        assertEquals(expectedPatientManager, actualModel.getPatientManager());
         assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
     }
 

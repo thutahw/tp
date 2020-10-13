@@ -54,7 +54,7 @@ public class RemarkPatientCommand extends PatientCommand {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(),
+        Patient editedPatient = new Patient(patientToEdit.getNric(), patientToEdit.getName(), patientToEdit.getPhone(),
                 patientToEdit.getGender(), patientToEdit.getTags(), remark);
 
         model.setPatient(patientToEdit, editedPatient);

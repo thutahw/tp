@@ -8,16 +8,18 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.BENSON;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.listmanagers.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
+import seedu.address.model.listmanagers.PatientManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.userprefs.UserPrefs;
-import seedu.address.testutil.AppointmentBookBuilder;
+import seedu.address.testutil.PatientManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -27,7 +29,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AppointmentBook(), new AppointmentBook(modelManager.getAppointmentBook()));
+        assertEquals(new PatientManager(), new PatientManager(modelManager.getPatientManager()));
     }
 
     @Test
@@ -38,14 +40,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAppointmentBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setPatientStorageFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAppointmentBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setPatientStorageFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -62,16 +64,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAppointmentBookFilePath(null));
+    public void setPatientStorageFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPatientStorageFilePath(null));
     }
 
-//    @Test
-//    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-//        Path path = Paths.get("address/book/file/path");
-//        modelManager.setAppointmentBookFilePath(path);
-//        assertEquals(path, modelManager.getAppointmentBookFilePath());
-//    }
+    @Test
+    public void setPatientStorageFilePath_validPath_setsPatientStorageFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setPatientStorageFilePath(path);
+        assertEquals(path, modelManager.getPatientStorageFilePath());
+    }
 
     @Test
     public void hasPatient_nullPatient_throwsNullPointerException() {
@@ -96,13 +98,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AppointmentBook appointmentBook = new AppointmentBookBuilder().withPatient(ALICE).withPatient(BENSON).build();
-        AppointmentBook differentAppointmentBook = new AppointmentBook();
+        PatientManager patientManager = new PatientManagerBuilder().withPatient(ALICE).withPatient(BENSON).build();
+        PatientManager differentPatientManager = new PatientManager();
+        AppointmentManager appointmentManager = new AppointmentManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(appointmentBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(appointmentBook, userPrefs);
+        modelManager = new ModelManager(patientManager, appointmentManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(patientManager, appointmentManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -115,19 +118,19 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAppointmentBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentPatientManager, appointmentManager, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(appointmentBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAppointmentBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(appointmentBook, differentUserPrefs)));
+        differentUserPrefs.setPatientStorageFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, differentUserPrefs)));
     }
 }

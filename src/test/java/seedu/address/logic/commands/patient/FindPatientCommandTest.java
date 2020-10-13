@@ -16,16 +16,19 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
-import seedu.address.model.listmanagers.ModelManager;
-import seedu.address.model.userprefs.UserPrefs;
+import seedu.address.model.ModelManager;
+import seedu.address.model.listmanagers.AppointmentManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
+import seedu.address.model.userprefs.UserPrefs;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindPatientCommandTest {
-    private Model model = new ModelManager(getTypicalPatientManager(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalPatientManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPatientManager(),
+            new AppointmentManager(), new UserPrefs());
 
     @Test
     public void equals() {
