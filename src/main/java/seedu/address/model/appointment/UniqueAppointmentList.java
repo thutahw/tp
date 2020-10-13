@@ -50,13 +50,13 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      */
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);
-
         int index = internalList.indexOf(target);
         if (index == -1) {
+            System.out.println("Here");
             throw new AppointmentNotFoundException();
         }
-
         if (!target.isSameAppointment(editedAppointment) && contains(editedAppointment)) {
+
             throw new DuplicateAppointmentException();
         }
 
