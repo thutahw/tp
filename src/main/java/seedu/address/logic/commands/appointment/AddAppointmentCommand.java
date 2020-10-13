@@ -23,7 +23,6 @@ import seedu.address.model.tag.Tag;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(4);
     public static final String COMMAND_WORD = "addAppt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
@@ -71,12 +70,12 @@ public class AddAppointmentCommand extends Command {
         }
 
         model.addAppointment(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(4);
     }
 
     @Override

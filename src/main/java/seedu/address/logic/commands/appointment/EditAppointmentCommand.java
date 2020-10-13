@@ -27,7 +27,6 @@ import seedu.address.model.tag.Tag;
  */
 public class EditAppointmentCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(4);
     public static final String COMMAND_WORD = "editAppt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
@@ -78,12 +77,12 @@ public class EditAppointmentCommand extends Command {
 
         model.setAppointment(appointmentToEdit, editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(4);
     }
 
     /**

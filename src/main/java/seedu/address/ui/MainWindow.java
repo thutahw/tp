@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
         PatientInfoPage patientInfoPage = new PatientInfoPage(logic.getFilteredPatientList());
         patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
 
-        AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage();
+        AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage(logic.getFilteredAppointmentList());
         appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
 
         CalendarPage calendarPage = new CalendarPage();

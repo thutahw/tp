@@ -15,7 +15,6 @@ import seedu.address.model.patient.NameContainsKeywordsPredicate;
  */
 public class FindPatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names contain any of "
@@ -35,18 +34,19 @@ public class FindPatientCommand extends Command {
         model.updateFilteredPatientList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
-                        model.getFilteredPatientList().size()), TAB_NUMBER);
+                        model.getFilteredPatientList().size()), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindPatientCommand // instanceof handles nulls
-                && predicate.equals(((FindPatientCommand) other).predicate)); // state check
+                && predicate.equals(((FindPatientCommand) other).predicate))
+                && getTabNumber().equals(((FindPatientCommand) other).getTabNumber()); // state check
     }
 }

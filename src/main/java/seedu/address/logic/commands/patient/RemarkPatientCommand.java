@@ -18,7 +18,6 @@ import seedu.address.model.patient.Remark;
  */
 public class RemarkPatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "remark";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Patient: %1$s";
@@ -62,12 +61,12 @@ public class RemarkPatientCommand extends Command {
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new CommandResult(generateSuccessMessage(editedPatient), TAB_NUMBER);
+        return new CommandResult(generateSuccessMessage(editedPatient), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
     }
 
     /**
@@ -94,6 +93,7 @@ public class RemarkPatientCommand extends Command {
         // state check
         RemarkPatientCommand e = (RemarkPatientCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark);
+                && remark.equals(e.remark)
+                && getTabNumber().equals(e.getTabNumber());
     }
 }

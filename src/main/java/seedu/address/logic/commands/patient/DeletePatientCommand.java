@@ -17,7 +17,6 @@ import seedu.address.model.patient.Patient;
  */
 public class DeletePatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -44,18 +43,19 @@ public class DeletePatientCommand extends Command {
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeletePatientCommand // instanceof handles nulls
-                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)
+                && getTabNumber().equals(((DeletePatientCommand) other).getTabNumber())); // state check
     }
 }

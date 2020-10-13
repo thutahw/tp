@@ -26,11 +26,11 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabId) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabNumber) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.tabNumber = tabId;
+        this.tabNumber = tabNumber;
     }
 
     /**

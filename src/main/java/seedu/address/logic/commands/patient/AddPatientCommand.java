@@ -18,7 +18,6 @@ import seedu.address.model.patient.Patient;
  */
 public class AddPatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "addPatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
@@ -56,18 +55,19 @@ public class AddPatientCommand extends Command {
         }
 
         model.addPatient(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPatientCommand // instanceof handles nulls
-                && toAdd.equals(((AddPatientCommand) other).toAdd));
+                && toAdd.equals(((AddPatientCommand) other).toAdd)
+                && getTabNumber().equals(((AddPatientCommand) other).getTabNumber()));
     }
 }

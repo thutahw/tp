@@ -14,6 +14,7 @@ import seedu.address.logic.parser.AppointmentBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAppointmentBook;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.patient.Patient;
 import seedu.address.storage.Storage;
 
@@ -61,8 +62,12 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
-        System.out.println("Here 1!");
         return model.getFilteredPatientList();
+    }
+
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return model.getFilteredAppointmentList();
     }
 
     @Override

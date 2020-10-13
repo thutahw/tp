@@ -13,7 +13,6 @@ import seedu.address.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(4);
     public static final String COMMAND_WORD = "listAppt";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
@@ -23,11 +22,11 @@ public class ListAppointmentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(MESSAGE_SUCCESS, TAB_NUMBER);
+        return new CommandResult(MESSAGE_SUCCESS, getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(4);
     }
 }

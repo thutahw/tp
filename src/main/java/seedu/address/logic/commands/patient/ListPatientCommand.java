@@ -13,7 +13,6 @@ import seedu.address.model.Model;
  */
 public class ListPatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all patients";
@@ -23,11 +22,18 @@ public class ListPatientCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(MESSAGE_SUCCESS, TAB_NUMBER);
+        return new CommandResult(MESSAGE_SUCCESS, getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListPatientCommand // instanceof handles nulls
+                && getTabNumber().equals(((ListPatientCommand) other).getTabNumber()));
     }
 }

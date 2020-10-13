@@ -32,7 +32,6 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPatientCommand extends Command {
 
-    public static final Index TAB_NUMBER = Index.fromOneBased(3);
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
@@ -83,12 +82,12 @@ public class EditPatientCommand extends Command {
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return TAB_NUMBER;
+        return Index.fromOneBased(3);
     }
 
     /**
@@ -122,7 +121,8 @@ public class EditPatientCommand extends Command {
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
         return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor);
+                && editPatientDescriptor.equals(e.editPatientDescriptor)
+                && getTabNumber().equals(e.getTabNumber());
     }
 
     /**
