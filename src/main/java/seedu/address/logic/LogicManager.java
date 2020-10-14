@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.patient.PatientCommand;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AppointmentBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
@@ -27,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AppointmentBookParser appointmentBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        appointmentBookParser = new AppointmentBookParser();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        PatientCommand command = addressBookParser.parseCommand(commandText);
+        Command command = appointmentBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {

@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.patient;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(new ClearCommand(),
+                model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -28,7 +28,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
         expectedModel.setPatientManager(new PatientManager());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(new ClearCommand(),
+                model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

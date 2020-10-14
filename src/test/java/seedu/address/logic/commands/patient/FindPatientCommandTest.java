@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPatients.ELLE;
 import static seedu.address.testutil.TypicalPatients.FIONA;
@@ -63,7 +62,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
@@ -73,7 +72,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }
 

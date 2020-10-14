@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,9 +17,9 @@ import seedu.address.model.patient.Patient;
 /**
  * Adds a patient to the address book.
  */
-public class AddPatientCommand extends PatientCommand {
+public class AddPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addPatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
             + "Parameters: "
@@ -27,6 +29,7 @@ public class AddPatientCommand extends PatientCommand {
             + PREFIX_GENDER + "GENDER "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NRIC + "S9771234F "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
@@ -55,13 +58,19 @@ public class AddPatientCommand extends PatientCommand {
         }
 
         model.addPatient(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(3);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPatientCommand // instanceof handles nulls
-                && toAdd.equals(((AddPatientCommand) other).toAdd));
+                && toAdd.equals(((AddPatientCommand) other).toAdd)
+                && getTabNumber().equals(((AddPatientCommand) other).getTabNumber()));
     }
 }

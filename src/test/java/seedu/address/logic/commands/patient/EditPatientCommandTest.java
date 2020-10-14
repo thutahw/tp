@@ -2,14 +2,13 @@ package seedu.address.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.address.testutil.TypicalPatients.getTypicalPatientManager;
@@ -48,7 +47,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
-        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,7 +70,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(lastPatient, editedPatient);
 
-        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -85,7 +84,7 @@ public class EditPatientCommandTest {
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
                 new AppointmentManager(), new UserPrefs());
 
-        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -103,7 +102,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
-        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -112,7 +111,7 @@ public class EditPatientCommandTest {
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(firstPatient).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_SECOND_PATIENT, descriptor);
 
-        assertCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
+        assertPatientCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
     @Test
@@ -124,7 +123,7 @@ public class EditPatientCommandTest {
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT,
                 new EditPatientDescriptorBuilder(patientInList).build());
 
-        assertCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
+        assertPatientCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
     @Test
@@ -133,7 +132,7 @@ public class EditPatientCommandTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertPatientCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -150,7 +149,7 @@ public class EditPatientCommandTest {
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex,
                 new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertPatientCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
