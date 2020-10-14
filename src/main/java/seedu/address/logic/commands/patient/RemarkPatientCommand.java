@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,7 +16,7 @@ import seedu.address.model.patient.Remark;
 /**
  * Changes the remark of an existing patient.
  */
-public class RemarkPatientCommand extends PatientCommand {
+public class RemarkPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
 
@@ -54,13 +55,18 @@ public class RemarkPatientCommand extends PatientCommand {
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(),
+        Patient editedPatient = new Patient(patientToEdit.getNric(), patientToEdit.getName(), patientToEdit.getPhone(),
                 patientToEdit.getGender(), patientToEdit.getTags(), remark);
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new CommandResult(generateSuccessMessage(editedPatient), TAB_NUMBER);
+        return new CommandResult(generateSuccessMessage(editedPatient), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(3);
     }
 
     /**
@@ -87,6 +93,7 @@ public class RemarkPatientCommand extends PatientCommand {
         // state check
         RemarkPatientCommand e = (RemarkPatientCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark);
+                && remark.equals(e.remark)
+                && getTabNumber().equals(e.getTabNumber());
     }
 }

@@ -2,22 +2,22 @@ package seedu.address.model.appointment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.uniquelist.UniqueListElement;
 
 /**
- * Represents an Appointment in the address book.
+ * Represents an Appointment in the appointment book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Appointment implements Comparator<Appointment> {
+public class Appointment implements UniqueListElement {
     private final Patient patient;
-    private final LocalDateTime dateTime;
+    private final DateTime dateTime;
     private final AppointmentStatus status;
     private final Set<Tag> tags;
     private final Description description;
@@ -25,8 +25,8 @@ public class Appointment implements Comparator<Appointment> {
     /**
      * Every field must be present and not null.
      */
-    public Appointment(Patient patient, LocalDateTime dateTime, Set<Tag> tags, Description description,
-                       AppointmentStatus status) {
+    public Appointment(Patient patient, DateTime dateTime, AppointmentStatus status,
+                       Description description, Set<Tag> tags) {
         requireAllNonNull(patient, dateTime, tags, description);
         this.patient = patient;
         this.dateTime = dateTime;
@@ -39,7 +39,7 @@ public class Appointment implements Comparator<Appointment> {
         return patient;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -62,16 +62,22 @@ public class Appointment implements Comparator<Appointment> {
     /** Returns true if both appointments have the same date and time.
      * This defines a weaker notion of equality between two appointments.
      */
-    public boolean isSameAppointment(Appointment otherAppointment) {
-        if (otherAppointment == this) {
+    @Override
+    public boolean isSame(UniqueListElement other) {
+        if (other == this) {
             return true;
         }
+
+        if (!(other instanceof Appointment)) {
+            return false;
+        }
+
+        Appointment otherAppointment = (Appointment) other;
 
         return otherAppointment != null
                 && otherAppointment.getDateTime().equals(getDateTime());
     }
 
-    @Override
     public int compare(Appointment a1, Appointment a2) {
         return a2.getDateTime().compareTo(a1.getDateTime());
     }
@@ -90,8 +96,12 @@ public class Appointment implements Comparator<Appointment> {
             return false;
         }
 
-        Appointment otherPatient = (Appointment) other;
-        return otherPatient.getPatient().equals(getPatient());
+        Appointment otherAppointment = (Appointment) other;
+        return getPatient().equals(otherAppointment.getPatient())
+                && getDateTime().equals(otherAppointment.getDateTime())
+                && getStatus().equals(otherAppointment.getStatus())
+                && getDescription().equals(otherAppointment.getDescription())
+                && getTags().equals(otherAppointment.getTags());
     }
 
     @Override

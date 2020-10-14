@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.ReadOnlyUserPrefs;
 
 /**
  * The API of the Model component.
@@ -13,6 +16,9 @@ import seedu.address.model.patient.Patient;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,22 +41,34 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' appointment book file path.
+     * Returns the user prefs' patient storage file path.
      */
-    Path getAppointmentBookFilePath();
+    Path getPatientStorageFilePath();
+
+    /**
+     * Returns the user prefs' appointment storage file path.
+     */
+    Path getAppointmentStorageFilePath();
 
     /**
      * Sets the user prefs' appointment book file path.
      */
-    void setAppointmentBookFilePath(Path appointmentBookFilePath);
+    void setPatientStorageFilePath(Path patientStorageFilePath);
+
+    void setAppointmentStorageFilePath(Path appointmentStorageFilePath);
+
+    //============= PatientManager ================
 
     /**
-     * Replaces appointment book data with the data in {@code appointmentBook}.
+     * Returns the PatientManager
+     * @return
      */
-    void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook);
+    ReadOnlyListManager<Patient> getPatientManager();
 
-    /** Returns the AppointmentBook */
-    ReadOnlyAppointmentBook getAppointmentBook();
+    /**
+     * Replaces PatientManager data with the data in {@code patientManager}
+     */
+    void setPatientManager(ReadOnlyListManager<Patient> patientManager);
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the appointment book.
@@ -85,4 +103,55 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
+
+    //============= AppointmentManager ================
+
+    /**
+     * Returns the PatientManager
+     * @return
+     */
+    ReadOnlyListManager<Appointment> getAppointmentManager();
+
+    /**
+     * Replaces PatientManager data with the data in {@code patientManager}
+     */
+    void setAppointmentManager(ReadOnlyListManager<Appointment> appointmentmanager);
+
+    /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Deletes the given appointment.
+     * The appointment must exist in the appointment book.
+     */
+    void deleteAppointment(Appointment target);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not already exist in the appointment book.
+     */
+    void addAppointment(Appointment appointment);
+
+    /**
+     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+     * {@code target} must exist in the appointment book.
+     * The appointment identity of {@code editedAppointment} must not be the same as another existing patient in the
+     * appointment book.
+     */
+    void setAppointment(Appointment target, Appointment editedAppointment);
+
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    //============= utils ================
+    void resetAllListManagers();
 }

@@ -1,0 +1,15 @@
+{
+  "patients": [ {
+    "nric": "T0123456F",
+    "name": "Valid Patient",
+    "phone": "9482424",
+    "gender": "M",
+    "remark": "Likes to code"
+  }, {
+    "nric": "S7894512E",
+    "name": "Patient With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "gender": "M",
+    "remark": "Likes to code"
+  } ]
+}

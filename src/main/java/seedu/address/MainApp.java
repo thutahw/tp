@@ -15,19 +15,22 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.listmanagers.AppointmentManager;
+import seedu.address.model.listmanagers.PatientManager;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.userprefs.ReadOnlyUserPrefs;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AppointmentBookStorage;
-import seedu.address.storage.JsonAppointmentBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.patient.JsonPatientManagerStorage;
+import seedu.address.storage.patient.PatientManagerStorage;
+import seedu.address.storage.userprefs.JsonUserPrefsStorage;
+import seedu.address.storage.userprefs.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -48,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AppointmentBook ]===========================");
+        logger.info("=============================[ Initializing Baymax ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,9 +59,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AppointmentBookStorage appointmentBookStorage = new JsonAppointmentBookStorage(
-                userPrefs.getAppointmentBookFilePath());
-        storage = new StorageManager(appointmentBookStorage, userPrefsStorage);
+        PatientManagerStorage patientManagerStorage = new JsonPatientManagerStorage(
+                userPrefs.getPatientStorageFilePath());
+        storage = new StorageManager(patientManagerStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -70,29 +73,50 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s appointment book and {@code userPrefs}. <br>
-     * The data from the sample appointment book will be used instead if {@code storage}'s appointment book is not
-     * found, or an empty appointment book will be used instead if errors occur when reading {@code storage}'s
-     * appointment book.
+     * Returns a {@code ModelManager} with the data from {@code storage} files and {@code userPrefs}. <br>
+     * The data from the sample Baymax will be used instead if {@code storage} files are not
+     * found, or an empty Baymax app will be used instead if errors occur when reading {@code storage} files.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAppointmentBook> appointmentBookOptional;
-        ReadOnlyAppointmentBook initialData;
+        ReadOnlyListManager<Patient> patientManager = initPatientManager(storage);
+        ReadOnlyListManager<Appointment> appointmentManager = initAppointmentManager(storage);
+        return new ModelManager(patientManager, appointmentManager, userPrefs);
+    }
+
+    /**
+     * Returns a {@code ReadOnlyListManager<Patient>} with the data from {@code storage}'s patients file. The data from
+     * the sample patients file will be used instead if {@code storage}'s patient manager is not found, or an empty
+     * patient manager will be used isntead of errors occur when reading {@code storage}'s patient manager.
+     */
+    private ReadOnlyListManager<Patient> initPatientManager(Storage storage) {
+        Optional<ReadOnlyListManager<Patient>> patientManagerOptional;
+        ReadOnlyListManager<Patient> initialPatientManager;
+
         try {
-            appointmentBookOptional = storage.readAppointmentBook();
-            if (!appointmentBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AppointmentBook");
+            patientManagerOptional = storage.readPatients();
+            if (!patientManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample patient manager");
             }
-            initialData = appointmentBookOptional.orElseGet(SampleDataUtil::getSampleAppointmentBook);
+            initialPatientManager = patientManagerOptional.orElseGet(SampleDataUtil::getSamplePatientManager);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AppointmentBook");
-            initialData = new AppointmentBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty PatientManager");
+            initialPatientManager = new PatientManager();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentBook");
-            initialData = new AppointmentBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty PatientManager");
+            initialPatientManager = new PatientManager();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return initialPatientManager;
+    }
+
+    /**
+     * Returns a {@code ReadOnlyListManager<Appointment>} with the data from {@code storage}'s appointments file.
+     * The data from the sample appointments file will be used instead if {@code storage}'s appointment manager is
+     * not found, or an empty appointment manager will be used isntead of errors occur when reading {@code storage}'s
+     * appointment manager.
+     */
+    private ReadOnlyListManager<Appointment> initAppointmentManager(Storage storage) {
+        return new AppointmentManager();
     }
 
     private void initLogging(Config config) {
@@ -153,7 +177,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty UserPrefs");
             initializedPrefs = new UserPrefs();
         }
 
@@ -169,7 +193,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AppointmentBook " + MainApp.VERSION);
+        logger.info("Starting Baymax " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

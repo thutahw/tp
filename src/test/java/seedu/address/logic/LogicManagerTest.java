@@ -3,10 +3,11 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.NRIC_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.AMY;
 
@@ -24,12 +25,12 @@ import seedu.address.logic.commands.patient.ListPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.listmanagers.ReadOnlyListManager;
 import seedu.address.model.patient.Patient;
-import seedu.address.storage.JsonAppointmentBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.model.userprefs.UserPrefs;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.patient.JsonPatientManagerStorage;
+import seedu.address.storage.userprefs.JsonUserPrefsStorage;
 import seedu.address.testutil.PatientBuilder;
 
 public class LogicManagerTest {
@@ -43,8 +44,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAppointmentBookStorage addressBookStorage =
-                new JsonAppointmentBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonPatientManagerStorage addressBookStorage =
+                new JsonPatientManagerStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -70,17 +71,17 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAppointmentBookIoExceptionThrowingStub
-        JsonAppointmentBookStorage addressBookStorage =
-                new JsonAppointmentBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonPatientManagerIoExceptionThrowingStub
+        JsonPatientManagerStorage addressBookStorage =
+                new JsonPatientManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddPatientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + GENDER_DESC_AMY
-                + REMARK_DESC_AMY;
+        String addCommand = AddPatientCommand.COMMAND_WORD + NRIC_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + REMARK_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPatient(expectedPatient);
@@ -129,7 +130,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAppointmentBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPatientManager(),
+                model.getAppointmentManager(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,13 +151,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAppointmentBookIoExceptionThrowingStub extends JsonAppointmentBookStorage {
-        private JsonAppointmentBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonPatientManagerIoExceptionThrowingStub extends JsonPatientManagerStorage {
+        private JsonPatientManagerIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAppointmentBook(ReadOnlyAppointmentBook appointmentBook, Path filePath) throws IOException {
+        public void savePatients(ReadOnlyListManager<Patient> patientManager, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
