@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
@@ -17,20 +16,22 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Gender;
 import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the address book.
+ * Edits the details of an existing patient in the appointment book.
  */
-public class EditPatientCommand extends PatientCommand {
+public class EditPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -40,15 +41,14 @@ public class EditPatientCommand extends PatientCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_GENDER + "M"
-            + PREFIX_REMARK + "likes to code";
+            + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book.";
 
     private final Index index;
     private final EditPatientDescriptor editPatientDescriptor;
@@ -77,13 +77,18 @@ public class EditPatientCommand extends PatientCommand {
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
-        if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
+        if (!patientToEdit.isSame(editedPatient) && model.hasPatient(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TAB_NUMBER);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabNumber());
+    }
+
+    @Override
+    public Index getTabNumber() {
+        return Index.fromOneBased(3);
     }
 
     /**
@@ -93,13 +98,14 @@ public class EditPatientCommand extends PatientCommand {
     private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
         assert patientToEdit != null;
 
+        Nric updateNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Gender updatedGender = editPatientDescriptor.getGender().orElse(patientToEdit.getGender());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Remark updatedRemark = editPatientDescriptor.getRemark().orElse(patientToEdit.getRemark());
 
-        return new Patient(updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
+        return new Patient(updateNric, updatedName, updatedPhone, updatedGender, updatedTags, updatedRemark);
     }
 
     @Override
@@ -117,7 +123,8 @@ public class EditPatientCommand extends PatientCommand {
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
         return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor);
+                && editPatientDescriptor.equals(e.editPatientDescriptor)
+                && getTabNumber().equals(e.getTabNumber());
     }
 
     /**
@@ -125,6 +132,7 @@ public class EditPatientCommand extends PatientCommand {
      * corresponding field value of the patient.
      */
     public static class EditPatientDescriptor {
+        private Nric nric;
         private Name name;
         private Phone phone;
         private Gender gender;
@@ -138,6 +146,7 @@ public class EditPatientCommand extends PatientCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
+            setNric(toCopy.nric);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setGender(toCopy.gender);
@@ -150,6 +159,14 @@ public class EditPatientCommand extends PatientCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, gender, tags, remark);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
         }
 
         public void setName(Name name) {

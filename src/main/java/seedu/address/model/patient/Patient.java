@@ -8,32 +8,39 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.uniquelist.UniqueListElement;
 
 /**
  * Represents a Patient in the appointment book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Patient {
+public class Patient implements UniqueListElement {
 
     // Identity fields
+    private final Nric nric;
+
+    // Data fields
     private final Name name;
     private final Phone phone;
     private final Gender gender;
-
-    // Data fields
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Gender gender, Set<Tag> tags, Remark remark) {
-        requireAllNonNull(name, phone, gender, tags, remark);
+    public Patient(Nric nric, Name name, Phone phone, Gender gender, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(nric, name, phone, gender, tags, remark);
+        this.nric = nric;
         this.name = name;
         this.phone = phone;
         this.gender = gender;
         this.tags.addAll(tags);
         this.remark = remark;
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Name getName() {
@@ -64,14 +71,20 @@ public class Patient {
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
-    public boolean isSamePatient(Patient otherPatient) {
-        if (otherPatient == this) {
+    @Override
+    public boolean isSame(UniqueListElement other) {
+        if (other == this) {
             return true;
         }
 
-        return otherPatient != null
-                && otherPatient.getName().equals(getName())
-                && (otherPatient.getPhone().equals(getPhone()) || otherPatient.getGender().equals(getGender()));
+        if (!(other instanceof Patient)) {
+            return false;
+        }
+
+        Patient otherPatient = (Patient) other;
+
+        return other != null
+                && otherPatient.getNric().equals(getNric());
     }
 
     /**
@@ -89,23 +102,21 @@ public class Patient {
         }
 
         Patient otherPatient = (Patient) other;
-        return otherPatient.getName().equals(getName())
-                && otherPatient.getPhone().equals(getPhone())
-                && otherPatient.getGender().equals(getGender())
-                && otherPatient.getTags().equals(getTags())
-                && otherPatient.getRemark().equals((getRemark()));
+        return otherPatient.getNric().equals(getNric());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, gender, tags, remark);
+        return Objects.hash(nric, name, phone, gender, tags, remark);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getNric())
+                .append(" Name: ")
+                .append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Gender: ")

@@ -26,11 +26,11 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabId) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabNumber) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.tabNumber = tabId;
+        this.tabNumber = tabNumber;
     }
 
     /**
@@ -53,7 +53,7 @@ public class CommandResult {
         return exit;
     }
 
-    public Index getTabId() {
+    public Index getTabNumber() {
         return tabNumber;
     }
 
@@ -72,7 +72,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && tabNumber == otherCommandResult.tabNumber;
+                && tabNumber.equals(otherCommandResult.getTabNumber());
     }
 
     @Override

@@ -1,11 +1,13 @@
 {
   "patients": [ {
+    "nric": "S7485962E",
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "F",
     "tagged": [ "friends" ],
     "remark": "Likes to code"
   }, {
+    "nric": "S7485962E",
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "F",
