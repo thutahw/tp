@@ -14,6 +14,7 @@ import team.baymax.commons.util.CollectionUtil;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
+import team.baymax.logic.parser.CliSyntax;
 import team.baymax.model.Model;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
@@ -22,7 +23,6 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
-import team.baymax.logic.parser.CliSyntax;
 
 /**
  * Edits the details of an existing patient in the appointment book.

@@ -10,7 +10,6 @@ import team.baymax.commons.core.time.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;
-import team.baymax.commons.util.CollectionUtil;
 
 /**
  * Represents an Appointment in the appointment book.
@@ -28,7 +27,7 @@ public class Appointment implements UniqueListElement {
      */
     public Appointment(Patient patient, DateTime dateTime, AppointmentStatus status,
                        Description description, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(patient, dateTime, tags, description);
+        requireAllNonNull(patient, dateTime, tags, description);
         this.patient = patient;
         this.dateTime = dateTime;
         this.description = description;

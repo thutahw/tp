@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.model.listmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.
@@ -66,7 +66,8 @@ public class TypicalPatients {
             .withRemark(PatientCommandTestUtil.VALID_REMARK_AMY).build();
     public static final Patient BOB = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_BOB)
             .withName(PatientCommandTestUtil.VALID_NAME_BOB).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
-            .withGender(PatientCommandTestUtil.VALID_GENDER_BOB).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND, PatientCommandTestUtil.VALID_TAG_FRIEND)
+            .withGender(PatientCommandTestUtil.VALID_GENDER_BOB)
+            .withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND, PatientCommandTestUtil.VALID_TAG_FRIEND)
             .withRemark(PatientCommandTestUtil.VALID_REMARK_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

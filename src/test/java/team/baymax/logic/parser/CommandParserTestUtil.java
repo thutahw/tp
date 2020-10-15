@@ -3,6 +3,7 @@ package team.baymax.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Assertions;
+
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.parser.exceptions.ParseException;
 

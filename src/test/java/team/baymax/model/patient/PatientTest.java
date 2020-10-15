@@ -8,8 +8,8 @@ import static team.baymax.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.testutil.PatientBuilder;
 import team.baymax.logic.commands.patient.PatientCommandTestUtil;
+import team.baymax.testutil.PatientBuilder;
 
 public class PatientTest {
 
@@ -28,7 +28,8 @@ public class PatientTest {
         assertFalse(ALICE.isSame(null));
 
         // different phone and gender -> returns true
-        Patient editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB).withGender(PatientCommandTestUtil.VALID_GENDER_BOB).build();
+        Patient editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
+                .withGender(PatientCommandTestUtil.VALID_GENDER_BOB).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // different name -> returns true

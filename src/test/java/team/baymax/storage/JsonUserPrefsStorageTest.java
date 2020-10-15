@@ -16,7 +16,6 @@ import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.exceptions.DataConversionException;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
-import team.baymax.testutil.Assert;
 
 public class JsonUserPrefsStorageTest {
 
@@ -27,7 +26,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> readUserPrefs(null));
+        assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
     private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
@@ -42,7 +41,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
+        assertThrows(DataConversionException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
     }
 
     private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
@@ -81,12 +80,12 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void savePrefs_nullPrefs_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
     }
 
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
     }
 
     /**

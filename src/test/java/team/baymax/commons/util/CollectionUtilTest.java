@@ -2,8 +2,6 @@ package team.baymax.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
-import static team.baymax.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import team.baymax.testutil.Assert;
 
 public class CollectionUtilTest {

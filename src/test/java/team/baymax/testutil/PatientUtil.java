@@ -4,9 +4,9 @@ import java.util.Set;
 
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
+import team.baymax.logic.parser.CliSyntax;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
-import team.baymax.logic.parser.CliSyntax;
 
 /**
  * A utility class for Patient.

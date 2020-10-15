@@ -11,10 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import team.baymax.commons.core.Messages;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.ListPatientCommand;
+import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
@@ -25,8 +27,6 @@ import team.baymax.storage.StorageManager;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
 import team.baymax.testutil.PatientBuilder;
-import team.baymax.commons.core.Messages;
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -39,10 +39,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonPatientManagerStorage addressBookStorage =
-                new JsonPatientManagerStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonPatientManagerStorage patientManagerStorage =
+                new JsonPatientManagerStorage(temporaryFolder.resolve("patients.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(patientManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -54,7 +54,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deletePatient 9";
         assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
@@ -75,7 +75,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddPatientCommand.COMMAND_WORD + PatientCommandTestUtil.NRIC_DESC_AMY + PatientCommandTestUtil.NAME_DESC_AMY + PatientCommandTestUtil.PHONE_DESC_AMY
+        String addCommand = AddPatientCommand.COMMAND_WORD + PatientCommandTestUtil.NRIC_DESC_AMY
+                + PatientCommandTestUtil.NAME_DESC_AMY + PatientCommandTestUtil.PHONE_DESC_AMY
                 + PatientCommandTestUtil.GENDER_DESC_AMY + PatientCommandTestUtil.REMARK_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

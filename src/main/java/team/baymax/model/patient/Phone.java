@@ -3,8 +3,6 @@ package team.baymax.model.patient;
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
-import team.baymax.commons.util.AppUtil;
-
 /**
  * Represents a Patient's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -24,7 +22,7 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        AppUtil.checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
     }
 

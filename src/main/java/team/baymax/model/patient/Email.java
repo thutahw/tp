@@ -3,8 +3,6 @@ package team.baymax.model.patient;
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
-import team.baymax.commons.util.AppUtil;
-
 /**
  * Represents a Patient's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
@@ -38,7 +36,7 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        AppUtil.checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
 

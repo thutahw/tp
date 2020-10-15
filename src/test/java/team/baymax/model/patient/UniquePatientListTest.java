@@ -13,11 +13,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.DuplicateElementException;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 import team.baymax.testutil.PatientBuilder;
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 
 public class UniquePatientListTest {
 

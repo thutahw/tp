@@ -3,6 +3,7 @@ package team.baymax.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
 import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.TypicalPatients.ALICE;
 import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
@@ -21,7 +22,6 @@ import team.baymax.model.listmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.uniquelist.exceptions.DuplicateElementException;
 import team.baymax.testutil.PatientBuilder;
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 
 public class PatientManagerTest {
 
@@ -47,7 +47,7 @@ public class PatientManagerTest {
     @Test
     public void resetData_withDuplicatePatients_throwsDuplicateElementException() {
         // Two patients with the same identity fields
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         PatientManagerStub newData = new PatientManagerStub(newPatients);
@@ -74,7 +74,7 @@ public class PatientManagerTest {
     @Test
     public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
         patientManager.addPatient(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(patientManager.hasPatient(editedAlice));
     }

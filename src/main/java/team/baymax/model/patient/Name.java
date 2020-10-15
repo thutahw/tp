@@ -3,8 +3,6 @@ package team.baymax.model.patient;
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
-import team.baymax.commons.util.AppUtil;
-
 /**
  * Represents a Patient's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -29,7 +27,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
     }
 

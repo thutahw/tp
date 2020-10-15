@@ -3,8 +3,6 @@ package team.baymax.model.patient;
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
-import team.baymax.commons.util.AppUtil;
-
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -22,7 +20,7 @@ public class Nric {
      */
     public Nric(String nric) {
         requireNonNull(nric);
-        AppUtil.checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         this.nric = nric;
     }
 

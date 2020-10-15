@@ -9,7 +9,6 @@ import java.util.Set;
 
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;
-import team.baymax.commons.util.CollectionUtil;
 
 /**
  * Represents a Patient in the appointment book.
@@ -31,7 +30,7 @@ public class Patient implements UniqueListElement {
      * Every field must be present and not null.
      */
     public Patient(Nric nric, Name name, Phone phone, Gender gender, Set<Tag> tags, Remark remark) {
-        CollectionUtil.requireAllNonNull(nric, name, phone, gender, tags, remark);
+        requireAllNonNull(nric, name, phone, gender, tags, remark);
         this.nric = nric;
         this.name = name;
         this.phone = phone;
