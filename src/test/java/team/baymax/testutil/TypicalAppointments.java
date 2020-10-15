@@ -1,15 +1,15 @@
-package seedu.address.testutil;
+package team.baymax.testutil;
 
-import static seedu.address.testutil.TypicalPatients.ALICE;
-import static seedu.address.testutil.TypicalPatients.BOB;
-import static seedu.address.testutil.TypicalPatients.CARL;
+import static team.baymax.testutil.TypicalPatients.ALICE;
+import static team.baymax.testutil.TypicalPatients.BOB;
+import static team.baymax.testutil.TypicalPatients.CARL;
 
 import java.util.HashSet;
 
-import seedu.address.commons.core.time.DateTime;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentStatus;
-import seedu.address.model.appointment.Description;
+import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.model.appointment.Description;
 
 /**
  * A utility class containing a list of {@code Appointment} objects to be used in tests.

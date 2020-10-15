@@ -1,17 +1,17 @@
-package seedu.address.testutil;
+package team.baymax.testutil;
 
-import static seedu.address.testutil.TypicalPatients.ALICE;
+import static team.baymax.testutil.TypicalPatients.ALICE;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.core.time.DateTime;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentStatus;
-import seedu.address.model.appointment.Description;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.model.appointment.Description;
+import team.baymax.model.patient.Patient;
+import team.baymax.model.tag.Tag;
+import team.baymax.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Appointment objects.

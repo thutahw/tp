@@ -1,7 +1,7 @@
-package seedu.address.model.appointment;
+package team.baymax.model.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
+import static team.baymax.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
