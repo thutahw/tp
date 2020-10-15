@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAppointments.APT1;
-import static seedu.address.testutil.TypicalAppointments.APT2;
-import static seedu.address.testutil.TypicalAppointments.APT3;
-import static seedu.address.testutil.TypicalAppointments.APT4;
+import static seedu.address.testutil.TypicalAppointments.*;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 
 import org.junit.jupiter.api.Test;
@@ -34,8 +31,8 @@ public class AppointmentTest {
 
     @Test
     public void equals() {
-        // same Patient -> True
-        assertEquals(APT2, APT1);
+        // same Patient, exact same appointment -> True
+        assertEquals(APT5, APT1);
         // different Patient -> False
         assertNotEquals(APT3, APT1);
 

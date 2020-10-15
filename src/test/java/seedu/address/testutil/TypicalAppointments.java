@@ -16,16 +16,19 @@ import seedu.address.model.appointment.Description;
  */
 public class TypicalAppointments {
 
-    public static final Appointment APT1 = new Appointment(ALICE, DateTime.fromString("2020-10-11T12:45:30"),
+    public static final Appointment APT1 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT2 = new Appointment(ALICE, DateTime.fromString("2020-10-12T12:45:30"),
+    public static final Appointment APT2 = new Appointment(ALICE, DateTime.fromString("12-10-2020 12:45"),
             AppointmentStatus.UPCOMING, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT3 = new Appointment(CARL, DateTime.fromString("2002-11-11T11:30:20"),
+    public static final Appointment APT3 = new Appointment(CARL, DateTime.fromString("11-11-2002 11:30"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT4 = new Appointment(BOB, DateTime.fromString("2020-10-11T12:45:30"),
+    public static final Appointment APT4 = new Appointment(BOB, DateTime.fromString("11-10-2020 12:45"),
+            AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
+
+    public static final Appointment APT5 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
 }
