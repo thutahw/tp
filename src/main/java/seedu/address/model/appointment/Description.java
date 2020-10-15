@@ -1,5 +1,7 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Appointment descriptions can take any values, "
             + "and it should not be blank";
@@ -12,14 +14,12 @@ public class Description {
      * @param description A valid description.
      */
     public Description(String description) {
-        value = description;
-    }
-
-    /**
-     * Returns true if a given string is a valid description.
-     */
-    public static boolean isValidDescription(String test) {
-        return test.trim() != "";
+        requireNonNull(description);
+        if (isValidDescription(description)) {
+            value = description;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -32,6 +32,13 @@ public class Description {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
                 && value.equals(((Description) other).value)); // state check
+    }
+
+    /**
+     * Returns true if a given string is a valid description.
+     */
+    public static boolean isValidDescription(String test) {
+        return test.trim().length() != 0;
     }
 
     @Override

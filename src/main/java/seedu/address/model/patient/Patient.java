@@ -127,5 +127,4 @@ public class Patient implements UniqueListElement {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }
