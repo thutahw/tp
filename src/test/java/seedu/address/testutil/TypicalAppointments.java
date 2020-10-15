@@ -4,14 +4,12 @@ import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.BOB;
 import static seedu.address.testutil.TypicalPatients.CARL;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import seedu.address.commons.core.time.DateTime;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentStatus;
 import seedu.address.model.appointment.Description;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class containing a list of {@code Appointment} objects to be used in tests.

@@ -2,10 +2,10 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPatients.ALICE;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentStatus;
 import seedu.address.model.appointment.Description;
@@ -24,7 +24,7 @@ public class AppointmentBuilder {
     private static final String DEFAULT_DESCRIPTION = "long term patient";
 
     private Patient patient;
-    private LocalDateTime dateTime;
+    private DateTime dateTime;
     private AppointmentStatus status;
     private Set<Tag> tags;
     private Description description;
@@ -34,7 +34,7 @@ public class AppointmentBuilder {
      */
     public AppointmentBuilder() {
         patient = DEFAULT_PATIENT;
-        dateTime = LocalDateTime.parse(DEFAULT_DATETIME);
+        dateTime = DateTime.fromString(DEFAULT_DATETIME);
         status = DEFAULT_APPOINTMENT_STATUS;
         tags = new HashSet<>();
         description = new Description(DEFAULT_DESCRIPTION);
@@ -84,7 +84,7 @@ public class AppointmentBuilder {
      * @param dateTime
      */
     public AppointmentBuilder withTime(String dateTime) {
-        this.dateTime = LocalDateTime.parse(dateTime);
+        this.dateTime = DateTime.fromString(dateTime);
         return this;
     }
 
@@ -99,6 +99,6 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(patient, dateTime, tags, description, status);
+        return new Appointment(patient, dateTime, status, description, tags);
     }
 }
