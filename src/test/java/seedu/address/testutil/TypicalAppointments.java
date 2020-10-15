@@ -7,25 +7,27 @@ import static seedu.address.testutil.TypicalPatients.CARL;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
+import seedu.address.commons.core.time.DateTime;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentStatus;
 import seedu.address.model.appointment.Description;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class containing a list of {@code Appointment} objects to be used in tests.
  */
 public class TypicalAppointments {
 
-    public static final Appointment APT1 = new Appointment(ALICE, LocalDateTime.parse("2020-10-11T12:45:30"),
-            new HashSet<>(), new Description("long term patient"), AppointmentStatus.DONE);
+    public static final Appointment APT1 = new Appointment(ALICE, DateTime.fromString("2020-10-11T12:45:30"),
+            AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT2 = new Appointment(ALICE, LocalDateTime.parse("2020-10-12T12:45:30"),
-            new HashSet<>(), new Description("long term patient"), AppointmentStatus.UPCOMING);
+    public static final Appointment APT2 = new Appointment(ALICE, DateTime.fromString("2020-10-12T12:45:30"),
+            AppointmentStatus.UPCOMING, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT3 = new Appointment(CARL, LocalDateTime.parse("2002-11-11T11:30:20"),
-            new HashSet<>(), new Description("long term patient"), AppointmentStatus.DONE);
+    public static final Appointment APT3 = new Appointment(CARL, DateTime.fromString("2002-11-11T11:30:20"),
+            AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT4 = new Appointment(BOB, LocalDateTime.parse("2020-10-11T12:45:30"),
-            new HashSet<>(), new Description("long term patient"), AppointmentStatus.UPCOMING);
+    public static final Appointment APT4 = new Appointment(BOB, DateTime.fromString("2020-10-11T12:45:30"),
+            AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
 }
