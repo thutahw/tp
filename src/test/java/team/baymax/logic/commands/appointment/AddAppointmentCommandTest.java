@@ -1,7 +1,7 @@
 package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.testutil.Assert.assertThrows;
+import static team.baymax.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,15 +10,13 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AppointmentBook;
 import team.baymax.model.Model;
-import seedu.address.model.ReadOnlyAppointmentBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.appointment.Appointment;
-import seedu.address.model.patient.Patient;
 import team.baymax.commons.core.GuiSettings;
+import team.baymax.model.appointment.Appointment;
+import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.listmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 
 public class AddAppointmentCommandTest {
 
@@ -68,13 +66,24 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public Path getAppointmentBookFilePath() {
+        public Path getPatientStorageFilePath() {
             throw new AssertionError(
                     "This method should not be called.");
         }
 
         @Override
-        public void setAppointmentBookFilePath(Path appointmentBookFilePath) {
+        public Path getAppointmentStorageFilePath() {
+            throw new AssertionError(
+                    "This method should not be called.");
+        }
+
+        @Override
+        public void setPatientStorageFilePath(Path patientStorageFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAppointmentStorageFilePath(Path appointmentStorageFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -91,12 +100,22 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public void setAppointmentBook(ReadOnlyAppointmentBook appointmentBook) {
+        public void setPatientManager(ReadOnlyListManager<Patient> patientManager) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAppointmentBook getAppointmentBook() {
+        public void setAppointmentManager(ReadOnlyListManager<Appointment> appointmentManager) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListManager<Patient> getPatientManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyListManager<Appointment> getAppointmentManager() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,6 +168,11 @@ public class AddAppointmentCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetAllListManagers() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -165,7 +189,7 @@ public class AddAppointmentCommandTest {
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            return this.appointment.isSameAppointment(appointment);
+            return this.appointment.isSame(appointment);
         }
     }
 
@@ -178,7 +202,7 @@ public class AddAppointmentCommandTest {
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
-            return appointmentsAdded.stream().anyMatch(appointment::isSameAppointment);
+            return appointmentsAdded.stream().anyMatch(appointment::isSame);
         }
 
         @Override
@@ -188,8 +212,9 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public ReadOnlyAppointmentBook getAppointmentBook() {
-            return new AppointmentBook();
+        public ReadOnlyListManager<Appointment> getAppointmentManager() {
+
+            return new AppointmentManager();
         }
     }
 }

@@ -1,16 +1,13 @@
 package team.baymax.logic.commands.appointment;
 
-import static seedu.address.testutil.TypicalPatients.getTypicalAppointmentBook;
-
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import team.baymax.model.Model;
+import team.baymax.model.ModelManager;
 
 public class EditAppointmentCommandTest {
 
-    private Model model = new ModelManager(getTypicalAppointmentBook(), new UserPrefs());
+    private Model model = new ModelManager();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
