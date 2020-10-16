@@ -1,5 +1,7 @@
 package team.baymax.logic.commands.patient;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
@@ -37,5 +39,18 @@ public class ListPatientCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
         PatientCommandTestUtil.assertPatientCommandSuccess(new ListPatientCommand(), model,
                 ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListPatientCommand listPatientCommand = new ListPatientCommand();
+        // null -> false
+        assertFalse(listPatientCommand.equals(null));
+        // different types -> false
+        assertFalse(listPatientCommand.equals(1));
+        // same type -> true
+        assertTrue(listPatientCommand.equals(new ListPatientCommand()));
+
+        assertTrue(listPatientCommand.equals(listPatientCommand));
     }
 }

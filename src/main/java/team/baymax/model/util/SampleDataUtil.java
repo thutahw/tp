@@ -21,18 +21,18 @@ public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Nric("S0123456A"), new Name("Alex Yeoh"), new Phone("87438807"),
-                    new Gender("M"), getTagSet(""), new Remark("Allergic to ibuprofen.")),
+                    new Gender("M"), getTagSet(), new Remark("Allergic to ibuprofen.")),
             new Patient(new Nric("T0123456A"), new Name("Bernice Yu"), new Phone("99272758"),
-                    new Gender("F"), getTagSet("", ""),
+                    new Gender("F"), getTagSet(),
                     new Remark("Only available on Saturdays.")),
             new Patient(new Nric("S6543210A"), new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                    new Gender("F"), getTagSet(""), new Remark("Under long term care.")),
+                    new Gender("F"), getTagSet(), new Remark("Under long term care.")),
             new Patient(new Nric("T6543210A"), new Name("David Li"), new Phone("91031282"),
-                    new Gender("M"), getTagSet(""), new Remark("Diabetic.")),
+                    new Gender("M"), getTagSet(), new Remark("Diabetic.")),
             new Patient(new Nric("T1548765D"), new Name("Irfan Ibrahim"), new Phone("92492021"),
-                    new Gender("M"), getTagSet(""), new Remark("Allergic to aspirin.")),
+                    new Gender("M"), getTagSet(), new Remark("Allergic to aspirin.")),
             new Patient(new Nric("S4658753E"), new Name("Roy Balakrishnan"), new Phone("92624417"),
-                    new Gender("M"), getTagSet(""), new Remark("Currently taking warfarin."))
+                    new Gender("M"), getTagSet(), new Remark("Currently taking warfarin."))
         };
     }
 
