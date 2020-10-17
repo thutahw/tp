@@ -23,8 +23,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_FRIEND;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.TypicalPatients.AMY;
@@ -46,7 +46,7 @@ public class AddPatientCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_LTP).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
@@ -69,7 +69,7 @@ public class AddPatientCommandParserTest {
                 + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple tags - all accepted
-        Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
                 .build();
         assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
@@ -125,7 +125,7 @@ public class AddPatientCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND + REMARK_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_LTP + REMARK_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, NRIC_DESC_BOB + INVALID_NAME_DESC + INVALID_PHONE_DESC

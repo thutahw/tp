@@ -6,7 +6,7 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_AMY
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.ClearCommand;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
@@ -47,7 +48,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -57,11 +58,11 @@ public class EditPatientCommandTest {
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_DIABETIC).build();
 
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_DIABETIC).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(indexLastPatient, descriptor);
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
@@ -70,7 +71,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(lastPatient, editedPatient);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class EditPatientCommandTest {
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
                 new AppointmentManager(), new UserPrefs());
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

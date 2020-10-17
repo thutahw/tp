@@ -17,8 +17,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_FRIEND;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -111,7 +111,7 @@ public class EditPatientCommandParserTest {
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withTags(VALID_TAG_DIABETIC, VALID_TAG_LTP)
                 .build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
@@ -155,7 +155,7 @@ public class EditPatientCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_LTP).build();
         expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -170,7 +170,7 @@ public class EditPatientCommandParserTest {
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
                 .build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 

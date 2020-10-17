@@ -2,6 +2,7 @@ package team.baymax.logic.commands.patient;
 
 import org.junit.jupiter.api.Test;
 
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.listmanagers.AppointmentManager;
@@ -32,6 +33,6 @@ class RemarkPatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);
     }
 }

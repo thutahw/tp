@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.appointment;
+package team.baymax.logic.commands.appointment;
 
 import org.junit.jupiter.api.Test;
 

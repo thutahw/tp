@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.listmanagers.AppointmentManager;
@@ -62,7 +63,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        PatientCommandTestUtil.assertPatientCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
@@ -72,7 +73,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        PatientCommandTestUtil.assertPatientCommandSuccess(command, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }
 

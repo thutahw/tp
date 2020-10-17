@@ -62,12 +62,12 @@ public class TypicalPatients {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_AMY)
             .withName(PatientCommandTestUtil.VALID_NAME_AMY).withPhone(PatientCommandTestUtil.VALID_PHONE_AMY)
-            .withGender(PatientCommandTestUtil.VALID_GENDER_AMY).withTags(PatientCommandTestUtil.VALID_TAG_FRIEND)
+            .withGender(PatientCommandTestUtil.VALID_GENDER_AMY).withTags(PatientCommandTestUtil.VALID_TAG_LTP)
             .withRemark(PatientCommandTestUtil.VALID_REMARK_AMY).build();
     public static final Patient BOB = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_BOB)
             .withName(PatientCommandTestUtil.VALID_NAME_BOB).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
             .withGender(PatientCommandTestUtil.VALID_GENDER_BOB)
-            .withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND, PatientCommandTestUtil.VALID_TAG_FRIEND)
+            .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC, PatientCommandTestUtil.VALID_TAG_LTP)
             .withRemark(PatientCommandTestUtil.VALID_REMARK_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
