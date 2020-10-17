@@ -1,10 +1,5 @@
 package team.baymax.commons.core.time;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,6 +9,10 @@ import static team.baymax.testutil.TypicalDateTimes.DATETIME2;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME3;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME4;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME5;
+
+import org.junit.jupiter.api.Test;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateTimeTest {
 
