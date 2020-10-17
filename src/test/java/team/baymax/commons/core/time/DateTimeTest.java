@@ -10,9 +10,10 @@ import static team.baymax.testutil.TypicalDateTimes.DATETIME3;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME4;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME5;
 
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 public class DateTimeTest {
 
@@ -49,7 +50,7 @@ public class DateTimeTest {
     public void compareToOtherDateTime() {
         assertTrue(0 == DATETIME1.compareTo(DATETIME5));
         assertTrue(0 < DATETIME1.compareTo(DATETIME2));
-        assertTrue(0 >DATETIME2.compareTo(DATETIME3));
+        assertTrue(0 > DATETIME2.compareTo(DATETIME3));
     }
 
     @Test
@@ -62,7 +63,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void hashCode_DefaultObject_valueAsExpected() {
+    public void hashCode_defaultObject_valueAsExpected() {
         assertEquals(LocalDateTime.parse("12-12-2020 23:59",
                 DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")).hashCode(), new DateTime().hashCode());
     }
