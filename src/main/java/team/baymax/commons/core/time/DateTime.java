@@ -28,6 +28,13 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
+     * Default constructor for {@code DateTime}, with input 2020-12-12 23:59
+     */
+    protected DateTime() {
+        this.dateTime = LocalDateTime.parse("12-12-2020 23:59", FORMAT_INPUT);
+    }
+
+    /**
      * Creates a new {@code DateTime} from a given formatted {@code dateTimeString}
      */
     public static DateTime fromString(String dateTimeString) {
