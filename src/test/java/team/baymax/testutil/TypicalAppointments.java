@@ -35,6 +35,9 @@ public class TypicalAppointments {
     public static final Appointment APPT5 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
+    public static final Appointment APPT6 = new Appointment(BOB, DateTime.fromString("09-09-2020 10:10"),
+            AppointmentStatus.UPCOMING, new Description("long term patient"), new HashSet<>());
+
     private TypicalAppointments() {} // prevents instantiation
 
     /**
@@ -49,6 +52,6 @@ public class TypicalAppointments {
     }
 
     public static List<Appointment> getTypicalAppointments() {
-        return new ArrayList<>(Arrays.asList(APPT1, APPT2, APPT3, APPT4, APPT5));
+        return new ArrayList<>(Arrays.asList(APPT1, APPT2, APPT3));
     }
 }

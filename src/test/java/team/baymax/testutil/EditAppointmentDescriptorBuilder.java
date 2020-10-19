@@ -26,11 +26,16 @@ public class EditAppointmentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditAppointmentDescriptor} with fields containing {@code patient}'s details
+     * Returns an {@code EditAppointmentDescriptor} with fields containing {@code appointment}'s details
      */
     public EditAppointmentDescriptorBuilder(Appointment appointment) {
         descriptor = new EditAppointmentDescriptor();
+        descriptor.setDateTime(appointment.getDateTime());
+        descriptor.setDescription(appointment.getDescription());
+        descriptor.setStatus(appointment.getStatus());
+        descriptor.setTags(appointment.getTags());
     }
+
 
     /**
      * Sets the {@code Nric} of the {@code EditAppointmentDescriptor} that we are building.

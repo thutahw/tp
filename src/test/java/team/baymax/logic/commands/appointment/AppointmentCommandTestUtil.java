@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import team.baymax.commons.core.index.Index;
@@ -13,6 +14,8 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.patient.NameContainsKeywordsPredicate;
+import team.baymax.model.patient.Patient;
 import team.baymax.testutil.EditAppointmentDescriptorBuilder;
 
 public class AppointmentCommandTestUtil {
@@ -60,5 +63,9 @@ public class AppointmentCommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
 
         // TODO
+//        Appointment appointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
+//        model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_ALL_APPOINTMENTS);
+//
+//        assertEquals(3, model.getFilteredAppointmentList().size());
     }
 }
