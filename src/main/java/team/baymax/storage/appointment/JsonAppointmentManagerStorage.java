@@ -51,7 +51,6 @@ public class JsonAppointmentManagerStorage implements AppointmentManagerStorage 
     public Optional<ReadOnlyListManager<Appointment>> readAppointments(PatientManager patientManager, Path filePath)
             throws DataConversionException {
         requireNonNull(filePath);
-
         Optional<JsonSerializableAppointmentManager> jsonAppointmentManager = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAppointmentManager.class);
         if (jsonAppointmentManager.isEmpty()) {
