@@ -20,7 +20,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     private final UniqueList<Patient> patients;
 
     {
-        patients = new UniqueList<Patient>();
+        patients = new UniqueList<>();
     }
 
     public PatientManager() {}

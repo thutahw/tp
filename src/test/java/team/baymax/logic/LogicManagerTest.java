@@ -20,10 +20,12 @@ import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
+import team.baymax.model.appointment.Appointment;
 import team.baymax.model.listmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.storage.StorageManager;
+import team.baymax.storage.appointment.JsonAppointmentManagerStorage;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
 import team.baymax.testutil.PatientBuilder;
@@ -41,8 +43,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonPatientManagerStorage patientManagerStorage =
                 new JsonPatientManagerStorage(temporaryFolder.resolve("patients.json"));
+        JsonAppointmentManagerStorage appointmentManagerStorage =
+                new JsonAppointmentManagerStorage(temporaryFolder.resolve("appointments.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(patientManagerStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(patientManagerStorage, appointmentManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -67,11 +71,16 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonPatientManagerIoExceptionThrowingStub
-        JsonPatientManagerStorage addressBookStorage =
-                new JsonPatientManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonPatientManagerStorage patientManagerStorage =
+                new JsonPatientManagerIoExceptionThrowingStub(temporaryFolder
+                        .resolve("ioExceptionPatientManager.json"));
+        JsonAppointmentManagerStorage appointmentManagerStorage =
+                new JsonAppointmentManagerIoExceptionThrowingStub(temporaryFolder
+                        .resolve("ioExceptionAppointmentManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(patientManagerStorage,
+                appointmentManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -145,7 +154,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * A stub class to throw an {@code IOException} when the save method is called.
+     * A stub class to throw an {@code IOException} when the save method is called on patientManagerStorage.
      */
     private static class JsonPatientManagerIoExceptionThrowingStub extends JsonPatientManagerStorage {
         private JsonPatientManagerIoExceptionThrowingStub(Path filePath) {
@@ -154,6 +163,21 @@ public class LogicManagerTest {
 
         @Override
         public void savePatients(ReadOnlyListManager<Patient> patientManager, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called on AppointmentManagerStorage.
+     */
+    private static class JsonAppointmentManagerIoExceptionThrowingStub extends JsonAppointmentManagerStorage {
+        private JsonAppointmentManagerIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveAppointments(ReadOnlyListManager<Appointment> appointmentManager, Path filePath)
+                throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
