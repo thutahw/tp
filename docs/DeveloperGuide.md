@@ -239,7 +239,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * need to manage significant number of patients and appointments
 * want to keep track of patients and appointments efficiently
 * want to look up patients and/or appointments easily by using matching words
-* want to look at current and past appointments through a calendar view
+* want to look at current and past appointments through a appointmentCalendar view
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -365,10 +365,10 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 **MSS**
 
-1. User requests to set the calendar to a particular year
-2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
-4. Baymax calendar switches to the stipulated month in the given year
+1. User requests to set the appointmentCalendar to a particular year
+2. Baymax appointmentCalendar switches to the stipulated year
+3. User requests to set the appointmentCalendar to a particular month
+4. Baymax appointmentCalendar switches to the stipulated month in the given year
 5. User requests to list all appointments on a given day in that month
 6. Baymax displays a list of appointments on that given day
 
@@ -378,10 +378,10 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 **MSS**
 
-1. User requests to set the calendar to a particular year
-2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
-4. Baymax calendar switches to the stipulated month in the given year
+1. User requests to set the appointmentCalendar to a particular year
+2. Baymax appointmentCalendar switches to the stipulated year
+3. User requests to set the appointmentCalendar to a particular month
+4. Baymax appointmentCalendar switches to the stipulated month in the given year
 5. User requests to list all appointments in the next 7 days
 6. Baymax displays a list of appointments in the next 7 days
 

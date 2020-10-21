@@ -1,6 +1,6 @@
 package team.baymax.testutil;
 
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.DateTime;
 
 public class TypicalDateTimes {
     public static final DateTime DATETIME1 = DateTime.fromString("12-12-2020 23:59");

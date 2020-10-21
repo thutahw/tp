@@ -15,8 +15,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.GuiSettings;
-import team.baymax.model.listmanagers.AppointmentManager;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.PatientManagerBuilder;

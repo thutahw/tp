@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;

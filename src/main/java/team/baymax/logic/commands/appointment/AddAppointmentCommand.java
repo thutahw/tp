@@ -10,7 +10,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;

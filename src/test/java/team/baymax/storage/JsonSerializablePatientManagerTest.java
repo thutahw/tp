@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.commons.util.JsonUtil;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.storage.patient.JsonSerializablePatientManager;
 import team.baymax.testutil.TypicalPatients;
 

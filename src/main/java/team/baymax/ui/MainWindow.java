@@ -13,12 +13,17 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.logic.Logic;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.Year;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -142,7 +147,8 @@ public class MainWindow extends UiPart<Stage> {
         AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage(logic.getFilteredAppointmentList());
         appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
 
-        CalendarPage calendarPage = new CalendarPage();
+        AppointmentCalendar to_be_replaced = new AppointmentCalendar(new Day(21), new Month(8), new Year(2020));
+        CalendarPage calendarPage = new CalendarPage(to_be_replaced);
         calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
 
         Dashboard dashboard = new Dashboard();

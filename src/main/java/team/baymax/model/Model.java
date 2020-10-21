@@ -6,7 +6,12 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.calendar.Date;
+import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.Year;
+import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 
@@ -151,6 +156,18 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    //=========== CalendarManager ========
+
+    CalendarManager getCalendarManager();
+
+    void setDay(Day day);
+
+    void setMonth(Month month);
+
+    void setYear(Year year);
+
+    void resetCalendar();
 
     //============= utils ================
     void resetAllListManagers();

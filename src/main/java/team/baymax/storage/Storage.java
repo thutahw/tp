@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import team.baymax.commons.exceptions.DataConversionException;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;

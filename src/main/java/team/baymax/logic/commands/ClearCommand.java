@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.model.Model;
-import team.baymax.model.listmanagers.AppointmentManager;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.PatientManager;
 
 /**
  * Clears the patient manager and appointment manager.

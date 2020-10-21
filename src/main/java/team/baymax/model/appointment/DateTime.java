@@ -1,4 +1,4 @@
-package team.baymax.commons.core.time;
+package team.baymax.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
@@ -60,6 +60,18 @@ public class DateTime implements Comparable<DateTime> {
      */
     public String getStorageFormat() {
         return dateTime.format(FORMAT_STORAGE);
+    }
+
+    public int getYear() {
+        return dateTime.getYear();
+    }
+
+    public int getMonth() {
+        return dateTime.getMonthValue();
+    }
+
+    public int getDay() {
+        return dateTime.getDayOfMonth();
     }
 
     @Override

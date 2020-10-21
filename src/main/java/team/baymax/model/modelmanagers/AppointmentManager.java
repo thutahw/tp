@@ -1,4 +1,4 @@
-package team.baymax.model.listmanagers;
+package team.baymax.model.modelmanagers;
 
 import static java.util.Objects.requireNonNull;
 

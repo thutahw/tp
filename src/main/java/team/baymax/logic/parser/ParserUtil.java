@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
