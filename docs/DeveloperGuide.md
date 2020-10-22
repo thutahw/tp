@@ -164,12 +164,46 @@ This section describes some noteworthy details on how certain features are imple
 ### **4.1 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
+Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
+a single patient's information can be managed at one time. A user can:
+* Add a new patient
+* Delete an existing patient
+* Edit a patient's details
+* List all the patients in the system
+* Find a patient by using a keyword from his/her name
+* List all the appointments of a specific patient 
 #### 4.1.1 Rationale
-
+The Patient Manager feature is included in Baymax because it is one of the core features of the application.
+If the user wants to keep track of the patient's information, he/she has to record the details
+of the patient and be able to look up a patient in the system easily.
 #### 4.1.2. Current Implementation
+The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
+When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word 
+and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
+the new patient is added into the appointment book and a success message is printed in the results display box. <br>
+
+The following diagram shows what happens when a user enters an addpatient command.
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
+Figure {} Workflow of an addpatient command<br>
+
+The following table shows the commands related to managing a patient's details.<br>
+
+| Command | Purpose
+| --------- | ------------------------------------------ 
+| `addpatient` | Adds a patient to the appointment book.
+| `deletepatient` | Deletes a patient.
+| `listpatient` | Lists all patients.
+| `editpatient` | Edits a patient's details.
+| `findpatient` | Finds a patient with the given search string (name).
+| `listpatientappts` | Lists all the appointments of a specific patient.
 #### 4.1.3. Design Consideration
+For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
+making the user easily understand the commands. <br>
 
+As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
+ `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all 
+ the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
 ### **4.2 Appointment Manager**
 (Contributed by Shi Huiling & Reuben Teng)
 
@@ -206,11 +240,11 @@ This section describes some noteworthy details on how certain features are imple
 
 **Target user profile**:
 
-* need to manage significant number of patients and appointments
-* want to keep track of patients and appointments efficiently
-* want to look up patients and/or appointments easily by using matching words
-* want to look at current and past appointments through a calendar view
-* prefer desktop apps over other types
+* needs to manage significant number of patients and appointments
+* wants to keep track of patients and appointments efficiently
+* wants to look up patients and/or appointments easily by using matching words
+* wants to look at current and past appointments through a calendar view
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
