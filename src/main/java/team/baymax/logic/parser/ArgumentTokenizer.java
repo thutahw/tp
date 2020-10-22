@@ -3,6 +3,8 @@ package team.baymax.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
  */
 public class ArgumentTokenizer {
 
+    private static Logger LOGGER = Logger.getLogger("Foo");
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
      * respective argument values. Only the given prefixes will be recognized in the arguments string.
@@ -24,7 +27,10 @@ public class ArgumentTokenizer {
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+        assert argsString != null;
+        LOGGER.log(Level.INFO, "going to start tokenizing");
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        LOGGER.log(Level.INFO, "end of tokenizing");
         return extractArguments(argsString, positions);
     }
 
