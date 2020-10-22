@@ -38,7 +38,7 @@ The following table provides a quick overview of each component of Baymax. More 
 
 | Component | Description
 | --------- | ------------------------------------------ 
-| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br><br>2. At shut down: Shuts down the components and cleanup resources where necessary.                    
+| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br>2. At shut down: Shuts down the components and cleanup resources where necessary.                    
 | `Commons` | Represents a collection of classes used by multiple other components. <br><br>It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
 | `UI`      | Handles the UI of the App.
 | `Logic`   | Executes commands.
@@ -213,14 +213,41 @@ As for the `listpatientappts` command, we decided not to continue this functiona
 
 #### 4.1.3. Design Consideration
 
-### **4.2 Calendar Manager**
+### **4.2 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
+
+Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month. 
 
 #### 4.1.1 Rationale
 
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
+
 #### 4.1.2. Current Implementation
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
+
+The following table shows the commands related to managing the appointment calendar:
+
+ Command    | Purpose
+| --------- | ------------------------------------------ 
+| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.             
+| `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
+| `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
 #### 4.1.3. Design Consideration
+Aspect: the necessity of a day view
+
+Option 1: Necessary (Current)
+- Pros: User is able to see all appointments on a particular day, in chronological order. This gives the receptionist better clarity of which other appointments are booked on that day. Thus, it will lead to better user experience.
+- Cons: More difficult to implement as another view needs to be implemented which adds to the complexity of the application.
+
+Option 2: Not necessary
+- Pros: User can simply find appointments by date to list out all appointments on that day. This is much easier to implement, and also means less commands to remember since it can be grouped under a find command.
+- Cons: It is less intuitive and requires longer commands.
+
+Reason for choosing Option 1:
+- Having a day view in the calendar allows the user to zoom in to a particular day, and hence makes the calendar more complete.
+- Having a chronological view of the appointments in a day allows the receptionist to spot timing collisions, and hence schedule appointments more efficiently.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
