@@ -37,8 +37,8 @@ Figure 1. Architecture Diagram of Baymax
 The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
 
 | Component | Description
-| --------- | ------------------------------------------ 
-| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br>2. At shut down: Shuts down the components and cleanup resources where necessary.                    
+| --------- | ------------------------------------------
+| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br>2. At shut down: Shuts down the components and cleanup resources where necessary.
 | `Commons` | Represents a collection of classes used by multiple other components. <br><br>It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
 | `UI`      | Handles the UI of the App.
 | `Logic`   | Executes commands.
@@ -74,7 +74,7 @@ Figure 3. Structure of the UI component
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
 The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
@@ -171,7 +171,7 @@ a single patient's information can be managed at one time. A user can:
 * Edit a patient's details
 * List all the patients in the system
 * Find a patient by using a keyword from his/her name
-* List all the appointments of a specific patient 
+* List all the appointments of a specific patient
 #### 4.1.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
@@ -179,7 +179,7 @@ of the patient and be able to look up a patient in the system easily.
 #### 4.1.2. Current Implementation
 The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
-When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word 
+When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
 and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
 the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
@@ -190,7 +190,7 @@ Figure {} Workflow of an addpatient command<br>
 The following table shows the commands related to managing a patient's details.<br>
 
 | Command | Purpose
-| --------- | ------------------------------------------ 
+| --------- | ------------------------------------------
 | `addpatient` | Adds a patient to the appointment book.
 | `deletepatient` | Deletes a patient.
 | `listpatient` | Lists all patients.
@@ -202,7 +202,7 @@ For all the commands except the `listpatientappts` command, the current implemen
 making the user easily understand the commands. <br>
 
 As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
- `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all 
+ `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
 ### **4.2 Appointment Manager**
 (Contributed by Shi Huiling & Reuben Teng)
@@ -216,7 +216,7 @@ As for the `listpatientappts` command, we decided not to continue this functiona
 ### **4.2 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
-Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month. 
+Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
 
 #### 4.1.1 Rationale
 
@@ -228,8 +228,8 @@ The `CalendarManager` class in the `Model` component contains a `AppointmentCale
 The following table shows the commands related to managing the appointment calendar:
 
  Command    | Purpose
-| --------- | ------------------------------------------ 
-| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.             
+| --------- | ------------------------------------------
+| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
 | `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
 | `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
