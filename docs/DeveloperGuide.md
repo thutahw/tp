@@ -22,30 +22,33 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **3. Design**
 
-### Architecture
+In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+### 3.1. Architecture
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
+<img src="images/ArchitectureDiagram.png" width="450" />
+Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-
-The rest of the App consists of four components.
-
-* [**`UI`**](#ui-component): Handles the UI of the App.
-* [**`Logic`**](#logic-component): Executes commands.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+| Component | Description
+| --------- | ------------------------------------------ 
+| `Main`    | Has two classes called Main and MainApp.   
+|           | It is responsible for:
+|           | 1. At App launch: Initializes the components in the correct sequence, and connects them up with each other.
+|           | 2. At shut down: Shuts down the components and cleanup resources where necessary.
+|           | receptionist of a clinic                     
+| `Commons` | Represents a collection of classes used by multiple other components.
+|           | It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
+| `UI`      | Handles the UI of the App.
+| `Logic`   | Executes commands.
+| `Model`   | Holds the data of the App in memory.
+| `Storage` | Reads data from, and writes data to, the hard disk.
 
 Each of the four components,
 
@@ -64,23 +67,37 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2. UI component
+(Contributed by Li Jianhan)
 
+This segment will explain the structure and responsibilities of the `UI` component.
+
+#### 3.2.1. Structure
 ![Structure of the UI Component](images/UiClassDiagram.png)
+Figure 3. Structure of the UI component
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `Page` is an abstract class that represents a page corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The following classes inherit from the `Page` abstract class:
+- Dashboard
+- PatientInfoPage
+- AppointmentInfoPage
+- CalendarPage
+- InfoPage
+
+#### 3.2.2. Responsibilities
 
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
-### Logic component
+### 3.3. Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
@@ -100,7 +117,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Model component
+### 3.4. Model component
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -120,7 +137,7 @@ The `Model`,
 </div>
 
 
-### Storage component
+### 3.5. Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
