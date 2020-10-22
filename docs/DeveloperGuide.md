@@ -38,8 +38,8 @@ The following table provides a quick overview of each component of Baymax. More 
 
 | Component | Description
 | --------- | ------------------------------------------ 
-| `Main`    | Has two classes called Main and MainApp. It is responsible for: 1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. 2. At shut down: Shuts down the components and cleanup resources where necessary.                    
-| `Commons` | Represents a collection of classes used by multiple other components. It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
+| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br><br>2. At shut down: Shuts down the components and cleanup resources where necessary.                    
+| `Commons` | Represents a collection of classes used by multiple other components. <br><br>It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
 | `UI`      | Handles the UI of the App.
 | `Logic`   | Executes commands.
 | `Model`   | Holds the data of the App in memory.
