@@ -38,13 +38,8 @@ The following table provides a quick overview of each component of Baymax. More 
 
 | Component | Description
 | --------- | ------------------------------------------ 
-| `Main`    | Has two classes called Main and MainApp.   
-|           | It is responsible for:
-|           | 1. At App launch: Initializes the components in the correct sequence, and connects them up with each other.
-|           | 2. At shut down: Shuts down the components and cleanup resources where necessary.
-|           | receptionist of a clinic                     
-| `Commons` | Represents a collection of classes used by multiple other components.
-|           | It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
+| `Main`    | Has two classes called Main and MainApp. It is responsible for: 1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. 2. At shut down: Shuts down the components and cleanup resources where necessary.                    
+| `Commons` | Represents a collection of classes used by multiple other components. It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
 | `UI`      | Handles the UI of the App.
 | `Logic`   | Executes commands.
 | `Model`   | Holds the data of the App in memory.
@@ -158,7 +153,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### **4.1 List Managers**
-(Contributed by Kaitlyn)
+(Contributed by Kaitlyn Ng)
 
 #### 4.1.1 Rationale
 
@@ -167,7 +162,7 @@ This section describes some noteworthy details on how certain features are imple
 #### 4.1.3. Design Consideration
 
 ### **4.1 Patient Manager**
-(Contributed by Thuta)
+(Contributed by Thuta Htun Wai)
 
 #### 4.1.1 Rationale
 
@@ -176,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 #### 4.1.3. Design Consideration
 
 ### **4.2 Appointment Manager**
-(Contributed by Huiling & Reuben)
+(Contributed by Shi Huiling & Reuben Teng)
 
 #### 4.1.1 Rationale
 
@@ -185,7 +180,7 @@ This section describes some noteworthy details on how certain features are imple
 #### 4.1.3. Design Consideration
 
 ### **4.2 Calendar Manager**
-(Contributed by Jianhan & Kaitlyn)
+(Contributed by Li Jianhan & Kaitlyn Ng)
 
 #### 4.1.1 Rationale
 
