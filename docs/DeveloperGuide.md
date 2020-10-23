@@ -53,12 +53,14 @@ Each of the four components,
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
 ![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
 <img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
+Figure 3. Structure of the UI component<br><br>
 
 The sections below give more details of each component.
 
@@ -68,8 +70,8 @@ The sections below give more details of each component.
 This segment will explain the structure and responsibilities of the `UI` component.
 
 #### 3.2.1. Structure
-![Structure of the UI Component](images/UiClassDiagram.png)
-Figure 3. Structure of the UI component
+![Structure of the UI Component](images/UiClassDiagram.png)<br>
+Figure 4. Structure of the UI componentr
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -94,7 +96,8 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
+![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
+Figure 5. Structure of the Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -107,14 +110,16 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
-![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
+Figure 6. Delete Appointment Sequence Diagram
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### 3.4. Model component
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/ModelClassDiagram.png)<br>
+Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -134,7 +139,8 @@ The `Model`,
 
 ### 3.5. Storage component
 
-![Structure of the Storage Component](images/StorageClassDiagram.png)
+![Structure of the Storage Component](images/StorageClassDiagram.png)<br>
+Figure 8. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -183,9 +189,9 @@ When a user enters a valid command (Let's say the `addpatient` command), the par
 and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
 the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
-The following diagram shows what happens when a user enters an addpatient command.
-![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
-Figure {} Workflow of an addpatient command<br>
+The following diagram shows what happens when a user enters an `addpatient` command.
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)<br>
+Figure 9. Workflow of an addpatient command
 
 The following table shows the commands related to managing a patient's details.<br>
 
@@ -220,10 +226,10 @@ Baymax allows the user to manage appointments using a built-in calendar. Baymax 
 
 #### 4.1.1 Rationale
 
-The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist to avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
 
 #### 4.1.2. Current Implementation
-The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
 
 The following table shows the commands related to managing the appointment calendar:
 
