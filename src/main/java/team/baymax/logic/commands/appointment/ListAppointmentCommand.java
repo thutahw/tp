@@ -13,7 +13,7 @@ import team.baymax.model.Model;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "listAppt";
+    public static final String COMMAND_WORD = "listappt";
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments";
 

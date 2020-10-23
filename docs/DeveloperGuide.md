@@ -6,39 +6,44 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **1. Introduction**
 
-## **Setting up, getting started**
+Baymax is a desktop appointment manager made for clinic receptionists. It focuses on the Command Line Interface (CLI) while providing users with a simple and intuitive Graphical User Interface (GUI). Thus, the main interaction with Baymax will be done through user text-based commands.
+
+Baymax allows receptionists to keep track of patients and appointments in a single, integrated platform.
+
+The purpose of this Developer Guide is to help you understand the design and implemetation of Baymax, so that you can become a contributor to this project as well.
+
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **3. Design**
 
-### Architecture
+In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+### 3.1. Architecture
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
+<img src="images/ArchitectureDiagram.png" width="450" />
+Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-
-The rest of the App consists of four components.
-
-* [**`UI`**](#ui-component): Handles the UI of the App.
-* [**`Logic`**](#logic-component): Executes commands.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+| Component | Description
+| --------- | ------------------------------------------
+| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br>2. At shut down: Shuts down the components and cleanup resources where necessary.
+| `Commons` | Represents a collection of classes used by multiple other components. <br><br>It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
+| `UI`      | Handles the UI of the App.
+| `Logic`   | Executes commands.
+| `Model`   | Holds the data of the App in memory.
+| `Storage` | Reads data from, and writes data to, the hard disk.
 
 Each of the four components,
 
@@ -51,29 +56,43 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2. UI component
+(Contributed by Li Jianhan)
 
+This segment will explain the structure and responsibilities of the `UI` component.
+
+#### 3.2.1. Structure
 ![Structure of the UI Component](images/UiClassDiagram.png)
+Figure 3. Structure of the UI component
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `Page` is an abstract class that represents a page corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The following classes inherit from the `Page` abstract class:
+- Dashboard
+- PatientInfoPage
+- AppointmentInfoPage
+- CalendarPage
+- InfoPage
+
+#### 3.2.2. Responsibilities
 
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
-### Logic component
+### 3.3. Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
@@ -86,42 +105,68 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Model component
+### 3.4. Model component
 
+This segment will explaint the structure and responsibilities of the Model component.
+
+#### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model`component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
+Each type of data is handled by a separate `ListManager` (to give `PatientManager` and `AppointmentManager`), and a 
+`ModelManager` facade class exposes the methods 
+that enable other components to perform getting, setting, searching and editing functions on the different 
+types of data.
 
-* stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+The `Model` component also contains
 
+* a `UserPref` object that represents the user’s preferences.
+* unmodifiable `ObservableList` objects for each type of data that can be 'observed' e.g. the UI can be bound to this 
+  list so that the UI automatically updates when the data in the list change. 
+  
+The `Model` component does not depend on any of the other three components.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+#### 3.4.2. Responsibilities
 
-</div>
+The `Model` component,
 
+* Stores different types of data in memory when Baymax is running
+* Represents data in `ObservableList` to automatically update the GUI when there is a change
 
-### Storage component
+### 3.5. Storage component
 
+This segment will explain the structure and responsibilities of the Storage component.
+
+#### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+The `Storage` component contains interfaces for `Patient` data (`PatientManagerStorage`) and 
+`Appointment` data (`AppointmentManagerStorage`) which defines methods for reading and saving the `Model` components
+to memory. This allows for multiple different implementations of storage to store the data in different formats, e.g. 
+json, csv, plaintext. A facade class `StorageManager` is used to expose these reading and writing methods.
+
+The `JsonPatientManagerStorage` and `JsonAppointmentManagerStorage` are specific implementations of 
+`PatientManagerStorage` and `AppointmentManagerStorage` that saves the `Patient` and `Appointment` data to 
+json files. The path to these files are obtained from the `UserPref` object. 
+
+#### 3.5.2. Responsibilities
+
 The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save `UserPref` objects in json format.
+* can parse a json file in the correct format to get a `UserPref` object.  
+* can save `Patient` and `Appointment` data in json format. 
+* can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
 ### Common classes
 
@@ -129,93 +174,169 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **4. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### **4.1 List Managers**
+(Contributed by Kaitlyn Ng)
 
-#### Proposed Implementation
+Allows the Baymax application to handle lists of the different types of data in the application, namely `Patient` and 
+`Appointment`. `ListManager` defines methods for Create, Read, Update and Delete operations that are common to all the
+different types of data and needed to manage the lists of data effectively. 
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### 4.1.1 Rationale
+The separation of `Patient` and `Appoinment` data into separate ListManagers allow a common architecture to be employed
+for each data type. This allows the application to easily manage the lists of data in the application efficiently, and 
+allows for other types of data to be added easily to extend the existing application. 
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### 4.1.2. Current Implementation
+Each `ListManager`contains a `UniqueList` which is a generic class that stores all the data items in a list and
+and maintains the uniqueness of the data objects in the list while doing so, i.e. no two data items can be the same in
+a `UniqueList`. The `UniqueList` class is a generic class that can only contain data items that extend the 
+`UniqueListElement`  interface, that ensures data items contains necessary comparison functions for `UniqueList` to
+maintain uniqueness. 
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Each ListManager implements the `ReadOnlyListManager` interface. This interfance 
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+#### 4.1.3. Design Consideration
+**Aspect: Separation into distinct list managers for each type of data.**
 
-Step 2. The user executes `delete 5` command to delete the 5th patient in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Option 1: Split into separate lists (Current)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+* Pros: Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
+often require interaction between them.
+  
+* Allows for more straightforward implementations in other components by ensuring each data type is handled with the
+class architecture.
+  
+* Cons: A lot of boilerplate code for implementing the list managers as separate classes but with similar 
+  functionalities
+  
+Option 2: Store all the information in a single `DataManager` 
 
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+* Pros: Easier to implement, as only one manager class is needed.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+* Cons: Violates the Separation of Concerns principle, making it difficult to implement future extensions without
+significant change to other components.
+  
+Reason for choosing Option 1:
+Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
+future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
+independent development for each data type, limiting the amount of change needed to other components when there are
+changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
+to unnecessary dependencies between data types.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Aspect: Extract common CRUD operations with a generic class**
 
-</div>
+Option 1: Extract common CRUD functionalities of the `ListManager`s into a
+single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top
+of the generic CRUD operations from the class. 
 
-Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+* Pros: Reduces amount of repeated code as all the lists of data essentially perform the same functions.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+* Cons: Generics can be harder to comprehend, thus making it harder for other programmers to understand and
+use the component. 
+  
+Option 2; Do not extract any common functionalities
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+* Pros: Easier for programmers to work on each code related to each data item completely separately, and implement 
+methods specific to the data item in a more straightforward manner.
 
-</div>
+* Cons: Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.
 
-The following sequence diagram shows how the undo operation works:
+Reason for choosing Option 1:
+Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
+which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+### **4.1 Patient Manager**
+(Contributed by Thuta Htun Wai)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
+a single patient's information can be managed at one time. A user can:
+* Add a new patient
+* Delete an existing patient
+* Edit a patient's details
+* List all the patients in the system
+* Find a patient by using a keyword from his/her name
+* List all the appointments of a specific patient
+#### 4.1.1 Rationale
+The Patient Manager feature is included in Baymax because it is one of the core features of the application.
+If the user wants to keep track of the patient's information, he/she has to record the details
+of the patient and be able to look up a patient in the system easily.
+#### 4.1.2. Current Implementation
+The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
-</div>
+When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
+and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
+the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The following diagram shows what happens when a user enters an addpatient command.
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
+Figure {} Workflow of an addpatient command<br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+The following table shows the commands related to managing a patient's details.<br>
 
-</div>
+| Command | Purpose
+| --------- | ------------------------------------------
+| `addpatient` | Adds a patient to the appointment book.
+| `deletepatient` | Deletes a patient.
+| `listpatient` | Lists all patients.
+| `editpatient` | Edits a patient's details.
+| `findpatient` | Finds a patient with the given search string (name).
+| `listpatientappts` | Lists all the appointments of a specific patient.
+#### 4.1.3. Design Consideration
+For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
+making the user easily understand the commands. <br>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
+ `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
+ the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
+### **4.2 Appointment Manager**
+(Contributed by Shi Huiling & Reuben Teng)
 
-![UndoRedoState4](images/UndoRedoState4.png)
+#### 4.1.1 Rationale
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+#### 4.1.2. Current Implementation
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### 4.1.3. Design Consideration
 
-The following activity diagram summarizes what happens when a user executes a new command:
+### **4.2 Calendar Feature**
+(Contributed by Li Jianhan & Kaitlyn Ng)
 
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
 
-#### Design consideration:
+#### 4.1.1 Rationale
 
-##### Aspect: How undo & redo executes
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+#### 4.1.2. Current Implementation
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The following table shows the commands related to managing the appointment calendar:
 
-_{more aspects and alternatives to be added}_
+ Command    | Purpose
+| --------- | ------------------------------------------
+| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
+| `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
+| `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
-### \[Proposed\] Data archiving
+#### 4.1.3. Design Consideration
+Aspect: the necessity of a day view
 
-_{Explain here how the data archiving feature will be implemented}_
+Option 1: Necessary (Current)
+- Pros: User is able to see all appointments on a particular day, in chronological order. This gives the receptionist better clarity of which other appointments are booked on that day. Thus, it will lead to better user experience.
+- Cons: More difficult to implement as another view needs to be implemented which adds to the complexity of the application.
+
+Option 2: Not necessary
+- Pros: User can simply find appointments by date to list out all appointments on that day. This is much easier to implement, and also means less commands to remember since it can be grouped under a find command.
+- Cons: It is less intuitive and requires longer commands.
+
+Reason for choosing Option 1:
+- Having a day view in the calendar allows the user to zoom in to a particular day, and hence makes the calendar more complete.
+- Having a chronological view of the appointments in a day allows the receptionist to spot timing collisions, and hence schedule appointments more efficiently.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -236,11 +357,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* need to manage significant number of patients and appointments
-* want to keep track of patients and appointments efficiently
-* want to look up patients and/or appointments easily by using matching words
-* want to look at current and past appointments through a calendar view
-* prefer desktop apps over other types
+* needs to manage significant number of patients and appointments
+* wants to keep track of patients and appointments efficiently
+* wants to look up patients and/or appointments easily by using matching words
+* wants to look at current and past appointments through a calendar view
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps

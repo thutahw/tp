@@ -14,6 +14,7 @@ import team.baymax.model.listmanagers.PatientManager;
 import team.baymax.model.listmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.UserPrefs;
+import team.baymax.storage.appointment.JsonAppointmentManagerStorage;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
 import team.baymax.testutil.TypicalPatients;
@@ -27,9 +28,11 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonPatientManagerStorage addressBookStorage = new JsonPatientManagerStorage(getTempFilePath("ab"));
+        JsonPatientManagerStorage patientManagerStorage = new JsonPatientManagerStorage(getTempFilePath("pm"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonAppointmentManagerStorage appointmentManagerStorage =
+                new JsonAppointmentManagerStorage(getTempFilePath("am"));
+        storageManager = new StorageManager(patientManagerStorage, appointmentManagerStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

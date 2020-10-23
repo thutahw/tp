@@ -1,54 +1,42 @@
 @startuml
-!include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+hide empty members
+skinparam linetype ortho
 
-Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
-Interface Model <<Interface>>
-Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
-Class Model
-Class ModelManager
-Class UserPrefs
-Class ReadOnlyUserPrefs
+interface ReadOnlyListManager
+interface Model
+interface UniqueListElement
 
-Package Patient {
-Class Patient
-Class Gender
-Class Name
-Class Phone
-Class UniquePatientList
+class UniqueList<? extends UniqueListElement>
+class PatientManager {
+    UniqueList<Patient>
+}
+class AppointmentManager {
+    UniqueList<Appointment>
+}
+class Description {
+    String value
 }
 
-Package Tag {
-Class Tag
+enum AppointmentStatus {
+    DONE, MISSED, UPCOMING
 }
-}
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+Model <|.. ModelManager
+UserPrefs <.. ModelManager
+Patient <-r- ModelManager: filtered list
+Appointment <-l- ModelManager: filtered list
+Patient <-- Appointment: < has a list of
+Appointment <-- Patient: < contains
+Appointment -- Description
+Appointment -- AppointmentStatus
 
-AddressBook .up.|> ReadOnlyAddressBook
+ReadOnlyListManager <|.. PatientManager
+PatientManager <.. ModelManager
 
-ModelManager .up.|> Model
-Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
-ModelManager o-left-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+UniqueListElement <|.. Patient
+UniqueListElement <|.. Appointment
 
-AddressBook *--> "1" UniquePatientList
-UniquePatientList o--> "*" Patient
-Patient *--> Name
-Patient *--> Phone
-Patient *--> Gender
-Patient *--> "*" Tag
+ReadOnlyListManager <|.. AppointmentManager
+AppointmentManager <.. ModelManager
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager -->"1" Patient : filtered list
 @enduml

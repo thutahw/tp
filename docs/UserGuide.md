@@ -1,7 +1,21 @@
 # Baymax - User Guide
 
-* Table of Contents
-{:toc}
+## Table of Contents
+1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
+3. [Features](#3-features)<br>
+    [Viewing Help:](#viewing-help--help)<br>
+    3.1 [Managing Patient Information](#31-managing-patient-information)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.1 [Add a new patient: `addpatient`](#311-add-a-new-patient-addpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 [List all patients: `listpatient`](#312-list-all-patients-listpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3 [Delete a patient profile: `deletepatient`](#313-delete-a-patient-profile-deletepatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4 [Edit a patient profile: `editpatient`](#314-edit-a-patient-profile-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.5 [Find a patient: `find`](#315-find-a-patient-find)<br>
+    3.2 [Managing Appointments](#32-managing-appointments)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 [Add a new appointment: `addappt`](#321-add-a-new-appointment-addappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2 [List all appointments: `listappt`](#322-list-all-appointments-listappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3 [Edit an appointment: `editappt`](#323-edit-an-appointment-editappt)<br>
+    3.3 [Utilizing the Calendar](#33-utilizing-the-calendar)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -17,7 +31,7 @@ neat features that makes appointment scheduling faster and less of a hassle. The
 helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the
 ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
-## 2. Quick start
+## 2. Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -43,7 +57,7 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `addPatient name/NAME`, `NAME` is a parameter which can be used as `addPatient name/Alice Tan`.
+  e.g. in `addpatient name/NAME`, `NAME` is a parameter which can be used as `addpatient name/Alice Tan`.
 
 * Items in square brackets are optional.<br>
   e.g `name/NAME [remark/REMARK]` can be used as `name/Alice Tan remark/No drug allergy` or as `name/Alice Tan`.
@@ -58,14 +72,24 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a link that brings the user to the help page.
 
-Format: `help`
+**Format:**<br>
+`help`
+
+**Example:**<br>
+1. Type `help` into the command box.
+2. Press `Enter` on your keyboard <br>
+
+**Outcome:**<br>
+1. A link directing the user to the help page will be displayed as shown below.<br>
+
+![help](images/help.png)
 
 ### 3.1 Managing Patient Information
 
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient and list
-all the patients in the system.
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a
+patient's details, find a patient by the name and list all the patients in the system.
 
 #### 3.1.1 Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
@@ -74,58 +98,154 @@ Before we examine the format of this command, let us take a look at what the par
 
 Parameter Name | Description
 ---------------|------------
+NRIC          | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them.
 NAME          | The name of the patient. It must consist solely of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
 CONTACT       | The hand phone number which the patient wishes to be contacted by. It must consist solely of numbers. E.g. 91710012
 GENDER        | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’.
 
 **Format:**<br>
-`addpatient name/NAME contact/CONTACT gender/GENDER`
+`addpatient nric/NRIC name/NAME contact/CONTACT gender/GENDER`
 
 **Example:**<br>
-1. Type `addpatient name/Alice contact/91710012 gender/F` into the command box.
+1. Type `addpatient nric/S9772234F name/Jason Tan contact/98765432 gender/M` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**<br>
-If the command is valid (i.e. valid fields are entered):
-1. In the dashboard, a success message will be displayed. <br>
-   e.g Alice has been added.
+If the command is valid (i.e. the user keyed in the valid fields):
+1. A success message will be displayed. <br>
 
-[insert screenshot]
+![addpatient](images/addpatient.png)
 
-#### 3.1.2 List all patients: `list`
+#### 3.1.2 List all patients: `listpatient`
 You can use this command to list all the patients in the system.
 
 **Format:**<br>
-`list`
+`listpatient`
 
 **Example:**<br>
-1. Type `list` into the command box.
+1. Type `listpatient` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**<br>
-1. All the patients in the system will be listed in the dashboard.
+1. All the patients in the system will be listed as shown below.
 
-[insert screenshot]
+![listpatient](images/listpatient.png)
 
-#### 3.1.3 Delete a patient profile: `delete`
-You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `list` command
-to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent
+#### 3.1.3 Delete a patient profile: `deletepatient`
+You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `listpatient` command
+or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent
 accidental deletes.
 
 **Format:**<br>
-`delete id/PATIENT_ID`
+`deletepatient PATIENT_ID`
 
 **Example:**<br>
-1. Type `delete 2` into the command box.
+1. Type `deletepatient 4` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+If the _PATIENT_ID_ (i.e 4) is valid:
+1. A success message will be displayed as shown below.
+2. The patient at index 4 in the recent list will be deleted.
+
+![deletepatient](images/deletepatient.png)
+
+#### 3.1.4 Edit a patient profile: `editpatient`
+You can use this command to edit a patient’s profile. However, you will need to use the `listpatient` command
+or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be edited, and prevent
+accidental edits.
+
+**Format:**<br>
+`editpatient PATIENT_ID t/TAG`
+
+**Example:**<br>
+1. Type `editpatient 2 t/Asthmatic` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**<br>
 If the _PATIENT_ID_ (i.e 2) is valid:
-1. A success message will be displayed in the dashboard.
-2. The patient at index 2 in the list will be deleted.
+1. A success message will be displayed as shown below.
+2. The tag of the patient at index 2 in the recent list will be edited.
 
-[insert screenshot]
+![editpatient](images/editpatient.png)
 
+#### 3.1.5 Find a patient: `find`
+You can use this command to find a patient’s profile by entering a part of his name. The search string for name is not case-sensitive.
+
+**Format:**<br>
+`find NAME`
+
+**Example:**<br>
+1. Type `find Alex` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+1. A success message will be displayed as shown below.
+
+![findpatient](images/findpatient.png)
+
+### 3.2 Managing Appointments
+This feature allows you to manage the appointments of every single patient. You can
+add an appointment, edit an appointment and list all the appointments in the system.
+
+#### 3.2.1 Add a new appointment: `addappt`
+You can use this command to add a new appointment for a patient.
+
+Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
+
+Parameter Name | Description
+---------------|------------
+ID            | The index of the patient.
+DATETIME      | The date followed by the time of the appointment.
+DESCRIPTION   | The description of the appointment.
+TAG           | The tag related to the appointment.
+
+**Format:**<br>
+`addappt id/ID dt/DATETIME desc/DESCRIPTION t/TAG`
+
+**Example:**<br>
+1. Type `addappt id/1 dt/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+If the command is valid (i.e. the user keyed in the valid fields):
+1. A success message will be displayed as shown below. <br>
+
+![addappt](images/addappt.png)
+
+#### 3.2.2 List all appointments: `listappt`
+You can use this command to list all the appointments in the system.
+
+**Format:**<br>
+`listappt`
+
+**Example:**<br>
+1. Type `listappt` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+1. All the appointments in the system will be listed as shown below.
+
+![listappt](images/listappt.png)
+
+#### 3.2.3 Edit an appointment: `editappt`
+You can use this command to edit an appointment. However, you will need to use the `listappt` command
+to find out the patient’s ID first. This extra step helps you to confirm the appointment to be edited, and prevent
+accidental edits.
+
+**Format:**<br>
+`editappt INDEX dt/DATETIME`
+
+**Example:**<br>
+1. Type `editappt 1 dt/12-10-2020 12:00` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+If the INDEX (i.e 1) is valid:
+1. A success message will be displayed as shown below.
+2. The `DATETIME` of the appointment at index 1 in the recent list will be edited.
+
+![editappt](images/editappt.png)
 
 ### 3.3 Utilizing the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
