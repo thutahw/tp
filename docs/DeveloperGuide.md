@@ -12,7 +12,7 @@ Baymax is a desktop appointment manager made for clinic receptionists. It focuse
 
 Baymax allows receptionists to keep track of patients and appointments in a single, integrated platform.
 
-The purpose of this Developer Guide is to help you understand the design and implemetation of Baymax, so that you can become a contributor to this project as well.
+The purpose of this Developer Guide is to help you understand the design and implementation of Baymax, so that you can become a contributor to this project as well.
 
 ## **2. Setting up, getting started**
 
@@ -101,7 +101,7 @@ The `UI` component,
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a patient).
+1. The command execution can affect the `Model` (e.g. adding a patient), which is executed by the `ModelManager` which calls `PatientManager` and `AppointmentManager`.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -192,12 +192,12 @@ allows for other types of data to be added easily to extend the existing applica
 
 #### 4.1.2. Current Implementation
 Each `ListManager`contains a `UniqueList` which is a generic class that stores all the data items in a list and
-and maintains the uniqueness of the data objects in the list while doing so, i.e. no two data items can be the same in
+ maintains the uniqueness of the data objects in the list while doing so, i.e. no two data items can be the same in
 a `UniqueList`. The `UniqueList` class is a generic class that can only contain data items that extend the 
 `UniqueListElement`  interface, that ensures data items contains necessary comparison functions for `UniqueList` to
 maintain uniqueness. 
 
-Each ListManager implements the `ReadOnlyListManager` interface. This interfance 
+Each ListManager implements the `ReadOnlyListManager` interface. This interface has the `getReadOnlyList()` method which returns an `ObservableList` of data items, which is monitored by and used to automatically update the GUI.
 
 
 
@@ -206,23 +206,32 @@ Each ListManager implements the `ReadOnlyListManager` interface. This interfance
 
 Option 1: Split into separate lists (Current)
 
-* Pros: Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
+*Pros:*
+
+* Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
 often require interaction between them.
   
 * Allows for more straightforward implementations in other components by ensuring each data type is handled with the
 class architecture.
+
+*Cons:*
   
-* Cons: A lot of boilerplate code for implementing the list managers as separate classes but with similar 
+* A lot of boilerplate code for implementing the list managers as separate classes but with similar 
   functionalities
   
 Option 2: Store all the information in a single `DataManager` 
 
-* Pros: Easier to implement, as only one manager class is needed.
+*Pros:*
 
-* Cons: Violates the Separation of Concerns principle, making it difficult to implement future extensions without
+* Easier to implement, as only one manager class is needed.
+
+*Cons:*
+
+* Violates the Separation of Concerns principle, making it difficult to implement future extensions without
 significant change to other components.
   
 Reason for choosing Option 1:
+
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
 independent development for each data type, limiting the amount of change needed to other components when there are
@@ -251,7 +260,8 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-### **4.1 Patient Manager**
+----------------------------------------------------------------------------------------
+### **4.2 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
@@ -262,11 +272,12 @@ a single patient's information can be managed at one time. A user can:
 * List all the patients in the system
 * Find a patient by using a keyword from his/her name
 * List all the appointments of a specific patient
-#### 4.1.1 Rationale
+
+#### 4.2.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
 of the patient and be able to look up a patient in the system easily.
-#### 4.1.2. Current Implementation
+#### 4.2.2. Current Implementation
 The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
 When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
@@ -287,32 +298,61 @@ The following table shows the commands related to managing a patient's details.<
 | `editpatient` | Edits a patient's details.
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
-#### 4.1.3. Design Consideration
+#### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
 
 As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
  `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
-### **4.2 Appointment Manager**
-(Contributed by Shi Huiling & Reuben Teng)
+ 
+-----------------------------------------------------------------------------------------
+### **4.3 Appointment Manager**
+(Contributed by Shi Hui Ling & Reuben Teng)
 
-#### 4.1.1 Rationale
+Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
 
-#### 4.1.2. Current Implementation
+`AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
+ 1. Adding an appointment
+ 2. Editing an appointment
+ 3. Deleting an appointment
+ 4. Finding a specific appointment by `Patient` and `DateTime`
+ 5. Sorting the list of appointments
+ 
+These methods are used by the `AppointmentCommand` classes to execute their logic.
 
-#### 4.1.3. Design Consideration
+#### 4.3.1 Rationale
 
-### **4.2 Calendar Feature**
+The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+
+#### 4.3.2. Current Implementation
+
+Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+
+#### 4.3.3. Design Consideration
+
+**Aspect 1: `deleteappt` Command** 
+ 
+For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+
+Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
+
+**Aspect 2: `nric` field**
+
+To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
+
+---------------------------------------------------------------------------------
+
+### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
 Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
 
-#### 4.1.1 Rationale
+#### 4.4.1 Rationale
 
 The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
 
-#### 4.1.2. Current Implementation
+#### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
 
 The following table shows the commands related to managing the appointment calendar:
@@ -323,7 +363,7 @@ The following table shows the commands related to managing the appointment calen
 | `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
 | `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
-#### 4.1.3. Design Consideration
+#### 4.4.3. Design Consideration
 Aspect: the necessity of a day view
 
 Option 1: Necessary (Current)
