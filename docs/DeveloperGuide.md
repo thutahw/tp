@@ -37,8 +37,8 @@ Figure 1. Architecture Diagram of Baymax
 The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
 
 | Component | Description
-| --------- | ------------------------------------------ 
-| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br><br>2. At shut down: Shuts down the components and cleanup resources where necessary.                    
+| --------- | ------------------------------------------
+| `Main`    | Has two classes called Main and MainApp.<br><br> It is responsible for: <br>1. At App launch: Initializes the components in the correct sequence, and connects them up with each other. <br>2. At shut down: Shuts down the components and cleanup resources where necessary.
 | `Commons` | Represents a collection of classes used by multiple other components. <br><br>It also contains the LogCenter component. The LogCenter component plays an important role at the architectural level and is used by many classes to write log messages to the App’s log file.
 | `UI`      | Handles the UI of the App.
 | `Logic`   | Executes commands.
@@ -56,9 +56,9 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
 
 The sections below give more details of each component.
 
@@ -74,7 +74,7 @@ Figure 3. Structure of the UI component
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. 
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
 The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
@@ -105,9 +105,9 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -164,12 +164,46 @@ This section describes some noteworthy details on how certain features are imple
 ### **4.1 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
+Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
+a single patient's information can be managed at one time. A user can:
+* Add a new patient
+* Delete an existing patient
+* Edit a patient's details
+* List all the patients in the system
+* Find a patient by using a keyword from his/her name
+* List all the appointments of a specific patient
 #### 4.1.1 Rationale
-
+The Patient Manager feature is included in Baymax because it is one of the core features of the application.
+If the user wants to keep track of the patient's information, he/she has to record the details
+of the patient and be able to look up a patient in the system easily.
 #### 4.1.2. Current Implementation
+The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
+When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
+and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
+the new patient is added into the appointment book and a success message is printed in the results display box. <br>
+
+The following diagram shows what happens when a user enters an addpatient command.
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
+Figure {} Workflow of an addpatient command<br>
+
+The following table shows the commands related to managing a patient's details.<br>
+
+| Command | Purpose
+| --------- | ------------------------------------------
+| `addpatient` | Adds a patient to the appointment book.
+| `deletepatient` | Deletes a patient.
+| `listpatient` | Lists all patients.
+| `editpatient` | Edits a patient's details.
+| `findpatient` | Finds a patient with the given search string (name).
+| `listpatientappts` | Lists all the appointments of a specific patient.
 #### 4.1.3. Design Consideration
+For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
+making the user easily understand the commands. <br>
 
+As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
+ `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
+ the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
 ### **4.2 Appointment Manager**
 (Contributed by Shi Huiling & Reuben Teng)
 
@@ -179,14 +213,41 @@ This section describes some noteworthy details on how certain features are imple
 
 #### 4.1.3. Design Consideration
 
-### **4.2 Calendar Manager**
+### **4.2 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
+
+Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
 
 #### 4.1.1 Rationale
 
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
+
 #### 4.1.2. Current Implementation
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
+
+The following table shows the commands related to managing the appointment calendar:
+
+ Command    | Purpose
+| --------- | ------------------------------------------
+| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
+| `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
+| `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
 #### 4.1.3. Design Consideration
+Aspect: the necessity of a day view
+
+Option 1: Necessary (Current)
+- Pros: User is able to see all appointments on a particular day, in chronological order. This gives the receptionist better clarity of which other appointments are booked on that day. Thus, it will lead to better user experience.
+- Cons: More difficult to implement as another view needs to be implemented which adds to the complexity of the application.
+
+Option 2: Not necessary
+- Pros: User can simply find appointments by date to list out all appointments on that day. This is much easier to implement, and also means less commands to remember since it can be grouped under a find command.
+- Cons: It is less intuitive and requires longer commands.
+
+Reason for choosing Option 1:
+- Having a day view in the calendar allows the user to zoom in to a particular day, and hence makes the calendar more complete.
+- Having a chronological view of the appointments in a day allows the receptionist to spot timing collisions, and hence schedule appointments more efficiently.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -206,11 +267,11 @@ This section describes some noteworthy details on how certain features are imple
 
 **Target user profile**:
 
-* need to manage significant number of patients and appointments
-* want to keep track of patients and appointments efficiently
-* want to look up patients and/or appointments easily by using matching words
-* want to look at current and past appointments through a calendar view
-* prefer desktop apps over other types
+* needs to manage significant number of patients and appointments
+* wants to keep track of patients and appointments efficiently
+* wants to look up patients and/or appointments easily by using matching words
+* wants to look at current and past appointments through a calendar view
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
