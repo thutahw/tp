@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.uniquelist.UniqueList;
@@ -105,10 +106,17 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     }
 
     /**
-     * Returns a patient matching the given nric, if it exists, otherwise th4rows an {@code ElementNotFoundException}
+     * Returns a patient matching the given nric, if it exists, otherwise throws an {@code ElementNotFoundException}
      */
     public Patient getPatientByNric(Nric nric) throws ElementNotFoundException {
         return patients.getByPredicate((patient) -> patient.getNric().equals(nric));
+    }
+
+    /**
+     * Returns the first patient matching the given name, if it exists, otherwise throws an {@code ElementNotFoundException}
+     */
+    public Patient getPatientByName(Name name) throws ElementNotFoundException {
+        return patients.getByPredicate((patient) -> patient.getNric().equals(name));
     }
 
     // util methods

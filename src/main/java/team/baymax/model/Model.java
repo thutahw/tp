@@ -107,13 +107,13 @@ public interface Model {
     //============= AppointmentManager ================
 
     /**
-     * Returns the PatientManager
+     * Returns the AppointmentManager
      * @return
      */
     ReadOnlyListManager<Appointment> getAppointmentManager();
 
     /**
-     * Replaces PatientManager data with the data in {@code patientManager}
+     * Replaces AppointmentManager data with the data in {@code AppointmentManager}
      */
     void setAppointmentManager(ReadOnlyListManager<Appointment> appointmentmanager);
 
