@@ -14,7 +14,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2 Patient Manager](#42-patient-manager)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3 Apointment Manager](#43-appointment-manager)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4 Calendar Feature](#44-calendar-feature)<br>
-[5. Documentation](#5)<br>
+[5. Documentation](#5-documentation)<br>
 [6. Testing](#6-testing)<br>
 [7. Dev Ops](#7-dev-ops)<br>
 [Appendix A: Product Scope](#appendix-a-product-scope)<br>
@@ -46,7 +46,7 @@ In this section, you will learn about the general design and structure of the Ba
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+<img src="images/ArchitectureDiagram.png" width="450" /><br>
 Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -70,7 +70,7 @@ Each of the four components,
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
-![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+![Class Diagram of the Logic Component](images/LogicClassDiagram.png)<br>
 Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
@@ -208,6 +208,7 @@ and the arguments and then creates an `AddPatientCommand` object. When the `AddP
 the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
 The following diagram shows what happens when a user enters an `addpatient` command.
+
 ![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)<br>
 Figure 9. Workflow of an addpatient command
 
@@ -221,6 +222,7 @@ The following table shows the commands related to managing a patient's details.<
 | `editpatient` | Edits a patient's details.
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
+
 #### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
@@ -251,7 +253,7 @@ The `CalendarManager` class in the `Model` component contains a `AppointmentCale
 
 The following table shows the commands related to managing the appointment calendar:
 
- Command    | Purpose
+|Command    | Purpose
 | --------- | ------------------------------------------
 | `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
 | `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
@@ -275,18 +277,19 @@ Reason for choosing Option 1:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **5. Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation**
 
 * [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **6. Testing**
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
 ## **7. Dev Ops**
+* [DevOps guide](DevOps.md)
+
 
 ## **Appendix A: Product scope**
 
