@@ -114,33 +114,59 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### 3.4. Model component
 
+This segment will explaint the structure and responsibilities of the Model component.
+
+#### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model`component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
+Each type of data is handled by a separate `ListManager` (to give `PatientManager` and `AppointmentManager`), and a 
+`ModelManager` facade class exposes the methods 
+that enable other components to perform getting, setting, searching and editing functions on the different 
+types of data.
 
-* stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+The `Model` component also contains
 
+* a `UserPref` object that represents the user’s preferences.
+* unmodifiable `ObservableList` objects for each type of data that can be 'observed' e.g. the UI can be bound to this 
+  list so that the UI automatically updates when the data in the list change. 
+  
+The `Model` component does not depend on any of the other three components.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+#### 3.4.2. Responsibilities
 
-</div>
+The `Model` component,
 
+* Stores different types of data in memory when Baymax is running
+* Represents data in `ObservableList` to automatically update the GUI when there is a change
 
 ### 3.5. Storage component
 
+This segment will explain the structure and responsibilities of the Storage component.
+
+#### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+The `Storage` component contains interfaces for `Patient` data (`PatientManagerStorage`) and 
+`Appointment` data (`AppointmentManagerStorage`) which defines methods for reading and saving the `Model` components
+to memory. This allows for multiple different implementations of storage to store the data in different formats, e.g. 
+json, csv, plaintext. A facade class `StorageManager` is used to expose these reading and writing methods.
+
+The `JsonPatientManagerStorage` and `JsonAppointmentManagerStorage` are specific implementations of 
+`PatientManagerStorage` and `AppointmentManagerStorage` that saves the `Patient` and `Appointment` data to 
+json files. The path to these files are obtained from the `UserPref` object. 
+
+#### 3.5.2. Responsibilities
+
 The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save `UserPref` objects in json format.
+* can parse a json file in the correct format to get a `UserPref` object.  
+* can save `Patient` and `Appointment` data in json format. 
+* can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
 ### Common classes
 
@@ -155,11 +181,75 @@ This section describes some noteworthy details on how certain features are imple
 ### **4.1 List Managers**
 (Contributed by Kaitlyn Ng)
 
+Allows the Baymax application to handle lists of the different types of data in the application, namely `Patient` and 
+`Appointment`. `ListManager` defines methods for Create, Read, Update and Delete operations that are common to all the
+different types of data and needed to manage the lists of data effectively. 
+
 #### 4.1.1 Rationale
+The separation of `Patient` and `Appoinment` data into separate ListManagers allow a common architecture to be employed
+for each data type. This allows the application to easily manage the lists of data in the application efficiently, and 
+allows for other types of data to be added easily to extend the existing application. 
 
 #### 4.1.2. Current Implementation
+Each `ListManager`contains a `UniqueList` which is a generic class that stores all the data items in a list and
+and maintains the uniqueness of the data objects in the list while doing so, i.e. no two data items can be the same in
+a `UniqueList`. The `UniqueList` class is a generic class that can only contain data items that extend the 
+`UniqueListElement`  interface, that ensures data items contains necessary comparison functions for `UniqueList` to
+maintain uniqueness. 
+
+Each ListManager implements the `ReadOnlyListManager` interface. This interfance 
+
+
 
 #### 4.1.3. Design Consideration
+**Aspect: Separation into distinct list managers for each type of data.**
+
+Option 1: Split into separate lists (Current)
+
+* Pros: Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
+often require interaction between them.
+  
+* Allows for more straightforward implementations in other components by ensuring each data type is handled with the
+class architecture.
+  
+* Cons: A lot of boilerplate code for implementing the list managers as separate classes but with similar 
+  functionalities
+  
+Option 2: Store all the information in a single `DataManager` 
+
+* Pros: Easier to implement, as only one manager class is needed.
+
+* Cons: Violates the Separation of Concerns principle, making it difficult to implement future extensions without
+significant change to other components.
+  
+Reason for choosing Option 1:
+Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
+future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
+independent development for each data type, limiting the amount of change needed to other components when there are
+changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
+to unnecessary dependencies between data types.
+
+**Aspect: Extract common CRUD operations with a generic class**
+
+Option 1: Extract common CRUD functionalities of the `ListManager`s into a
+single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top
+of the generic CRUD operations from the class. 
+
+* Pros: Reduces amount of repeated code as all the lists of data essentially perform the same functions.
+
+* Cons: Generics can be harder to comprehend, thus making it harder for other programmers to understand and
+use the component. 
+  
+Option 2; Do not extract any common functionalities
+
+* Pros: Easier for programmers to work on each code related to each data item completely separately, and implement 
+methods specific to the data item in a more straightforward manner.
+
+* Cons: Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.
+
+Reason for choosing Option 1:
+Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
+which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
 ### **4.1 Patient Manager**
 (Contributed by Thuta Htun Wai)
