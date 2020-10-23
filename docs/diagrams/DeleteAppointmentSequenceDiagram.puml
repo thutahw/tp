@@ -1,0 +1,69 @@
+@startuml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager
+participant ":AppointmentBookParser" as AppointmentBookParser
+participant ":DeleteAppointmentCommandParser" as DeleteAppointmentCommandParser
+participant "d:DeleteAppointmentCommand" as DeleteAppointmentCommand
+participant ":CommandResult" as CommandResult
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model
+end box
+
+[-> LogicManager : execute("deleteappt 1")
+activate LogicManager
+
+LogicManager -> AppointmentBookParser : parseCommand("deleteappt 1")
+activate AppointmentBookParser
+
+create DeleteAppointmentCommandParser
+AppointmentBookParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+
+DeleteAppointmentCommandParser --> AppointmentBookParser
+deactivate DeleteAppointmentCommandParser
+
+AppointmentBookParser -> DeleteAppointmentCommandParser : parse("1")
+activate DeleteAppointmentCommandParser
+
+create DeleteAppointmentCommand
+DeleteAppointmentCommandParser -> DeleteAppointmentCommand
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand --> DeleteAppointmentCommandParser : d
+deactivate DeleteAppointmentCommand
+
+DeleteAppointmentCommandParser --> AppointmentBookParser : d
+deactivate DeleteAppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteAppointmentCommandParser -[hidden]-> AppointmentBookParser
+destroy DeleteAppointmentCommandParser
+
+AppointmentBookParser --> LogicManager : d
+destroy AppointmentBookParser
+
+LogicManager -> DeleteAppointmentCommand : execute()
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand -> Model : deleteAppointment(1)
+activate Model
+
+Model --> DeleteAppointmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteAppointmentCommand
+destroy CommandResult
+
+
+DeleteAppointmentCommand --> LogicManager : result
+destroy DeleteAppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

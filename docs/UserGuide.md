@@ -15,7 +15,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 [Add a new appointment: `addappt`](#321-add-a-new-appointment-addappt)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2 [List all appointments: `listappt`](#322-list-all-appointments-listappt)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3 [Edit an appointment: `editappt`](#323-edit-an-appointment-editappt)<br>
-    3.3 [Utilizing the Calendar](#33-utilizing-the-calendar) 
+    3.3 [Utilizing the Calendar](#33-utilizing-the-calendar)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ Shows a link that brings the user to the help page.
 
 ### 3.1 Managing Patient Information
 
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a 
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a
 patient's details, find a patient by the name and list all the patients in the system.
 
 #### 3.1.1 Add a new patient: `addpatient`
