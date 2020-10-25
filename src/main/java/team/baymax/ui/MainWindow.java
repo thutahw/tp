@@ -5,9 +5,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -20,10 +17,6 @@ import team.baymax.logic.Logic;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.Year;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -41,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SideTabPane sideTabPane;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,28 +43,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private TabPane sideTabPane;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane dashboardTabContentPlaceholder;
-
-    @FXML
-    private StackPane patientTabContentPlaceholder;
-
-    @FXML
-    private StackPane appointmentTabContentPlaceholder;
-
-    @FXML
-    private StackPane calendarTabContentPlaceholder;
-
-    @FXML
-    private StackPane infoTabContentPlaceholder;
+    private StackPane tabPanePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -141,20 +120,10 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        PatientInfoPage patientInfoPage = new PatientInfoPage(logic.getFilteredPatientList());
-        patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
+        sideTabPane = new SideTabPane(logic.getFilteredPatientList(), logic.getFilteredAppointmentList(),
+                logic.getAppointmentCalendar());
 
-        AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage(logic.getFilteredAppointmentList());
-        appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
-
-        CalendarPage calendarPage = new CalendarPage(logic.getAppointmentCalendar());
-        calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
-
-        Dashboard dashboard = new Dashboard();
-        dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());
-
-        InfoPage infoPage = new InfoPage();
-        infoTabContentPlaceholder.getChildren().add(infoPage.getRoot());
+        tabPanePlaceholder.getChildren().add(sideTabPane.getRoot());
     }
 
     /**
@@ -216,9 +185,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            // switches to the concerned tab
-            SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
-            selectionModel.select(commandResult.getTabNumber().getZeroBased());
+            // tab switch
+            sideTabPane.switchTab(commandResult.getTabNumber());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

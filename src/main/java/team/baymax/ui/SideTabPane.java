@@ -1,0 +1,78 @@
+package team.baymax.ui;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import team.baymax.commons.core.index.Index;
+import team.baymax.model.appointment.Appointment;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.patient.Patient;
+
+public class SideTabPane extends UiPart<Region> {
+
+    private static final String FXML = "SideTabPane.fxml";
+
+    @FXML
+    private TabPane sideTabPane;
+
+    @FXML
+    private StackPane dashboardTabContentPlaceholder;
+
+    @FXML
+    private StackPane patientTabContentPlaceholder;
+
+    @FXML
+    private StackPane appointmentTabContentPlaceholder;
+
+    @FXML
+    private StackPane calendarTabContentPlaceholder;
+
+    @FXML
+    private StackPane infoTabContentPlaceholder;
+
+    @FXML
+    private StackPane scheduleTabContentPlaceholder;
+
+    private ObservableList<Patient> patients;
+    private ObservableList<Appointment> appointments;
+    private AppointmentCalendar calendar;
+
+    public SideTabPane(ObservableList<Patient> patients, ObservableList<Appointment> appointments,
+                       AppointmentCalendar calendar) {
+        super(FXML);
+        this.patients = patients;
+        this.appointments = appointments;
+        this.calendar = calendar;
+
+        initialize();
+    }
+
+    private void initialize() {
+        PatientInfoPage patientInfoPage = new PatientInfoPage(patients);
+        patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
+
+        AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage(appointments);
+        appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
+
+        CalendarPage calendarPage = new CalendarPage(calendar);
+        calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
+
+        Dashboard dashboard = new Dashboard();
+        dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());
+
+        InfoPage infoPage = new InfoPage();
+        infoTabContentPlaceholder.getChildren().add(infoPage.getRoot());
+
+        SchedulePage schedulePage = new SchedulePage(appointments);
+        scheduleTabContentPlaceholder.getChildren().add(schedulePage.getRoot());
+    }
+
+    public void switchTab(Index tabNumber) {
+        SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
+        selectionModel.select(tabNumber.getZeroBased());
+    }
+}

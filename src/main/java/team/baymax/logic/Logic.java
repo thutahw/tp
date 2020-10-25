@@ -10,7 +10,6 @@ import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 

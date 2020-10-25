@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import team.baymax.model.appointment.Appointment;
 
 /**
- * An UI component that displays information of an {@code Appointment}.
+ * An UI component that displays information of a scheduled {@code Appointment}.
  */
-public class AppointmentCard extends UiPart<Region> {
+public class ScheduleCard extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentListCard.fxml";
+    private static final String FXML = "ScheduleListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,12 +25,9 @@ public class AppointmentCard extends UiPart<Region> {
      */
 
     private final Appointment appointment;
-    private final int displayedIndex;
 
     @FXML
     private HBox cardPane;
-    @FXML
-    private Label id;
     @FXML
     private Label dateTime;
     @FXML
@@ -43,16 +40,14 @@ public class AppointmentCard extends UiPart<Region> {
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
      */
-    public AppointmentCard(Appointment appointment, int displayedIndex) {
+    public ScheduleCard(Appointment appointment) {
         super(FXML);
         this.appointment = appointment;
-        this.displayedIndex = displayedIndex;
 
         initialize();
     }
 
     private void initialize() {
-        id.setText(displayedIndex + ". ");
         patientName.setText(appointment.getPatient().getName().fullName);
         dateTime.setText(appointment.getDateTime().toString());
         description.setText(appointment.getDescription().toString());
@@ -69,13 +64,12 @@ public class AppointmentCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentCard)) {
+        if (!(other instanceof ScheduleCard)) {
             return false;
         }
 
         // state check
-        AppointmentCard card = (AppointmentCard) other;
-        return id.getText().equals(card.id.getText())
-                && appointment.equals(card.appointment);
+        ScheduleCard card = (ScheduleCard) other;
+        return appointment.equals(card.appointment);
     }
 }

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
 import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 import team.baymax.model.calendar.Year;
 
 public class CalendarManager {

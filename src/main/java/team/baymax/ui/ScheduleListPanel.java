@@ -11,21 +11,21 @@ import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
 
 /**
- * Panel containing the list of appointments.
+ * Panel containing the list of appointments along a timeline.
  */
-public class AppointmentListPanel extends UiPart<Region> {
-    private static final String FXML = "AppointmentListPanel.fxml";
+public class ScheduleListPanel extends UiPart<Region> {
+    private static final String FXML = "ScheduleListPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
     protected final ObservableList<Appointment> appointments;
 
     @FXML
-    protected ListView<Appointment> appointmentListView;
+    protected ListView<Appointment> scheduleListView;
 
     /**
      * Creates a {@code AppointmentListPanel} with the given {@code ObservableList}.
      */
-    public AppointmentListPanel(ObservableList<Appointment> appointments) {
+    public ScheduleListPanel(ObservableList<Appointment> appointments) {
         super(FXML);
         this.appointments = appointments;
 
@@ -33,14 +33,14 @@ public class AppointmentListPanel extends UiPart<Region> {
     }
 
     protected void initialize() {
-        appointmentListView.setItems(appointments);
-        appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
+        scheduleListView.setItems(appointments);
+        scheduleListView.setCellFactory(listView -> new ScheduleListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of an {@code Appointment} using a {@code AppointmentCard}.
+     * Custom {@code ListCell} that displays the graphics of an {@code Appointment} using a {@code ScheduleCard}.
      */
-    class AppointmentListViewCell extends ListCell<Appointment> {
+    class ScheduleListViewCell extends ListCell<Appointment> {
 
         @Override
         protected void updateItem(Appointment appointment, boolean empty) {
@@ -49,7 +49,7 @@ public class AppointmentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AppointmentCard(appointment, getIndex() + 1).getRoot());
+                setGraphic(new ScheduleCard(appointment).getRoot());
             }
         }
     }

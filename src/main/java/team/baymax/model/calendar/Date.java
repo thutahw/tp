@@ -1,13 +1,8 @@
 package team.baymax.model.calendar;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import team.baymax.model.appointment.DateTime;
 
 public class Date {
-
-    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     private final Year year;
     private final Month month;

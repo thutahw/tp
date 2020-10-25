@@ -7,7 +7,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 
 /**
  * A ui for the calendar in the application.
