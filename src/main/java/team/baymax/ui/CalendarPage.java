@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 
 /**
  * A ui for the calendar in the application.
@@ -24,19 +25,25 @@ public class CalendarPage extends UiPart<Region> {
     @FXML
     private Label monthLabel;
 
-    AppointmentCalendar appointmentCalendar;
+    @FXML
+    private Label dayLabel;
+
+    private final AppointmentCalendar appointmentCalendar;
 
     public CalendarPage(AppointmentCalendar appointmentCalendar) {
         super(FXML);
         this.appointmentCalendar = appointmentCalendar;
+
+        initialize();
     }
 
-    @FXML
     private void initialize() {
-        yearLabel.setText(appointmentCalendar.getYear().getText());
-        monthLabel.setText(appointmentCalendar.getMonth().getText());
-
         int day = 1;
+
+        yearLabel.textProperty().bind(appointmentCalendar.getYearProperty());
+        monthLabel.textProperty().bind(appointmentCalendar.getMonthProperty());
+        dayLabel.textProperty().bind(appointmentCalendar.getDayProperty());
+
         while (day <= appointmentCalendar.getMonth().getNumOfDays()) {
             CalendarViewCell cell = new CalendarViewCell(new Day(day));
             cell.setGreen();
@@ -45,7 +52,7 @@ public class CalendarPage extends UiPart<Region> {
         }
     }
 
-    class CalendarViewCell extends Button {
+    static class CalendarViewCell extends Button {
 
         public CalendarViewCell(Day day) {
             super();

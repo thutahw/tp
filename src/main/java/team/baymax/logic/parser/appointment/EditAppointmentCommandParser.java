@@ -13,10 +13,11 @@ import team.baymax.logic.commands.appointment.EditAppointmentDescriptor;
 import team.baymax.logic.commands.patient.EditPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
+import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 
-public class EditAppointmentCommandParser {
+public class EditAppointmentCommandParser implements Parser<EditAppointmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditAppointmentCommand
      * and returns an EditAppointmentCommand object for execution.
@@ -33,7 +34,7 @@ public class EditAppointmentCommandParser {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditPatientCommand.MESSAGE_USAGE), pe);
+                    EditAppointmentCommand.MESSAGE_USAGE), pe);
         }
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();

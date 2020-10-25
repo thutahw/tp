@@ -1,5 +1,6 @@
 package team.baymax.model.calendar;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import team.baymax.model.appointment.DateTime;
@@ -12,14 +13,14 @@ public class Date {
     private final Month month;
     private final Day day;
 
-    private Date(Day day, Month month, Year year) {
+    public Date(Day day, Month month, Year year) {
         this.day = day;
         this.month = month;
         this.year = year;
     }
 
-    public static Date fromCalendar(AppointmentCalendar ac) {
-        return new Date(ac.getDay(), ac.getMonth(), ac.getYear());
+    public static Date fromCalendar(AppointmentCalendar calendar) {
+        return new Date(calendar.getDay(), calendar.getMonth(), calendar.getYear());
     }
 
     public Year getYear() {
@@ -57,5 +58,10 @@ public class Date {
                 && otherDate.getDay().equals(day)
                 && otherDate.getMonth().equals(month)
                 && otherDate.getYear().equals(year);
+    }
+
+    @Override
+    public String toString() {
+        return day.getValue() + "-" + month.getValue() + "-" + year.getValue();
     }
 }

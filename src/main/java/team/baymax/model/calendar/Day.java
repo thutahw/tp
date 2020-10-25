@@ -3,7 +3,10 @@ package team.baymax.model.calendar;
 import static java.util.Objects.requireNonNull;
 
 public class Day {
-    int value;
+
+    public static final String MESSAGE_CONSTRAINTS = "A day must be specificied as an integer between 0 and 31.";
+
+    private final int value;
 
     public Day(int value) {
         requireNonNull(value);

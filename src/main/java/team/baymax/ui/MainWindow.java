@@ -147,8 +147,7 @@ public class MainWindow extends UiPart<Stage> {
         AppointmentInfoPage appointmentInfoPage = new AppointmentInfoPage(logic.getFilteredAppointmentList());
         appointmentTabContentPlaceholder.getChildren().add(appointmentInfoPage.getRoot());
 
-        AppointmentCalendar to_be_replaced = new AppointmentCalendar(new Day(21), new Month(8), new Year(2020));
-        CalendarPage calendarPage = new CalendarPage(to_be_replaced);
+        CalendarPage calendarPage = new CalendarPage(logic.getAppointmentCalendar());
         calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
 
         Dashboard dashboard = new Dashboard();

@@ -4,33 +4,39 @@ import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Calendar;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class AppointmentCalendar {
 
-    private ObjectProperty<Day> day;
-    private ObjectProperty<Month> month;
-    private ObjectProperty<Year> year;
+    protected final SimpleStringProperty dayProperty;
+    protected final SimpleStringProperty monthProperty;
+    protected final SimpleStringProperty yearProperty;
+
 
     public AppointmentCalendar() {
-        Calendar calendar = Calendar.getInstance();
-
-        int defaultYear = calendar.get(Calendar.YEAR);
-        int defaultMonth = calendar.get(Calendar.MONTH);
-        int defaultDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-        this.day = new SimpleObjectProperty<>(new Day(defaultDay));
-        this.month = new SimpleObjectProperty<>(new Month(defaultMonth));
-        this.year = new SimpleObjectProperty<>(new Year(defaultYear));
+        this.dayProperty = new SimpleStringProperty(Integer.toString(getCurrentday()));
+        this.monthProperty = new SimpleStringProperty(Integer.toString(getCurrentMonth()));
+        this.yearProperty = new SimpleStringProperty(Integer.toString(getCurrentYear()));
     }
 
     public AppointmentCalendar(Day day, Month month, Year year) {
         requireAllNonNull(day, month, year);
 
-        this.day = new SimpleObjectProperty<>(day);
-        this.month = new SimpleObjectProperty<>(month);
-        this.year = new SimpleObjectProperty<>(year);
+        this.dayProperty = new SimpleStringProperty(day.getText());
+        this.monthProperty = new SimpleStringProperty(month.getText());
+        this.yearProperty = new SimpleStringProperty(year.getText());
+    }
+
+    public static int getCurrentday() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static int getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH) + 1;
+    }
+
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
 
     public ReadOnlyAppointmentCalendar asUnmodifiableAppointmentCalendar() {
@@ -38,31 +44,39 @@ public class AppointmentCalendar {
     }
 
     public Day getDay() {
-        return day.get();
+        return new Day(Integer.parseInt(dayProperty.get()));
     }
 
     public Month getMonth() {
-        return month.get();
+        return new Month(Integer.parseInt(monthProperty.get()));
     }
 
     public Year getYear() {
-        return year.get();
+        return new Year(Integer.parseInt(yearProperty.get()));
     }
 
-    public void setDay(Day day) {
-        this.day.set(day);
+    public SimpleStringProperty getDayProperty() {
+        return dayProperty;
     }
 
-    public void setMonth(Month month) {
-        this.month.set(month);
+    public SimpleStringProperty getMonthProperty() {
+        return monthProperty;
     }
 
-    public void setYear(Year year) {
-        this.year.set(year);
+    public SimpleStringProperty getYearProperty() {
+        return yearProperty;
     }
 
-    public Date getDate() {
-        return Date.fromCalendar(this);
+    public void setDayProperty(String dayProperty) {
+        this.dayProperty.set(dayProperty);
+    }
+
+    public void setMonthProperty(String monthProperty) {
+        this.monthProperty.set(monthProperty);
+    }
+
+    public void setYearProperty(String yearProperty) {
+        this.yearProperty.set(yearProperty);
     }
 
 }

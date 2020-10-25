@@ -9,7 +9,7 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
 
 /**
- * Lists all patients in the appointment book to the user.
+ * Lists all appointments in the appointment book to the user.
  */
 public class ListAppointmentCommand extends Command {
 

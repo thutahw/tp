@@ -6,9 +6,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Date;
 import team.baymax.model.calendar.Day;
 import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 import team.baymax.model.calendar.Year;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
@@ -160,6 +162,8 @@ public interface Model {
     //=========== CalendarManager ========
 
     CalendarManager getCalendarManager();
+
+    AppointmentCalendar getAppointmentCalendar();
 
     void setDay(Day day);
 

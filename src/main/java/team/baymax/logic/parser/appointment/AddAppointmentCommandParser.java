@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.patient.AddPatientCommand;
+import team.baymax.logic.parser.Parser;
 import team.baymax.model.appointment.DateTime;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
@@ -23,7 +25,7 @@ import team.baymax.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddAppointmentCommand object
  */
-public class AddAppointmentCommandParser {
+public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand
      * and returns an AddAppointmentCommand object for execution.

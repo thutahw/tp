@@ -14,6 +14,7 @@ import team.baymax.model.appointment.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.Day;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
@@ -39,6 +40,15 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static Day parseDayOfMonth(String day) throws ParseException {
+        String trimmedDayOfMonth = day.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
+        if (invalidNumber || !Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Day(Integer.parseInt(trimmedDayOfMonth));
     }
 
     /**

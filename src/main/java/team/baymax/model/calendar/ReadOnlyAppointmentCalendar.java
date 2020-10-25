@@ -2,28 +2,25 @@ package team.baymax.model.calendar;
 
 public class ReadOnlyAppointmentCalendar extends AppointmentCalendar {
 
-    private final Day day;
-    private final Month month;
-    private final Year year;
-
     public ReadOnlyAppointmentCalendar(AppointmentCalendar appointmentCalendar) {
-        day = appointmentCalendar.getDay();
-        month = appointmentCalendar.getMonth();
-        year = appointmentCalendar.getYear();
+        super();
+        dayProperty.set(appointmentCalendar.getDayProperty().get());
+        monthProperty.set(appointmentCalendar.getMonthProperty().get());
+        yearProperty.set(appointmentCalendar.getYearProperty().get());
     }
 
     @Override
-    public void setDay(Day day) {
+    public void setDayProperty(String dayProperty) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setMonth(Month month) {
+    public void setMonthProperty(String monthProperty) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setYear(Year year) {
+    public void setYearProperty(String yearProperty) {
         throw new UnsupportedOperationException();
     }
 }

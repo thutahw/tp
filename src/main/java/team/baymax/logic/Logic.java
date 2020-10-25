@@ -9,6 +9,8 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.calendar.ReadOnlyAppointmentCalendar;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 
@@ -44,6 +46,8 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of appointments */
     ObservableList<Appointment> getFilteredAppointmentList();
+
+    AppointmentCalendar getAppointmentCalendar();
 
     /**
      * Returns the user prefs' patient manager file path.
