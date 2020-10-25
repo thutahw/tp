@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import team.baymax.model.appointment.DateTime;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;

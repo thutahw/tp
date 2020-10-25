@@ -1,11 +1,12 @@
 package team.baymax.logic.commands;
 
-import static team.baymax.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static team.baymax.logic.commands.general.HelpCommand.SHOWING_HELP_MESSAGE;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.general.HelpCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 

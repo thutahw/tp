@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.model.appointment.DateTime;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
@@ -180,13 +180,13 @@ public class ParserUtil {
      * {@code Set<Tag>} containing zero tags.
      */
     public static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(parseTags(tagSet));
     }
 
 }

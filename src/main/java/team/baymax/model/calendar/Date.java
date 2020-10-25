@@ -1,7 +1,5 @@
 package team.baymax.model.calendar;
 
-import team.baymax.model.appointment.DateTime;
-
 public class Date {
 
     private final Year year;
@@ -28,13 +26,6 @@ public class Date {
 
     public Day getDay() {
         return day;
-    }
-
-    public boolean isSameDate(DateTime dateTime) {
-        return dateTime != null
-                && dateTime.getDay() == day.getValue()
-                && dateTime.getMonth() == month.getValue()
-                && dateTime.getYear() == year.getValue();
     }
 
     @Override

@@ -10,9 +10,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.parser.Parser;
-import team.baymax.model.appointment.DateTime;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;

@@ -1,8 +1,10 @@
-package team.baymax.logic.commands;
+package team.baymax.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.Command;
+import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
 import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.PatientManager;

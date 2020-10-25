@@ -18,22 +18,28 @@ public class SideTabPane extends UiPart<Region> {
 
     @FXML
     private TabPane sideTabPane;
-
+    @FXML
+    private Tab dashboardTab;
+    @FXML
+    private Tab calendarTab;
+    @FXML
+    private Tab scheduleTab;
+    @FXML
+    private Tab patientInfoTab;
+    @FXML
+    private Tab appointmentInfoTab;
+    @FXML
+    private Tab infoTab;
     @FXML
     private StackPane dashboardTabContentPlaceholder;
-
     @FXML
     private StackPane patientTabContentPlaceholder;
-
     @FXML
     private StackPane appointmentTabContentPlaceholder;
-
     @FXML
     private StackPane calendarTabContentPlaceholder;
-
     @FXML
     private StackPane infoTabContentPlaceholder;
-
     @FXML
     private StackPane scheduleTabContentPlaceholder;
 
@@ -52,6 +58,9 @@ public class SideTabPane extends UiPart<Region> {
     }
 
     private void initialize() {
+
+        sideTabPane.setMouseTransparent(true);
+
         PatientInfoPage patientInfoPage = new PatientInfoPage(patients);
         patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
 

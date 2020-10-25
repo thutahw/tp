@@ -1,6 +1,8 @@
-package team.baymax.logic.commands;
+package team.baymax.logic.commands.general;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.Command;
+import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
 
 /**

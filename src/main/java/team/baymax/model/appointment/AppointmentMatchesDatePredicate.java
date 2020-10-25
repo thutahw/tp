@@ -14,6 +14,6 @@ public class AppointmentMatchesDatePredicate implements Predicate<Appointment> {
 
     @Override
     public boolean test(Appointment appointment) {
-        return date.isSameDate(appointment.getDateTime());
+        return date.equals(appointment.getDate());
     }
 }

@@ -10,7 +10,8 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.model.appointment.DateTime;
+import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -74,12 +75,19 @@ public class AddAppointmentCommand extends Command {
         }
 
         model.addAppointment(toAdd);
+
+        model.setYear(dateTime.getYear());
+        model.setMonth(dateTime.getMonth());
+        model.setDay(dateTime.getDay());
+
+        model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dateTime.getDate()));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return Index.fromOneBased(4);
+        return Index.fromOneBased(3);
     }
 
     @Override

@@ -29,15 +29,16 @@ public class DayCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        model.setDay(day);
+
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));
-        model.setDay(day);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabNumber());
     }
 
     @Override
     public Index getTabNumber() {
-        return Index.fromOneBased(2);
+        return Index.fromOneBased(3);
     }
 }

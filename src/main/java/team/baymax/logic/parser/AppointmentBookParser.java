@@ -6,14 +6,15 @@ import static team.baymax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import team.baymax.logic.commands.ClearCommand;
+import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.Command;
-import team.baymax.logic.commands.ExitCommand;
-import team.baymax.logic.commands.HelpCommand;
+import team.baymax.logic.commands.general.ExitCommand;
+import team.baymax.logic.commands.general.HelpCommand;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListAppointmentCommand;
 import team.baymax.logic.commands.calendar.DayCommand;
+import team.baymax.logic.commands.general.SwitchCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
@@ -24,6 +25,7 @@ import team.baymax.logic.parser.appointment.AddAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
 import team.baymax.logic.parser.calendar.DayCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
+import team.baymax.logic.parser.general.SwitchCommandParser;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
 import team.baymax.logic.parser.patient.EditPatientCommandParser;
@@ -96,6 +98,9 @@ public class AppointmentBookParser {
 
         case DayCommand.COMMAND_WORD:
             return new DayCommandParser().parse(arguments);
+
+        case SwitchCommand.COMMAND_WORD:
+            return new SwitchCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

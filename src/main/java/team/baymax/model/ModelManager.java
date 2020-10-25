@@ -7,8 +7,11 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.Tab;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
-import team.baymax.model.appointment.DateTime;
+import team.baymax.model.calendar.DateTime;
 
 public class DateTimeTest {
 

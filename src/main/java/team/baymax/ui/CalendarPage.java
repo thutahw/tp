@@ -59,7 +59,7 @@ public class CalendarPage extends UiPart<Region> {
             setText(day.getText());
             setMinHeight(75.0);
             setMinWidth(75.0);
-            setDisable(true);
+            setMouseTransparent(true);
         }
 
         private void setGreen() {

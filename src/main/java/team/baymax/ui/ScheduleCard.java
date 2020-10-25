@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
 import team.baymax.model.appointment.Appointment;
 
 /**
@@ -49,7 +50,7 @@ public class ScheduleCard extends UiPart<Region> {
 
     private void initialize() {
         patientName.setText(appointment.getPatient().getName().fullName);
-        dateTime.setText(appointment.getDateTime().toString());
+        dateTime.setText(appointment.getTime().toString());
         description.setText(appointment.getDescription().toString());
         appointment.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

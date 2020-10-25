@@ -47,7 +47,7 @@
                 <StackPane fx:id="patientTabContentPlaceholder"></StackPane>
             </content>
         </Tab>
-        <Tab fx:id="appointmentTab">
+        <Tab fx:id="appointmentInfoTab">
             <graphic>
                 <ImageView>
                     <Image url="@/images/IconAppointment.png"/>
