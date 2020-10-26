@@ -5,17 +5,17 @@
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)<br>
     [Viewing Help:](#viewing-help--help)<br>
-    3.1 [Managing Patient Information](#31-managing-patient-information)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.1 [Add a new patient: `addpatient`](#311-add-a-new-patient-addpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 [List all patients: `listpatient`](#312-list-all-patients-listpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3 [Delete a patient profile: `deletepatient`](#313-delete-a-patient-profile-deletepatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4 [Edit a patient profile: `editpatient`](#314-edit-a-patient-profile-editpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.5 [Find a patient: `find`](#315-find-a-patient-find)<br>
-    3.2 [Managing Appointments](#32-managing-appointments)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 [Add a new appointment: `addappt`](#321-add-a-new-appointment-addappt)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2 [List all appointments: `listappt`](#322-list-all-appointments-listappt)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3 [Edit an appointment: `editappt`](#323-edit-an-appointment-editappt)<br>
-    3.3 [Utilizing the Calendar](#33-utilizing-the-calendar)
+    3.1. [Managing Patient Information](#31-managing-patient-information)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.1. [Add a new patient: `addpatient`](#311-add-a-new-patient-addpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2. [List all patients: `listpatient`](#312-list-all-patients-listpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3. [Delete a patient profile: `deletepatient`](#313-delete-a-patient-profile-deletepatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4. [Edit a patient profile: `editpatient`](#314-edit-a-patient-profile-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.5. [Find a patient: `find`](#315-find-a-patient-find)<br>
+    3.2. [Managing Appointments](#32-managing-appointments)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [Add a new appointment: `addappt`](#321-add-a-new-appointment-addappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [List all appointments: `listappt`](#322-list-all-appointments-listappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3. [Edit an appointment: `editappt`](#323-edit-an-appointment-editappt)<br>
+    3.3. [Using the Calendar](#33-using-the-calendar) 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +42,7 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   Figure 1. Baymax Graphical User Interface
 
 1. At the top of the screen, type in your commands in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -72,7 +73,7 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ### Viewing help : `help`
 
-Shows a link that brings the user to the help page.
+Displays a link that brings the user to the help page.
 
 **Format:**<br>
 `help`
@@ -84,12 +85,13 @@ Shows a link that brings the user to the help page.
 **Outcome:**<br>
 1. A link directing the user to the help page will be displayed as shown below.<br>
 
-![help](images/help.png)
+![help](images/help.png)<br>
+Figure 2. Execution of help command
 
 ### 3.1 Managing Patient Information
 
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a
-patient's details, find a patient by the name and list all the patients in the system.
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a 
+patient's details, find patients by name and list all the patients in the system.
 
 #### 3.1.1 Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
@@ -114,7 +116,8 @@ GENDER        | The gender of the patient. In short, female is indicated by the 
 If the command is valid (i.e. the user keyed in the valid fields):
 1. A success message will be displayed. <br>
 
-![addpatient](images/addpatient.png)
+![addpatient](images/addpatient.png)<br>
+Figure 3. Adding a patient 
 
 #### 3.1.2 List all patients: `listpatient`
 You can use this command to list all the patients in the system.
@@ -129,7 +132,8 @@ You can use this command to list all the patients in the system.
 **Outcome:**<br>
 1. All the patients in the system will be listed as shown below.
 
-![listpatient](images/listpatient.png)
+![listpatient](images/listpatient.png)<br>
+Figure 4. Listing all patients
 
 #### 3.1.3 Delete a patient profile: `deletepatient`
 You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `listpatient` command
@@ -148,7 +152,8 @@ If the _PATIENT_ID_ (i.e 4) is valid:
 1. A success message will be displayed as shown below.
 2. The patient at index 4 in the recent list will be deleted.
 
-![deletepatient](images/deletepatient.png)
+![deletepatient](images/deletepatient.png)<br>
+Figure 5. Deleting a patient's profile
 
 #### 3.1.4 Edit a patient profile: `editpatient`
 You can use this command to edit a patient’s profile. However, you will need to use the `listpatient` command
@@ -167,22 +172,24 @@ If the _PATIENT_ID_ (i.e 2) is valid:
 1. A success message will be displayed as shown below.
 2. The tag of the patient at index 2 in the recent list will be edited.
 
-![editpatient](images/editpatient.png)
+![editpatient](images/editpatient.png)<br>
+Figure 6. Editing a patient's profile
 
-#### 3.1.5 Find a patient: `find`
+#### 3.1.5 Find a patient: `findpatient`
 You can use this command to find a patient’s profile by entering a part of his name. The search string for name is not case-sensitive.
 
 **Format:**<br>
-`find NAME`
+`findpatient NAME`
 
 **Example:**<br>
-1. Type `find Alex` into the command box.
+1. Type `findpatient Alex` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**<br>
 1. A success message will be displayed as shown below.
 
-![findpatient](images/findpatient.png)
+![findpatient](images/findpatient.png)<br>
+Figure 7. Finding patient by name
 
 ### 3.2 Managing Appointments
 This feature allows you to manage the appointments of every single patient. You can
@@ -211,7 +218,8 @@ TAG           | The tag related to the appointment.
 If the command is valid (i.e. the user keyed in the valid fields):
 1. A success message will be displayed as shown below. <br>
 
-![addappt](images/addappt.png)
+![addappt](images/addappt.png)<br>
+Figure 8. Scheduling a new appointment for a patient
 
 #### 3.2.2 List all appointments: `listappt`
 You can use this command to list all the appointments in the system.
@@ -226,9 +234,10 @@ You can use this command to list all the appointments in the system.
 **Outcome:**<br>
 1. All the appointments in the system will be listed as shown below.
 
-![listappt](images/listappt.png)
+![listappt](images/listappt.png)<br>
+Figure 9. List all appointments
 
-#### 3.2.3 Edit an appointment: `editappt`
+#### 3.2.3. Edit an appointment: `editappt`
 You can use this command to edit an appointment. However, you will need to use the `listappt` command
 to find out the patient’s ID first. This extra step helps you to confirm the appointment to be edited, and prevent
 accidental edits.
@@ -245,9 +254,10 @@ If the INDEX (i.e 1) is valid:
 1. A success message will be displayed as shown below.
 2. The `DATETIME` of the appointment at index 1 in the recent list will be edited.
 
-![editappt](images/editappt.png)
+![editappt](images/editappt.png)<br>
+Figure 10. Edit an appointment
 
-### 3.3 Utilizing the Calendar
+### 3.3. Using the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
 set the calendar to a particular year and month.
@@ -268,7 +278,7 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 1. Baymax will switch to the calendar tab.
 2. The year 2020 will be displayed on the top right-hand corner of the window.
 
-[insert screenshot]
+[App Screenshot (Still in Progress)]
 
 #### 3.3.2 Switching to a particular month
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
@@ -290,7 +300,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 **Outcome:**<br>
 1. The month will be set to March and be displayed in the calendar.
 
-[Insert Screenshot]
+[App Screenshot (Still in Progress)]
 
 #### 3.3.3 Displaying appointments on a particular day in the current month
 You can use this command to display all appointments on a particular day.
@@ -311,7 +321,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 **Outcome:**<br>
 1. All appointments on 2020-01-13 will be displayed in the calendar.
 
-[Insert Screenshot]
+[App Screenshot (Still in Progress)]
 
 #### 3.3.4 Displaying appointments within the next n days
 You can use this command to display all appointments within the next n days. For example, choosing n to be 7, Baymax
@@ -330,7 +340,7 @@ will display all appointments in the upcoming week (7 days).
 **Outcome:**
 1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar.
 
-[Insert Screenshot]
+[App Screenshot (Still in Progress)]
 
 ### Exiting the program : `exit`
 

@@ -1,10 +1,28 @@
----
-layout: page
-title: Developer Guide
----
-* Table of Contents
-{:toc}
-
+# Baymax - Developer Guide
+## Table of Contents
+[1. Introduction](#1-introduction)<br>
+[2. Setting up](#2-setting-up-getting-started)<br>
+[3. Design](#3-design)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1. Architecture](#31-architecture)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2. UI Component](#32-ui-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3. Logic Component](#33-logic-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.4. Model Component](#34-model-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.5. Storage Component](#35-storage-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6. Storage Component](#36-common-classes)<br>
+[4. Implementation](#4-implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1 List Managers](#41-list-managers)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2 Patient Manager](#42-patient-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3 Apointment Manager](#43-appointment-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4 Calendar Feature](#44-calendar-feature)<br>
+[5. Documentation](#5)<br>
+[6. Testing](#6-testing)<br>
+[7. Dev Ops](#7-dev-ops)<br>
+[Appendix A: Product Scope](#appendix-a-product-scope)<br>
+[Appendix B: User Stories](#appendix-b-user-stories)<br>
+[Appendix C: Use Cases](#appendix-c-use-cases)<br>
+[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
+[Appendix E: Glossary](#appendix-e-glossary)<br>
+[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
 
@@ -24,7 +42,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-### 3.1. Architecture
+### **3.1. Architecture**
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -53,12 +71,14 @@ Each of the four components,
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
 ![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
 <img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
+Figure 3. Structure of the UI component<br><br>
 
 The sections below give more details of each component.
 
@@ -68,8 +88,8 @@ The sections below give more details of each component.
 This segment will explain the structure and responsibilities of the `UI` component.
 
 #### 3.2.1. Structure
-![Structure of the UI Component](images/UiClassDiagram.png)
-Figure 3. Structure of the UI component
+![Structure of the UI Component](images/UiClassDiagram.png)<br>
+Figure 4. Structure of the UI componentr
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -94,7 +114,8 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
+![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
+Figure 5. Structure of the Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -107,17 +128,21 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
-![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
+Figure 6. Delete Appointment Sequence Diagram
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### 3.4. Model component
 
-This segment will explaint the structure and responsibilities of the Model component.
+![Structure of the Model Component](images/ModelClassDiagram.png)<br>
+
+This segment will explain the structure and responsibilities of the Model component.
 
 #### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
+Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -148,6 +173,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
+Figure 8. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -168,7 +194,7 @@ The `Storage` component,
 * can save `Patient` and `Appointment` data in json format. 
 * can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
-### Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -251,7 +277,7 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-### **4.1 Patient Manager**
+### **4.2 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
@@ -262,20 +288,20 @@ a single patient's information can be managed at one time. A user can:
 * List all the patients in the system
 * Find a patient by using a keyword from his/her name
 * List all the appointments of a specific patient
-#### 4.1.1 Rationale
+#### 4.2.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
 of the patient and be able to look up a patient in the system easily.
-#### 4.1.2. Current Implementation
+#### 4.2.2. Current Implementation
 The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
 When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
 and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
 the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
-The following diagram shows what happens when a user enters an addpatient command.
-![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
-Figure {} Workflow of an addpatient command<br>
+The following diagram shows what happens when a user enters an `addpatient` command.
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)<br>
+Figure 9. Workflow of an addpatient command
 
 The following table shows the commands related to managing a patient's details.<br>
 
@@ -287,33 +313,33 @@ The following table shows the commands related to managing a patient's details.<
 | `editpatient` | Edits a patient's details.
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
-#### 4.1.3. Design Consideration
+#### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
 
 As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
  `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
-### **4.2 Appointment Manager**
+### **4.3 Appointment Manager**
 (Contributed by Shi Huiling & Reuben Teng)
 
-#### 4.1.1 Rationale
+#### 4.3.1 Rationale
 
-#### 4.1.2. Current Implementation
+#### 4.3.2. Current Implementation
 
-#### 4.1.3. Design Consideration
+#### 4.3.3. Design Consideration
 
-### **4.2 Calendar Feature**
+### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
 Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
 
-#### 4.1.1 Rationale
+#### 4.4.1 Rationale
 
-The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist to avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
 
-#### 4.1.2. Current Implementation
-The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
+#### 4.4.2. Current Implementation
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
 
 The following table shows the commands related to managing the appointment calendar:
 
@@ -323,7 +349,7 @@ The following table shows the commands related to managing the appointment calen
 | `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
 | `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
 
-#### 4.1.3. Design Consideration
+#### 4.4.3. Design Consideration
 Aspect: the necessity of a day view
 
 Option 1: Necessary (Current)
@@ -341,7 +367,7 @@ Reason for choosing Option 1:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -351,7 +377,10 @@ Reason for choosing Option 1:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix A: Product scope
+## **6. Testing**
+## **7. Dev Ops**
+
+## **Appendix A: Product scope**
 
 (Contributed by Thuta Htun Wai)
 
@@ -370,7 +399,7 @@ Reason for choosing Option 1:
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
 * Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
-## Appendix B: User stories
+## **Appendix B: User stories**
 (Contributed by Kaitlyn Ng)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -404,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
 
 
-## Appendix C: Use cases
+## **Appendix C: Use cases**
 (Contributed by Li Jianhan)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
@@ -510,7 +539,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 *{More to be added}*
 
-## Appendix D: Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling))
 
 **Technical Environment**
@@ -547,7 +576,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 
 
-## Appendix E: Glossary
+## **Appendix E: Glossary**
 (Contributed by Reuben Teng)
 #### *UI*
 * Abbreviation for User Interface, representing the point of human-computer interaction and communication.
