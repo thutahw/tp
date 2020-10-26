@@ -10,7 +10,6 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
-import team.baymax.model.listmanagers.AppointmentManager;
 import team.baymax.model.listmanagers.PatientManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
@@ -32,7 +31,6 @@ public class DeleteAppointmentCommand extends Command {
             + ": Deletes the appointment identified by the patient's ID or name, and date-time of the appointment.\n"
             + "Parameters: "
             + PREFIX_ID + "PATIENT_ID "
-            // TODO: edit to nric
             + "(OR "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + "OR "
@@ -107,8 +105,8 @@ public class DeleteAppointmentCommand extends Command {
         Appointment apptToDelete;
 
         try {
-            AppointmentManager appointmentManager = (AppointmentManager)model.getAppointmentManager();
-            apptToDelete = appointmentManager.getApptByPred(predicate);
+//            AppointmentManager appointmentManager = (AppointmentManager)model.getAppointmentManager();
+            apptToDelete = model.findAppointmentByPredicate(predicate);
 
             model.deleteAppointment(apptToDelete);
             model.getFilteredAppointmentList();

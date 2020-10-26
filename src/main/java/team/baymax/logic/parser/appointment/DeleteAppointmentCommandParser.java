@@ -43,7 +43,7 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
             dt = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage() ), pe);
         }
 
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {

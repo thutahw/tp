@@ -40,9 +40,15 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         }
 
         Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
-        DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        DateTime dateTime;
+
+        try {
+            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        } catch (ParseException ex) {
+            throw new ParseException(ex.getMessage());
+        }
 
         return new AddAppointmentCommand(id, dateTime, description, tagList);
     }

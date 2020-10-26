@@ -152,6 +152,8 @@ public interface Model {
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
+    Appointment findAppointmentByPredicate(Predicate<Appointment> predicate);
+
     //============= utils ================
     void resetAllListManagers();
 }

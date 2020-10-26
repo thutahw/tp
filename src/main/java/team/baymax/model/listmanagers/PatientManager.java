@@ -2,12 +2,15 @@ package team.baymax.model.listmanagers;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.baymax.model.patient.Name;
+import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.uniquelist.UniqueList;
@@ -116,7 +119,8 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      * Returns the first patient matching the given name, if it exists, otherwise throws an {@code ElementNotFoundException}
      */
     public Patient getPatientByName(Name name) throws ElementNotFoundException {
-        return patients.getByPredicate((patient) -> patient.getNric().equals(name));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(name.toString()));
+        return patients.getByPredicate(predicate);
     }
 
     // util methods

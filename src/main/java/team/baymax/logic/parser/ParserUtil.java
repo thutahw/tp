@@ -161,6 +161,8 @@ public class ParserUtil {
             dateTimeObj = DateTime.fromString(trimmedDateTime);
         } catch (DateTimeParseException ex) {
             throw new ParseException(ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(ex.getMessage());
         }
         return dateTimeObj;
     }

@@ -193,6 +193,12 @@ public class ModelManager implements Model {
         appointmentManager.setAppointment(target, editedAppointment);
     }
 
+    @Override
+    public Appointment findAppointmentByPredicate(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        return appointmentManager.getApptByPred(predicate);
+    }
+
     //=========== Filtered Appointment List Accessors =============================================================
 
     /**
