@@ -186,7 +186,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             // tab switch
-            sideTabPane.switchTab(commandResult.getTabNumber());
+            sideTabPane.switchTab(commandResult.getTabId());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

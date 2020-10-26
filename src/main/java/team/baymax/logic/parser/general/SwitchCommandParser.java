@@ -17,7 +17,7 @@ public class SwitchCommandParser implements Parser<SwitchCommand> {
             return new SwitchCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SwitchCommand.MESSAGE_INVALID_TAB_NUMBER), pe);
+                    SwitchCommand.MESSAGE_INVALID_TAB), pe);
         }
     }
 }

@@ -21,10 +21,11 @@ import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addAppt";
+    public static final String COMMAND_WORD = "addappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
             + "Parameters: "
@@ -42,7 +43,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
             + "appointment book";
-    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist";
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
 
     private final Index patientIndex;
     private final DateTime dateTime;
@@ -82,12 +83,7 @@ public class AddAppointmentCommand extends Command {
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dateTime.getDate()));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
-    }
-
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TabId.SCHEDULE);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package team.baymax.logic.commands.general;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
+import team.baymax.model.util.TabId;
 
 /**
  * Format full help instructions for every command for display.
@@ -19,11 +19,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, getTabNumber());
-    }
-
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(1);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, TabId.INFO);
     }
 }

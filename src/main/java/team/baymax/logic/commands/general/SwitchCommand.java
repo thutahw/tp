@@ -5,13 +5,13 @@ import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
+import team.baymax.model.util.TabId;
 
 public class SwitchCommand extends Command {
 
-    public static final int TAB_CEILING = 6;
     public static final String COMMAND_WORD = "tab";
-    public static final String MESSAGE_SUCCESS = "Switched to tab %1$s";
-    public static final String MESSAGE_INVALID_TAB_NUMBER = "The tab number entered is invalid.";
+    public static final String MESSAGE_SUCCESS = "Switched to %1$s tab";
+    public static final String MESSAGE_INVALID_TAB = "The tab number you've entered is invalid.";
 
     private final Index tabNumber;
 
@@ -21,15 +21,17 @@ public class SwitchCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (tabNumber.getOneBased() < 1 || tabNumber.getOneBased() > TAB_CEILING) {
-            throw new CommandException(MESSAGE_INVALID_TAB_NUMBER);
+        TabId tabId = TabId.valueOf(tabNumber.getOneBased());
+        if (tabId == null) {
+            throw new CommandException(MESSAGE_INVALID_TAB);
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tabNumber), tabNumber);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tabId), tabId);
     }
 
     @Override
-    public Index getTabNumber() {
-        return tabNumber;
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SwitchCommand // instanceof handles nulls
+                && tabNumber.equals(((SwitchCommand) other).tabNumber));
     }
 }

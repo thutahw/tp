@@ -11,20 +11,21 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.util.TabId;
 
 /**
  * Deletes a patient identified using it's displayed index from the address book.
  */
 public class DeletePatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletePatient";
+    public static final String COMMAND_WORD = "deletepatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by the index number used in the displayed patient list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "The following patient is deleted:\n %1$s";
 
     private final Index targetIndex;
 
@@ -43,19 +44,15 @@ public class DeletePatientCommand extends Command {
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), getTabNumber());
-    }
+        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), TabId.PATIENT);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeletePatientCommand // instanceof handles nulls
-                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)
-                && getTabNumber().equals(((DeletePatientCommand) other).getTabNumber())); // state check
+                && targetIndex.equals(((DeletePatientCommand) other).targetIndex)); // state check
     }
 }

@@ -2,7 +2,6 @@ package team.baymax.logic.commands.calendar;
 
 import static java.util.Objects.requireNonNull;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -10,6 +9,7 @@ import team.baymax.model.Model;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.calendar.Date;
 import team.baymax.model.calendar.Day;
+import team.baymax.model.util.TabId;
 
 public class DayCommand extends Command {
 
@@ -34,11 +34,7 @@ public class DayCommand extends Command {
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabNumber());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), TabId.CALENDAR);
     }
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
-    }
 }

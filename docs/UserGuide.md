@@ -145,7 +145,7 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 2. Press enter on your keyboard.
 
 **Outcome:**<br>
-1. Baymax will switch to the appointmentCalendar tab.
+1. Baymax will switch to the appointmentCalendar tabId.
 2. The year 2020 will be displayed on the top right-hand corner of the window.
 
 [insert screenshot]

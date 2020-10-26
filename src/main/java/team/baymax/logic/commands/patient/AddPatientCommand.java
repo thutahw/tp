@@ -7,19 +7,20 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
+import team.baymax.model.util.TabId;
 
 /**
  * Adds a patient to the address book.
  */
 public class AddPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "addPatient";
+    public static final String COMMAND_WORD = "addpatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the appointment book. "
             + "Parameters: "
@@ -58,19 +59,16 @@ public class AddPatientCommand extends Command {
         }
 
         model.addPatient(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
-    }
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+        model.updateFilteredPatientList(new PatientIdenticalPredicate(toAdd));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TabId.PATIENT);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddPatientCommand // instanceof handles nulls
-                && toAdd.equals(((AddPatientCommand) other).toAdd)
-                && getTabNumber().equals(((AddPatientCommand) other).getTabNumber()));
+                && toAdd.equals(((AddPatientCommand) other).toAdd));
     }
 }

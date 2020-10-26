@@ -1,5 +1,6 @@
 package team.baymax.ui;
 
+import javax.sound.midi.SysexMessage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.SingleSelectionModel;
@@ -7,10 +8,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import team.baymax.commons.core.index.Index;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.util.TabId;
 
 public class SideTabPane extends UiPart<Region> {
 
@@ -80,8 +81,29 @@ public class SideTabPane extends UiPart<Region> {
         scheduleTabContentPlaceholder.getChildren().add(schedulePage.getRoot());
     }
 
-    public void switchTab(Index tabNumber) {
+    public void switchTab(TabId tabId) {
+
         SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
-        selectionModel.select(tabNumber.getZeroBased());
+
+        switch (tabId) {
+        case DASHBOARD:
+            selectionModel.select(dashboardTab);
+            break;
+        case CALENDAR:
+            selectionModel.select(calendarTab);
+            break;
+        case SCHEDULE:
+            selectionModel.select(scheduleTab);
+            break;
+        case PATIENT:
+            selectionModel.select(patientInfoTab);
+            break;
+        case APPOINTMENT:
+            selectionModel.select(appointmentInfoTab);
+            break;
+        case INFO:
+            selectionModel.select(infoTab);
+            break;
+        }
     }
 }
