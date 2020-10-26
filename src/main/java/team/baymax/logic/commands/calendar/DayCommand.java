@@ -34,7 +34,7 @@ public class DayCommand extends Command {
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), TabId.CALENDAR);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), TabId.SCHEDULE);
     }
 
 }

@@ -37,11 +37,13 @@ public class CalendarPage extends UiPart<Region> {
     }
 
     private void initialize() {
+
+        calendarGridView.setMaxWidth(500);
+
         int day = 1;
 
         yearLabel.textProperty().bind(appointmentCalendar.getYearProperty());
         monthLabel.textProperty().bind(appointmentCalendar.getMonthProperty());
-        dayLabel.textProperty().bind(appointmentCalendar.getDayProperty());
 
         while (day <= appointmentCalendar.getMonth().getNumOfDays()) {
             CalendarViewCell cell = new CalendarViewCell(new Day(day));

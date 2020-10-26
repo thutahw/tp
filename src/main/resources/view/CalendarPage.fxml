@@ -15,7 +15,6 @@
         <Label text="Calendar"></Label>
         <Label fx:id="yearLabel"></Label>
         <Label fx:id="monthLabel"></Label>
-        <Label fx:id="dayLabel"></Label>
         <TilePane fx:id="calendarGridView"></TilePane>
     </VBox>
 </StackPane>

@@ -7,15 +7,13 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.Tab;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.calendar.Date;
 import team.baymax.model.calendar.Day;
 import team.baymax.model.calendar.Month;
 import team.baymax.model.calendar.Year;
@@ -99,7 +97,6 @@ public class ModelManager implements Model {
     public Path getPatientStorageFilePath() {
         return userPrefs.getPatientStorageFilePath();
     }
-
 
     @Override
     public Path getAppointmentStorageFilePath() {
@@ -258,6 +255,13 @@ public class ModelManager implements Model {
     @Override
     public void resetCalendar() {
         calendarManager.resetCalendar(new CalendarManager());
+    }
+
+    public void updateMonthlyData(Day day) {
+        filteredAppointmentsList.stream().filter(appointment -> {
+            AppointmentCalendar ac = getAppointmentCalendar();
+            return appointment.getDate().equals(new Date(day, ac.getMonth(), ac.getYear()));
+        }).count();
     }
 
     //=========== utils ================================================================================
