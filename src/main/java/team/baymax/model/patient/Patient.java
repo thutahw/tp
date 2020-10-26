@@ -88,7 +88,7 @@ public class Patient implements UniqueListElement {
     }
 
     /**
-     * Returns true if both patients have the same identity and data fields.
+     * Returns true if both patients have the same identity fields (nric, name, gender).
      * This defines a stronger notion of equality between two patients.
      */
     @Override
@@ -104,10 +104,7 @@ public class Patient implements UniqueListElement {
         Patient otherPatient = (Patient) other;
         return otherPatient.getNric().equals(getNric())
                 && otherPatient.getName().equals(getName())
-                && otherPatient.getPhone().equals(getPhone())
-                && otherPatient.getGender().equals(getGender())
-                && otherPatient.getRemark().equals(getRemark())
-                && otherPatient.getTags().equals(getTags());
+                && otherPatient.getGender().equals(getGender());
     }
 
     @Override

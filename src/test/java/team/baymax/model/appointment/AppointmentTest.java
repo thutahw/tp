@@ -24,8 +24,8 @@ public class AppointmentTest {
 
     @Test
     public void isSameAppointment() {
-        // same dateTime -> return True
-        assertTrue(APT1.isSame(APT4));
+        // same dateTime but different Patient -> return False
+        assertFalse(APT1.isSame(APT4));
         // different dateTime -> return False
         assertFalse(APT1.isSame(APT3));
         //same patient but different dateTime -> False
