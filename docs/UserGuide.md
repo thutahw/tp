@@ -206,7 +206,7 @@ You can use this command to find a patient’s profile by entering a part of his
 ![findpatient](images/findpatient.png)<br>
 Figure 7. Finding patient by name
 
-### 4.2 Managing Appointments
+### 4.2 Manage Appointments
 This feature allows you to manage the appointments of every single patient. You can
 add an appointment, edit an appointment and list all the appointments in the system.
 
@@ -272,12 +272,12 @@ If the INDEX (i.e 1) is valid:
 ![editappt](images/editappt.png)<br>
 Figure 10. Edit an appointment
 
-### 4.3. Using the Calendar
+### 4.3. The Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
 set the calendar to a particular year and month.
 
-#### 4.3.1 Switching to a particular year
+#### 4.3.1 Switch to a particular year
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
 scheduled one year in advance, you can use this function to switch to the following year. The year set by this command
 will affect the command we will discuss in Section 3.3.2 (Switching to a particular month).
@@ -295,7 +295,7 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 
 [App Screenshot (Still in Progress)]
 
-#### 4.3.2 Switching to a particular month
+#### 4.3.2 Switch to a particular month
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
 current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
 January by default.
@@ -338,7 +338,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 
 [App Screenshot (Still in Progress)]
 
-#### 4.3.4 Displaying appointments within a period
+#### 4.3.4 Display appointments within a period
 You can use this command to display all appointments within a period, defined by a start day and an end day.
 
 **Format:**<br>
@@ -357,7 +357,7 @@ You can use this command to display all appointments within a period, defined by
 
 ### 4.4. Miscellaneous
 
-### 4.4.1. Viewing help : `help`
+### 4.4.1. View help : `help`
 
 Displays a list of commands to jog your memory and quickly get started. If more details about the commands are needed,
 you can visit the full *User Guide* via the URL link provided as well.
@@ -374,7 +374,7 @@ you can visit the full *User Guide* via the URL link provided as well.
 
 ![help](images/help.png)
 
-### 4.4.2. Switching between tabs : `tab`
+### 4.4.2. Switch between tabs : `tab`
 
 Switches between tabs based on the tab number you have entered.
 
@@ -390,13 +390,13 @@ Switches between tabs based on the tab number you have entered.
 
 [App Screenshot (Still in Progress)]
 
-### 4.2.3 Exiting the program : `exit`
+### 4.2.3 Exit the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 4.2.4 Saving data
+### 4.2.4 Save data
 Baymax data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
