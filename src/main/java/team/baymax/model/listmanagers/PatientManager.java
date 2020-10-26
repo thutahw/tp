@@ -2,7 +2,6 @@ package team.baymax.model.listmanagers;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
