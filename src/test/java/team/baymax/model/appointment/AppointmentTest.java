@@ -3,7 +3,6 @@ package team.baymax.model.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.TypicalAppointments.APT1;
 import static team.baymax.testutil.TypicalAppointments.APT2;
