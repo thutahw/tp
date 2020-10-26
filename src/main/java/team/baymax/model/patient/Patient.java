@@ -102,7 +102,12 @@ public class Patient implements UniqueListElement {
         }
 
         Patient otherPatient = (Patient) other;
-        return otherPatient.getNric().equals(getNric());
+        return otherPatient.getNric().equals(getNric())
+                && otherPatient.getName().equals(getName())
+                && otherPatient.getPhone().equals(getPhone())
+                && otherPatient.getGender().equals(getGender())
+                && otherPatient.getRemark().equals(getRemark())
+                && otherPatient.getTags().equals(getTags());
     }
 
     @Override
