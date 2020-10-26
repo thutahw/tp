@@ -9,17 +9,15 @@ import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.appointment.AppointmentStatus;
-import team.baymax.model.appointment.Description;
+import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
+import team.baymax.model.listmanagers.AppointmentManager;
 import team.baymax.model.listmanagers.PatientManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
-import team.baymax.model.tag.Tag;
+import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -28,7 +26,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
 public class DeleteAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "deleteAppt";
+    public static final String COMMAND_WORD = "deleteappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the appointment identified by the patient's ID or name, and date-time of the appointment.\n"
@@ -104,21 +102,20 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }
 
-        // create new appointment with the Date Time specified
-        Appointment apptToDelete = new Appointment(patientOfAppointment, dateTime);
+        SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patientOfAppointment);
 
-        if (model.hasAppointment(apptToDelete)) {
-            // hasAppointment checks if apptToDelete isSame as some appointment in the appointmentList
-            // isSame returns true if the appointments have the same Patient and DateTime
-            // TODO: FIND APPOINTMENT as in actually get that appointment w the same dateTime & Patient
+        Appointment apptToDelete;
+
+        try {
+            AppointmentManager appointmentManager = (AppointmentManager)model.getAppointmentManager();
+            apptToDelete = appointmentManager.getApptByPred(predicate);
+
             model.deleteAppointment(apptToDelete);
-            Predicate<Appointment> PREDICATE_MATCH_APPOINTMENT = ()
-            model.getFilteredAppointmentList()
-            // TODO: actually this might throw an ElementNotFoundException that idk if we need to catch
-        } else {
+            model.getFilteredAppointmentList();
+        } catch (ElementNotFoundException e) {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }
-        // TODO: the deleted appointment displayed won't have the remarks and tags and correct status
+
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, apptToDelete), getTabNumber());
     }
 
