@@ -1,10 +1,28 @@
----
-layout: page
-title: Developer Guide
----
-* Table of Contents
-{:toc}
-
+# Baymax - Developer Guide
+## Table of Contents
+[1. Introduction](#1-introduction)<br>
+[2. Setting up](#2-setting-up-getting-started)<br>
+[3. Design](#3-design)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1. Architecture](#31-architecture)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2. UI Component](#32-ui-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3. Logic Component](#33-logic-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.4. Model Component](#34-model-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.5. Storage Component](#35-storage-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6. Storage Component](#36-common-classes)<br>
+[4. Implementation](#4-implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1 List Managers](#41-list-managers)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2 Patient Manager](#42-patient-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3 Apointment Manager](#43-appointment-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4 Calendar Feature](#44-calendar-feature)<br>
+[5. Documentation](#5-documentation)<br>
+[6. Testing](#6-testing)<br>
+[7. Dev Ops](#7-dev-ops)<br>
+[Appendix A: Product Scope](#appendix-a-product-scope)<br>
+[Appendix B: User Stories](#appendix-b-user-stories)<br>
+[Appendix C: Use Cases](#appendix-c-use-cases)<br>
+[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
+[Appendix E: Glossary](#appendix-e-glossary)<br>
+[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
 
@@ -24,11 +42,11 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-### 3.1. Architecture
+### **3.1. Architecture**
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+<img src="images/ArchitectureDiagram.png" width="450" /><br>
 Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -52,13 +70,15 @@ Each of the four components,
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
-![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+![Class Diagram of the Logic Component](images/LogicClassDiagram.png)<br>
+Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
 <img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
+Figure 3. Structure of the UI component<br><br>
 
 The sections below give more details of each component.
 
@@ -68,8 +88,8 @@ The sections below give more details of each component.
 This segment will explain the structure and responsibilities of the `UI` component.
 
 #### 3.2.1. Structure
-![Structure of the UI Component](images/UiClassDiagram.png)
-Figure 3. Structure of the UI component
+![Structure of the UI Component](images/UiClassDiagram.png)<br>
+Figure 4. Structure of the UI componentr
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -94,7 +114,8 @@ The `UI` component,
 
 ### 3.3. Logic component
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
+![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
+Figure 5. Structure of the Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -107,17 +128,19 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
-![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
+Figure 6. Delete Appointment Sequence Diagram
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### 3.4. Model component
 
-This segment will explaint the structure and responsibilities of the Model component.
+This segment will explain the structure and responsibilities of the Model component.
 
 #### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
+Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -148,6 +171,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
+Figure 8. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -168,7 +192,7 @@ The `Storage` component,
 * can save `Patient` and `Appointment` data in json format. 
 * can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
-### Common classes
+### 3.6. Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -181,25 +205,25 @@ This section describes some noteworthy details on how certain features are imple
 ### **4.1 List Managers**
 (Contributed by Kaitlyn Ng)
 
-Allows the Baymax application to handle lists of the different types of data in the application, namely `Patient` and 
-`Appointment`. `ListManager` defines methods for Create, Read, Update and Delete operations that are common to all the
-different types of data and needed to manage the lists of data effectively. 
+List Managers allow the Baymax application to handle lists of the different types of data in the application, 
+namely `Patient` and `Appointment`. `ListManager` defines methods for Create, Read, Update and Delete (CRUD) operations 
+that are common to all the types of data, and needed to manage the lists of data effectively. 
 
 #### 4.1.1 Rationale
-The separation of `Patient` and `Appoinment` data into separate ListManagers allow a common architecture to be employed
-for each data type. This allows the application to easily manage the lists of data in the application efficiently, and 
-allows for other types of data to be added easily to extend the existing application. 
+The separation of `Patient` and `Appointment` data into separate ListManagers allow for a common software architecture 
+between data types. Lists of data within the application can thus be handled more efficiently, and other types of data 
+can be added to extend the application with minimal modification to the code.
 
 #### 4.1.2. Current Implementation
+
 Each `ListManager`contains a `UniqueList` which is a generic class that stores all the data items in a list and
- maintains the uniqueness of the data objects in the list while doing so, i.e. no two data items can be the same in
-a `UniqueList`. The `UniqueList` class is a generic class that can only contain data items that extend the 
-`UniqueListElement`  interface, that ensures data items contains necessary comparison functions for `UniqueList` to
-maintain uniqueness. 
+and maintains the uniqueness of the data objects in the list while doing so. This ensures that in every `UniqueList`, 
+there is only one of each object. The `UniqueList` class is a generic class that can only contain data items that 
+extend the `UniqueListElement` interface, which ensures data items contain the necessary comparison functions for 
+`UniqueList` to maintain uniqueness. 
 
-Each ListManager implements the `ReadOnlyListManager` interface. This interface has the `getReadOnlyList()` method which returns an `ObservableList` of data items, which is monitored by and used to automatically update the GUI.
-
-
+Each ListManager implements the `ReadOnlyListManager` interface. This interface has the `getReadOnlyList()` method 
+which returns an `ObservableList` of data items, to be monitored by the GUI.
 
 #### 4.1.3. Design Consideration
 **Aspect: Separation into distinct list managers for each type of data.**
@@ -249,7 +273,7 @@ of the generic CRUD operations from the class.
 * Cons: Generics can be harder to comprehend, thus making it harder for other programmers to understand and
 use the component. 
   
-Option 2; Do not extract any common functionalities
+Option 2: Do not extract any common functionalities
 
 * Pros: Easier for programmers to work on each code related to each data item completely separately, and implement 
 methods specific to the data item in a more straightforward manner.
@@ -260,7 +284,7 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-----------------------------------------------------------------------------------------
+=======
 ### **4.2 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
@@ -273,6 +297,7 @@ a single patient's information can be managed at one time. A user can:
 * Find a patient by using a keyword from his/her name
 * List all the appointments of a specific patient
 
+=======
 #### 4.2.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
@@ -284,9 +309,10 @@ When a user enters a valid command (Let's say the `addpatient` command), the par
 and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
 the new patient is added into the appointment book and a success message is printed in the results display box. <br>
 
-The following diagram shows what happens when a user enters an addpatient command.
-![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)
-Figure {} Workflow of an addpatient command<br>
+The following diagram shows what happens when a user enters an `addpatient` command.
+
+![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)<br>
+Figure 9. Workflow of an addpatient command
 
 The following table shows the commands related to managing a patient's details.<br>
 
@@ -298,6 +324,9 @@ The following table shows the commands related to managing a patient's details.<
 | `editpatient` | Edits a patient's details.
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
+
+=======
+
 #### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
@@ -306,7 +335,7 @@ As for the `listpatientappts` command, we decided not to continue this functiona
  `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
  
------------------------------------------------------------------------------------------
+========
 ### **4.3 Appointment Manager**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
@@ -341,23 +370,73 @@ Additionally, we only require matching of `DateTime` and `Patient` of appointmen
 
 To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
----------------------------------------------------------------------------------
+=======
+### **4.3 Appointment Manager**
+(Contributed by Shi Huiling & Reuben Teng)
+Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+
+`AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
+ 1. Adding an appointment
+ 2. Editing an appointment
+ 3. Deleting an appointment
+ 4. Finding a specific appointment by `Patient` and `DateTime`
+ 5. Sorting the list of appointments
+ 
+These methods are used by the `AppointmentCommand` classes to execute their logic.
+
+#### 4.3.1 Rationale
+
+The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+
+#### 4.3.2. Current Implementation
+
+Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+
+#### 4.3.3. Design Consideration
+
+**Aspect 1: `deleteappt` Command** 
+ 
+For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the 
+`Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt 
+for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed 
+correct" way (by `nric`).
+
+Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have 
+those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command 
+more succinct and easy to use for receptionists. It is also easier implementation-wise.
+
+**Aspect 2: `nric` field**
+
+To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the 
+`Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely 
+identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the 
+`nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the 
+existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
-Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and month, following which any calendar-related commands entered will be with respect to that year and month.
+Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the 
+application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and 
+month, following which any calendar-related commands entered will be with respect to that year and month.
 
 #### 4.4.1 Rationale
 
-The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the receptionist avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of giving a broad overview of how busy each day is in a month.
+The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of 
+that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the 
+receptionist to avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of 
+giving a broad overview of how busy each day is in a month.
 
 #### 4.4.2. Current Implementation
-The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set `year`, `month` and `day`. Note that this `year`, `month` and `day` attributes may not necessarily be storing the current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to view all appointments relative to a particular year or month.
+The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set 
+`year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
+current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should 
+be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to 
+view all appointments relative to a particular year or month.
 
 The following table shows the commands related to managing the appointment calendar:
 
- Command    | Purpose
+|Command    | Purpose
 | --------- | ------------------------------------------
 | `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
 | `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
@@ -381,17 +460,21 @@ Reason for choosing Option 1:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation**
 
 * [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix A: Product scope
+## **6. Testing**
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+## **7. Dev Ops**
+* [DevOps guide](DevOps.md)
+
+
+## **Appendix A: Product scope**
 
 (Contributed by Thuta Htun Wai)
 
@@ -410,7 +493,7 @@ Reason for choosing Option 1:
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
 * Baymax can manage patient information and appointments better than a typical mouse driven medical appointment management app.
 
-## Appendix B: User stories
+## **Appendix B: User stories**
 (Contributed by Kaitlyn Ng)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -444,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
 
 
-## Appendix C: Use cases
+## **Appendix C: Use cases**
 (Contributed by Li Jianhan)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
@@ -550,7 +633,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 *{More to be added}*
 
-## Appendix D: Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling))
 
 **Technical Environment**
@@ -587,7 +670,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 
 
-## Appendix E: Glossary
+## **Appendix E: Glossary**
 (Contributed by Reuben Teng)
 #### *UI*
 * Abbreviation for User Interface, representing the point of human-computer interaction and communication.
@@ -608,8 +691,14 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 * Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
 
 #### *Private contact detail*
-* A contact detail that is not meant to be shared with others
+* A contact detail that is not meant to be shared with others.
 
+#### *Boilerplate code*
+* Code that is reused without significant changes. Usually a sign of poor coding practices.
+
+#### *Separation of Concerns principle*
+* Principle of separating code into different sections, with each section handling a different concern. This allows for
+  a more modular approach to implementation, with changes to one section not affecting another.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
