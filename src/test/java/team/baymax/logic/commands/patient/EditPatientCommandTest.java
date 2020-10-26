@@ -156,24 +156,24 @@ public class EditPatientCommandTest {
     public void equals() {
         final EditPatientCommand standardCommand = new EditPatientCommand(INDEX_FIRST_PATIENT, DESC_AMY);
 
-        // same values -> returns true
+        // same values -> returns True
         EditPatientDescriptor copyDescriptor = new EditPatientCommand.EditPatientDescriptor(DESC_AMY);
         EditPatientCommand commandWithSameValues = new EditPatientCommand(INDEX_FIRST_PATIENT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // same object -> returns true
+        // same object -> returns True
         assertTrue(standardCommand.equals(standardCommand));
 
-        // null -> returns false
+        // null -> returns False
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
+        // different types -> returns False
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // different index -> returns False
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_SECOND_PATIENT, DESC_AMY)));
 
-        // different descriptor -> returns false
+        // different descriptor -> returns False
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_FIRST_PATIENT, DESC_BOB)));
     }
 

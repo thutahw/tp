@@ -44,13 +44,13 @@ public class ListPatientCommandTest {
     @Test
     public void equals() {
         ListPatientCommand listPatientCommand = new ListPatientCommand();
-        // null -> false
+        // null -> returns False
         assertFalse(listPatientCommand.equals(null));
-        // different types -> false
+        // different types -> returns False
         assertFalse(listPatientCommand.equals(1));
-        // same type -> true
+        // same type -> returns True
         assertTrue(listPatientCommand.equals(new ListPatientCommand()));
-
+        // this -> returns True
         assertTrue(listPatientCommand.equals(listPatientCommand));
     }
 }

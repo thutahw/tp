@@ -30,7 +30,11 @@ public class ListPatientAppointmentsCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a ListPatientAppointmentsCommand with the specified {@code Index}
+     */
     public ListPatientAppointmentsCommand (Index targetIndex) {
+        assert targetIndex != null;
         this.targetIndex = targetIndex;
     }
 
