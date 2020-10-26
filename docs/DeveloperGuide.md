@@ -30,7 +30,7 @@ Baymax is a desktop appointment manager made for clinic receptionists. It focuse
 
 Baymax allows receptionists to keep track of patients and appointments in a single, integrated platform.
 
-The purpose of this Developer Guide is to help you understand the design and implemetation of Baymax, so that you can become a contributor to this project as well.
+The purpose of this Developer Guide is to help you understand the design and implementation of Baymax, so that you can become a contributor to this project as well.
 
 ## **2. Setting up, getting started**
 
@@ -122,7 +122,7 @@ Figure 5. Structure of the Logic Component
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a patient).
+1. The command execution can affect the `Model` (e.g. adding a patient), which is executed by the `ModelManager` which calls `PatientManager` and `AppointmentManager`.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -215,6 +215,7 @@ between data types. Lists of data within the application can thus be handled mor
 can be added to extend the application with minimal modification to the code.
 
 #### 4.1.2. Current Implementation
+
 Each `ListManager`contains a `UniqueList` which is a generic class that stores all the data items in a list and
 and maintains the uniqueness of the data objects in the list while doing so. This ensures that in every `UniqueList`, 
 there is only one of each object. The `UniqueList` class is a generic class that can only contain data items that 
@@ -229,23 +230,32 @@ which returns an `ObservableList` of data items, to be monitored by the GUI.
 
 Option 1: Split into separate lists (Current)
 
-* Pros: Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
+*Pros:*
+
+* Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
 often require interaction between them.
   
 * Allows for more straightforward implementations in other components by ensuring each data type is handled with the
 class architecture.
+
+*Cons:*
   
-* Cons: A lot of boilerplate code for implementing the list managers as separate classes but with similar 
+* A lot of boilerplate code for implementing the list managers as separate classes but with similar 
   functionalities
   
 Option 2: Store all the information in a single `DataManager` 
 
-* Pros: Easier to implement, as only one manager class is needed.
+*Pros:*
 
-* Cons: Violates the Separation of Concerns principle, making it difficult to implement future extensions without
+* Easier to implement, as only one manager class is needed.
+
+*Cons:*
+
+* Violates the Separation of Concerns principle, making it difficult to implement future extensions without
 significant change to other components.
   
 Reason for choosing Option 1:
+
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
 independent development for each data type, limiting the amount of change needed to other components when there are
@@ -263,7 +273,7 @@ of the generic CRUD operations from the class.
 * Cons: Generics can be harder to comprehend, thus making it harder for other programmers to understand and
 use the component. 
   
-Option 2; Do not extract any common functionalities
+Option 2: Do not extract any common functionalities
 
 * Pros: Easier for programmers to work on each code related to each data item completely separately, and implement 
 methods specific to the data item in a more straightforward manner.
@@ -274,6 +284,7 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
+=======
 ### **4.2 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
@@ -285,6 +296,8 @@ a single patient's information can be managed at one time. A user can:
 * List all the patients in the system
 * Find a patient by using a keyword from his/her name
 * List all the appointments of a specific patient
+
+=======
 #### 4.2.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
@@ -312,6 +325,8 @@ The following table shows the commands related to managing a patient's details.<
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
 
+=======
+
 #### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
@@ -319,6 +334,43 @@ making the user easily understand the commands. <br>
 As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
  `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
+ 
+========
+### **4.3 Appointment Manager**
+(Contributed by Shi Hui Ling & Reuben Teng)
+
+Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+
+`AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
+ 1. Adding an appointment
+ 2. Editing an appointment
+ 3. Deleting an appointment
+ 4. Finding a specific appointment by `Patient` and `DateTime`
+ 5. Sorting the list of appointments
+ 
+These methods are used by the `AppointmentCommand` classes to execute their logic.
+
+#### 4.3.1 Rationale
+
+The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+
+#### 4.3.2. Current Implementation
+
+Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+
+#### 4.3.3. Design Consideration
+
+**Aspect 1: `deleteappt` Command** 
+ 
+For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+
+Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
+
+**Aspect 2: `nric` field**
+
+To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
+
+=======
 ### **4.3 Appointment Manager**
 (Contributed by Shi Huiling & Reuben Teng)
 Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 

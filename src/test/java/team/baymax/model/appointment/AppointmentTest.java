@@ -3,7 +3,6 @@ package team.baymax.model.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.TypicalAppointments.APT1;
 import static team.baymax.testutil.TypicalAppointments.APT2;
@@ -24,8 +23,8 @@ public class AppointmentTest {
 
     @Test
     public void isSameAppointment() {
-        // same dateTime -> return True
-        assertTrue(APT1.isSame(APT4));
+        // same dateTime but different Patient -> return False
+        assertFalse(APT1.isSame(APT4));
         // different dateTime -> return False
         assertFalse(APT1.isSame(APT3));
         //same patient but different dateTime -> False

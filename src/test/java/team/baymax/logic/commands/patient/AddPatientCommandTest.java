@@ -166,6 +166,11 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public Appointment findAppointmentByPredicate(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }

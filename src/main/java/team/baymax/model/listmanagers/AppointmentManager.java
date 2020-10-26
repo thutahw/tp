@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.util.uniquelist.UniqueList;
+import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 
 /**
@@ -93,6 +95,15 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
+    }
+
+    /**
+     * Returns the Appointment matching the given predicate. If no Appointment matches the
+     * predicate given, an {@code ElementNotFoundException} is thrown.
+     * @return
+     */
+    public Appointment getApptByPred(Predicate<Appointment> pred) throws ElementNotFoundException {
+        return appointments.getByPredicate(pred);
     }
 
     // util methods
