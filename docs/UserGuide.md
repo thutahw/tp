@@ -9,8 +9,9 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Add a new patient: `addpatient`](#411-add-a-new-patient-addpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.2. [List all patients: `listpatient`](#412-list-all-patients-listpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.3. [Delete a patient profile: `deletepatient`](#413-delete-a-patient-profile-deletepatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4. [Edit a patient profile: `editpatient`](#414-edit-a-patient-profile-editpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.5. [Find a patient: `find`](#415-find-a-patient-find)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.4. [Edit a patient profile: `editpatient`](#414-edit-a-patient-profile-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.5. [Find a patient: `findpatient`](#415-find-a-patient-find)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.6. [List all appointments of a patient: `listapptby`](#316-list-all-appointments-of-a-patient-listapptby)<br>
     4.2. [Managing Appointments](#42-managing-appointments)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.1. [Add a new appointment: `addappt`](#421-add-a-new-appointment-addappt)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.2. [List all appointments: `listappt`](#422-list-all-appointments-listappt)<br>
@@ -78,16 +79,16 @@ when reading this document.
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be **supplied** by the user.<br>
   e.g. in `addpatient name/NAME`, `NAME` is a parameter which can be used as `addpatient name/Alice Tan`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are **optional**.<br>
   e.g `name/NAME [remark/REMARK]` can be used as `name/Alice Tan remark/No drug allergy` or as `name/Alice Tan`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used **multiple** times including zero times.<br>
   e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/braces`, `tag/braces tag/cleaning` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in **any** order.<br>
   e.g. if the command specifies `name/NAME contact/PHONE_NUMBER`, `contact/PHONE_NUMBER name/NAME` is also acceptable.
 
 </div>
@@ -115,9 +116,9 @@ Before we examine the format of this command, let us take a look at what the par
 
 Parameter Name | Description
 ---------------|------------
-NRIC          | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them.
-NAME          | The name of the patient. It must consist solely of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
-CONTACT       | The hand phone number which the patient wishes to be contacted by. It must consist solely of numbers. E.g. 91710012
+NRIC          | The nric of the patient. It must <ins>start and end</ins> with a capital letter and contain 7 numbers in between them.
+NAME          | The name of the patient. It must consist <ins>solely</ins> of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
+CONTACT       | The hand phone number which the patient wishes to be contacted by. It must consist <ins>solely</ins> of numbers. E.g. 91710012
 GENDER        | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’.
 
 **Format:**<br>
@@ -151,8 +152,8 @@ You can use this command to list all the patients in the system.
 Figure 4. Listing all patients
 
 #### 4.1.3 Delete a patient profile: `deletepatient`
-You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `listpatient` command
-or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent
+You can use this command to delete a patient’s profile by his or her ID. However, you will first need to use the `listpatient` command
+or the `findpatient` command to find out the patient’s ID `PATIENT_ID` first. This extra step helps you to confirm the profile to be deleted, and prevents
 accidental deletes.
 
 **Format:**<br>
@@ -171,12 +172,19 @@ If the _PATIENT_ID_ (i.e 4) is valid:
 Figure 5. Deleting a patient's profile
 
 #### 4.1.4 Edit a patient profile: `editpatient`
-You can use this command to edit a patient’s profile. However, you will need to use the `listpatient` command
-or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be edited, and prevent
-accidental edits.
+You can use this command to edit a patient’s profile. You can edit any field of a patient in any order. However, you will first need to use the `listpatient` command
+or the `findpatient` command to find out the patient’s ID `PATIENT_ID` first. This extra step helps you to confirm the profile to be edited, and prevents
+accidental edits. 
 
 **Format:**<br>
-`editpatient PATIENT_ID t/TAG`
+Listed below are some examples of valid commands.<br>
+* `editpatient PATIENT_ID t/TAG`
+* `editpatient PATIENT_ID name/NAME`
+* `editpatient PATIENT_ID nric/NRIC`
+* `editpatient PATIENT_ID gender/GENDER`
+* `editpatient PATIENT_ID contact/CONTACT`
+* `editpatient PATIENT_ID r/REMARK`
+* `editpatient PATIENT_ID gender/GENDER name/NAME contact/CONTACT`
 
 **Example:**<br>
 1. Type `editpatient 2 t/Asthmatic` into the command box.
@@ -190,8 +198,8 @@ If the _PATIENT_ID_ (i.e 2) is valid:
 ![editpatient](images/editpatient.png)<br>
 Figure 6. Editing a patient's profile
 
-#### 3.1.5 Find a patient: `findpatient`
-You can use this command to find a patient’s profile by entering a part of his name. The search string for name is not case-sensitive.
+#### 4.1.5 Find a patient: `findpatient`
+You can use this command to find a patient’s profile by entering a part of his name. The search string for the name is not case-sensitive.
 
 **Format:**<br>
 `findpatient NAME`
@@ -206,11 +214,28 @@ You can use this command to find a patient’s profile by entering a part of his
 ![findpatient](images/findpatient.png)<br>
 Figure 7. Finding patient by name
 
-### 4.2 Manage Appointments
+### 4.2. Manage Appointments
 This feature allows you to manage the appointments of every single patient. You can
 add an appointment, edit an appointment and list all the appointments in the system.
 
-#### 4.2.1 Add a new appointment: `addappt`
+#### 4.2.1. List all appointments of a patient: `listapptby`
+You can use this command to list all the appointments of a patient.
+However, you will first need to use the `listpatient` command or the `findpatient` command to find out the patient’s ID `PATIENT_ID` first. 
+
+**Format:**<br>
+`listapptby PATIENT_INDEX`
+
+**Example:**<br>
+1. Type `listapptby 1` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+1. A success message will be displayed as shown below.
+
+[Screenshot to be added] <br>
+Figure _. Listing a patient's appointments
+
+#### 4.2.2. Add a new appointment: `addappt`
 You can use this command to add a new appointment for a patient.
 
 Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
@@ -236,7 +261,7 @@ If the command is valid (i.e. the user keyed in the valid fields):
 ![addappt](images/addappt.png)<br>
 Figure 8. Scheduling a new appointment for a patient
 
-#### 4.2.2. List all appointments: `listappt`
+#### 4.2.3. List all appointments: `listappt`
 You can use this command to list all the appointments in the system.
 
 **Format:**<br>
@@ -252,13 +277,17 @@ You can use this command to list all the appointments in the system.
 ![listappt](images/listappt.png)<br>
 Figure 9. List all appointments
 
-#### 4.2.3. Edit an appointment: `editappt`
-You can use this command to edit an appointment. However, you will need to use the `listappt` command
-to find out the patient’s ID first. This extra step helps you to confirm the appointment to be edited, and prevent
+#### 4.2.4. Edit an appointment: `editappt`
+You can use this command to edit an appointment. You can edit any field of an appointment in any order. However, you will first need to use the `listappt` command
+to find out the appointment index `INDEX` first. This extra step helps you to confirm the appointment to be edited, and prevents
 accidental edits.
 
 **Format:**<br>
-`editappt INDEX dt/DATETIME`
+Listed below are some examples of valid commands.<br>
+* `editappt INDEX dt/DATETIME`
+* `editappt INDEX desc/DESC`
+* `editappt INDEX t/TAG`
+* `editappt INDEX t/TAG desc/DESC dt/DATETIME`
 
 **Example:**<br>
 1. Type `editappt 1 dt/12-10-2020 12:00` into the command box.
@@ -277,7 +306,7 @@ This feature allows you to display the availability status of each day in a mont
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
 set the calendar to a particular year and month.
 
-#### 4.3.1 Switch to a particular year
+#### 4.3.1. Switch to a particular year
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
 scheduled one year in advance, you can use this function to switch to the following year. The year set by this command
 will affect the command we will discuss in Section 3.3.2 (Switching to a particular month).
@@ -295,7 +324,7 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 
 [App Screenshot (Still in Progress)]
 
-#### 4.3.2 Switch to a particular month
+#### 4.3.2. Switch to a particular month
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
 current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
 January by default.
@@ -317,7 +346,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 
 [App Screenshot (Still in Progress)]
 
-#### 4.3.3 View schedule of a day
+#### 4.3.3. View schedule of a day
 You can use this command to display all appointments on a particular day.
 
 Parameter Name | Description
@@ -338,7 +367,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 
 [App Screenshot (Still in Progress)]
 
-#### 4.3.4 Display appointments within a period
+#### 4.3.4. Display appointments within a period
 You can use this command to display all appointments within a period, defined by a start day and an end day.
 
 **Format:**<br>
@@ -390,13 +419,13 @@ Switches between tabs based on the tab number you have entered.
 
 [App Screenshot (Still in Progress)]
 
-### 4.2.3 Exit the program : `exit`
+### 4.4.3 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 4.2.4 Save data
+### 4.4.4 Saving data
 Baymax data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
