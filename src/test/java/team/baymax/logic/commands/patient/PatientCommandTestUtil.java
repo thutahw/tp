@@ -122,7 +122,7 @@ public class PatientCommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the patient at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s appointment book.
      */
     public static void showPatientAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());

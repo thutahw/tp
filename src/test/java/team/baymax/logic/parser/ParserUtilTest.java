@@ -117,9 +117,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
+        String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
         Gender expectedGender = new Gender(VALID_GENDER);
-        assertEquals(expectedGender, ParserUtil.parseGender(emailWithWhitespace));
+        assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
     }
 
     @Test

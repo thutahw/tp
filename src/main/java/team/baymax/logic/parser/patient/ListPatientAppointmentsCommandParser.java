@@ -8,6 +8,9 @@ import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new ListPatientAppointmentsCommand object
+ */
 public class ListPatientAppointmentsCommandParser implements Parser<ListPatientAppointmentsCommand> {
 
     /**
