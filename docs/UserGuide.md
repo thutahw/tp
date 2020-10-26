@@ -26,10 +26,9 @@ appointments? You have come to the right place! <br>
 
 Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just
 the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments,
-cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few
-neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in calendar that
-helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the
-ground. What are you waiting for? Head on to Section 2, “Quick Start”!
+cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a built-in
+calendar that helps you to see how available a particular day is at a glance, so that patients can make quick decisions
+on the ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 ## 2. Quick Start
 
@@ -50,8 +49,26 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Features
+## 3. About
 
+### 3.1. Structure of this Document
+(Contributed by Li Jianhan)
+
+To give you the most amount of flexbility over what you can do with Baymax, we have provided a large set of features.
+To help you, we have structured this User Guide in such a way that you can easily find what you need. In the next subsection,
+Section 3.2, “Reading this Document”, you will find useful tips on reading this document. It is then followed by Section
+4, “Features” where the main features of Baymax and their commands are documented:
+
+### 3.2. Reading this Document
+However, before moving on to the next section, you may want to familiarise yourself with some technical terms, symbols
+and syntax that are used throughout this document. In the following sub-section, you can find all the information you need to know
+when reading this document.
+
+3.2.1 Terminology related to the GUI
+
+3.2.2. General Symbols and Syntax
+
+3.2.3. Command Syntax and Usage
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -70,28 +87,21 @@ ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
 </div>
 
-### Viewing help : `help`
+## 4. Features
 
-Shows a link that brings the user to the help page.
+### 4.1. Managing Patient Information
 
-**Format:**<br>
-`help`
+This feature allows you to manage patient information. You can add a new patient, delete an existing patient and edit a
+patient's details.
 
-**Example:**<br>
-1. Type `help` into the command box.
-2. Press `Enter` on your keyboard <br>
+This section will also feature a range of methods for finding patients depending on your needs. For example,
 
-**Outcome:**<br>
-1. A link directing the user to the help page will be displayed as shown below.<br>
+1. If you know a patient's NRIC, you can directly find his profile using the `findByNric` command.
+2. However, if you only remember a patient's first name, you can narrow down to a list of patients with that first name using
+the `findByName` command. 
+3. Lastly, you can find patients by the tags assigned to them. (see section xxx for more information on tags)
 
-![help](images/help.png)
-
-### 3.1 Managing Patient Information
-
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient, edit a
-patient's details, find a patient by the name and list all the patients in the system.
-
-#### 3.1.1 Add a new patient: `addpatient`
+#### 4.1.1. Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
 
 Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
@@ -116,7 +126,7 @@ If the command is valid (i.e. the user keyed in the valid fields):
 
 ![addpatient](images/addpatient.png)
 
-#### 3.1.2 List all patients: `listpatient`
+#### 4.1.2. List all patients: `listpatient`
 You can use this command to list all the patients in the system.
 
 **Format:**<br>
@@ -131,7 +141,7 @@ You can use this command to list all the patients in the system.
 
 ![listpatient](images/listpatient.png)
 
-#### 3.1.3 Delete a patient profile: `deletepatient`
+#### 4.1.3 Delete a patient profile: `deletepatient`
 You can use this command to delete a patient’s profile by his or her ID. However, you will need to use the `listpatient` command
 or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be deleted, and prevent
 accidental deletes.
@@ -150,7 +160,7 @@ If the _PATIENT_ID_ (i.e 4) is valid:
 
 ![deletepatient](images/deletepatient.png)
 
-#### 3.1.4 Edit a patient profile: `editpatient`
+#### 4.1.4 Edit a patient profile: `editpatient`
 You can use this command to edit a patient’s profile. However, you will need to use the `listpatient` command
 or the `findpatient` command to find out the patient’s ID first. This extra step helps you to confirm the profile to be edited, and prevent
 accidental edits.
@@ -169,7 +179,7 @@ If the _PATIENT_ID_ (i.e 2) is valid:
 
 ![editpatient](images/editpatient.png)
 
-#### 3.1.5 Find a patient: `find`
+#### 4.1.5 Find a patient: `find`
 You can use this command to find a patient’s profile by entering a part of his name. The search string for name is not case-sensitive.
 
 **Format:**<br>
@@ -184,11 +194,11 @@ You can use this command to find a patient’s profile by entering a part of his
 
 ![findpatient](images/findpatient.png)
 
-### 3.2 Managing Appointments
+### 4.2 Managing Appointments
 This feature allows you to manage the appointments of every single patient. You can
 add an appointment, edit an appointment and list all the appointments in the system.
 
-#### 3.2.1 Add a new appointment: `addappt`
+#### 4.2.1 Add a new appointment: `addappt`
 You can use this command to add a new appointment for a patient.
 
 Before we examine the format of this command, let us take a look at what the parameters it takes are and what they mean:
@@ -213,7 +223,7 @@ If the command is valid (i.e. the user keyed in the valid fields):
 
 ![addappt](images/addappt.png)
 
-#### 3.2.2 List all appointments: `listappt`
+#### 4.2.2. List all appointments: `listappt`
 You can use this command to list all the appointments in the system.
 
 **Format:**<br>
@@ -228,7 +238,7 @@ You can use this command to list all the appointments in the system.
 
 ![listappt](images/listappt.png)
 
-#### 3.2.3 Edit an appointment: `editappt`
+#### 4.2.3. Edit an appointment: `editappt`
 You can use this command to edit an appointment. However, you will need to use the `listappt` command
 to find out the patient’s ID first. This extra step helps you to confirm the appointment to be edited, and prevent
 accidental edits.
@@ -247,12 +257,12 @@ If the INDEX (i.e 1) is valid:
 
 ![editappt](images/editappt.png)
 
-### 3.3 Utilizing the Calendar
+### 4.3. Utilizing the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
 set the calendar to a particular year and month.
 
-#### 3.3.1 Switching to a particular year
+#### 4.3.1 Switching to a particular year
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
 scheduled one year in advance, you can use this function to switch to the following year. The year set by this command
 will affect the command we will discuss in Section 3.3.2 (Switching to a particular month).
@@ -270,7 +280,7 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 
 [insert screenshot]
 
-#### 3.3.2 Switching to a particular month
+#### 4.3.2 Switching to a particular month
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
 current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
 January by default.
@@ -292,7 +302,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 
 [Insert Screenshot]
 
-#### 3.3.3 Displaying appointments on a particular day in the current month
+#### 4.3.3 Displaying appointments on a particular day in the current month
 You can use this command to display all appointments on a particular day.
 
 Parameter Name | Description
@@ -313,7 +323,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 
 [Insert Screenshot]
 
-#### 3.3.4 Displaying appointments within the next n days
+#### 4.3.4 Displaying appointments within the next n days
 You can use this command to display all appointments within the next n days. For example, choosing n to be 7, Baymax
 will display all appointments in the upcoming week (7 days).
 
@@ -332,17 +342,53 @@ will display all appointments in the upcoming week (7 days).
 
 [Insert Screenshot]
 
-### Exiting the program : `exit`
+### 4.4. Miscellaneous
+
+### 4.4.1. Viewing help : `help`
+
+Displays a list of commands to jog your memory and quickly get started. If more details about the commands are needed,
+you can visit the full *User Guide* via the URL link provided as well.
+
+**Format:**<br>
+`help`
+
+**Example:**<br>
+1. Type `help` into the command box.
+2. Press `Enter` on your keyboard <br>
+
+**Outcome:**<br>
+1. A link directing the user to the help page will be displayed as shown below, together with summary of the list of commands.<br>
+
+![help](images/help.png)
+
+### 4.4.2. Switching between tabs : `tab`
+
+Switches between tabs based on the tab number you have entered.
+
+**Format:**<br>
+`tab TAB_NUMBER`
+
+**Example:**<br>
+1. Type `tab 2` into the command box.
+2. Press `Enter` on your keyboard <br>
+
+**Outcome:**<br>
+1. The second tab, featuring the calendar page, with be displayed as shown in the image below.<br>
+
+![help](images/switchtab.png)
+
+
+### 4.2.3 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### 4.2.4 Saving the data
 Baymax data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
-## 4. FAQ
+## 5. FAQ
 
 
-## 5. Command summary
+## 6. Command summary
