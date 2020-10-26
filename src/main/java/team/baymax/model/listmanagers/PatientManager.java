@@ -115,7 +115,8 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     }
 
     /**
-     * Returns the first patient matching the given name, if it exists, otherwise throws an {@code ElementNotFoundException}
+     * Returns the first patient matching the given name, if it exists,
+     * otherwise throws an {@code ElementNotFoundException}
      */
     public Patient getPatientByName(Name name) throws ElementNotFoundException {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(name.toString()));
