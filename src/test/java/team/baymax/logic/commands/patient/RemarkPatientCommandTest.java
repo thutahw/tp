@@ -1,5 +1,8 @@
 package team.baymax.logic.commands.patient;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.CommandTestUtil;
@@ -34,5 +37,25 @@ class RemarkPatientCommandTest {
         expectedModel.setPatient(firstPatient, editedPatient);
 
         CommandTestUtil.assertCommandSuccess(remarkPatientCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        Patient patient = new PatientBuilder().build();
+        RemarkPatientCommand remarkPatientCommandA = new RemarkPatientCommand(TypicalIndexes.INDEX_FIRST_PATIENT,
+                new Remark(REMARK_STUB));
+        RemarkPatientCommand remarkPatientCommandB = new RemarkPatientCommand(TypicalIndexes.INDEX_SECOND_PATIENT,
+                patient.getRemark());
+        // null -> returns False
+        assertFalse(remarkPatientCommandA.equals(null));
+        // different type -> returns False
+        assertFalse(remarkPatientCommandA.equals(1));
+        // this -> returns True
+        assertTrue(remarkPatientCommandA.equals(remarkPatientCommandA));
+        // remark command but with different state-> returns False
+        assertFalse(remarkPatientCommandA.equals(remarkPatientCommandB));
+        // remark command with same state -> returns True
+        assertTrue(remarkPatientCommandB.equals(new RemarkPatientCommand(TypicalIndexes.INDEX_SECOND_PATIENT,
+                patient.getRemark())));
     }
 }

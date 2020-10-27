@@ -27,6 +27,8 @@ import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.model.util.SampleDataUtil;
 import team.baymax.storage.Storage;
 import team.baymax.storage.StorageManager;
+import team.baymax.storage.appointment.AppointmentManagerStorage;
+import team.baymax.storage.appointment.JsonAppointmentManagerStorage;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.patient.PatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
@@ -61,7 +63,9 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         PatientManagerStorage patientManagerStorage = new JsonPatientManagerStorage(
                 userPrefs.getPatientStorageFilePath());
-        storage = new StorageManager(patientManagerStorage, userPrefsStorage);
+        AppointmentManagerStorage appointmentManagerStorage = new JsonAppointmentManagerStorage(
+                userPrefs.getAppointmentStorageFilePath());
+        storage = new StorageManager(patientManagerStorage, appointmentManagerStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -79,7 +83,7 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         ReadOnlyListManager<Patient> patientManager = initPatientManager(storage);
-        ReadOnlyListManager<Appointment> appointmentManager = initAppointmentManager(storage);
+        ReadOnlyListManager<Appointment> appointmentManager = initAppointmentManager(patientManager, storage);
         return new ModelManager(patientManager, appointmentManager, userPrefs);
     }
 
@@ -115,8 +119,27 @@ public class MainApp extends Application {
      * not found, or an empty appointment manager will be used isntead of errors occur when reading {@code storage}'s
      * appointment manager.
      */
-    private ReadOnlyListManager<Appointment> initAppointmentManager(Storage storage) {
-        return new AppointmentManager();
+    private ReadOnlyListManager<Appointment> initAppointmentManager(
+            ReadOnlyListManager<Patient> patientManager, Storage storage) {
+        Optional<ReadOnlyListManager<Appointment>> appointmentManagerOptional;
+        ReadOnlyListManager<Appointment> initialAppointmentManager;
+
+        try {
+            appointmentManagerOptional = storage.readAppointments(new PatientManager(patientManager));
+            if (!appointmentManagerOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample appointment manager");
+            }
+            initialAppointmentManager = appointmentManagerOptional
+                    .orElseGet(SampleDataUtil::getSampleAppointmentManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AppointmentManager");
+            initialAppointmentManager = new AppointmentManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AppointmentManager");
+            initialAppointmentManager = new AppointmentManager();
+        }
+
+        return initialAppointmentManager;
     }
 
     private void initLogging(Config config) {
@@ -199,7 +222,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Baymax ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

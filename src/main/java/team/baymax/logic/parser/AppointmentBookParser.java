@@ -11,23 +11,26 @@ import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.ExitCommand;
 import team.baymax.logic.commands.HelpCommand;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
+import team.baymax.logic.commands.appointment.DeleteAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListAppointmentCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
 import team.baymax.logic.commands.patient.FindPatientCommand;
+import team.baymax.logic.commands.patient.ListPatientAppointmentsCommand;
 import team.baymax.logic.commands.patient.ListPatientCommand;
 import team.baymax.logic.commands.patient.RemarkPatientCommand;
 import team.baymax.logic.parser.appointment.AddAppointmentCommandParser;
+import team.baymax.logic.parser.appointment.DeleteAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
 import team.baymax.logic.parser.patient.EditPatientCommandParser;
 import team.baymax.logic.parser.patient.FindPatientCommandParser;
+import team.baymax.logic.parser.patient.ListPatientAppointmentsCommandParser;
 import team.baymax.logic.parser.patient.RemarkPatientCommandParser;
-
 
 /**
  * Parses user input.
@@ -74,6 +77,9 @@ public class AppointmentBookParser {
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
 
+        case ListPatientAppointmentsCommand.COMMAND_WORD:
+            return new ListPatientAppointmentsCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -91,6 +97,9 @@ public class AppointmentBookParser {
 
         case EditAppointmentCommand.COMMAND_WORD:
             return new EditAppointmentCommandParser().parse(arguments);
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return new DeleteAppointmentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

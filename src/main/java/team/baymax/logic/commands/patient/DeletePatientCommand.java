@@ -13,11 +13,11 @@ import team.baymax.model.Model;
 import team.baymax.model.patient.Patient;
 
 /**
- * Deletes a patient identified using it's displayed index from the address book.
+ * Deletes a patient identified using it's displayed index from the appointment book.
  */
 public class DeletePatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletePatient";
+    public static final String COMMAND_WORD = "deletepatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by the index number used in the displayed patient list.\n"

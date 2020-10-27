@@ -1,24 +1,52 @@
 @startuml
-!include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
+hide empty members
+skinparam linetype ortho
+class JsonAppointmentManagerStorage {
+    FilePath path
+}
 
-Interface Storage <<Interface>>
-Interface UserPrefsStorage <<Interface>>
-Interface AddressBookStorage <<Interface>>
+class JsonPatientManagerStorage {
+    FilePath path
+}
 
-Class StorageManager
-Class JsonUserPrefsStorage
-Class JsonAddressBookStorage
+class JsonUserPrefsStorage {
+    FilePath path
+}
 
-StorageManager .left.|> Storage
-StorageManager o-right-> UserPrefsStorage
-StorageManager o--> AddressBookStorage
+interface PatientManagerStorage
+interface AppointmentManagerStorage
+interface UserPrefsStorage
+interface Storage
 
-JsonUserPrefsStorage .left.|> UserPrefsStorage
-JsonAddressBookStorage .left.|> AddressBookStorage
-JsonAddressBookStorage .down.> JsonSerializableAddressBookStorage
-JsonSerializableAddressBookStorage .right.> JsonSerializablePatient
-JsonSerializablePatient .right.> JsonAdaptedTag
+JsonAdaptedPatient .right.> JsonAdaptedTag
+JsonAdaptedAppointment .left.> JsonAdaptedTag
+
+StorageManager ..u..|> Storage
+PatientManagerStorage -r[hidden]- AppointmentManagerStorage
+AppointmentManagerStorage -r[hidden]- UserPrefsStorage
+StorageManager .u.> AppointmentManagerStorage
+StorageManager .u.> UserPrefsStorage
+StorageManager .u.> PatientManagerStorage
+
+JsonAdaptedPatient .d.> Patient
+JsonAdaptedPatient <.d. JsonSerializablePatientManager
+JsonAdaptedAppointment .d.> Appointment
+JsonSerializableAppointmentManager .u.> JsonAdaptedAppointment
+
+JsonPatientManagerStorage -r-> Patient
+JsonPatientManagerStorage .u.> JsonSerializablePatientManager
+JsonPatientManagerStorage .d.|> PatientManagerStorage
+
+JsonAppointmentManagerStorage -u-> Appointment
+JsonAppointmentManagerStorage .d.|> AppointmentManagerStorage
+JsonSerializableAppointmentManager <.d. JsonAppointmentManagerStorage
+
+JsonUserPrefsStorage -r-> UserPrefs
+JsonUserPrefsStorage .d.|> UserPrefsStorage
+JsonUserPrefsStorage -l[hidden]- JsonAppointmentManagerStorage
+
+Storage -u-|> PatientManagerStorage
+Storage -u-|> AppointmentManagerStorage
+Storage -u-|> UserPrefsStorage
+
 @enduml

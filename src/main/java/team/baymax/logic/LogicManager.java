@@ -48,6 +48,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.savePatients(model.getPatientManager());
+            storage.saveAppointments(model.getAppointmentManager());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
