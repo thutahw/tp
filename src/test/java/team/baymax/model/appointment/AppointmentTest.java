@@ -10,6 +10,7 @@ import static team.baymax.testutil.TypicalAppointments.APPT2;
 import static team.baymax.testutil.TypicalAppointments.APPT3;
 import static team.baymax.testutil.TypicalAppointments.APPT4;
 import static team.baymax.testutil.TypicalAppointments.APPT5;
+import static team.baymax.testutil.TypicalAppointments.APPT6;
 import static team.baymax.testutil.TypicalPatients.ALICE;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class AppointmentTest {
     public void isSameAppointment() {
 
         // same dateTime -> return True
-        assertTrue(APPT1.isSame(APPT4));
+        assertTrue(APPT1.isSame(APPT6));
         // different dateTime -> return False
         assertFalse(APPT1.isSame(APPT3));
         //same patient but different dateTime -> False
