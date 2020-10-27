@@ -1,7 +1,7 @@
 package team.baymax.model.patient;
 
 /**
- * Represents a Patient's remark in the Address book.
+ * Represents a Patient's remark in the appointment book.
  * Guarantees: immutable;}
  */
 public class Remark {

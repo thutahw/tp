@@ -43,7 +43,8 @@ public class PatientUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getGender().ifPresent(email -> sb.append(CliSyntax.PREFIX_GENDER).append(email.gender).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(CliSyntax.PREFIX_GENDER).append(gender.gender)
+                .append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(CliSyntax.PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
