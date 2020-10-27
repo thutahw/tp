@@ -37,45 +37,44 @@ public class CalendarPage extends UiPart<Region> {
     }
 
     private void initialize() {
-
-        calendarGridView.setMaxWidth(500);
-
-        int day = 1;
-
+        calendarGridView.setMaxWidth(550);
         yearLabel.textProperty().bind(appointmentCalendar.getYearProperty());
         monthLabel.textProperty().bind(appointmentCalendar.getMonthProperty());
 
-        while (day <= appointmentCalendar.getMonth().getNumOfDays()) {
+        renderCalendar();
+    }
+
+    private void renderCalendar() {
+        int day = 1;
+        int numOfDaysInMonth = appointmentCalendar.getMonth().getNumOfDays();
+        while (day <= numOfDaysInMonth) {
             CalendarViewCell cell = new CalendarViewCell(new Day(day));
-            cell.setGreen();
             calendarGridView.getChildren().add(cell);
             day++;
         }
     }
 
     static class CalendarViewCell extends Button {
+        private static String style = "-fx-background-color: #ffffff; "
+                    + "-fx-font-family: 'Adobe Gothic Std';"
+                    + "-fx-text-fill: #0e0e0e;"
+                    + "-fx-border-style: hidden hidden solid hidden;"
+                    + "-fx-border-width: 5;"
+                    + "-fx-border-color: #a5a5a5; "
+                    + "-fx-padding: 5;"
+                    + "-fx-border-insets: 5;"
+                    + "-fx-background-insets: 5;";
 
         public CalendarViewCell(Day day) {
             super();
 
             setText(day.getText());
+
+            setStyle(style);
             setMinHeight(75.0);
             setMinWidth(75.0);
             setMouseTransparent(true);
         }
-
-        private void setGreen() {
-            setStyle("-fx-background-color: #008000;");
-        }
-
-        private void setRed() {
-            setStyle("-fx-background-color: #FF0000;");
-        }
-
-        private void setOrange() {
-            setStyle("-fx-background-color: #FFA500;");
-        }
-
     }
 
 }

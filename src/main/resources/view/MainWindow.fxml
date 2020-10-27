@@ -21,6 +21,8 @@
         <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
         <URL value="@TabPane.css" />
+        <URL value="@CalendarPage.css" />
+        <URL value="@SchedulePage.css" />
       </stylesheets>
 
       <VBox>

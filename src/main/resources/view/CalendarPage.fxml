@@ -8,13 +8,15 @@
 
 <?import javafx.scene.layout.TilePane?>
 <StackPane fx:id="calendarPage" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox fx:id="calendarContainer" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+    <VBox minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
         <Label text="Calendar"></Label>
-        <Label fx:id="yearLabel"></Label>
-        <Label fx:id="monthLabel"></Label>
-        <TilePane fx:id="calendarGridView"></TilePane>
+        <VBox fx:id="calendarContainer" styleClass="calendar-container">
+            <Label fx:id="yearLabel" styleClass="year-label"></Label>
+            <Label fx:id="monthLabel" styleClass="month-label"></Label>
+            <TilePane fx:id="calendarGridView" styleClass="grid-view"></TilePane>
+        </VBox>
     </VBox>
 </StackPane>

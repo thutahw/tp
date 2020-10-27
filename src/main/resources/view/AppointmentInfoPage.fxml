@@ -10,7 +10,7 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <Label text="Appointment"></Label>
-        <StackPane fx:id="appointmentListPanelPlaceholder"></StackPane>
+        <Label text="Appointment Information"></Label>
+        <StackPane fx:id="appointmentListPanelPlaceholder"/>
     </VBox>
 </StackPane>

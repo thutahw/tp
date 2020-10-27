@@ -60,8 +60,6 @@ public class SideTabPane extends UiPart<Region> {
 
     private void initialize() {
 
-        sideTabPane.setMouseTransparent(true);
-
         PatientInfoPage patientInfoPage = new PatientInfoPage(patients);
         patientTabContentPlaceholder.getChildren().add(patientInfoPage.getRoot());
 
