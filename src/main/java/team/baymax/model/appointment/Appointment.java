@@ -3,6 +3,7 @@ package team.baymax.model.appointment;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,6 +22,21 @@ public class Appointment implements UniqueListElement {
     private final AppointmentStatus status;
     private final Set<Tag> tags;
     private final Description description;
+
+    /**
+     * For use by DeleteAppointment and FindAppointment, as they only
+     * require comparing patient and dateTime
+     * @param patient
+     * @param dateTime
+     */
+    public Appointment(Patient patient, DateTime dateTime) {
+        requireAllNonNull(patient, dateTime);
+        this.patient = patient;
+        this.dateTime = dateTime;
+        this.status = AppointmentStatus.UPCOMING;
+        this.description = new Description("Default description");
+        this.tags = new HashSet<>();
+    }
 
     /**
      * Every field must be present and not null.
@@ -75,6 +91,7 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
 
         return otherAppointment != null
+                && otherAppointment.getPatient().equals(getPatient())
                 && otherAppointment.getDateTime().equals(getDateTime());
     }
 
