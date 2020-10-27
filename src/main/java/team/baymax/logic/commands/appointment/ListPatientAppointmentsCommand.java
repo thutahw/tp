@@ -18,7 +18,7 @@ import team.baymax.model.patient.PatientHasAppointmentPredicate;
  */
 public class ListPatientAppointmentsCommand extends Command {
 
-    public static final String COMMAND_WORD = "listapptby";
+    public static final String COMMAND_WORD = "listapptof";
 
     public static final String MESSAGE_SUCCESS = "Listed all the appointments of the patient";
 

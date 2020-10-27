@@ -24,6 +24,7 @@
         <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
         <URL value="@TabPane.css" />
+        <URL value="@AppointmentInfoPage.css" />
       </stylesheets>
 
       <VBox>
