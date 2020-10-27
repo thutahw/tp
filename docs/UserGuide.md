@@ -26,11 +26,11 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.1. [Switch to a particular year: `year`](#431-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.2. [Switch to a particular month: `month`](#432-switch-to-a-particular-month-month)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.3. [View schedule of a day: `day`](#433-view-schedule-of-a-day-day)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Displaying appointments within a period: `period`](#434-display-appointments-within-a-period-period)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Display appointments within a period: `period`](#434-display-appointments-within-a-period-period)<br>
     4.4. [Utilities](#44-utilities)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.1. [View help : `help`](#441-view-help--help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.2. [Switch between tabs: `tab`](#442-switch-between-tabs-tab)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.3. [Exiting the program: `exit`](#443-exiting-the-program--exit)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.3. [Exit the program: `exit`](#443-exit-the-program--exit)<br>
 5. [FAQ](#5-faq)<br>
 6. [Command Summary](#6-command-summary)<br>
     6.1. [Patient Information Management Commands](#61-patient-information-management-commands)<br>
@@ -82,10 +82,9 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, �
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3. About
-
-### 3.1. Structure of this Document
 (Contributed by Li Jianhan & Shi Hui Ling)
 
+### 3.1. Structure of this Document
 To give you the most amount of flexibility over what you can do with Baymax, we have provided a large set of features.
 We have structured this User Guide in such a way that you can easily find what you need. In the next subsection,
 *Section 3.2 Reading this Document*, you will find useful tips on using this document. All of Baymax's features and 
@@ -145,6 +144,7 @@ Commands all take the following format:
 
 -----------------------------------------------------------------------------------
 ## 4. Features
+(Contributed by Thuta and ...everyone?)
 
 ### 4.1. Patient Information Management
 
@@ -161,7 +161,7 @@ the `findByName` command.
 You can use this command to add a new patient who has not yet been registered.
 
 **Format:**<br>
-`addpatient nric/NRIC name/NAME contact/CONTACT gender/GENDER`
+`addpatient nric/NRIC name/NAME contact/CONTACT gender/GENDER [r/REMARK] [t/TAG]`
 
 **Parameters:** 
 
@@ -171,6 +171,8 @@ NRIC          | The nric of the patient. It must <ins>start and end</ins> with a
 NAME          | The name of the patient. It must consist <ins>solely</ins> of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
 CONTACT       | The hand phone number that the patient wishes to be contacted by. It must consist <ins>solely</ins> of numbers. E.g. 91234567
 GENDER        | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’.
+REMARK        | Any remarks about the patient. It can be any text -- alphanumerical, special characters etc. are allowed. E.g. Only available on Mon / Tues
+TAG           | The tag for the patient. It must only be alphanumerical and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic
 
 **Example:**<br>
 1. Type `addpatient nric/S9772234F name/Jason Tan contact/98765432 gender/M` into the command box.
@@ -186,7 +188,8 @@ If the command is valid (i.e. the user keyed in the valid fields):
 2. The patient with the information supplied by the parameters will be created and added to the system.
 
 #### 4.1.2. List all patients: `listpatient`
-You can use this command to list all the patients in the system.
+You can use this command to list all the patients in the system. The *Main Display* of the GUI will show
+the list of patients with all their information: name, nric, contact number, gender, remark, tags, and appointments.
 
 **Format:**<br>
 `listpatient`
@@ -246,6 +249,7 @@ Listed below are some examples of valid `editpatient` commands:
 * `editpatient PATIENT_ID contact/CONTACT`
 * `editpatient PATIENT_ID r/REMARK`
 * You can also supply multiple parameters, e.g. `editpatient PATIENT_ID gender/GENDER name/NAME contact/CONTACT`
+* The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
 
@@ -257,7 +261,7 @@ NAME    | The name of the patient. It must consist solely of alphabets, and shou
 CONTACT | The hand phone number which the patient wishes to be contacted by. It must consist solely of numbers. E.g. 91710012
 GENDER  | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’.
 REMARK  | Any remarks about the patient. It can be any text -- alphanumerical, special characters etc. are allowed. E.g. Only available on Mon / Tues
-TAG     | The tag for the patient. It must only be alphanumerical and must not contain spaces or special characters. E.g. Diabetic
+TAG     | The tag for the patient. It must only be alphanumerical and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic
 
 **Example:**<br>
 1. Type `editpatient 2 t/Asthmatic` into the command box.
@@ -317,7 +321,7 @@ Parameter Name | Description
 ID            | The index of the patient in the most recently displayed list. It must be a positive integer.
 DATETIME      | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 DESCRIPTION   | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
-TAG           | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. E.g. Xray
+TAG           | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 
 **Format:**<br>
 `addappt id/ID dt/DATETIME desc/DESCRIPTION [t/TAG]`
@@ -389,6 +393,7 @@ Listed below are some examples of valid `editappt` commands:
 * `editappt INDEX desc/DESC`
 * `editappt INDEX t/TAG`
 * You can also supply multiple parameters, e.g. `editappt INDEX t/TAG desc/DESC dt/DATETIME`
+* The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
 
@@ -397,7 +402,7 @@ Parameter Name | Description
 ID            | The index of the patient in the most recently displayed list. It must be a positive integer.
 DATETIME      | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 DESCRIPTION   | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
-TAG           | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. E.g. Xray
+TAG           | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 
 **Example:**<br>
 1. Type `editappt 1 dt/12-10-2020 12:00` into the command box.
@@ -594,7 +599,7 @@ TAB_NUMBER | Tab that Baymax will switch to
 
 [App Screenshot (Still in Progress)]
 
-#### 4.4.3 Exiting the program : `exit`
+#### 4.4.3 Exit the program : `exit`
 
 You can use this command to exit the program.
 
@@ -619,8 +624,37 @@ You can use this command to exit the program.
 
 ### 6.1 Patient Information Management Commands
 
+**Command**             | **Example**
+------------------------|--------------------
+Add a Patient: `addpatient nric/NRIC name/NAME contact/CONTACT gender/GENDER [r/REMARK] [t/TAG]` | `addpatient nric/S9772234F name/Jason Tan contact/98765432 gender/M` 
+List All Patients: `listpatient` | `listpatient`
+Delete a Patient: `deletepatient PATIENT_ID` | `deletepatient 4`
+Edit a Patient's Information: `editpatient PATIENT_ID <at least 1 patient information parameter>` | `editpatient PATIENT_ID contact/82345678`
+Find a Patient: `findpatient name/NAME` | `findpatient Alex`
+
 ### 6.2 Appointment Management Commands
+
+**Command**             | **Example**
+------------------------|--------------------
+Add an Appointment: `addappt id/ID dt/DATETIME desc/DESCRIPTION [t/TAG]` | `addappt id/1 dt/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
+List Appointments of a Patient: `listapptby PATIENT_ID` | `listapptby 1`
+List All Appointments: `listappt` | `listappt`
+Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 dt/12-10-2020 12:00`
+Delete an Appointment: `deleteappt id/PATIENT_ID (OR nric/NRIC OR name/NAME) dt/DATETIME` | `deleteappt nric/S1234567A dt/20-01-2020 15:00`
 
 ### 6.3 Calendar Commands
 
+**Command**             | **Example**
+------------------------|--------------------
+Switch to a particular year: `year YEAR` | `year 2021`
+Switch to a particular month: `month MONTH` | `month 11`
+View schedule of a day: `day DAY` | `day 30`
+Display appointments within a period: `period from/START to/END` | `period from/1 to/7`
+
 ### 6.4 Utilities Commands
+
+**Command**             | **Example**
+------------------------|--------------------
+View help: `help` | `help`
+Switch between tabs: `tab` | `tab 2`
+Exit the program : `exit` | `exit`

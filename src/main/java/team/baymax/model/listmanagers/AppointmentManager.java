@@ -8,7 +8,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import team.baymax.commons.core.time.DateTime;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
@@ -113,6 +115,26 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         return "AppointmentManager:\n"
                 + appointments.stream().map(Appointment::toString).collect(Collectors.joining("\n"))
                 + "\nTotal number of appointments: " + appointments.size();
+    }
+
+    // directly modifies appointments list to mark all appointments that have passed as DONE
+    // if they are not explicitly marked as MISSING
+    private void markAllPastAppointmentsAsDone() {
+        Predicate<Appointment> apptPastButMarkedAsUpcoming = new Predicate<Appointment>() {
+            @Override
+            public boolean test(Appointment appointment) {
+                return appointment.getDateTime().compareTo(new DateTime()) < 0
+                        && appointment.getStatus() == AppointmentStatus.UPCOMING;
+            }
+        };
+
+        while (appointments.contains(apptPastButMarkedAsUpcoming)) {
+            Appointment pastAppt = appointments.getByPredicate(apptPastButMarkedAsUpcoming);
+            Appointment markedAsDoneAppt = new Appointment(pastAppt.getPatient(),
+                    pastAppt.getDateTime(), AppointmentStatus.DONE,
+                    pastAppt.getDescription(), pastAppt.getTags());
+            setAppointment(pastAppt, markedAsDoneAppt);
+        }
     }
 
     @Override
