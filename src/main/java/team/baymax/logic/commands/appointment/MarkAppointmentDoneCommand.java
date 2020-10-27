@@ -36,9 +36,9 @@ public class MarkAppointmentDoneCommand extends Command {
             + "OR "
             + PREFIX_DATETIME + "DATETIME "
             + "(" + PREFIX_NAME + "NAME OR "
-            + PREFIX_NRIC + "NRIC)"
+            + PREFIX_NRIC + "NRIC)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATETIME + "11-10-2020 12:30 "
+            + PREFIX_DATETIME + "10-10-2020 14:00 "
             + PREFIX_NAME + "Alex Yeoh. "
             + "OR " + COMMAND_WORD + " "
             + PREFIX_ID + "1 ";

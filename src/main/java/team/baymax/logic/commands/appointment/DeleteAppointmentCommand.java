@@ -34,7 +34,7 @@ public class DeleteAppointmentCommand extends Command {
             + PREFIX_NRIC + "PATIENT_NRIC "
             + "OR "
             + PREFIX_NAME + "PATIENT_NAME) "
-            + PREFIX_DATETIME + "DATETIME "
+            + PREFIX_DATETIME + "DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 ";

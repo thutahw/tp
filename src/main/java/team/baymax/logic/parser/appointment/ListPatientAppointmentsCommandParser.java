@@ -1,12 +1,20 @@
 package team.baymax.logic.parser.appointment;
 
+import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
+import team.baymax.logic.parser.ArgumentMultimap;
+import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
+import team.baymax.model.patient.Name;
+import team.baymax.model.patient.Nric;
 
 /**
  * Parses input arguments and creates a new ListPatientAppointmentsCommand object
@@ -20,12 +28,22 @@ public class ListPatientAppointmentsCommandParser implements Parser<ListPatientA
      */
     @Override
     public ListPatientAppointmentsCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_NRIC);
+
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
             return new ListPatientAppointmentsCommand(index);
-        } catch (ParseException pe) {
+        } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            return new ListPatientAppointmentsCommand(name);
+        } else if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+            return new ListPatientAppointmentsCommand(nric);
+        } else {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPatientAppointmentsCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPatientAppointmentsCommand.MESSAGE_USAGE));
         }
     }
 }
