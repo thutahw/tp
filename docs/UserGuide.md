@@ -596,7 +596,7 @@ TAB_NUMBER | Tab that Baymax will switch to
 
 #### 4.4.3 Exiting the program : `exit`
 
-Exits the program.
+You can use this command to exit the program.
 
 **Format:** `exit`
 
