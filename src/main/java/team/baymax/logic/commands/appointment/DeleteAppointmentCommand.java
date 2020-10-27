@@ -14,7 +14,6 @@ import team.baymax.commons.core.time.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
-import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
@@ -140,6 +139,7 @@ public class DeleteAppointmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteAppointmentCommand // instanceof handles nulls
-                && getTabNumber().equals(((DeletePatientCommand) other).getTabNumber())); // state check
+                && targetIndex.equals(((DeleteAppointmentCommand) other).targetIndex)
+                && getTabNumber().equals(((DeleteAppointmentCommand) other).getTabNumber())); // state check
     }
 }

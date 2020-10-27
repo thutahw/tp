@@ -8,7 +8,7 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +52,8 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns False
-        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different tags -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_DIABETIC).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

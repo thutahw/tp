@@ -1,7 +1,7 @@
 package team.baymax.logic.commands;
 
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +20,6 @@ public class HelpCommandTest {
                 true,
                 false,
                 Index.fromOneBased(1));
-        assertPatientCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

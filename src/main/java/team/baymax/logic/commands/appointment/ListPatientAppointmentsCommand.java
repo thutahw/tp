@@ -1,4 +1,4 @@
-package team.baymax.logic.commands.patient;
+package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 

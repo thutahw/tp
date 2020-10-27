@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.listmanagers.AppointmentManager;
@@ -38,7 +39,7 @@ public class DeletePatientCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -62,7 +63,7 @@ public class DeletePatientCommandTest {
         expectedModel.deletePatient(patientToDelete);
         showNoPatient(expectedModel);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

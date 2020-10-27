@@ -6,6 +6,7 @@ import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.listmanagers.AppointmentManager;
@@ -32,7 +33,7 @@ public class AddPatientCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs());
         expectedModel.addPatient(validPatient);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(new AddPatientCommand(validPatient), model,
+        CommandTestUtil.assertCommandSuccess(new AddPatientCommand(validPatient), model,
                 String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient), expectedModel);
     }
 

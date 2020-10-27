@@ -1,9 +1,9 @@
-package team.baymax.logic.parser.patient;
+package team.baymax.logic.parser.appointment;
 
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.patient.ListPatientAppointmentsCommand;
+import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;

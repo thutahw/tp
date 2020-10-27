@@ -1,0 +1,155 @@
+package team.baymax.logic.commands;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import team.baymax.commons.core.GuiSettings;
+import team.baymax.model.Model;
+import team.baymax.model.appointment.Appointment;
+import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.patient.Patient;
+import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.testutil.AppointmentBuilder;
+
+/**
+ * A default model stub that have all of the methods failing.
+ */
+public class ModelStub implements Model {
+    @Override
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public GuiSettings getGuiSettings() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setGuiSettings(GuiSettings guiSettings) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getPatientStorageFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getAppointmentStorageFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setPatientStorageFilePath(Path patientStorageFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setAppointmentStorageFilePath(Path appointmentStorageFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addPatient(Patient patient) {
+        throw new AssertionError(
+                "This method should not be called.");
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        throw new AssertionError(
+                "This method should not be called.");
+    }
+
+    @Override
+    public void setPatientManager(ReadOnlyListManager<Patient> patientManager) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setAppointmentManager(ReadOnlyListManager<Appointment> appointmentManager) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyListManager<Patient> getPatientManager() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyListManager<Appointment> getAppointmentManager() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasPatient(Patient patient) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deletePatient(Patient target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteAppointment(Appointment target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setPatient(Patient target, Patient editedPatient) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Patient> getFilteredPatientList() {
+        ArrayList<Patient> patients = new ArrayList<>();
+        patients.add(AppointmentBuilder.DEFAULT_PATIENT);
+
+        return FXCollections.observableArrayList(patients);
+    }
+
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Appointment findAppointmentByPredicate(Predicate<Appointment> predicate) {
+        return null;
+    }
+
+    @Override
+    public void resetAllListManagers() {
+        throw new AssertionError("This method should not be called.");
+    }
+}

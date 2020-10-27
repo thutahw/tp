@@ -29,4 +29,11 @@ public class ListAppointmentCommand extends Command {
     public Index getTabNumber() {
         return Index.fromOneBased(4);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListAppointmentCommand // instanceof handles nulls
+                && getTabNumber().equals(((ListAppointmentCommand) other).getTabNumber()));
+    }
 }

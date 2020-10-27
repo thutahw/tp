@@ -38,16 +38,16 @@ public class PatientTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withGender(PatientCommandTestUtil.VALID_GENDER_BOB)
-                .withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same gender, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
-                .withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same phone, same gender, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND).build();
+        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
     }
 
@@ -82,7 +82,7 @@ public class PatientTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns true
-        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND).build();
+        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.equals(editedAlice));
     }
 }

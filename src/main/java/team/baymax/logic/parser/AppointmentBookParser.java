@@ -14,22 +14,22 @@ import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.commands.appointment.DeleteAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListAppointmentCommand;
+import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
 import team.baymax.logic.commands.patient.FindPatientCommand;
-import team.baymax.logic.commands.patient.ListPatientAppointmentsCommand;
 import team.baymax.logic.commands.patient.ListPatientCommand;
 import team.baymax.logic.commands.patient.RemarkPatientCommand;
 import team.baymax.logic.parser.appointment.AddAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.DeleteAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
+import team.baymax.logic.parser.appointment.ListPatientAppointmentsCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
 import team.baymax.logic.parser.patient.EditPatientCommandParser;
 import team.baymax.logic.parser.patient.FindPatientCommandParser;
-import team.baymax.logic.parser.patient.ListPatientAppointmentsCommandParser;
 import team.baymax.logic.parser.patient.RemarkPatientCommandParser;
 
 /**
