@@ -33,7 +33,12 @@ public class Appointment implements UniqueListElement {
         requireAllNonNull(patient, dateTime);
         this.patient = patient;
         this.dateTime = dateTime;
-        this.status = AppointmentStatus.UPCOMING;
+        // if the dateTime is in the future, set status as UPCOMING, otherwise DONE
+        if (dateTime.compareTo(DateTime.current()) > 0) {
+            this.status = AppointmentStatus.UPCOMING;
+        } else {
+            this.status = AppointmentStatus.DONE;
+        }
         this.description = new Description("Default description");
         this.tags = new HashSet<>();
     }
