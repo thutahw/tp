@@ -1,4 +1,4 @@
-package team.baymax.logic.parser;
+package team.baymax.logic.parser.patient;
 
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.patient.EditPatientCommand;
-import team.baymax.logic.parser.patient.EditPatientCommandParser;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Phone;

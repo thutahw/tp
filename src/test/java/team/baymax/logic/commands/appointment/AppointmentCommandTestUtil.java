@@ -1,6 +1,10 @@
 package team.baymax.logic.commands.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +17,27 @@ import team.baymax.model.listmanagers.AppointmentManager;
 import team.baymax.testutil.EditAppointmentDescriptorBuilder;
 
 public class AppointmentCommandTestUtil {
+
+    public static final String VALID_ID1 = "1";
+    public static final String VALID_ID2 = "2";
+    public static final String VALID_ID3 = "3";
+
     public static final String VALID_DATETIME_1 = "11-10-2020 12:00";
     public static final String VALID_DATETIME_2 = "13-10-2020 09:00";
     public static final String VALID_DESCRIPTION_1 = "Wisdom teeth extraction.";
     public static final String VALID_DESCRIPTION_2 = "Root canal treatment.";
     public static final String VALID_TAG_DIABETIC = "Diabetic";
     public static final String VALID_TAG_LTP = "LTP";
+
+    public static final String VALID_DESC_ID1 = " " + PREFIX_ID + VALID_ID1;
+    public static final String VALID_DESC_ID2 = " " + PREFIX_ID + VALID_ID2;
+    public static final String VALID_DESC_ID3 = " " + PREFIX_ID + VALID_ID3;
+    public static final String VALID_DESC_DATETIME_1 = " " + PREFIX_DATETIME + VALID_DATETIME_1;
+    public static final String VALID_DESC_DATETIME_2 = " " + PREFIX_DATETIME + VALID_DATETIME_2;
+    public static final String VALID_DESC_DESCRIPTION_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_1;
+    public static final String VALID_DESC_DESCRIPTION_2 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_2;
+    public static final String VALID_DESC_TAG_DIABETIC = " " + PREFIX_TAG + VALID_TAG_DIABETIC;
+    public static final String VALID_DESC_TAG_LTP = " " + PREFIX_TAG + VALID_TAG_LTP;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
