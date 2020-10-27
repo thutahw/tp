@@ -60,20 +60,20 @@ public class AddPatientCommandTest {
         AddPatientCommand addAliceCommand = new AddPatientCommand(alice);
         AddPatientCommand addBobCommand = new AddPatientCommand(bob);
 
-        // same object -> returns true
+        // same object -> returns True
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
-        // same values -> returns true
+        // same values -> returns True
         AddPatientCommand addAliceCommandCopy = new AddPatientCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
-        // different types -> returns false
+        // different types -> returns False
         assertFalse(addAliceCommand.equals(1));
 
-        // null -> returns false
+        // null -> returns False
         assertFalse(addAliceCommand.equals(null));
 
-        // different patient -> returns false
+        // different patient -> returns False
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 

@@ -15,7 +15,7 @@ import team.baymax.model.Model;
 import team.baymax.model.patient.Patient;
 
 /**
- * Adds a patient to the address book.
+ * Adds a patient to the appointment book.
  */
 public class AddPatientCommand extends Command {
 

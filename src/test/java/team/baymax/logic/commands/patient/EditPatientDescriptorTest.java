@@ -18,41 +18,41 @@ public class EditPatientDescriptorTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
+        // same values -> returns True
         EditPatientCommand.EditPatientDescriptor descriptorWithSameValues =
                 new EditPatientCommand.EditPatientDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
-        // same object -> returns true
+        // same object -> returns True
         assertTrue(DESC_AMY.equals(DESC_AMY));
 
-        // null -> returns false
+        // null -> returns False
         assertFalse(DESC_AMY.equals(null));
 
-        // different types -> returns false
+        // different types -> returns False
         assertFalse(DESC_AMY.equals(5));
 
-        // different values -> returns false
+        // different values -> returns False
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
-        // different name -> returns false
+        // different name -> returns False
         EditPatientCommand.EditPatientDescriptor editedAmy = new EditPatientDescriptorBuilder(DESC_AMY)
                 .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different phone -> returns false
+        // different phone -> returns False
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different gender -> returns false
+        // different gender -> returns False
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withGender(VALID_GENDER_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different remark -> returns false
+        // different remark -> returns False
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different tags -> returns False
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }

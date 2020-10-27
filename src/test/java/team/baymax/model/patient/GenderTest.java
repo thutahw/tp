@@ -20,10 +20,10 @@ public class GenderTest {
 
     @Test
     public void isValidGender() {
-        // null email
+        // null gender
         assertThrows(NullPointerException.class, () -> Gender.isValidGender(null));
 
-        // blank email
+        // blank gender
         assertFalse(Gender.isValidGender("")); // empty string
         assertFalse(Gender.isValidGender(" ")); // spaces only
     }
