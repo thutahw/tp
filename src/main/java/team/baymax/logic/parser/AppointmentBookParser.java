@@ -15,6 +15,7 @@ import team.baymax.logic.commands.appointment.DeleteAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
+import team.baymax.logic.commands.appointment.MarkAppointmentDoneCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
@@ -25,6 +26,7 @@ import team.baymax.logic.parser.appointment.AddAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.DeleteAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.ListPatientAppointmentsCommandParser;
+import team.baymax.logic.parser.appointment.MarkAppointmentDoneCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
@@ -100,6 +102,9 @@ public class AppointmentBookParser {
 
         case DeleteAppointmentCommand.COMMAND_WORD:
             return new DeleteAppointmentCommandParser().parse(arguments);
+
+        case MarkAppointmentDoneCommand.COMMAND_WORD:
+            return new MarkAppointmentDoneCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
