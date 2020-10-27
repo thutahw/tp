@@ -1,4 +1,4 @@
-package team.baymax.commons.core.time;
+package team.baymax.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
@@ -62,6 +62,34 @@ public class DateTime implements Comparable<DateTime> {
         return dateTime.format(FORMAT_STORAGE);
     }
 
+    public Day getDay() {
+        return new Day(dateTime.getDayOfMonth());
+    }
+
+    public Month getMonth() {
+        return new Month(dateTime.getMonthValue());
+    }
+
+    public Year getYear() {
+        return new Year(dateTime.getYear());
+    }
+
+    public Date getDate() {
+        return new Date(getDay(), getMonth(), getYear());
+    }
+
+    public Hour getHour() {
+        return new Hour(dateTime.getHour());
+    }
+
+    public Minute getMinute() {
+        return new Minute(dateTime.getMinute());
+    }
+
+    public Time getTime() {
+        return new Time(getHour(), getMinute());
+    }
+
     @Override
     public int compareTo(DateTime other) {
         return dateTime.compareTo(other.dateTime);
@@ -83,5 +111,4 @@ public class DateTime implements Comparable<DateTime> {
     public String toString() {
         return dateTime.format(FORMAT_OUTPUT);
     }
-
 }

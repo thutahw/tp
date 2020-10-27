@@ -1,8 +1,8 @@
-package team.baymax.model.listmanagers;
+package team.baymax.model.modelmanagers;
 import javafx.collections.ObservableList;
 
 /**
- * Unmodifiable view of a PatientManager
+ * Unmodifiable view of a ListManager
  */
 public interface ReadOnlyListManager<T> {
     /**

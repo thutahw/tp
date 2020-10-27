@@ -10,10 +10,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.Year;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
@@ -39,6 +42,33 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static Day parseDayOfMonth(String day) throws ParseException {
+        String trimmedDayOfMonth = day.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
+        if (invalidNumber || !Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Day(Integer.parseInt(trimmedDayOfMonth));
+    }
+
+    public static Month parseMonth(String month) throws ParseException {
+        String trimmedMonth = month.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
+        if (invalidNumber || !Month.isValidMonth(Integer.parseInt(trimmedMonth))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Month(Integer.parseInt(trimmedMonth));
+    }
+
+    public static Year parseYear(String year) throws ParseException {
+        String trimmedYear = year.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedYear);
+        if (invalidNumber || !Year.isValidYear(Integer.parseInt(trimmedYear))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Year(Integer.parseInt(trimmedYear));
     }
 
     /**
@@ -170,13 +200,13 @@ public class ParserUtil {
      * {@code Set<Tag>} containing zero tags.
      */
     public static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(parseTags(tagSet));
     }
 
 }

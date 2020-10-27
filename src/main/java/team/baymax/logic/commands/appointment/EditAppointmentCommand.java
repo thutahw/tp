@@ -11,7 +11,8 @@ import java.util.Set;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -21,6 +22,7 @@ import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
 
 /**
  * Edits the details (date-and-time, description, tags) of an existing appointment in the appointment book.
@@ -37,7 +39,7 @@ public class EditAppointmentCommand extends Command {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATETIME + "2020-10-24 11:00AM ";
+            + PREFIX_DATETIME + "24-10-2020 11:00 ";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -77,12 +79,10 @@ public class EditAppointmentCommand extends Command {
 
         model.setAppointment(appointmentToEdit, editedAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabNumber());
-    }
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(4);
+        model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), TabId.APPOINTMENT);
     }
 
     /**

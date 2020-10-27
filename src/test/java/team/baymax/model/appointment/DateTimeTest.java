@@ -1,4 +1,4 @@
-package team.baymax.commons.core.time;
+package team.baymax.model.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
+import team.baymax.model.calendar.DateTime;
 
 public class DateTimeTest {
 

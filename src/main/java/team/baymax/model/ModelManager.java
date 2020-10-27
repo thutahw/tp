@@ -12,9 +12,15 @@ import javafx.collections.transformation.FilteredList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.AppointmentManager;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.calendar.Date;
+import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.Year;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
@@ -29,6 +35,7 @@ public class ModelManager implements Model {
 
     private final PatientManager patientManager;
     private final AppointmentManager appointmentManager;
+    private final CalendarManager calendarManager;
     private final UserPrefs userPrefs;
 
     private final FilteredList<Patient> filteredPatientsList;
@@ -47,6 +54,10 @@ public class ModelManager implements Model {
 
         this.patientManager = new PatientManager(patientManager);
         this.appointmentManager = new AppointmentManager(appointmentManager);
+
+        // -------  To be replaced!!!!
+        this.calendarManager = new CalendarManager();
+        // -------
 
         this.userPrefs = new UserPrefs(userPrefs);
 
@@ -86,7 +97,6 @@ public class ModelManager implements Model {
     public Path getPatientStorageFilePath() {
         return userPrefs.getPatientStorageFilePath();
     }
-
 
     @Override
     public Path getAppointmentStorageFilePath() {
@@ -212,10 +222,54 @@ public class ModelManager implements Model {
         filteredAppointmentsList.setPredicate(predicate);
     }
 
+    //=========== CalendarManager ================================================================================
+
+    @Override
+    public CalendarManager getCalendarManager() {
+        return calendarManager;
+    }
+
+    @Override
+    public AppointmentCalendar getAppointmentCalendar() {
+        return calendarManager.getAppointmentCalendar();
+    }
+
+    @Override
+    public void setDay(Day day) {
+        requireNonNull(day);
+        calendarManager.setDay(day);
+    }
+
+    @Override
+    public void setMonth(Month month) {
+        requireNonNull(month);
+        calendarManager.setMonth(month);
+    }
+
+    @Override
+    public void setYear(Year year) {
+        requireNonNull(year);
+        calendarManager.setYear(year);
+    }
+
+    @Override
+    public void resetCalendar() {
+        calendarManager.resetCalendar(new CalendarManager());
+    }
+
+    public void updateMonthlyData(Day day) {
+        filteredAppointmentsList.stream().filter(appointment -> {
+            AppointmentCalendar ac = getAppointmentCalendar();
+            return appointment.getDate().equals(new Date(day, ac.getMonth(), ac.getYear()));
+        }).count();
+    }
+
+    //=========== utils ================================================================================
+
     @Override
     public void resetAllListManagers() {
-        this.patientManager.resetData(new PatientManager());
-        this.appointmentManager.resetData(new AppointmentManager());
+        patientManager.resetData(new PatientManager());
+        appointmentManager.resetData(new AppointmentManager());
     }
 
     @Override

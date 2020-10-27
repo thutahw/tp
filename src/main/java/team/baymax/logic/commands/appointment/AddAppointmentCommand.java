@@ -10,7 +10,8 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -20,6 +21,7 @@ import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
 
 public class AddAppointmentCommand extends Command {
 
@@ -41,7 +43,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
             + "appointment book";
-    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist";
+    public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
 
     private final Index patientIndex;
     private final DateTime dateTime;
@@ -74,12 +76,14 @@ public class AddAppointmentCommand extends Command {
         }
 
         model.addAppointment(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabNumber());
-    }
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(4);
+        model.setYear(dateTime.getYear());
+        model.setMonth(dateTime.getMonth());
+        model.setDay(dateTime.getDay());
+
+        model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dateTime.getDate()));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TabId.SCHEDULE);
     }
 
     @Override

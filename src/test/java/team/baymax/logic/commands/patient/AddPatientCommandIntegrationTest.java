@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.PatientBuilder;

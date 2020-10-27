@@ -27,7 +27,7 @@ appointments? You have come to the right place! <br>
 Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just
 the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments,
 cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few
-neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in calendar that
+neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in appointmentCalendar that
 helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the
 ground. What are you waiting for? Head on to Section 2, “Quick Start”!
 
@@ -260,7 +260,7 @@ Figure 10. Edit an appointment
 ### 3.3. Using the Calendar
 This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
-set the calendar to a particular year and month.
+set the appointmentCalendar to a particular year and month.
 
 #### 3.3.1 Switching to a particular year
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
@@ -275,14 +275,14 @@ will affect the command we will discuss in Section 3.3.2 (Switching to a particu
 2. Press enter on your keyboard.
 
 **Outcome:**<br>
-1. Baymax will switch to the calendar tab.
+1. Baymax will switch to the appointmentCalendar tabId.
 2. The year 2020 will be displayed on the top right-hand corner of the window.
 
 [App Screenshot (Still in Progress)]
 
 #### 3.3.2 Switching to a particular month
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
-current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
+current month. For example, if today is 3rd January 2020, then the appointmentCalendar will display the year 2020 and the month
 January by default.
 
 Parameter Name | Description
@@ -298,7 +298,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 3. Press enter on your keyboard.
 
 **Outcome:**<br>
-1. The month will be set to March and be displayed in the calendar.
+1. The month will be set to March and be displayed in the appointmentCalendar.
 
 [App Screenshot (Still in Progress)]
 
@@ -319,7 +319,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 4. Press enter on your keyboard.
 
 **Outcome:**<br>
-1. All appointments on 2020-01-13 will be displayed in the calendar.
+1. All appointments on 2020-01-13 will be displayed in the appointmentCalendar.
 
 [App Screenshot (Still in Progress)]
 
@@ -338,7 +338,7 @@ will display all appointments in the upcoming week (7 days).
 5. Press enter on your keyboard.
 
 **Outcome:**
-1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar.
+1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the appointmentCalendar.
 
 [App Screenshot (Still in Progress)]
 

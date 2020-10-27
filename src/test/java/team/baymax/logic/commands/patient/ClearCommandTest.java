@@ -4,11 +4,11 @@ import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.ClearCommand;
+import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.listmanagers.AppointmentManager;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.userprefs.UserPrefs;
 
 public class ClearCommandTest {

@@ -1,7 +1,9 @@
-package team.baymax.logic.commands;
+package team.baymax.logic.commands.general;
 
-import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.Command;
+import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
+import team.baymax.model.util.TabId;
 
 /**
  * Terminates the program.
@@ -14,12 +16,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, getTabNumber());
-    }
-
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(1);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, TabId.DASHBOARD);
     }
 
 }

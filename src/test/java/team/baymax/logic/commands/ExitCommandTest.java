@@ -1,11 +1,12 @@
 package team.baymax.logic.commands;
 
-import static team.baymax.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+import static team.baymax.logic.commands.general.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.general.ExitCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 

@@ -20,9 +20,11 @@ import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
 
 /**
  * Edits the details of an existing patient in the appointment book.
@@ -78,13 +80,9 @@ public class EditPatientCommand extends Command {
         }
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabNumber());
-    }
+        model.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-    @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TabId.PATIENT);
     }
 
     /**
@@ -119,8 +117,7 @@ public class EditPatientCommand extends Command {
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
         return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor)
-                && getTabNumber().equals(e.getTabNumber());
+                && editPatientDescriptor.equals(e.editPatientDescriptor);
     }
 
     /**

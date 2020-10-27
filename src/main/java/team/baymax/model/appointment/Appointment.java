@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.calendar.Date;
+import team.baymax.model.calendar.DateTime;
+import team.baymax.model.calendar.Time;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;
@@ -41,6 +43,14 @@ public class Appointment implements UniqueListElement {
 
     public DateTime getDateTime() {
         return dateTime;
+    }
+
+    public Date getDate() {
+        return dateTime.getDate();
+    }
+
+    public Time getTime() {
+        return dateTime.getTime();
     }
 
     public Description getDescription() {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1">
+    <TabPane fx:id="sideTabPane" minWidth="450" minHeight="600" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="dashboardTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconHome.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="dashboardTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+        <Tab fx:id="calendarTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconCalendar.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="calendarTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+        <Tab fx:id="scheduleTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconDayView.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="scheduleTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+        <Tab fx:id="patientInfoTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconPatientInfo.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="patientTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+        <Tab fx:id="appointmentInfoTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconAppointment.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="appointmentTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+        <Tab fx:id="infoTab">
+            <graphic>
+                <ImageView>
+                    <Image url="@/images/IconInfo.png"/>
+                </ImageView>
+            </graphic>
+            <content>
+                <StackPane fx:id="infoTabContentPlaceholder"></StackPane>
+            </content>
+        </Tab>
+    </TabPane>
+</StackPane>

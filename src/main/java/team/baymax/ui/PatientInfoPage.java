@@ -23,6 +23,7 @@ public class PatientInfoPage extends UiPart<Region> {
      */
     public PatientInfoPage(ObservableList<Patient> patientList) {
         super(FXML);
+
         patientListPanel = new PatientListPanel(patientList);
         patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
     }

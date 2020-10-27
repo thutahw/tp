@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import team.baymax.commons.core.time.DateTime;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.util.CollectionUtil;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;

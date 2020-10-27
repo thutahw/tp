@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import team.baymax.logic.commands.patient.PatientCommandTestUtil;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
 
 /**

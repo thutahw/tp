@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.ClearCommand;
-import team.baymax.logic.commands.ExitCommand;
-import team.baymax.logic.commands.HelpCommand;
+import team.baymax.logic.commands.general.ClearCommand;
+import team.baymax.logic.commands.general.ExitCommand;
+import team.baymax.logic.commands.general.HelpCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
