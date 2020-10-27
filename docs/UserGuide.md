@@ -51,7 +51,7 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 
 1. Managing appointments -- scheduling new appointments, changing appointments, cancelling appointments,
    marking appointments as done etc.
-2. Managing patient information -- phone number, special remarks etc. 
+2. Managing patient information -- phone number, special remarks etc.
 3. Viewing appointments in a calendar format
 
 And all this can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
