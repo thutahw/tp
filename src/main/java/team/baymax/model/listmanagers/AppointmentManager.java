@@ -123,7 +123,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         Predicate<Appointment> apptPastButMarkedAsUpcoming = new Predicate<Appointment>() {
             @Override
             public boolean test(Appointment appointment) {
-                return appointment.getDateTime().compareTo(new DateTime()) < 0
+                return appointment.getDateTime().compareTo(DateTime.current()) < 0
                         && appointment.getStatus() == AppointmentStatus.UPCOMING;
             }
         };

@@ -34,7 +34,7 @@ public class Appointment implements UniqueListElement {
         this.patient = patient;
         this.dateTime = dateTime;
         // if the dateTime is in the future, set status as UPCOMING, otherwise DONE
-        if (dateTime.compareTo(new DateTime()) > 0) {
+        if (dateTime.compareTo(DateTime.current()) > 0) {
             this.status = AppointmentStatus.UPCOMING;
         } else {
             this.status = AppointmentStatus.DONE;
