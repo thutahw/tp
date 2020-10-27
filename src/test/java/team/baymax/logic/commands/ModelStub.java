@@ -144,6 +144,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Appointment findAppointmentByPredicate(Predicate<Appointment> predicate) {
+        return null;
+    }
+
+    @Override
     public void resetAllListManagers() {
         throw new AssertionError("This method should not be called.");
     }

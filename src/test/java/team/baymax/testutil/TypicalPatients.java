@@ -20,8 +20,6 @@ public class TypicalPatients {
             .withPhone("94351253")
             .withTags("friends").build();
 
-    // Manually added
-
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient BENSON = new PatientBuilder()
             .withNric("S1234567B")
@@ -59,7 +57,7 @@ public class TypicalPatients {
             .withName("Ida Mueller").withPhone("8482131")
             .withGender("F").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_AMY)
             .withName(PatientCommandTestUtil.VALID_NAME_AMY).withPhone(PatientCommandTestUtil.VALID_PHONE_AMY)
             .withGender(PatientCommandTestUtil.VALID_GENDER_AMY).withTags(PatientCommandTestUtil.VALID_TAG_LTP)

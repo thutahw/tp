@@ -16,8 +16,6 @@ import java.util.List;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
-import team.baymax.logic.commands.CommandResult;
-import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.listmanagers.PatientManager;

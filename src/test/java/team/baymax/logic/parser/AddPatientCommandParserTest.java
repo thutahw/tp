@@ -23,8 +23,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.TypicalPatients.AMY;

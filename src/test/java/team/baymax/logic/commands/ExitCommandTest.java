@@ -1,7 +1,7 @@
 package team.baymax.logic.commands;
 
-import static team.baymax.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.baymax.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 import org.junit.jupiter.api.Test;
 

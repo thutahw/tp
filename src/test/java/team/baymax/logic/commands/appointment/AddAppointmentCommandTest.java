@@ -2,15 +2,20 @@ package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
+import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_2;
 import static team.baymax.testutil.Assert.assertThrows;
+import static team.baymax.testutil.TypicalDateTimes.DATETIME1;
+import static team.baymax.testutil.TypicalDateTimes.DATETIME2;
+import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.index.Index;
@@ -18,10 +23,8 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.ModelStub;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.patient.Patient;
-import team.baymax.model.util.uniquelist.UniqueList;
+import team.baymax.model.appointment.Description;
 import team.baymax.testutil.AppointmentBuilder;
-import team.baymax.testutil.PatientBuilder;
 
 public class AddAppointmentCommandTest {
 
@@ -64,7 +67,28 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void equals() {
-        // TODO
+        AddAppointmentCommand firstCommand = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1,
+                new Description(VALID_DESCRIPTION_1), new HashSet<>());
+        AddAppointmentCommand secondCommand = new AddAppointmentCommand(INDEX_SECOND_PATIENT, DATETIME2,
+                new Description(VALID_DESCRIPTION_2), new HashSet<>());
+
+        // same object -> returns True
+        assertTrue(firstCommand.equals(firstCommand));
+
+        // same values -> returns True
+        AddAppointmentCommand firstCommandCopy = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1,
+                new Description(VALID_DESCRIPTION_1), new HashSet<>());
+        assertTrue(firstCommand.equals(firstCommandCopy));
+
+        // different types -> returns False
+        assertFalse(firstCommand.equals(1));
+
+        // null -> returns False
+        assertFalse(firstCommand.equals(null));
+
+        // different details -> returns False
+        assertFalse(firstCommand.equals(secondCommand));
+
     }
 
     /**

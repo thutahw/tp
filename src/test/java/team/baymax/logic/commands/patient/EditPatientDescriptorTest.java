@@ -52,13 +52,8 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-<<<<<<< HEAD
         // different tags -> returns false
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_DIABETIC).build();
-=======
-        // different tags -> returns False
-        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
->>>>>>> 8d46a700f92abfcf9a6597878b4af12c8b6367d5
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

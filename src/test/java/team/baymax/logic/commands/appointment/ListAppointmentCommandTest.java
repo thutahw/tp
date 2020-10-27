@@ -1,5 +1,7 @@
 package team.baymax.logic.commands.appointment;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,10 +29,22 @@ public class ListAppointmentCommandTest {
                 ListAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    // TODO
     @Test
     public void execute_listIsFiltered_showsEverything() {
 
+    }
+
+    @Test
+    public void equals() {
+        ListAppointmentCommand listAppointmentCommand = new ListAppointmentCommand();
+        // null -> returns False
+        assertFalse(listAppointmentCommand.equals(null));
+        // different types -> returns False
+        assertFalse(listAppointmentCommand.equals(1));
+        // same type -> returns True
+        assertTrue(listAppointmentCommand.equals(new ListAppointmentCommand()));
+        // this -> returns True
+        assertTrue(listAppointmentCommand.equals(listAppointmentCommand));
     }
 
 }

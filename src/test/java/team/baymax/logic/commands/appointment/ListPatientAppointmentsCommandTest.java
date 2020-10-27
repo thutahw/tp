@@ -1,4 +1,4 @@
-package team.baymax.logic.commands.patient;
+package team.baymax.logic.commands.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.listmanagers.AppointmentManager;
@@ -20,7 +21,7 @@ import team.baymax.model.patient.PatientHasAppointmentPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * Contains integration tests (interaction with the Model) and unit tests for
  * {@code ListPatientAppointmentsCommand}.
  */
 public class ListPatientAppointmentsCommandTest {
@@ -39,7 +40,7 @@ public class ListPatientAppointmentsCommandTest {
                 new AppointmentManager(), new UserPrefs());
         expectedModel.updateFilteredAppointmentList(new PatientHasAppointmentPredicate(patientChosen));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(listPatientAppointmentsCommand,
+        CommandTestUtil.assertCommandSuccess(listPatientAppointmentsCommand,
                 model, expectedMessage, expectedModel);
     }
 

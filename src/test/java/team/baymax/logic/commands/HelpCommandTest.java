@@ -1,7 +1,7 @@
 package team.baymax.logic.commands;
 
-import static team.baymax.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.baymax.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
