@@ -28,7 +28,7 @@ public class TypicalAppointments {
     public static final Appointment APT4 = new Appointment(BOB, DateTime.fromString("11-10-2020 12:45"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
-    public static final Appointment APT5 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
+    public static final Appointment APT1_DUPLICATE = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
             AppointmentStatus.DONE, new Description("long term patient"), new HashSet<>());
 
 }
