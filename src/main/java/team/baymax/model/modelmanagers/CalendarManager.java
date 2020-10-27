@@ -22,17 +22,17 @@ public class CalendarManager {
 
     public void setDay(Day day) {
         requireNonNull(day);
-        appointmentCalendar.setDayProperty(day.getText());
+        appointmentCalendar.setDay(day);
     }
 
     public void setMonth(Month month) {
         requireNonNull(month);
-        appointmentCalendar.setMonthProperty(month.getText());
+        appointmentCalendar.setMonth(month);
     }
 
     public void setYear(Year year) {
         requireNonNull(year);
-        appointmentCalendar.setYearProperty(year.getText());
+        appointmentCalendar.setYear(year);
     }
 
     public void resetCalendar(CalendarManager newCalendar) {

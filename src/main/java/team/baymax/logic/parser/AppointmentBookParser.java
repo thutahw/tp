@@ -6,6 +6,8 @@ import static team.baymax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import team.baymax.logic.commands.calendar.MonthCommand;
+import team.baymax.logic.commands.calendar.YearCommand;
 import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.general.ExitCommand;
@@ -24,6 +26,8 @@ import team.baymax.logic.commands.patient.RemarkPatientCommand;
 import team.baymax.logic.parser.appointment.AddAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
 import team.baymax.logic.parser.calendar.DayCommandParser;
+import team.baymax.logic.parser.calendar.MonthCommandParser;
+import team.baymax.logic.parser.calendar.YearCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.logic.parser.general.SwitchCommandParser;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
@@ -98,6 +102,12 @@ public class AppointmentBookParser {
 
         case DayCommand.COMMAND_WORD:
             return new DayCommandParser().parse(arguments);
+
+        case MonthCommand.COMMAND_WORD:
+            return new MonthCommandParser().parse(arguments);
+
+        case YearCommand.COMMAND_WORD:
+            return new YearCommandParser().parse(arguments);
 
         case SwitchCommand.COMMAND_WORD:
             return new SwitchCommandParser().parse(arguments);

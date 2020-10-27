@@ -20,11 +20,7 @@ public class Year {
      * Returns true if a given number is a valid year.
      */
     public static boolean isValidYear(int n) {
-        return n > 2000;
-    }
-
-    public String getText() {
-        return "" + value;
+        return n >= 2000;
     }
 
     public int getValue() {
@@ -36,5 +32,10 @@ public class Year {
         return other == this // short circuit if same object
                 || (other instanceof Year // instanceof handles nulls
                 && value == ((Year) other).value); // state check
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

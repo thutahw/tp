@@ -38,6 +38,7 @@ public class CalendarPage extends UiPart<Region> {
 
     private void initialize() {
         calendarGridView.setMaxWidth(550);
+
         yearLabel.textProperty().bind(appointmentCalendar.getYearProperty());
         monthLabel.textProperty().bind(appointmentCalendar.getMonthProperty());
 
@@ -68,7 +69,7 @@ public class CalendarPage extends UiPart<Region> {
         public CalendarViewCell(Day day) {
             super();
 
-            setText(day.getText());
+            setText(day.toString());
 
             setStyle(style);
             setMinHeight(75.0);

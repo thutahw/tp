@@ -2,15 +2,16 @@ package team.baymax.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import team.baymax.model.calendar.utils.CalendarUtil;
+
 public class Month {
 
-    static int[] numOfDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private static int[] numOfDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     private final int value;
 
     public Month(int value) {
         requireNonNull(value);
-
         if (isValidMonth(value)) {
             this.value = value;
         } else {
@@ -23,10 +24,6 @@ public class Month {
      */
     public static boolean isValidMonth(int n) {
         return n > 0 && n <= 12;
-    }
-
-    public String getText() {
-        return "" + value;
     }
 
     public int getValue() {
@@ -42,5 +39,10 @@ public class Month {
         return other == this // short circuit if same object
                 || (other instanceof Month // instanceof handles nulls
                 && value == ((Month) other).value); // state check
+    }
+
+    @Override
+    public String toString() {
+        return CalendarUtil.getMonthForInt(value - 1);
     }
 }

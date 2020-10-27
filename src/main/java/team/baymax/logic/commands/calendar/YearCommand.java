@@ -10,29 +10,29 @@ import team.baymax.model.calendar.Month;
 import team.baymax.model.calendar.Year;
 import team.baymax.model.util.TabId;
 
-public class MonthCommand extends Command {
+public class YearCommand extends Command {
 
-    public static final String COMMAND_WORD = "month";
-    public static final String MESSAGE_SUCCESS = "Viewing the month %1$s in %2$s.";
+    public static final String COMMAND_WORD = "year";
+    public static final String MESSAGE_SUCCESS = "Switched to %1$s in %2$s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Switches to a particular month and updates the calendar.\n"
-            + "Parameters: MONTH (must be a positive number from 1 to 12 ).\n"
-            + "Example: " + COMMAND_WORD + " 12 ";
+            + ": Switches to a particular year and updates the calendar.\n"
+            + "Parameters: YEAR (must be a positive number from year 2000 onwards).\n"
+            + "Example: " + COMMAND_WORD + " 2020 ";
 
-    private final Month month;
+    private final Year year;
 
-    public MonthCommand(Month month) {
-        this.month = month;
+    public YearCommand(Year year) {
+        this.year = year;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.setMonth(month);
+        model.setYear(year);
 
-        Year year = model.getAppointmentCalendar().getYear();
+        Month month = model.getAppointmentCalendar().getMonth();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), TabId.CALENDAR);
     }

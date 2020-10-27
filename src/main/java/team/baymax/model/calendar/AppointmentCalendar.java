@@ -8,23 +8,36 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class AppointmentCalendar {
 
+    private Day day;
+    private Month month;
+    private Year year;
+
     protected final SimpleStringProperty dayProperty;
     protected final SimpleStringProperty monthProperty;
     protected final SimpleStringProperty yearProperty;
 
 
     public AppointmentCalendar() {
-        this.dayProperty = new SimpleStringProperty(Integer.toString(getCurrentday()));
-        this.monthProperty = new SimpleStringProperty(Integer.toString(getCurrentMonth()));
-        this.yearProperty = new SimpleStringProperty(Integer.toString(getCurrentYear()));
+
+        day = new Day(getCurrentday());
+        month = new Month(getCurrentMonth());
+        year = new Year(getCurrentYear());
+
+        this.dayProperty = new SimpleStringProperty(day.toString());
+        this.monthProperty = new SimpleStringProperty(month.toString());
+        this.yearProperty = new SimpleStringProperty(year.toString());
     }
 
     public AppointmentCalendar(Day day, Month month, Year year) {
         requireAllNonNull(day, month, year);
 
-        this.dayProperty = new SimpleStringProperty(day.getText());
-        this.monthProperty = new SimpleStringProperty(month.getText());
-        this.yearProperty = new SimpleStringProperty(year.getText());
+        this.day = day;
+        this.month = month;
+        this.year = year;
+
+        this.dayProperty = new SimpleStringProperty(day.toString());
+        this.monthProperty = new SimpleStringProperty(month.toString());
+        this.yearProperty = new SimpleStringProperty(year.toString());
     }
 
     public static int getCurrentday() {
@@ -44,15 +57,30 @@ public class AppointmentCalendar {
     }
 
     public Day getDay() {
-        return new Day(Integer.parseInt(dayProperty.get()));
+        return day;
     }
 
     public Month getMonth() {
-        return new Month(Integer.parseInt(monthProperty.get()));
+        return month;
     }
 
     public Year getYear() {
-        return new Year(Integer.parseInt(yearProperty.get()));
+        return year;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
+        dayProperty.set(day.toString());
+    }
+
+    public void setMonth(Month month) {
+        this.month = month;
+        monthProperty.set(month.toString());
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
+        yearProperty.set(year.toString());
     }
 
     public SimpleStringProperty getDayProperty() {
@@ -66,17 +94,4 @@ public class AppointmentCalendar {
     public SimpleStringProperty getYearProperty() {
         return yearProperty;
     }
-
-    public void setDayProperty(String dayProperty) {
-        this.dayProperty.set(dayProperty);
-    }
-
-    public void setMonthProperty(String monthProperty) {
-        this.monthProperty.set(monthProperty);
-    }
-
-    public void setYearProperty(String yearProperty) {
-        this.yearProperty.set(yearProperty);
-    }
-
 }

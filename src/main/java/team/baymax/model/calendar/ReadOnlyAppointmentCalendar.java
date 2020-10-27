@@ -10,17 +10,17 @@ public class ReadOnlyAppointmentCalendar extends AppointmentCalendar {
     }
 
     @Override
-    public void setDayProperty(String dayProperty) {
+    public void setDay(Day day) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setMonthProperty(String monthProperty) {
+    public void setMonth(Month month) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setYearProperty(String yearProperty) {
+    public void setYear(Year year) {
         throw new UnsupportedOperationException();
     }
 }

@@ -25,10 +25,6 @@ public class Day {
         return n > 0 && n <= 31;
     }
 
-    public String getText() {
-        return "" + value;
-    }
-
     public int getValue() {
         return value;
     }
@@ -38,5 +34,10 @@ public class Day {
         return other == this // short circuit if same object
                 || (other instanceof Day // instanceof handles nulls
                 && value == ((Day) other).value); // state check
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
