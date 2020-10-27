@@ -1,0 +1,20 @@
+.dashboard-container {
+    -fx-alignment: center;
+}
+
+.dashboard-left-panel {
+}
+
+.dashboard-right-panel {
+}
+
+.clock-container {
+    -fx-alignment: center;
+}
+
+.stats-container {
+}
+
+.date-panel {
+    -fx-alignment: center;
+}

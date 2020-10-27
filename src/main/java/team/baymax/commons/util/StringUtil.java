@@ -65,4 +65,22 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Creates a string left padded to the specified width with the supplied padding character.
+     *
+     * @param width      the length of the padded string.
+     * @param padChar    a character to use for padding the string.
+     * @param str          the string to be padded.
+     * @return the padded string.
+     */
+    public static String pad(int width, char padChar, String str) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = str.length(); i < width; i++) {
+            sb.append(padChar);
+        }
+        sb.append(str);
+
+        return sb.toString();
+    }
 }
