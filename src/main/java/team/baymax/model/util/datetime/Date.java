@@ -1,37 +1,79 @@
 package team.baymax.model.util.datetime;
 
+import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import team.baymax.model.calendar.AppointmentCalendar;
 
 public class Date {
 
-    private final Year year;
-    private final Month month;
-    private final Day day;
+    public static final String MESSAGE_CONSTRAINTS = "Date entered must be in the form of <dd-MM-yyyy";
+    private static final DateTimeFormatter FORMAT_INPUT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter FORMAT_OUTPUT = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+    private final LocalDate date;
+
+    /**
+     * Constructs a {@Date} given a {@code LocalDate}.
+     *
+     */
+    public Date(LocalDate date) {
+        this.date = date;
+    }
 
     /**
      * Constructs a {@Date} given the {@code day}, {@code month} and {@code year}
      *
      */
     public Date(Day day, Month month, Year year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        date = LocalDate.of(year.getValue(), month.getValue(), day.getValue());
+    }
+
+    /**
+     * Creates a new {@code Date} from a given formatted {@code dateString}
+     */
+    public static Date fromString(String dateString) {
+        requireNonNull(dateString);
+
+        checkArgument(isValidDate((dateString)), MESSAGE_CONSTRAINTS);
+        return new Date(LocalDate.parse(dateString, FORMAT_INPUT));
+    }
+
+    /**
+     * Returns true if a given string is a valid time format
+     */
+    public static boolean isValidDate(String test) {
+        try {
+            LocalDate.parse(test, FORMAT_INPUT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     public static Date fromCalendar(AppointmentCalendar calendar) {
         return new Date(calendar.getDay(), calendar.getMonth(), calendar.getYear());
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     public Year getYear() {
-        return year;
+        return new Year(date.getYear());
     }
 
     public Month getMonth() {
-        return month;
+        return new Month(date.getMonthValue());
     }
 
     public Day getDay() {
-        return day;
+        return new Day(date.getDayOfMonth());
     }
 
     @Override
@@ -46,14 +88,12 @@ public class Date {
 
         Date otherDate = (Date) other;
 
-        return other != null
-                && otherDate.getDay().equals(day)
-                && otherDate.getMonth().equals(month)
-                && otherDate.getYear().equals(year);
+        return otherDate != null
+                && otherDate.date.equals(date);
     }
 
     @Override
     public String toString() {
-        return day.getValue() + "-" + month.getValue() + "-" + year.getValue();
+        return date.format(FORMAT_OUTPUT);
     }
 }

@@ -7,13 +7,14 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
 
 
-// make AppointmentCalednar a java bean class to support property change listeners
+// make AppointmentCalendar a java bean class to support property change listeners
 public class AppointmentCalendar {
 
     protected final SimpleStringProperty dayProperty;

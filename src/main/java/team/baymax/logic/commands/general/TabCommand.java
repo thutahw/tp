@@ -2,6 +2,7 @@ package team.baymax.logic.commands.general;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+import static team.baymax.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
@@ -43,6 +44,7 @@ public class TabCommand extends Command {
 
         if (tabId == TabId.DASHBOARD || tabId == TabId.SCHEDULE) {
             model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(today));
+            model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         } else {
             model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         }

@@ -6,6 +6,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -24,7 +25,6 @@ import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
 
-
 /**
  * Parses input arguments and creates a new AddAppointmentCommand object
  */
@@ -36,28 +36,34 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_DURATION,
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_TIME, PREFIX_DURATION,
                         PREFIX_DESCRIPTION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATETIME, PREFIX_DURATION, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DURATION, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
-        DateTime dateTime = null;
-        Time time = null;
-        try {
-            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-        } catch (ParseException pe) {
-            time = ParserUtil.par
-        }
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        return new AddAppointmentCommand(id, dateTime, duration, tagList, description);
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+            System.out.println("Datetime");
+            DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+            return new AddAppointmentCommand(id, dateTime, duration, tagList, description);
+        } else if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
+            System.out.println("Time only");
+            Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
+            System.out.println(time);
+            return new AddAppointmentCommand(id, time, duration, tagList, description);
+        } else {
+            System.out.println("Bail out");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

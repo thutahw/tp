@@ -56,6 +56,11 @@ public class DateTime implements Comparable<DateTime> {
         }
     }
 
+    public static DateTime from(Date d, Time t) {
+        LocalDateTime dt = LocalDateTime.of(d.getDate(), t.getTime());
+        return new DateTime(dt);
+    }
+
     /**
      * Returns the dateTime in a storage format
      */
@@ -79,16 +84,8 @@ public class DateTime implements Comparable<DateTime> {
         return new Date(getDay(), getMonth(), getYear());
     }
 
-    public Hour getHour() {
-        return new Hour(dateTime.getHour());
-    }
-
-    public Minute getMinute() {
-        return new Minute(dateTime.getMinute());
-    }
-
     public Time getTime() {
-        return new Time(getHour(), getMinute());
+        return new Time(dateTime.toLocalTime());
     }
 
     public DateTime plusMinutes(Duration duration) {

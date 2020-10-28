@@ -3,32 +3,23 @@ package team.baymax.model.util.datetime;
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "Time entered must be in the form of <HH:mm>";
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
+    public static final String MESSAGE_CONSTRAINTS = "Time entered must be in the form of <HH:mm>. Example: 14:00";
+    private static final DateTimeFormatter FORMAT_INPUT = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter FORMAT_OUTPUT = DateTimeFormatter.ofPattern("hh:mma");
 
-    private final Hour hour;
-    private final Minute minute;
-
-    /**
-     * Constructs a {@code Time} object given the {@code hour} and {@code minute}.
-     *
-     */
-    public Time(Hour hour, Minute minute) {
-        this.hour = hour;
-        this.minute = minute;
-    }
+    private final LocalTime time;
 
     /**
      * Constructs a {@code Time} from a {@code LocalDateTime}.
      */
-    private Time(LocalDateTime dateTime) {
-        this.time = dateTime;
+    public Time(LocalTime time) {
+        this.time = time;
     }
 
     /**
@@ -38,7 +29,7 @@ public class Time {
         requireNonNull(timeString);
 
         checkArgument(isValidTime((timeString)), MESSAGE_CONSTRAINTS);
-        return new Time(LocalDateTime.parse(timeString, TIME_FORMAT));
+        return new Time(LocalTime.parse(timeString, FORMAT_INPUT));
     }
 
     /**
@@ -46,16 +37,20 @@ public class Time {
      */
     public static boolean isValidTime(String test) {
         try {
-            LocalDateTime.parse(test, TIME_FORMAT);
+            LocalTime.parse(test, FORMAT_INPUT);
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
-        return hour + ":" + minute;
+        return time.format(FORMAT_OUTPUT);
     }
 
     @Override
@@ -70,8 +65,7 @@ public class Time {
 
         Time otherTime = (Time) other;
 
-        return other != null
-                && otherTime.hour.equals(hour)
-                && otherTime.minute.equals(minute);
+        return otherTime != null
+                && time.equals(otherTime.time);
     }
 }

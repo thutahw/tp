@@ -19,11 +19,13 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Time;
 
 public class AddAppointmentCommand extends Command {
 
@@ -52,6 +54,7 @@ public class AddAppointmentCommand extends Command {
 
     private final Index patientIndex;
     private final DateTime dateTime;
+    private final Time time;
     private final Duration duration;
     private final Description description;
     private final Set<Tag> tags;
@@ -67,6 +70,18 @@ public class AddAppointmentCommand extends Command {
         this.duration = duration;
         this.description = description;
         this.tags = tags;
+        this.time = null;
+    }
+
+    public AddAppointmentCommand(Index patientIndex, Time time, Duration duration, Set<Tag> tags,
+                                 Description description) {
+        requireAllNonNull(patientIndex, time, duration, description, tags);
+        this.patientIndex = patientIndex;
+        this.time = time;
+        this.duration = duration;
+        this.description = description;
+        this.tags = tags;
+        this.dateTime = null;
     }
 
     @Override
@@ -77,7 +92,17 @@ public class AddAppointmentCommand extends Command {
         }
 
         Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
-        Appointment toAdd = new Appointment(patient, dateTime, duration, description, tags,
+
+        DateTime dt;
+
+        if (dateTime == null) {
+            Date date = Date.fromCalendar(model.getAppointmentCalendar());
+            dt = DateTime.from(date, time);
+        } else {
+            dt = dateTime;
+        }
+
+        Appointment toAdd = new Appointment(patient, dt, duration, description, tags,
                 AppointmentStatus.UPCOMING);
 
         if (model.hasAppointment(toAdd)) {
@@ -90,9 +115,11 @@ public class AddAppointmentCommand extends Command {
 
         model.addAppointment(toAdd);
 
+        // switches calendar to the day of the appointment
         model.setYear(dateTime.getYear());
         model.setMonth(dateTime.getMonth());
         model.setDay(dateTime.getDay());
+
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dateTime.getDate()));
 
