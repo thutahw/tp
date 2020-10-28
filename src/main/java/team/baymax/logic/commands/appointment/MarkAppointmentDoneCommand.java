@@ -26,6 +26,19 @@ public class MarkAppointmentDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as done. "
+            + "Parameters: "
+            + PREFIX_ID + "APPOINTMENT_INDEX "
+            + "OR "
+            + PREFIX_DATETIME + "DATETIME "
+            + "(" + PREFIX_NAME + "NAME OR "
+            + PREFIX_NRIC + "NRIC)\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DATETIME + "10-10-2020 14:00 "
+            + PREFIX_NAME + "Alex Yeoh. "
+            + "OR " + COMMAND_WORD + " "
+            + PREFIX_ID + "1 ";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as done by either "
             + "the index or the date and time of the appointment and the last four digits of the patient's "
             + "phone number.\n"
