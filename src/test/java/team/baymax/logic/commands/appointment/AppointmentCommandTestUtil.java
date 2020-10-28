@@ -3,7 +3,7 @@ package team.baymax.logic.commands.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ public class AppointmentCommandTestUtil {
     public static final String VALID_TAG_DIABETIC = "Diabetic";
     public static final String VALID_TAG_LTP = "LTP";
 
-    public static final String VALID_DESC_ID1 = " " + PREFIX_ID + VALID_ID1;
-    public static final String VALID_DESC_ID2 = " " + PREFIX_ID + VALID_ID2;
-    public static final String VALID_DESC_ID3 = " " + PREFIX_ID + VALID_ID3;
+    public static final String VALID_DESC_ID1 = " " + PREFIX_INDEX + VALID_ID1;
+    public static final String VALID_DESC_ID2 = " " + PREFIX_INDEX + VALID_ID2;
+    public static final String VALID_DESC_ID3 = " " + PREFIX_INDEX + VALID_ID3;
     public static final String VALID_DESC_DATETIME_1 = " " + PREFIX_DATETIME + VALID_DATETIME_1;
     public static final String VALID_DESC_DATETIME_2 = " " + PREFIX_DATETIME + VALID_DATETIME_2;
     public static final String VALID_DESC_DESCRIPTION_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_1;
