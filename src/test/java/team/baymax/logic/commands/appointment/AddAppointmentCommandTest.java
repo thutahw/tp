@@ -15,6 +15,7 @@ import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,10 @@ import team.baymax.logic.commands.ModelStub;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.testutil.AppointmentBuilder;
 
 public class AddAppointmentCommandTest {
@@ -31,34 +36,43 @@ public class AddAppointmentCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null,
-                null, null, null));
+                null, null, null, null, null));
     }
 
     @Test
     public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
         Appointment validAppointment = new AppointmentBuilder().build();
+
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(
                 Index.fromOneBased(1),
                 validAppointment.getDateTime(),
+                validAppointment.getTime(),
+                validAppointment.getDuration(),
                 validAppointment.getDescription(),
                 validAppointment.getTags());
+
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
 
         CommandResult commandResult = addAppointmentCommand.execute(modelStub);
 
-        assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment),
-                commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment);
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsAdded);
     }
 
     @Test
     public void execute_duplicateAppointment_throwsCommandException() {
         Appointment validAppointment = new AppointmentBuilder().build();
+
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(
                 Index.fromOneBased(1),
                 validAppointment.getDateTime(),
+                validAppointment.getTime(),
+                validAppointment.getDuration(),
                 validAppointment.getDescription(),
                 validAppointment.getTags());
+
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 
         assertThrows(CommandException.class, AddAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT, () ->
@@ -67,17 +81,17 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void equals() {
-        AddAppointmentCommand firstCommand = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1,
-                new Description(VALID_DESCRIPTION_1), new HashSet<>());
-        AddAppointmentCommand secondCommand = new AddAppointmentCommand(INDEX_SECOND_PATIENT, DATETIME2,
-                new Description(VALID_DESCRIPTION_2), new HashSet<>());
+        AddAppointmentCommand firstCommand = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1, null,
+                new Duration(60), new Description(VALID_DESCRIPTION_1), new HashSet<>());
+        AddAppointmentCommand secondCommand = new AddAppointmentCommand(INDEX_SECOND_PATIENT, DATETIME2, null,
+                new Duration(60), new Description(VALID_DESCRIPTION_2), new HashSet<>());
 
         // same object -> returns True
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns True
-        AddAppointmentCommand firstCommandCopy = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1,
-                new Description(VALID_DESCRIPTION_1), new HashSet<>());
+        AddAppointmentCommand firstCommandCopy = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1, null,
+                new Duration(60), new Description(VALID_DESCRIPTION_1), new HashSet<>());
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns False
@@ -127,6 +141,32 @@ public class AddAppointmentCommandTest {
             appointmentsAdded.add(appointment);
         }
 
+        @Override
+        public boolean doesAppointmentClash(Appointment appointment) {
+            if (appointmentsAdded.size() == 0) {
+                return false;
+            }
+
+            for (Appointment appt : appointmentsAdded) {
+                if (appointmentsAdded.equals(appt)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public void setYear(Year year) { }
+
+        @Override
+        public void setMonth(Month month) { }
+
+        @Override
+        public void setDay(Day day) { }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<Appointment> predicate) { }
     }
 }
 

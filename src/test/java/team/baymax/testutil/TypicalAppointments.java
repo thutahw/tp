@@ -21,23 +21,38 @@ import team.baymax.model.util.datetime.Duration;
  */
 public class TypicalAppointments {
 
-    public static final Appointment APT1 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
-            new Duration(60), new Description("description 1"), new HashSet<>(), AppointmentStatus.DONE);
+    public static final Appointment ALICE_APT = new Appointment(ALICE,
+            DateTime.fromString("11-10-2020 12:45"),
+            new Duration(60), new Description("desc 1"),
+            new HashSet<>(), AppointmentStatus.DONE);
 
-    public static final Appointment APT1_VARIANT_1 = new Appointment(ALICE,
-            DateTime.fromString("11-10-2020 12:45"), new Duration(60),
-            new Description("appointment 1 with same datetime and patient"), new HashSet<>(), AppointmentStatus.MISSED);
-    public static final Appointment APT1_DUPLICATE = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
-            new Duration(60), new Description("appointment 1 duplicate"), new HashSet<>(), AppointmentStatus.DONE);
+    // exact duplicate of APT1
+    public static final Appointment ALICE_APT_DUPLICATE = new Appointment(ALICE,
+            DateTime.fromString("11-10-2020 12:45"),
+            new Duration(60), new Description("desc 1"),
+            new HashSet<>(), AppointmentStatus.DONE);
 
-    public static final Appointment APT2 = new Appointment(ALICE, DateTime.fromString("12-10-2020 12:45"),
-            new Duration(60), new Description("long term patient"), new HashSet<>(), AppointmentStatus.UPCOMING);
+    // same patient and datetime with APT1, but other fields are different
+    public static final Appointment ALICE_APT_VARIANT_1 = new Appointment(ALICE,
+            DateTime.fromString("11-10-2020 12:45"),
+            new Duration(60), new Description("desc 2"),
+            new HashSet<>(), AppointmentStatus.MISSED);
 
-    public static final Appointment APT3 = new Appointment(CARL, DateTime.fromString("11-11-2002 11:30"),
-            new Duration(60), new Description("long term patient"), new HashSet<>(), AppointmentStatus.DONE);
+    // same patient, but different datetime
+    public static final Appointment ALICE_APT_VARIANT_2 = new Appointment(ALICE,
+            DateTime.fromString("12-10-2020 12:45"),
+            new Duration(60), new Description("desc 2"),
+            new HashSet<>(), AppointmentStatus.MISSED);
 
-    public static final Appointment APT4 = new Appointment(BOB, DateTime.fromString("11-10-2020 12:45"),
-            new Duration(60), new Description("long term patient"), new HashSet<>(), AppointmentStatus.DONE);
+    public static final Appointment CARL_APT = new Appointment(CARL,
+            DateTime.fromString("11-11-2002 11:30"),
+            new Duration(60), new Description("desc 3"),
+            new HashSet<>(), AppointmentStatus.DONE);
+
+    public static final Appointment BOB_APT = new Appointment(BOB,
+            DateTime.fromString("11-10-2020 12:45"),
+            new Duration(60), new Description("desc 4"),
+            new HashSet<>(), AppointmentStatus.DONE);
 
 
 
@@ -55,6 +70,6 @@ public class TypicalAppointments {
     }
 
     public static List<Appointment> getTypicalAppointments() {
-        return new ArrayList<>(Arrays.asList(APT1, APT2, APT3));
+        return new ArrayList<>(Arrays.asList(ALICE_APT, ALICE_APT_VARIANT_2, CARL_APT));
     }
 }

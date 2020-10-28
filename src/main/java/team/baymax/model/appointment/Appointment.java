@@ -3,7 +3,6 @@ package team.baymax.model.appointment;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -122,10 +121,11 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
         return getPatient().equals(otherAppointment.getPatient())
                 && getDateTime().equals(otherAppointment.getDateTime())
-                && getStatus().equals(otherAppointment.getStatus())
+                && getTime().equals(otherAppointment.getTime())
+                && getDuration().equals(otherAppointment.duration)
                 && getDescription().equals(otherAppointment.getDescription())
-                && getTags().equals(otherAppointment.getTags())
-                && getDuration().equals(otherAppointment.duration);
+                && getStatus().equals(otherAppointment.getStatus())
+                && getTags().equals(otherAppointment.getTags());
     }
 
     @Override

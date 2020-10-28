@@ -18,16 +18,13 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@LightTheme.css" />
-        <URL value="@Extensions.css" />
-        <URL value="@TabPane.css" />
-<<<<<<< HEAD
-        <URL value="@CalendarPage.css" />
-        <URL value="@SchedulePage.css" />
-=======
         <URL value="@AppointmentInfoPage.css" />
+        <URL value="@CalendarPage.css" />
         <URL value="@Dashboard.css" />
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
+        <URL value="@Extensions.css" />
+        <URL value="@LightTheme.css" />
+        <URL value="@SchedulePage.css" />
+        <URL value="@TabPane.css" />
       </stylesheets>
 
       <VBox>

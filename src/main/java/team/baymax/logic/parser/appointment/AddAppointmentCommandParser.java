@@ -4,9 +4,9 @@ import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TIME;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
@@ -51,10 +51,12 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
-            return new AddAppointmentCommand(id, dateTime, duration, tagList, description);
+            System.out.println("Datetime");
+            return new AddAppointmentCommand(id, dateTime, null, duration, description, tagList);
         } else if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-            return new AddAppointmentCommand(id, time, duration, tagList, description);
+            System.out.println("Time");
+            return new AddAppointmentCommand(id, null, time, duration, description, tagList);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));

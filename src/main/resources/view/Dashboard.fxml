@@ -21,7 +21,7 @@
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
-                <Label text="Today"/>
+                <Label text="Appointments Today"/>
                 <StackPane fx:id="appointmentListPanelPlaceholder"></StackPane>
             </VBox>
             <VBox fx:id="rightPanel" minWidth="300">

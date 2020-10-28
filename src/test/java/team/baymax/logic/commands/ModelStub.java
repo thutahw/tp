@@ -166,7 +166,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public <HEAD> CalendarManager getCalendarManager() {
+    public CalendarManager getCalendarManager() {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -42,6 +42,7 @@ public class TabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         TabId tabId = TabId.valueOf(tabNumber.getOneBased());
+
         Date today = new Date(
                 new Day(AppointmentCalendar.getCurrentDay()),
                 new Month(AppointmentCalendar.getCurrentMonth()),

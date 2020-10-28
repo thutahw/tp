@@ -4,11 +4,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.logic.commands.appointment.EditAppointmentDescriptor;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
 
 /**
  * A utility class to help with building EditAppointmentDescriptor objects.

@@ -17,11 +17,13 @@ import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.userprefs.UserPrefs;
 
 public class DeleteAppointmentCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -34,7 +36,7 @@ public class DeleteAppointmentCommandTest {
                 appointmentToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs());
+                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -64,7 +66,7 @@ public class DeleteAppointmentCommandTest {
                 appointmentToDelete);
 
         Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs());
+                new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
         showNoAppointment(expectedModel);
 

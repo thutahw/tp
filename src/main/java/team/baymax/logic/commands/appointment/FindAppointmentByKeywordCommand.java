@@ -2,7 +2,6 @@ package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 
-import team.baymax.commons.core.Messages;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
@@ -17,6 +16,7 @@ public class FindAppointmentByKeywordCommand extends Command {
     public static final String COMMAND_WORD = "findappt";
     public static final TabId TAB_ID = TabId.APPOINTMENT;
 
+    public static final String MESSAGE_APPOINTMENTS_LISTED_SUCCESS = "%1$d appointments listed!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments whose description or tags "
             + "contain the given keyword. "
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
@@ -33,7 +33,7 @@ public class FindAppointmentByKeywordCommand extends Command {
         requireNonNull(model);
         model.updateFilteredAppointmentList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW,
+                String.format(MESSAGE_APPOINTMENTS_LISTED_SUCCESS,
                         model.getFilteredAppointmentList().size()), getTabId());
     }
 

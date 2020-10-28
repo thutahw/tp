@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.CommandTestUtil;
+import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;

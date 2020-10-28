@@ -13,6 +13,7 @@ import team.baymax.model.tag.Tag;
 import team.baymax.model.util.SampleDataUtil;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Time;
 
 
 /**
@@ -22,12 +23,14 @@ public class AppointmentBuilder {
 
     public static final Patient DEFAULT_PATIENT = ALICE;
     public static final String DEFAULT_DATETIME = "11-10-2020 12:45";
-    private static final AppointmentStatus DEFAULT_APPOINTMENT_STATUS = AppointmentStatus.UPCOMING;
-    private static final String DEFAULT_DESCRIPTION = "Monthly checkup.";
-    private static final Duration DEFAULT_DURATION = new Duration(60);
+    public static final int DEFAULT_DURATION = 60;
+    public static final Time DEFAULT_TIME = null;
+    public static final String DEFAULT_DESCRIPTION = "Monthly checkup.";
+    public static final AppointmentStatus DEFAULT_APPOINTMENT_STATUS = AppointmentStatus.UPCOMING;
 
     private Patient patient;
     private DateTime dateTime;
+    private Time time;
     private Duration duration;
     private AppointmentStatus status;
     private Set<Tag> tags;
@@ -39,7 +42,8 @@ public class AppointmentBuilder {
     public AppointmentBuilder() {
         patient = DEFAULT_PATIENT;
         dateTime = DateTime.fromString(DEFAULT_DATETIME);
-        duration = DEFAULT_DURATION;
+        time = DEFAULT_TIME;
+        duration = new Duration(DEFAULT_DURATION);
         status = DEFAULT_APPOINTMENT_STATUS;
         tags = new HashSet<>();
         description = new Description(DEFAULT_DESCRIPTION);
@@ -52,6 +56,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder(Appointment appointmentToCopy) {
         patient = appointmentToCopy.getPatient();
         dateTime = appointmentToCopy.getDateTime();
+        time = appointmentToCopy.getTime();
         duration = appointmentToCopy.getDuration();
         description = appointmentToCopy.getDescription();
         tags = appointmentToCopy.getTags();
@@ -86,11 +91,20 @@ public class AppointmentBuilder {
     }
 
     /**
-     * Parses the input into a LocaLDateTime and sets it as the dateTime of the appointment we are building
-     * @param dateTime
+     * Parses the input into a {@code DateTime} and sets it as the dateTime of the appointment we are building
+     *
      */
-    public AppointmentBuilder withTime(String dateTime) {
+    public AppointmentBuilder withDateTime(String dateTime) {
         this.dateTime = DateTime.fromString(dateTime);
+        return this;
+    }
+
+    /**
+     * Parses the input into a {@code Time} and sets it as the time of the appointment we are building
+     *
+     */
+    public AppointmentBuilder withTime(String time) {
+        this.time = Time.fromString(time);
         return this;
     }
 

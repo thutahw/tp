@@ -27,7 +27,8 @@ import team.baymax.model.userprefs.UserPrefs;
  */
 public class ListPatientAppointmentsCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
