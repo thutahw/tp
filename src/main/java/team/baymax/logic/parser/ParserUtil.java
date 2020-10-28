@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.model.calendar.Day;
 import team.baymax.model.calendar.Month;
 import team.baymax.model.calendar.Year;
@@ -44,6 +44,11 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code day} into a {@code Day} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code day} is invalid.
+     */
     public static Day parseDayOfMonth(String day) throws ParseException {
         String trimmedDayOfMonth = day.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
@@ -53,6 +58,11 @@ public class ParserUtil {
         return new Day(Integer.parseInt(trimmedDayOfMonth));
     }
 
+    /**
+     * Parses {@code month} into a {@code Month} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code month} is invalid.
+     */
     public static Month parseMonth(String month) throws ParseException {
         String trimmedMonth = month.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
@@ -62,6 +72,11 @@ public class ParserUtil {
         return new Month(Integer.parseInt(trimmedMonth));
     }
 
+    /**
+     * Parses {@code year} into a {@code Year} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code year} is invalid.
+     */
     public static Year parseYear(String year) throws ParseException {
         String trimmedYear = year.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedYear);

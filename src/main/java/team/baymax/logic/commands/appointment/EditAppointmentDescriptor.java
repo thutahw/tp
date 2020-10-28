@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import team.baymax.model.calendar.DateTime;
 import team.baymax.commons.util.CollectionUtil;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 

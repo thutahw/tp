@@ -10,16 +10,17 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.parser.Parser;
-import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
+import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.Prefix;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.model.tag.Tag;
+
 
 /**
  * Parses input arguments and creates a new AddAppointmentCommand object

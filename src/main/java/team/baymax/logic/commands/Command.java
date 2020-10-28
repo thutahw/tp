@@ -1,6 +1,5 @@
 package team.baymax.logic.commands;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 

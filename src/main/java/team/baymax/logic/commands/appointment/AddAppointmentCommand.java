@@ -10,15 +10,15 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
-import team.baymax.model.calendar.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.calendar.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;

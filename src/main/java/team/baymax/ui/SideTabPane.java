@@ -1,10 +1,12 @@
 package team.baymax.ui;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
@@ -76,6 +78,17 @@ public class SideTabPane extends UiPart<Region> {
 
         SchedulePage schedulePage = new SchedulePage(appointments);
         scheduleTabContentPlaceholder.getChildren().add(schedulePage.getRoot());
+
+        sideTabPane.addEventFilter(
+            MouseEvent.ANY,
+            new EventHandler<MouseEvent>() {
+                public void handle(final MouseEvent mouseEvent) {
+                    // prevent any children from acting on the mouse event
+                    mouseEvent.consume();
+                }
+            });
+
+
     }
 
     public void switchTab(TabId tabId) {

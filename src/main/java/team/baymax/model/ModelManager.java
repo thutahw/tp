@@ -13,7 +13,6 @@ import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.Date;
 import team.baymax.model.calendar.Day;
 import team.baymax.model.calendar.Month;
 import team.baymax.model.calendar.Year;
@@ -257,12 +256,12 @@ public class ModelManager implements Model {
         calendarManager.resetCalendar(new CalendarManager());
     }
 
-    public void updateMonthlyData(Day day) {
-        filteredAppointmentsList.stream().filter(appointment -> {
-            AppointmentCalendar ac = getAppointmentCalendar();
-            return appointment.getDate().equals(new Date(day, ac.getMonth(), ac.getYear()));
-        }).count();
-    }
+    //    public void updateMonthlyData(Day day) {
+    //        filteredAppointmentsList.stream().filter(appointment -> {
+    //            AppointmentCalendar ac = getAppointmentCalendar();
+    //            return appointment.getDate().equals(new Date(day, ac.getMonth(), ac.getYear()));
+    //        }).count();
+    //    }
 
     //=========== utils ================================================================================
 

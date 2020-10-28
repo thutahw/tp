@@ -10,7 +10,6 @@ import static team.baymax.logic.parser.ParserUtil.parseTagsForEdit;
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentDescriptor;
-import team.baymax.logic.commands.patient.EditPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;

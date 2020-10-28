@@ -7,25 +7,18 @@ import java.util.Calendar;
 import javafx.beans.property.SimpleStringProperty;
 
 public class AppointmentCalendar {
+    protected final SimpleStringProperty dayProperty;
+    protected final SimpleStringProperty monthProperty;
+    protected final SimpleStringProperty yearProperty;
 
     private Day day;
     private Month month;
     private Year year;
 
-    protected final SimpleStringProperty dayProperty;
-    protected final SimpleStringProperty monthProperty;
-    protected final SimpleStringProperty yearProperty;
 
 
     public AppointmentCalendar() {
-
-        day = new Day(getCurrentday());
-        month = new Month(getCurrentMonth());
-        year = new Year(getCurrentYear());
-
-        this.dayProperty = new SimpleStringProperty(day.toString());
-        this.monthProperty = new SimpleStringProperty(month.toString());
-        this.yearProperty = new SimpleStringProperty(year.toString());
+        this(new Day(getCurrentDay()), new Month(getCurrentMonth()), new Year(getCurrentYear()));
     }
 
     public AppointmentCalendar(Day day, Month month, Year year) {
@@ -40,7 +33,7 @@ public class AppointmentCalendar {
         this.yearProperty = new SimpleStringProperty(year.toString());
     }
 
-    public static int getCurrentday() {
+    public static int getCurrentDay() {
         return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
