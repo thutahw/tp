@@ -34,10 +34,6 @@ public class Month {
         return value;
     }
 
-    public int getNumOfDays() {
-        return numOfDays[value - 1];
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
