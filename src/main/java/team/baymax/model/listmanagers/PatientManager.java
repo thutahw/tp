@@ -110,7 +110,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     /**
      * Returns a patient matching the given nric, if it exists, otherwise throws an {@code ElementNotFoundException}
      */
-    public Patient getPatientByNric(Nric nric) throws ElementNotFoundException {
+    public Patient getPatient(Nric nric) throws ElementNotFoundException {
         return patients.getByPredicate((patient) -> patient.getNric().equals(nric));
     }
 
@@ -118,7 +118,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      * Returns the first patient matching the given name, if it exists,
      * otherwise throws an {@code ElementNotFoundException}
      */
-    public Patient getPatientByName(Name name) throws ElementNotFoundException {
+    public Patient getPatient(Name name) throws ElementNotFoundException {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(name.toString()));
         return patients.getByPredicate(predicate);
     }

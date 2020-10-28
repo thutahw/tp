@@ -2,7 +2,7 @@ package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -24,19 +24,19 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class DeleteAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "deleteappt";
+    public static final String COMMAND_WORD = "cancel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the appointment identified by the patient's ID or name, and date-time of the appointment.\n"
+            + ": Cancels the appointment identified by the patient's ID or name, and date-time of the appointment.\n"
             + "Parameters: "
-            + PREFIX_ID + "PATIENT_ID "
+            + PREFIX_INDEX + "PATIENT_ID "
             + "(OR "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + "OR "
             + PREFIX_NAME + "PATIENT_NAME) "
             + PREFIX_DATETIME + "DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + "1 "
+            + PREFIX_INDEX + "1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 ";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
@@ -102,14 +102,13 @@ public class DeleteAppointmentCommand extends Command {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
             }
-
             patientOfAppointment = lastShownList.get(targetIndex.getZeroBased());
         } else if (nric != null) {
             PatientManager patientManager = (PatientManager) model.getPatientManager();
-            patientOfAppointment = patientManager.getPatientByNric(nric);
+            patientOfAppointment = patientManager.getPatient(nric);
         } else if (name != null) {
             PatientManager patientManager = (PatientManager) model.getPatientManager();
-            patientOfAppointment = patientManager.getPatientByName(name);
+            patientOfAppointment = patientManager.getPatient(name);
         } else {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }

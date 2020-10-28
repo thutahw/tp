@@ -91,7 +91,7 @@ class JsonAdaptedAppointment {
             throw new ElementNotFoundException();
         }
 
-        final Patient modelPatient = patientManager.getPatientByNric(modelNric);
+        final Patient modelPatient = patientManager.getPatient(modelNric);
 
         if (dateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

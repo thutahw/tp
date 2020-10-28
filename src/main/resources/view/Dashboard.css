@@ -1,0 +1,11 @@
+.dashboard-container {
+    -fx-alignment: center;
+}
+
+.clock-container {
+    -fx-alignment: center;
+}
+
+.date-panel {
+    -fx-alignment: center;
+}

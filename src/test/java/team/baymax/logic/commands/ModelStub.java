@@ -10,6 +10,8 @@ import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.patient.Name;
+import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.testutil.AppointmentBuilder;
@@ -112,6 +114,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setPatient(Patient target, Patient editedPatient) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Patient getPatient(Nric nric) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Patient getPatient(Name name) {
         throw new AssertionError("This method should not be called.");
     }
 

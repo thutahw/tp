@@ -7,16 +7,15 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
-import team.baymax.logic.parser.Prefix;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
@@ -56,14 +55,6 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         Patient patient = new Patient(nric, name, phone, gender, tagList, remark);
 
         return new AddPatientCommand(patient);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
