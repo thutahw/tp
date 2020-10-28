@@ -3,7 +3,7 @@ package team.baymax.logic.parser.appointment;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
@@ -31,15 +31,15 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATETIME, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_DATETIME, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
 
-        Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
+        Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         DateTime dateTime;

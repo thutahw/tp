@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -23,16 +23,16 @@ import team.baymax.model.tag.Tag;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addappt";
+    public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
             + "Parameters: "
-            + PREFIX_ID + "PATIENT_ID "
+            + PREFIX_INDEX + "PATIENT_INDEX "
             + PREFIX_DATETIME + "DATETIME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + "1 "
+            + PREFIX_INDEX + "1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 "
             + PREFIX_DESCRIPTION + "Removal of braces. "
             + PREFIX_TAG + "DrGoh "

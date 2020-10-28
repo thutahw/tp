@@ -6,7 +6,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
 
-
 /**
  * A ui for the appointment information page.
  */
@@ -24,6 +23,7 @@ public class AppointmentInfoPage extends UiPart<Region> {
      */
     public AppointmentInfoPage(ObservableList<Appointment> appointmentList) {
         super(FXML);
+
         appointmentListPanel = new AppointmentListPanel(appointmentList);
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
     }

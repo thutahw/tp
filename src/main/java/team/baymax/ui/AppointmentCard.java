@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentStatus;
 
 /**
  * An UI component that displays information of an {@code Appointment}.
@@ -37,6 +38,10 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label patientName;
     @FXML
+    private Label phoneNumber;
+    @FXML
+    private Label statusTag;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -45,13 +50,21 @@ public class AppointmentCard extends UiPart<Region> {
     public AppointmentCard(Appointment appointment, int displayedIndex) {
         super(FXML);
         this.appointment = appointment;
+
         id.setText(displayedIndex + ". ");
         patientName.setText(appointment.getPatient().getName().fullName);
+        phoneNumber.setText(appointment.getPatient().getPhone().toString());
         dateTime.setText(appointment.getDateTime().toString());
         description.setText(appointment.getDescription().toString());
+        statusTag.setText(appointment.getStatus().text());
+        statusTag.setStyle(statusTagStyles(appointment.getStatus()));
         appointment.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private String statusTagStyles(AppointmentStatus status) {
+        return String.format("-fx-background-color: %s;", status.getColor());
     }
 
     @Override
