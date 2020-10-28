@@ -45,7 +45,8 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyListManager<Patient> patientManager,
                         ReadOnlyListManager<Appointment> appointmentManager,
-                        ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs,
+                        CalendarManager calendarManager) {
         super();
         requireAllNonNull(patientManager, appointmentManager, userPrefs);
 
@@ -54,9 +55,7 @@ public class ModelManager implements Model {
         this.patientManager = new PatientManager(patientManager);
         this.appointmentManager = new AppointmentManager(appointmentManager);
 
-        // -------  To be replaced!!!!
-        this.calendarManager = new CalendarManager();
-        // -------
+        this.calendarManager = calendarManager;
 
         this.userPrefs = new UserPrefs(userPrefs);
 
@@ -65,7 +64,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new PatientManager(), new AppointmentManager(), new UserPrefs());
+        this(new PatientManager(), new AppointmentManager(), new UserPrefs(), new CalendarManager());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -287,8 +286,9 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return userPrefs.equals(other.userPrefs)
                 && patientManager.equals(other.patientManager)
-                && filteredPatientsList.equals(other.filteredPatientsList)
                 && appointmentManager.equals(other.appointmentManager)
+                && calendarManager.equals(other.calendarManager)
+                && filteredPatientsList.equals(other.filteredPatientsList)
                 && filteredAppointmentsList.equals(other.filteredAppointmentsList);
     }
 

@@ -25,7 +25,7 @@ import team.baymax.model.util.TabId;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "addappt";
+    public static final String COMMAND_WORD = "schedule";
     public static final TabId TAB_ID = TabId.SCHEDULE;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "

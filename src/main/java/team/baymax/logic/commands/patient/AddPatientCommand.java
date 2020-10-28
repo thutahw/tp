@@ -67,6 +67,10 @@ public class AddPatientCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabId());
     }
 
+    public Patient getToAdd() {
+        return toAdd;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;

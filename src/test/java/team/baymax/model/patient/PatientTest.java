@@ -69,20 +69,20 @@ public class PatientTest {
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 
-        // different name -> returns true
+        // different name -> returns false
         Patient editedAlice = new PatientBuilder(ALICE).withName(PatientCommandTestUtil.VALID_NAME_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns true
+        // different phone -> returns false
         editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // different gender -> returns true
+        // different gender -> returns false
         editedAlice = new PatientBuilder(ALICE).withGender(PatientCommandTestUtil.VALID_GENDER_BOB).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns true
+        // different tags -> returns false
         editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
     }
 }

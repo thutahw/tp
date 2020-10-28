@@ -22,8 +22,10 @@ import team.baymax.logic.commands.patient.EditPatientCommand.EditPatientDescript
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.EditPatientDescriptorBuilder;
 import team.baymax.testutil.PatientBuilder;
@@ -33,7 +35,8 @@ import team.baymax.testutil.PatientBuilder;
  */
 public class EditPatientCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+            new CalendarManager());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -41,11 +44,14 @@ public class EditPatientCommandTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT, descriptor);
 
+        System.out.println(editedPatient);
+
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
+        expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
         PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
@@ -67,8 +73,9 @@ public class EditPatientCommandTest {
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.setPatient(lastPatient, editedPatient);
+        expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
         PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
@@ -82,7 +89,8 @@ public class EditPatientCommandTest {
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
+        expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
         PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
@@ -99,8 +107,9 @@ public class EditPatientCommandTest {
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
+        expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
         PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }

@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 
@@ -25,9 +26,10 @@ import team.baymax.model.userprefs.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindPatientCommandTest {
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+            new CalendarManager());
     private Model expectedModel = new ModelManager(getTypicalPatientManager(),
-            new AppointmentManager(), new UserPrefs());
+            new AppointmentManager(), new UserPrefs(), new CalendarManager());
 
     @Test
     public void equals() {

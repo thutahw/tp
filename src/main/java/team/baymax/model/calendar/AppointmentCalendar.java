@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 // make AppointmentCalednar a java bean class to support property change listeners
 public class AppointmentCalendar {
+
     protected final SimpleStringProperty dayProperty;
     protected final SimpleStringProperty monthProperty;
     protected final SimpleStringProperty yearProperty;
@@ -108,5 +109,14 @@ public class AppointmentCalendar {
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AppointmentCalendar // instanceof handles nulls
+                && day.equals(((AppointmentCalendar) other).day)
+                && month.equals(((AppointmentCalendar) other).month)
+                && year.equals(((AppointmentCalendar) other).year));
     }
 }

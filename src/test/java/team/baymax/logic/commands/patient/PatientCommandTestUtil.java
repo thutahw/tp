@@ -67,13 +67,17 @@ public class PatientCommandTestUtil {
     public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
+        DESC_AMY = new EditPatientDescriptorBuilder()
+                .withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_FRIEND).withRemark(VALID_REMARK_AMY).build();
-        DESC_BOB = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_FRIEND).withRemark(VALID_REMARK_AMY)
+                .build();
+        DESC_BOB = new EditPatientDescriptorBuilder()
+                .withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .withRemark(VALID_REMARK_BOB).build();
+                .withRemark(VALID_REMARK_BOB)
+                .build();
     }
 
     /**

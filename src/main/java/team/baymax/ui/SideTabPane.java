@@ -92,8 +92,6 @@ public class SideTabPane extends UiPart<Region> {
                     mouseEvent.consume();
                 }
             });
-
-
     }
 
     /**

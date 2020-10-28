@@ -46,4 +46,11 @@ public class CalendarManager {
         setMonth(appointmentCalendar.getMonth());
         setDay(appointmentCalendar.getDay());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CalendarManager // instanceof handles nulls
+                && appointmentCalendar.equals(((CalendarManager) other).appointmentCalendar));
+    }
 }

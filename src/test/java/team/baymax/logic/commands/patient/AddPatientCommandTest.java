@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -44,7 +46,9 @@ public class AddPatientCommandTest {
 
         CommandResult commandResult = new AddPatientCommand(validPatient).execute(modelStub);
 
-        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient), commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient);
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
     }
 
@@ -286,6 +290,9 @@ public class AddPatientCommandTest {
         public ReadOnlyListManager<Patient> getPatientManager() {
             return new PatientManager();
         }
+
+        @Override
+        public void updateFilteredPatientList(Predicate<Patient> predicate) { }
     }
 
 }

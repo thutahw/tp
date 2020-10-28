@@ -12,12 +12,12 @@ import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
 
 
-//make CalendarPage a property change listener
+// Make CalendarPage a property change listener
 
 /**
  * A ui for the calendar in the application.
  */
-public class CalendarPage extends UiPart<Region> implements PropertyChangeListener {
+public class    CalendarPage extends UiPart<Region> implements PropertyChangeListener {
 
     private static final String FXML = "CalendarPage.fxml";
 
@@ -57,6 +57,7 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
 
     private void renderCalendar() {
         calendarGridView.getChildren().setAll();
+
         int day = 1;
         int numOfDaysInMonth = appointmentCalendar.getMonth().getNumOfDays();
         CalendarViewCell cell;
@@ -72,6 +73,7 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
     }
 
     static class CalendarViewCell extends Button {
+
         private static String style = "-fx-background-color: #ffffff; "
                     + "-fx-font-family: 'Adobe Gothic Std';"
                     + "-fx-text-fill: #0e0e0e;"

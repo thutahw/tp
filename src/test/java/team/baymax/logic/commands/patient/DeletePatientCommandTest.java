@@ -15,6 +15,7 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.UserPrefs;
 
@@ -25,7 +26,8 @@ import team.baymax.model.userprefs.UserPrefs;
  */
 public class DeletePatientCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+            new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +37,7 @@ public class DeletePatientCommandTest {
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deletePatient(patientToDelete);
 
         PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
@@ -58,7 +60,8 @@ public class DeletePatientCommandTest {
 
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
-        Model expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs(),
+                new CalendarManager());
         expectedModel.deletePatient(patientToDelete);
         showNoPatient(expectedModel);
 
@@ -70,7 +73,7 @@ public class DeletePatientCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         Index outOfBoundIndex = INDEX_SECOND_PATIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of the list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPatientManager().getReadOnlyList().size());
 
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundIndex);

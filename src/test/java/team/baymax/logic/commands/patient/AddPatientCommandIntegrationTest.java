@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.PatientBuilder;
 
@@ -22,18 +24,23 @@ public class AddPatientCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+        model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+                new CalendarManager());
     }
 
     @Test
     public void execute_newPatient_success() {
         Patient validPatient = new PatientBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs());
+        String expectedMessage = String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient);
+
+        Model expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs(),
+                new CalendarManager());
         expectedModel.addPatient(validPatient);
+        expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(validPatient));
 
         PatientCommandTestUtil.assertPatientCommandSuccess(new AddPatientCommand(validPatient), model,
-                String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient), expectedModel);
+                expectedMessage, expectedModel);
     }
 
     @Test

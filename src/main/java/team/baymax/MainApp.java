@@ -19,6 +19,7 @@ import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
@@ -84,7 +85,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         ReadOnlyListManager<Patient> patientManager = initPatientManager(storage);
         ReadOnlyListManager<Appointment> appointmentManager = initAppointmentManager(patientManager, storage);
-        return new ModelManager(patientManager, appointmentManager, userPrefs);
+        CalendarManager calendarManager = new CalendarManager();
+        return new ModelManager(patientManager, appointmentManager, userPrefs, calendarManager);
     }
 
     /**

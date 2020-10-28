@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.userprefs.UserPrefs;
@@ -101,11 +102,13 @@ public class ModelManagerTest {
         PatientManager patientManager = new PatientManagerBuilder().withPatient(ALICE).withPatient(BENSON).build();
         PatientManager differentPatientManager = new PatientManager();
         AppointmentManager appointmentManager = new AppointmentManager();
+        CalendarManager calendarManager = new CalendarManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(patientManager, appointmentManager, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(patientManager, appointmentManager, userPrefs);
+        modelManager = new ModelManager(patientManager, appointmentManager, userPrefs, new CalendarManager());
+        ModelManager modelManagerCopy = new ModelManager(patientManager, appointmentManager, userPrefs,
+                new CalendarManager());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -117,13 +120,15 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentPatientManager, appointmentManager, userPrefs)));
+        // different patientManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentPatientManager, appointmentManager, userPrefs,
+                calendarManager)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, userPrefs,
+                calendarManager)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
@@ -131,6 +136,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setPatientStorageFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, differentUserPrefs,
+                calendarManager)));
     }
 }
