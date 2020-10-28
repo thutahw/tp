@@ -186,6 +186,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean doesAppointmentClash(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointmentManager.doesAppointmentClash(appointment);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         appointmentManager.removeAppointment(target);
     }

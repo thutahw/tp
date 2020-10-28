@@ -46,6 +46,7 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
             + "appointment book";
+    public static final String MESSAGE_CLASH_APPOINTMENT = "This appointment clashes with an existing appointment";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
 
     private final Index patientIndex;
@@ -80,6 +81,10 @@ public class AddAppointmentCommand extends Command {
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        if (model.doesAppointmentClash(toAdd)) {
+            throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 
         model.addAppointment(toAdd);

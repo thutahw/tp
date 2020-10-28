@@ -128,6 +128,12 @@ public interface Model {
     boolean hasAppointment(Appointment appointment);
 
     /**
+     * Returns true if there is an appointment existing in the manager that clashes with
+     * {@code appointment} in time.
+     */
+    boolean doesAppointmentClash(Appointment appointment);
+
+    /**
      * Deletes the given appointment.
      * The appointment must exist in the appointment book.
      */

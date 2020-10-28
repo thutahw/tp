@@ -90,6 +90,22 @@ public class DateTime implements Comparable<DateTime> {
         return new Time(getHour(), getMinute());
     }
 
+    public DateTime plusMinutes(Duration duration) {
+        return new DateTime(this.dateTime.plusMinutes(duration.value));
+    }
+
+    public boolean isAfter(DateTime other) {
+        return dateTime.isAfter(other.dateTime);
+    }
+
+    public boolean isBefore(DateTime other) {
+        return dateTime.isBefore(other.dateTime);
+    }
+
+    public boolean isEqual(DateTime other) {
+        return dateTime.isEqual(other.dateTime);
+    }
+
     @Override
     public int compareTo(DateTime other) {
         return dateTime.compareTo(other.dateTime);

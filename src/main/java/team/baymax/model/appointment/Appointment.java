@@ -60,6 +60,10 @@ public class Appointment implements UniqueListElement {
         return duration;
     }
 
+    public DateTime getEndDateTime() {
+        return this.dateTime.plusMinutes(this.duration);
+    }
+
     public Description getDescription() {
         return description;
     }
