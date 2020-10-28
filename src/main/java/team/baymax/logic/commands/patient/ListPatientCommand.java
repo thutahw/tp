@@ -13,7 +13,7 @@ import team.baymax.model.Model;
  */
 public class ListPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "lspat";
+    public static final String COMMAND_WORD = "lspatient";
 
     public static final String MESSAGE_SUCCESS = "Listed all patients";
 

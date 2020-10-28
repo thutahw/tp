@@ -17,7 +17,7 @@ import team.baymax.model.patient.Patient;
  */
 public class DeletePatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletepat";
+    public static final String COMMAND_WORD = "deletepatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by the index number used in the displayed patient list.\n"

@@ -29,7 +29,7 @@ import team.baymax.model.tag.Tag;
  */
 public class EditPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "editpat";
+    public static final String COMMAND_WORD = "editpatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
             + "by the index number used in the displayed patient list. "

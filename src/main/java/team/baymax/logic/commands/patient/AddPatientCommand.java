@@ -19,7 +19,7 @@ import team.baymax.model.patient.Patient;
  */
 public class AddPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "addpat";
+    public static final String COMMAND_WORD = "addpatient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the appointment book. "
             + "Parameters: "
