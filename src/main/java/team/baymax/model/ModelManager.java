@@ -15,6 +15,8 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.listmanagers.AppointmentManager;
 import team.baymax.model.listmanagers.PatientManager;
 import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.patient.Name;
+import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
@@ -138,6 +140,16 @@ public class ModelManager implements Model {
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
         patientManager.setPatient(target, editedPatient);
+    }
+
+    @Override
+    public Patient getPatient(Nric nric) {
+        return patientManager.getPatient(nric);
+    }
+
+    @Override
+    public Patient getPatient(Name name) {
+        return patientManager.getPatient(name);
     }
 
     //=========== Filtered Patient List Accessors =============================================================

@@ -145,7 +145,7 @@ public class MainWindow extends UiPart<Stage> {
         CalendarPage calendarPage = new CalendarPage();
         calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
 
-        Dashboard dashboard = new Dashboard();
+        Dashboard dashboard = new Dashboard(logic.getFilteredAppointmentList());
         dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());
 
         InfoPage infoPage = new InfoPage();

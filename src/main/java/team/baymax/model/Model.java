@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.patient.Name;
+import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 
@@ -94,6 +96,10 @@ public interface Model {
      * appointment book.
      */
     void setPatient(Patient target, Patient editedPatient);
+
+    Patient getPatient(Nric nric);
+
+    Patient getPatient(Name name);
 
     /** Returns an unmodifiable view of the filtered patient list */
     ObservableList<Patient> getFilteredPatientList();
