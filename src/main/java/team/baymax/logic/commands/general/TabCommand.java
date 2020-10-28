@@ -24,7 +24,6 @@ public class TabCommand extends Command {
     public static final String COMMAND_WORD_SCHEDULE = "schedule";
     public static final String COMMAND_WORD_PATIENT = "patient";
     public static final String COMMAND_WORD_APPOINTMENT = "appt";
-    public static final String COMMAND_WORD_HELP = "help";
 
     public static final String MESSAGE_SUCCESS = "Switched to %1$s tab";
     public static final String MESSAGE_INVALID_TAB = "This tab does not exist.";

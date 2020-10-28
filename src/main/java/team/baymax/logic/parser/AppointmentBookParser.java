@@ -83,9 +83,6 @@ public class AppointmentBookParser {
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case RemarkPatientCommand.COMMAND_WORD:
             return new RemarkPatientCommandParser().parse(arguments);
 
@@ -122,8 +119,11 @@ public class AppointmentBookParser {
         case TabCommand.COMMAND_WORD_PATIENT:
             return new TabCommand(Index.fromOneBased(TabId.PATIENT.getTabNumber()));
 
-        case TabCommand.COMMAND_WORD_HELP:
-            return new TabCommand(Index.fromOneBased(TabId.INFO.getTabNumber()));
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
