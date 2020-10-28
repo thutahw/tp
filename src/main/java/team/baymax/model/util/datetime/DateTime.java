@@ -1,4 +1,4 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;

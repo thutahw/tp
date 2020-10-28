@@ -3,6 +3,7 @@ package team.baymax.logic.parser.appointment;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -18,8 +19,9 @@ import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.Prefix;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.calendar.DateTime;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.Duration;
 
 
 /**
@@ -33,7 +35,8 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_DURATION,
+                        PREFIX_DESCRIPTION, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATETIME, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -43,10 +46,11 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        return new AddAppointmentCommand(id, dateTime, description, tagList);
+        return new AddAppointmentCommand(id, dateTime, duration, tagList, description);
     }
 
     /**

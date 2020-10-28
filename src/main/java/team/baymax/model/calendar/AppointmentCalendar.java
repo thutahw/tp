@@ -7,7 +7,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
-import team.baymax.model.calendar.utils.CalendarUtil;
+import team.baymax.model.util.datetime.DateTimeUtil;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
 
 // make AppointmentCalednar a java bean class to support property change listeners
@@ -71,7 +74,7 @@ public class AppointmentCalendar {
     }
 
     public void updateDay() {
-        int maxNumOfDays = CalendarUtil.getNumOfDays(this.month, this.year);
+        int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
         if (this.day.getValue() > maxNumOfDays) {
             this.setDay(new Day(maxNumOfDays));
         }

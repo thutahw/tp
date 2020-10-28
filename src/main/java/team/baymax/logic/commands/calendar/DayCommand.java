@@ -7,8 +7,8 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
-import team.baymax.model.calendar.Date;
-import team.baymax.model.calendar.Day;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.TabId;
 
 public class DayCommand extends Command {

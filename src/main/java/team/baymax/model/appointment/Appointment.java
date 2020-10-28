@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import team.baymax.model.calendar.Date;
-import team.baymax.model.calendar.DateTime;
-import team.baymax.model.calendar.Time;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Time;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;
@@ -20,6 +21,7 @@ import team.baymax.model.util.uniquelist.UniqueListElement;
 public class Appointment implements UniqueListElement {
     private final Patient patient;
     private final DateTime dateTime;
+    private final Duration duration;
     private final AppointmentStatus status;
     private final Set<Tag> tags;
     private final Description description;
@@ -27,11 +29,12 @@ public class Appointment implements UniqueListElement {
     /**
      * Every field must be present and not null.
      */
-    public Appointment(Patient patient, DateTime dateTime, AppointmentStatus status,
-                       Description description, Set<Tag> tags) {
-        requireAllNonNull(patient, dateTime, tags, description);
+    public Appointment(Patient patient, DateTime dateTime, Duration duration, Description description,
+                       Set<Tag> tags, AppointmentStatus status) {
+        requireAllNonNull(patient, dateTime, tags, description, duration);
         this.patient = patient;
         this.dateTime = dateTime;
+        this.duration = duration;
         this.description = description;
         this.tags = tags;
         this.status = status;
@@ -51,6 +54,10 @@ public class Appointment implements UniqueListElement {
 
     public Time getTime() {
         return dateTime.getTime();
+    }
+
+    public Duration getDuration() {
+        return duration;
     }
 
     public Description getDescription() {

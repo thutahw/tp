@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.calendar.DateTime;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
@@ -18,6 +18,7 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.Duration;
 
 /**
  * Contains utility methods for populating {@code AppointmentManager} with sample data.
@@ -52,18 +53,20 @@ public class SampleDataUtil {
     public static Appointment[] getSampleAppointments() {
         Patient[] patients = getSamplePatients();
         return new Appointment[] {
-            new Appointment(patients[0], DateTime.fromString("10-10-2020 14:00"),
-                    AppointmentStatus.DONE, new Description("Full body checkup"), getTagSet("Xray")),
-            new Appointment(patients[3], DateTime.fromString("28-10-2020 10:45"),
-                    AppointmentStatus.UPCOMING, new Description("Diabetes checkup"), getTagSet()),
-            new Appointment(patients[0], DateTime.fromString("10-01-2021 12:00"),
-                    AppointmentStatus.UPCOMING, new Description("Blood pressure checkup"), getTagSet()),
-            new Appointment(patients[2], DateTime.fromString("15-10-2020 09:30"),
-                    AppointmentStatus.MISSED, new Description("Wrist fracture checkup"), getTagSet("Xray")),
-            new Appointment(patients[1], DateTime.fromString("23-11-2020 15:00"),
-                    AppointmentStatus.UPCOMING, new Description("Pregnancy checkup"), getTagSet("Gynaecology")),
-            new Appointment(patients[1], DateTime.fromString("02-01-2021 15:00"),
-                    AppointmentStatus.UPCOMING, new Description("Pregnancy checkup"), getTagSet("Gynaecology"))
+            new Appointment(patients[0], DateTime.fromString("10-10-2020 14:00"), new Duration(60),
+                    new Description("Full body checkup"), getTagSet("Xray"), AppointmentStatus.DONE),
+            new Appointment(patients[3], DateTime.fromString("28-10-2020 10:45"), new Duration(60),
+                    new Description("Diabetes checkup"), getTagSet(), AppointmentStatus.UPCOMING),
+            new Appointment(patients[0], DateTime.fromString("10-01-2021 12:00"), new Duration(60),
+                    new Description("Blood pressure checkup"), getTagSet(), AppointmentStatus.UPCOMING),
+            new Appointment(patients[2], DateTime.fromString("15-10-2020 09:30"), new Duration(60),
+                    new Description("Wrist fracture checkup"), getTagSet("Xray"), AppointmentStatus.MISSED),
+            new Appointment(patients[1], DateTime.fromString("23-11-2020 15:00"), new Duration(60),
+                    new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
+                    AppointmentStatus.UPCOMING),
+            new Appointment(patients[1], DateTime.fromString("02-01-2021 15:00"), new Duration(60),
+                    new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
+                    AppointmentStatus.UPCOMING)
         };
     }
 

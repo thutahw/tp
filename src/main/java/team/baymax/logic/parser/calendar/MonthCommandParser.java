@@ -7,7 +7,7 @@ import team.baymax.logic.commands.calendar.MonthCommand;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.model.calendar.Month;
+import team.baymax.model.util.datetime.Month;
 
 public class MonthCommandParser implements Parser<MonthCommand> {
 

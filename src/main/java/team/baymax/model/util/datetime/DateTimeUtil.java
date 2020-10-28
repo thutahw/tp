@@ -1,11 +1,7 @@
-package team.baymax.model.calendar.utils;
-
-import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.Year;
-
+package team.baymax.model.util.datetime;
 import java.text.DateFormatSymbols;
 
-public class CalendarUtil {
+public class DateTimeUtil {
 
     private static int[] numOfDaysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static int numOfDaysInFebLeapYear = 29;

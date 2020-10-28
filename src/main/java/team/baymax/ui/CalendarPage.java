@@ -9,8 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.utils.CalendarUtil;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.DateTimeUtil;
 
 
 //make CalendarPage a property change listener
@@ -59,7 +59,7 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
     private void renderCalendar() {
         calendarGridView.getChildren().setAll();
         int day = 1;
-        int numOfDaysInMonth = CalendarUtil.getNumOfDays(appointmentCalendar.getMonth(),
+        int numOfDaysInMonth = DateTimeUtil.getNumOfDays(appointmentCalendar.getMonth(),
                 appointmentCalendar.getYear());
         CalendarViewCell cell;
         while (day <= numOfDaysInMonth) {

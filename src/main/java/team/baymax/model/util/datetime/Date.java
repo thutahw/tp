@@ -1,4 +1,6 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
+
+import team.baymax.model.calendar.AppointmentCalendar;
 
 public class Date {
 

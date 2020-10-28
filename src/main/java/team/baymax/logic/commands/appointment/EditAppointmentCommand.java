@@ -19,10 +19,11 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.calendar.DateTime;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.Duration;
 
 /**
  * Edits the details (date-and-time, description, tags) of an existing appointment in the appointment book.
@@ -103,13 +104,16 @@ public class EditAppointmentCommand extends Command {
                 .orElse(appointmentToEdit.getPatient());
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
+        Duration updatedDuration = editAppointmentDescriptor.getDuration()
+                .orElse(appointmentToEdit.getDuration());
         Set<Tag> updatedTags = editAppointmentDescriptor.getTags()
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
         AppointmentStatus status = appointmentToEdit.getStatus();
 
-        return new Appointment(updatedPatient, updatedDateTime, status, updatedDescription, updatedTags);
+        return new Appointment(updatedPatient, updatedDateTime, updatedDuration, updatedDescription,
+                updatedTags, status);
     }
 
     @Override
