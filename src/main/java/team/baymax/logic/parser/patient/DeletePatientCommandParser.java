@@ -14,8 +14,8 @@ import team.baymax.logic.parser.exceptions.ParseException;
 public class DeletePatientCommandParser implements Parser<DeletePatientCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeletePatientCommand
+     * and returns a DeletePatientCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeletePatientCommand parse(String args) throws ParseException {

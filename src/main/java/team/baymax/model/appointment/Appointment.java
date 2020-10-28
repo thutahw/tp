@@ -3,6 +3,7 @@ package team.baymax.model.appointment;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 

@@ -5,6 +5,7 @@ import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.general.ClearCommand;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
@@ -19,7 +20,7 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(new ClearCommand(),
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(),
                 model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -31,7 +32,7 @@ public class ClearCommandTest {
                 new CalendarManager());
         expectedModel.setPatientManager(new PatientManager());
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(new ClearCommand(),
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(),
                 model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

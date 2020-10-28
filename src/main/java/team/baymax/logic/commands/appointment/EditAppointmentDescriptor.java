@@ -8,7 +8,6 @@ import java.util.Set;
 import team.baymax.commons.util.CollectionUtil;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
@@ -18,7 +17,6 @@ import team.baymax.model.util.datetime.Duration;
  * corresponding field value of the appointment.
  */
 public class EditAppointmentDescriptor {
-    private Patient patient;
     private DateTime dateTime;
     private Duration duration;
     private AppointmentStatus status;
@@ -32,7 +30,6 @@ public class EditAppointmentDescriptor {
      * A defensive copy of {@code tags} is used internally.
      */
     public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
-        setPatient(toCopy.patient);
         setDateTime(toCopy.dateTime);
         setDuration(toCopy.duration);
         setStatus(toCopy.status);
@@ -44,15 +41,7 @@ public class EditAppointmentDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(patient, dateTime, status, tags, description);
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public Optional<Patient> getPatient() {
-        return Optional.ofNullable(patient);
+        return CollectionUtil.isAnyNonNull(dateTime, status, tags, description);
     }
 
     public void setDateTime(DateTime dateTime) {
@@ -119,8 +108,7 @@ public class EditAppointmentDescriptor {
         // state check
         EditAppointmentDescriptor e = (EditAppointmentDescriptor) other;
 
-        return getPatient().equals(e.getPatient())
-                && getDateTime().equals(e.getDateTime())
+        return getDateTime().equals(e.getDateTime())
                 && getStatus().equals(e.getStatus())
                 && getTags().equals(e.getTags())
                 && getDescription().equals(e.getDescription());

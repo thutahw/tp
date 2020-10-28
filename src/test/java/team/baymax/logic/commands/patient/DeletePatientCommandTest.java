@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
@@ -40,7 +41,7 @@ public class DeletePatientCommandTest {
                 new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deletePatient(patientToDelete);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class DeletePatientCommandTest {
         expectedModel.deletePatient(patientToDelete);
         showNoPatient(expectedModel);
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -73,7 +74,8 @@ public class DeletePatientCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         Index outOfBoundIndex = INDEX_SECOND_PATIENT;
-        // ensures that outOfBoundIndex is still in bounds of the list
+
+        // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPatientManager().getReadOnlyList().size());
 
         DeletePatientCommand deletePatientCommand = new DeletePatientCommand(outOfBoundIndex);

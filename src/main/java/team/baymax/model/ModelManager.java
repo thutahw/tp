@@ -17,6 +17,8 @@ import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
+import team.baymax.model.patient.Name;
+import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
@@ -149,6 +151,16 @@ public class ModelManager implements Model {
         patientManager.setPatient(target, editedPatient);
     }
 
+    @Override
+    public Patient getPatient(Nric nric) {
+        return patientManager.getPatient(nric);
+    }
+
+    @Override
+    public Patient getPatient(Name name) {
+        return patientManager.getPatient(name);
+    }
+
     //=========== Filtered Patient List Accessors =============================================================
 
     /**
@@ -206,6 +218,12 @@ public class ModelManager implements Model {
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireAllNonNull(target, editedAppointment);
         appointmentManager.setAppointment(target, editedAppointment);
+    }
+
+    @Override
+    public Appointment findAppointmentByPredicate(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        return appointmentManager.getApptByPred(predicate);
     }
 
     //=========== Filtered Appointment List Accessors =============================================================

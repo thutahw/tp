@@ -1,7 +1,7 @@
 package team.baymax.logic.commands;
 
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.general.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +20,7 @@ public class ExitCommandTest {
                 false,
                 true,
                 ExitCommand.TAB_ID);
-        assertPatientCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
+
     }
 }

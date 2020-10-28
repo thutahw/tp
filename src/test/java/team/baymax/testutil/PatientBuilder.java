@@ -87,7 +87,7 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Patient} that we are building.
+     * Sets the {@code Gender} of the {@code Patient} that we are building.
      */
     public PatientBuilder withGender(String gender) {
         this.gender = new Gender(gender);

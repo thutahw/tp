@@ -16,7 +16,7 @@ import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.util.TabId;
 
 /**
- * Adds a patient to the address book.
+ * Adds a patient to the appointment book.
  */
 public class AddPatientCommand extends Command {
 

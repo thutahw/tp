@@ -98,8 +98,7 @@ public class EditAppointmentCommand extends Command {
                                                        EditAppointmentDescriptor editAppointmentDescriptor) {
         assert appointmentToEdit != null;
 
-        Patient updatedPatient = editAppointmentDescriptor.getPatient()
-                .orElse(appointmentToEdit.getPatient());
+        Patient updatedPatient = appointmentToEdit.getPatient();
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
         Duration updatedDuration = editAppointmentDescriptor.getDuration()

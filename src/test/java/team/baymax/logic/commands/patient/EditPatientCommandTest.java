@@ -6,7 +6,7 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_AMY
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.general.ClearCommand;
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
@@ -53,7 +54,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -63,11 +64,11 @@ public class EditPatientCommandTest {
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_DIABETIC).build();
 
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_DIABETIC).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(indexLastPatient, descriptor);
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
@@ -77,7 +78,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(lastPatient, editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -111,7 +112,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -127,7 +128,7 @@ public class EditPatientCommandTest {
     public void execute_duplicatePatientFilteredList_failure() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
-        // edit patient in filtered list into a duplicate in address book
+        // edit patient in filtered list into a duplicate in appointment book
         Patient patientInList = model.getPatientManager().getReadOnlyList().get(INDEX_SECOND_PATIENT.getZeroBased());
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT,
                 new EditPatientDescriptorBuilder(patientInList).build());
@@ -146,13 +147,13 @@ public class EditPatientCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of appointment book
      */
     @Test
     public void execute_invalidPatientIndexFilteredList_failure() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
         Index outOfBoundIndex = INDEX_SECOND_PATIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPatientManager().getReadOnlyList().size());
 
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex,
@@ -165,24 +166,24 @@ public class EditPatientCommandTest {
     public void equals() {
         final EditPatientCommand standardCommand = new EditPatientCommand(INDEX_FIRST_PATIENT, DESC_AMY);
 
-        // same values -> returns true
+        // same values -> returns True
         EditPatientDescriptor copyDescriptor = new EditPatientCommand.EditPatientDescriptor(DESC_AMY);
         EditPatientCommand commandWithSameValues = new EditPatientCommand(INDEX_FIRST_PATIENT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // same object -> returns true
+        // same object -> returns True
         assertTrue(standardCommand.equals(standardCommand));
 
-        // null -> returns false
+        // null -> returns False
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
+        // different types -> returns False
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
+        // different index -> returns False
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_SECOND_PATIENT, DESC_AMY)));
 
-        // different descriptor -> returns false
+        // different descriptor -> returns False
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_FIRST_PATIENT, DESC_BOB)));
     }
 

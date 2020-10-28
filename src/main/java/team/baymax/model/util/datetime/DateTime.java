@@ -34,6 +34,10 @@ public class DateTime implements Comparable<DateTime> {
         this.dateTime = LocalDateTime.parse("12-12-2020 23:59", FORMAT_INPUT);
     }
 
+    public static DateTime current() {
+        return new DateTime(LocalDateTime.now());
+    }
+
     /**
      * Creates a new {@code DateTime} from a given formatted {@code dateTimeString}
      */

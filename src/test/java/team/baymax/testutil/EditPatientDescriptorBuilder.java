@@ -66,7 +66,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code Gender} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withGender(String gender) {
         descriptor.setGender(new Gender(gender));

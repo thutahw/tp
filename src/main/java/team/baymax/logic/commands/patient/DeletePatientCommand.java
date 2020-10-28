@@ -14,7 +14,7 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 
 /**
- * Deletes a patient identified using it's displayed index from the address book.
+ * Deletes a patient identified using it's displayed index from the appointment book.
  */
 public class DeletePatientCommand extends Command {
 

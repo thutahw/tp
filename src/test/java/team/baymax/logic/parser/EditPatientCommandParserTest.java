@@ -17,8 +17,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_FRIEND;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -77,7 +77,7 @@ public class EditPatientCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_GENDER_DESC, Gender.MESSAGE_CONSTRAINTS); // invalid gender
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid gender
@@ -111,7 +111,7 @@ public class EditPatientCommandParserTest {
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withTags(VALID_TAG_DIABETIC, VALID_TAG_LTP)
                 .build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
@@ -155,7 +155,7 @@ public class EditPatientCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_LTP).build();
         expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -170,7 +170,7 @@ public class EditPatientCommandParserTest {
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB)
                 .withGender(VALID_GENDER_BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
                 .build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 

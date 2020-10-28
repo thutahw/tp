@@ -42,7 +42,7 @@ public class UniquePatientListTest {
     @Test
     public void contains_patientWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC)
                 .build();
         assertTrue(uniquePatientList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniquePatientListTest {
     @Test
     public void setPatient_editedPatientHasSameIdentity_success() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC)
                 .build();
         uniquePatientList.setElement(ALICE, editedAlice);
         UniqueList<Patient> expectedUniquePatientList = new UniqueList<>();

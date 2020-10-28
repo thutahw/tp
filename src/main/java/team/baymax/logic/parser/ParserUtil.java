@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.commons.util.StringUtil;
@@ -215,6 +216,8 @@ public class ParserUtil {
             dateTimeObj = DateTime.fromString(trimmedDateTime);
         } catch (DateTimeParseException ex) {
             throw new ParseException(ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(ex.getMessage());
         }
         return dateTimeObj;
     }
@@ -264,4 +267,11 @@ public class ParserUtil {
         return Optional.of(parseTags(tagSet));
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }

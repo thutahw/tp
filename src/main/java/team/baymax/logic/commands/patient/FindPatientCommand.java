@@ -9,7 +9,7 @@ import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.util.TabId;
 
 /**
- * Finds and lists all patients in address book whose name contains any of the argument keywords.
+ * Finds and lists all patients in the appointment book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindPatientCommand extends Command {

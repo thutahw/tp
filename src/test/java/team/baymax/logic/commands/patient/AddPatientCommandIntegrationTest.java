@@ -1,11 +1,13 @@
 package team.baymax.logic.commands.patient;
 
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
 import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
@@ -39,7 +41,7 @@ public class AddPatientCommandIntegrationTest {
         expectedModel.addPatient(validPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(validPatient));
 
-        PatientCommandTestUtil.assertPatientCommandSuccess(new AddPatientCommand(validPatient), model,
+        assertCommandSuccess(new AddPatientCommand(validPatient), model,
                 expectedMessage, expectedModel);
     }
 

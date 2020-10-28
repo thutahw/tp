@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -26,6 +28,11 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="patientName" text="\$patientName" styleClass="cell_big_label" />
+                <ImageView>
+                    <Image url="@/images/IconPhone.png"/>
+                </ImageView>
+                <Label fx:id="phoneNumber" text="\$phoneNumber" styleClass="cell_big_label" />
+                <Label fx:id="statusTag"/>
             </HBox>
             <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
             <Label fx:id="description" styleClass="cell_small_label" text="\$description" />

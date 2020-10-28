@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Baymax" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Baymax" minWidth="860" minHeight="730" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -21,8 +21,13 @@
         <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
         <URL value="@TabPane.css" />
+<<<<<<< HEAD
         <URL value="@CalendarPage.css" />
         <URL value="@SchedulePage.css" />
+=======
+        <URL value="@AppointmentInfoPage.css" />
+        <URL value="@Dashboard.css" />
+>>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
       </stylesheets>
 
       <VBox>
