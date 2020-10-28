@@ -8,10 +8,14 @@ import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+//make CalendarPage a property change listener
 /**
  * A ui for the calendar in the application.
  */
-public class CalendarPage extends UiPart<Region> {
+public class CalendarPage extends UiPart<Region> implements PropertyChangeListener {
 
     private static final String FXML = "CalendarPage.fxml";
 
@@ -46,10 +50,16 @@ public class CalendarPage extends UiPart<Region> {
     }
 
     private void renderCalendar() {
+        calendarGridView.getChildren().setAll();
         int day = 1;
         int numOfDaysInMonth = appointmentCalendar.getMonth().getNumOfDays();
+        CalendarViewCell cell;
         while (day <= numOfDaysInMonth) {
-            CalendarViewCell cell = new CalendarViewCell(new Day(day));
+            if (day == appointmentCalendar.getDay().getValue()) {
+                cell = new CalendarViewCell(new Day(day), true);
+            } else {
+                cell = new CalendarViewCell(new Day(day), false);
+            }
             calendarGridView.getChildren().add(cell);
             day++;
         }
@@ -61,21 +71,36 @@ public class CalendarPage extends UiPart<Region> {
                     + "-fx-text-fill: #0e0e0e;"
                     + "-fx-border-style: hidden hidden solid hidden;"
                     + "-fx-border-width: 5;"
-                    + "-fx-border-color: #a5a5a5; "
+                    + "-fx-border-color: %s; "
                     + "-fx-padding: 5;"
                     + "-fx-border-insets: 5;"
                     + "-fx-background-insets: 5;";
 
-        public CalendarViewCell(Day day) {
+        private final String color;
+
+        public CalendarViewCell(Day day, boolean isCurrent) {
             super();
+
+            if (isCurrent) {
+                this.color = "#97a2ff";
+            } else {
+                this.color = "#a5a5a5";
+            }
 
             setText(day.toString());
 
-            setStyle(style);
+            setStyle(String.format(style, this.color));
             setMinHeight(75.0);
             setMinWidth(75.0);
             setMouseTransparent(true);
         }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent e) {
+        System.out.println("Property changed!");
+        System.out.println(appointmentCalendar.getDay());
+        renderCalendar();
     }
 
 }

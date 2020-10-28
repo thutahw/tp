@@ -69,6 +69,7 @@ public class SideTabPane extends UiPart<Region> {
 
         CalendarPage calendarPage = new CalendarPage(calendar);
         calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
+        calendar.addPropertyChangeListener(calendarPage);
 
         Dashboard dashboard = new Dashboard();
         dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());

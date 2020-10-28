@@ -2,10 +2,14 @@ package team.baymax.model.calendar;
 
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
 
+
+// make AppointmentCalednar a java bean class to support property change listeners
 public class AppointmentCalendar {
     protected final SimpleStringProperty dayProperty;
     protected final SimpleStringProperty monthProperty;
@@ -15,7 +19,7 @@ public class AppointmentCalendar {
     private Month month;
     private Year year;
 
-
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public AppointmentCalendar() {
         this(new Day(getCurrentDay()), new Month(getCurrentMonth()), new Year(getCurrentYear()));
@@ -62,18 +66,24 @@ public class AppointmentCalendar {
     }
 
     public void setDay(Day day) {
+        Day oldDay = this.day;
         this.day = day;
         dayProperty.set(day.toString());
+        pcs.firePropertyChange("day", oldDay, day);
     }
 
     public void setMonth(Month month) {
+        Month oldMonth = this.month;
         this.month = month;
         monthProperty.set(month.toString());
+        pcs.firePropertyChange("month", oldMonth, month);
     }
 
     public void setYear(Year year) {
+        Year oldYear = this.year;
         this.year = year;
         yearProperty.set(year.toString());
+        pcs.firePropertyChange("year", oldYear, year);
     }
 
     public SimpleStringProperty getDayProperty() {
@@ -86,5 +96,13 @@ public class AppointmentCalendar {
 
     public SimpleStringProperty getYearProperty() {
         return yearProperty;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
     }
 }
