@@ -1,10 +1,10 @@
 package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
-import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 import java.util.Set;
@@ -56,8 +56,7 @@ public class EditAppointmentCommand extends Command {
      * @param editAppointmentDescriptor details to edit the appointment with
      */
     public EditAppointmentCommand(Index index, EditAppointmentDescriptor editAppointmentDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editAppointmentDescriptor);
+        requireAllNonNull(index, editAppointmentDescriptor);
 
         this.index = index;
         this.editAppointmentDescriptor = new EditAppointmentDescriptor(editAppointmentDescriptor);
@@ -80,7 +79,6 @@ public class EditAppointmentCommand extends Command {
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
 
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
 

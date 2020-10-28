@@ -3,7 +3,7 @@ package team.baymax.logic.commands.patient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.commons.core.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
+import static team.baymax.logic.commands.patient.FindPatientCommand.MESSAGE_PATIENTS_LISTED_SUCCESS;
 import static team.baymax.testutil.TypicalPatients.CARL;
 import static team.baymax.testutil.TypicalPatients.ELLE;
 import static team.baymax.testutil.TypicalPatients.FIONA;
@@ -60,7 +60,7 @@ public class FindPatientCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPatientFound() {
-        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
@@ -70,7 +70,7 @@ public class FindPatientCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePatientsFound() {
-        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);

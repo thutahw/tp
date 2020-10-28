@@ -71,11 +71,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyListManager<Appointment> getSampleAppointmentManager() {
-        AppointmentManager sampleAM = new AppointmentManager();
+        AppointmentManager sampleAppointmentManager = new AppointmentManager();
         for (Appointment sampleAppointment : getSampleAppointments()) {
-            sampleAM.addAppointment(sampleAppointment);
+            sampleAppointmentManager.addAppointment(sampleAppointment);
         }
-        return sampleAM;
+        return sampleAppointmentManager;
     }
 
     /**

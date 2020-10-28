@@ -22,6 +22,7 @@ import team.baymax.model.appointment.Description;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Time;
 
 
 /**
@@ -38,14 +39,20 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATETIME, PREFIX_DURATION,
                         PREFIX_DESCRIPTION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATETIME, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATETIME, PREFIX_DURATION, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         Index id = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).get());
-        DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        DateTime dateTime = null;
+        Time time = null;
+        try {
+            dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        } catch (ParseException pe) {
+            time = ParserUtil.par
+        }
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

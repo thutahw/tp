@@ -1,13 +1,22 @@
 package team.baymax.logic.commands.general;
 
+import static java.util.Objects.requireNonNull;
+import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
+import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
+import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
-public class SwitchCommand extends Command {
+public class TabCommand extends Command {
 
     public static final String COMMAND_WORD = "tab";
     public static final String MESSAGE_SUCCESS = "Switched to %1$s tab";
@@ -15,16 +24,29 @@ public class SwitchCommand extends Command {
 
     private final Index tabNumber;
 
-    public SwitchCommand(Index tabNumber) {
+    public TabCommand(Index tabNumber) {
+        requireNonNull(tabNumber);
         this.tabNumber = tabNumber;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         TabId tabId = TabId.valueOf(tabNumber.getOneBased());
+        Date today = new Date(
+                new Day(AppointmentCalendar.getCurrentDay()),
+                new Month(AppointmentCalendar.getCurrentMonth()),
+                new Year(AppointmentCalendar.getCurrentYear()));
+
         if (tabId == null) {
             throw new CommandException(MESSAGE_INVALID_TAB);
         }
+
+        if (tabId == TabId.DASHBOARD || tabId == TabId.SCHEDULE) {
+            model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(today));
+        } else {
+            model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, tabId), getTabId());
     }
 
@@ -36,7 +58,7 @@ public class SwitchCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SwitchCommand // instanceof handles nulls
-                && tabNumber.equals(((SwitchCommand) other).tabNumber));
+                || (other instanceof TabCommand // instanceof handles nulls
+                && tabNumber.equals(((TabCommand) other).tabNumber));
     }
 }

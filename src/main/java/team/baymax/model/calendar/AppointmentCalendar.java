@@ -76,8 +76,8 @@ public class AppointmentCalendar {
 
     public void updateDay() {
         int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
-        if (this.day.getValue() > maxNumOfDays) {
-            this.setDay(new Day(maxNumOfDays));
+        if (day.getValue() > maxNumOfDays) {
+            setDay(new Day(maxNumOfDays));
         }
     }
 

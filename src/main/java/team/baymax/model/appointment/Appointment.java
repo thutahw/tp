@@ -96,7 +96,8 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
 
         return otherAppointment != null
-                && otherAppointment.getDateTime().equals(getDateTime());
+                && otherAppointment.getDateTime().equals(dateTime)
+                && otherAppointment.getPatient().equals(patient);
     }
 
     public int compare(Appointment a1, Appointment a2) {
@@ -122,7 +123,8 @@ public class Appointment implements UniqueListElement {
                 && getDateTime().equals(otherAppointment.getDateTime())
                 && getStatus().equals(otherAppointment.getStatus())
                 && getDescription().equals(otherAppointment.getDescription())
-                && getTags().equals(otherAppointment.getTags());
+                && getTags().equals(otherAppointment.getTags())
+                && getDuration().equals(otherAppointment.duration);
     }
 
     @Override

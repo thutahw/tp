@@ -36,8 +36,8 @@ public class AddPatientCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_GENDER + "M "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "asthmatic "
+            + PREFIX_TAG + "LTP";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book";

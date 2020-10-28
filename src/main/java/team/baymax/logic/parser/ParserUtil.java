@@ -17,6 +17,7 @@ import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Time;
 import team.baymax.model.util.datetime.Year;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
@@ -110,6 +111,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
+
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -125,6 +127,7 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
+
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -140,6 +143,7 @@ public class ParserUtil {
      */
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
+
         String trimmedGender = gender.trim();
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
@@ -155,6 +159,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
+
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
@@ -167,6 +172,7 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
@@ -179,6 +185,7 @@ public class ParserUtil {
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
+
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
     }
@@ -188,6 +195,7 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
+
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
@@ -196,10 +204,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String dateTime} (e.g. "2020-10-12 23:39PM") into a {@code LocalDateTime}.
+     * Parses {@code String dateTime} (e.g. "2020-10-12 23:39PM") into a {@code DateTime}.
      */
     public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
+
         String trimmedDateTime = dateTime.trim();
         DateTime dateTimeObj;
         try {
@@ -211,10 +220,27 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String time} (e.g. "23:39PM") into a {@code Time}.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+
+        String trimmedTime = time.trim();
+        Time timeObj;
+        try {
+            timeObj = Time.fromString(trimmedTime);
+        } catch (DateTimeParseException ex) {
+            throw new ParseException(ex.getMessage());
+        }
+        return timeObj;
+    }
+
+    /**
      * Parses {@code String duration} (e.g. "60") into a {@code Duration}.
      */
     public static Duration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);
+
         String trimmedDuration = duration.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDuration);
         if (invalidNumber || !Duration.isValidDuration(Integer.parseInt(trimmedDuration))) {

@@ -16,7 +16,7 @@ import team.baymax.logic.commands.calendar.YearCommand;
 import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.general.ExitCommand;
 import team.baymax.logic.commands.general.HelpCommand;
-import team.baymax.logic.commands.general.SwitchCommand;
+import team.baymax.logic.commands.general.TabCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
@@ -29,7 +29,7 @@ import team.baymax.logic.parser.calendar.DayCommandParser;
 import team.baymax.logic.parser.calendar.MonthCommandParser;
 import team.baymax.logic.parser.calendar.YearCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.logic.parser.general.SwitchCommandParser;
+import team.baymax.logic.parser.general.TabCommandParser;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
 import team.baymax.logic.parser.patient.EditPatientCommandParser;
@@ -109,8 +109,8 @@ public class AppointmentBookParser {
         case YearCommand.COMMAND_WORD:
             return new YearCommandParser().parse(arguments);
 
-        case SwitchCommand.COMMAND_WORD:
-            return new SwitchCommandParser().parse(arguments);
+        case TabCommand.COMMAND_WORD:
+            return new TabCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

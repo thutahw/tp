@@ -39,6 +39,7 @@ public class DateTime implements Comparable<DateTime> {
      */
     public static DateTime fromString(String dateTimeString) {
         requireNonNull(dateTimeString);
+
         checkArgument(isValidDateTime((dateTimeString)), MESSAGE_CONSTRAINTS);
         return new DateTime(LocalDateTime.parse(dateTimeString, FORMAT_INPUT));
     }

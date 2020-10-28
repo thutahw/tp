@@ -1,13 +1,9 @@
 package team.baymax.model.util.datetime;
 
-import team.baymax.model.patient.Name;
-
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
-
-
 
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS = "Duration (in minutes) must be a valid integer spanning" +

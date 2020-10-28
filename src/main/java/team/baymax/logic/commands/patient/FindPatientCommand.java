@@ -2,7 +2,6 @@ package team.baymax.logic.commands.patient;
 
 import static java.util.Objects.requireNonNull;
 
-import team.baymax.commons.core.Messages;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.model.Model;
@@ -22,6 +21,7 @@ public class FindPatientCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
     public static final TabId TAB_ID = TabId.PATIENT;
+    public static final String MESSAGE_PATIENTS_LISTED_SUCCESS = "%1$d patient(s) listed!";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -33,7 +33,7 @@ public class FindPatientCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
-        return new CommandResult(String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
+        return new CommandResult(String.format(MESSAGE_PATIENTS_LISTED_SUCCESS,
                 model.getFilteredPatientList().size()), getTabId());
     }
 

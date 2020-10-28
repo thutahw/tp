@@ -30,7 +30,7 @@ public class AddAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
     public static final TabId TAB_ID = TabId.SCHEDULE;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book.\n"
             + "Parameters: "
             + PREFIX_ID + "PATIENT_ID "
             + PREFIX_DATETIME + "DATETIME "
@@ -40,6 +40,7 @@ public class AddAppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 "
+            + PREFIX_DURATION + "60 "
             + PREFIX_DESCRIPTION + "Removal of braces. "
             + PREFIX_TAG + "DrGoh ";
 

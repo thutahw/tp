@@ -20,6 +20,10 @@ public class TypicalAppointments {
     public static final Appointment APT1 = new Appointment(ALICE, DateTime.fromString("11-10-2020 12:45"),
             new Duration(60), new Description("long term patient"), new HashSet<>(), AppointmentStatus.DONE);
 
+    public static final Appointment APT1_VARIANT_1 = new Appointment(ALICE,
+            DateTime.fromString("11-10-2020 12:45"), new Duration(60),
+            new Description("a different description"), new HashSet<>(), AppointmentStatus.MISSED);
+
     public static final Appointment APT2 = new Appointment(ALICE, DateTime.fromString("12-10-2020 12:45"),
             new Duration(60), new Description("long term patient"), new HashSet<>(), AppointmentStatus.UPCOMING);
 
