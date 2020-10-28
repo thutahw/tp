@@ -19,9 +19,15 @@ import team.baymax.model.util.datetime.Year;
 
 public class TabCommand extends Command {
 
-    public static final String COMMAND_WORD = "tab";
+    public static final String COMMAND_WORD_DASHBOARD = "dashboard";
+    public static final String COMMAND_WORD_CALENDAR = "calendar";
+    public static final String COMMAND_WORD_SCHEDULE = "schedule";
+    public static final String COMMAND_WORD_PATIENT = "patient";
+    public static final String COMMAND_WORD_APPOINTMENT = "appt";
+    public static final String COMMAND_WORD_HELP = "help";
+
     public static final String MESSAGE_SUCCESS = "Switched to %1$s tab";
-    public static final String MESSAGE_INVALID_TAB = "The tab number you've entered is invalid.";
+    public static final String MESSAGE_INVALID_TAB = "This tab does not exist.";
 
     private final Index tabNumber;
 

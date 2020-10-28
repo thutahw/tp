@@ -6,6 +6,7 @@ import static team.baymax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
@@ -29,12 +30,12 @@ import team.baymax.logic.parser.calendar.DayCommandParser;
 import team.baymax.logic.parser.calendar.MonthCommandParser;
 import team.baymax.logic.parser.calendar.YearCommandParser;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.logic.parser.general.TabCommandParser;
 import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.logic.parser.patient.DeletePatientCommandParser;
 import team.baymax.logic.parser.patient.EditPatientCommandParser;
 import team.baymax.logic.parser.patient.FindPatientCommandParser;
 import team.baymax.logic.parser.patient.RemarkPatientCommandParser;
+import team.baymax.model.util.TabId;
 
 
 /**
@@ -85,9 +86,6 @@ public class AppointmentBookParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         case RemarkPatientCommand.COMMAND_WORD:
             return new RemarkPatientCommandParser().parse(arguments);
 
@@ -109,8 +107,23 @@ public class AppointmentBookParser {
         case YearCommand.COMMAND_WORD:
             return new YearCommandParser().parse(arguments);
 
-        case TabCommand.COMMAND_WORD:
-            return new TabCommandParser().parse(arguments);
+        case TabCommand.COMMAND_WORD_DASHBOARD:
+            return new TabCommand(Index.fromOneBased(TabId.DASHBOARD.getTabNumber()));
+
+        case TabCommand.COMMAND_WORD_CALENDAR:
+            return new TabCommand(Index.fromOneBased(TabId.CALENDAR.getTabNumber()));
+
+        case TabCommand.COMMAND_WORD_SCHEDULE:
+            return new TabCommand(Index.fromOneBased(TabId.SCHEDULE.getTabNumber()));
+
+        case TabCommand.COMMAND_WORD_APPOINTMENT:
+            return new TabCommand(Index.fromOneBased(TabId.APPOINTMENT.getTabNumber()));
+
+        case TabCommand.COMMAND_WORD_PATIENT:
+            return new TabCommand(Index.fromOneBased(TabId.PATIENT.getTabNumber()));
+
+        case TabCommand.COMMAND_WORD_HELP:
+            return new TabCommand(Index.fromOneBased(TabId.INFO.getTabNumber()));
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

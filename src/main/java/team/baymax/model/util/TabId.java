@@ -34,6 +34,10 @@ public enum TabId {
         return tabName;
     }
 
+    public int getTabNumber() {
+        return tabNumber;
+    }
+
     @Override
     public String toString() {
         return getTabName();
