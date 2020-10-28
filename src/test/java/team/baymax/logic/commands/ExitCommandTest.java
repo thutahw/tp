@@ -5,7 +5,6 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPa
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.general.ExitCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;

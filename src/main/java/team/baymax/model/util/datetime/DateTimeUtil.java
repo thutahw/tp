@@ -27,6 +27,10 @@ public class DateTimeUtil {
         return numOfDaysInAMonth[month.getValue() - 1];
     }
 
+    /**
+     * Returns true if the supplied {@code year} is a leap year.
+     *
+     */
     public static boolean isLeapYear(Year year) {
         int value = year.getValue();
         if (value % 4 == 0) {

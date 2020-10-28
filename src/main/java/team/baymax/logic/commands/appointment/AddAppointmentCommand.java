@@ -19,11 +19,11 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.Date;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
 
@@ -60,7 +60,8 @@ public class AddAppointmentCommand extends Command {
     private final Set<Tag> tags;
 
     /**
-     * Creates an AddAppointmentCommand to add the specified {@code Appointment}
+     * Creates an @{code AddAppointmentCommand} to add the specified {@code Appointment} to the appointment book.
+     * Note that this constructor takes in a {@code DateTime}.
      */
     public AddAppointmentCommand(Index patientIndex, DateTime dateTime, Duration duration, Set<Tag> tags,
                                  Description description) {
@@ -73,6 +74,10 @@ public class AddAppointmentCommand extends Command {
         this.time = null;
     }
 
+    /**
+     * Creates an @{code AddAppointmentCommand} to add the specified {@code Appointment} to the appointment book.
+     * Notes that this constructor takes in a {@code Time}.
+     */
     public AddAppointmentCommand(Index patientIndex, Time time, Duration duration, Set<Tag> tags,
                                  Description description) {
         requireAllNonNull(patientIndex, time, duration, description, tags);

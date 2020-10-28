@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.commons.core.index.Index;
 import team.baymax.model.util.TabId;
 
 public class CommandResultTest {

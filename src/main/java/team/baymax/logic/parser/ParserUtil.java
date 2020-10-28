@@ -13,18 +13,18 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Duration;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Time;
-import team.baymax.model.util.datetime.Year;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Time;
+import team.baymax.model.util.datetime.Year;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -183,7 +183,7 @@ public class ParserUtil {
     /**
      * Parses {@code String remark} into a {@code Remark}.
      */
-    public static Remark parseRemark(String remark) throws ParseException {
+    public static Remark parseRemark(String remark) {
         requireNonNull(remark);
 
         String trimmedRemark = remark.trim();

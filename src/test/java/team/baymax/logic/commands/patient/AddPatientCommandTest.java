@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -22,14 +20,14 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Year;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.testutil.PatientBuilder;
 
 public class AddPatientCommandTest {

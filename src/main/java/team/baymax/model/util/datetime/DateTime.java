@@ -56,6 +56,10 @@ public class DateTime implements Comparable<DateTime> {
         }
     }
 
+    /**
+     * Constructs a {@code DateTime} from a {@code Date} and {@code Time}.
+     *
+     */
     public static DateTime from(Date d, Time t) {
         LocalDateTime dt = LocalDateTime.of(d.getDate(), t.getTime());
         return new DateTime(dt);

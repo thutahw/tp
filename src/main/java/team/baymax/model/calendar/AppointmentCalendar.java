@@ -7,7 +7,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
-import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
@@ -75,6 +74,9 @@ public class AppointmentCalendar {
         return year;
     }
 
+    /**
+     * Updates the value of the {@code day} attribute stored in the {@code AppointmentCalendar}.
+     */
     public void updateDay() {
         int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
         if (day.getValue() > maxNumOfDays) {

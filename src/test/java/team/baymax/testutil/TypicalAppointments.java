@@ -6,10 +6,10 @@ import static team.baymax.testutil.TypicalPatients.CARL;
 
 import java.util.HashSet;
 
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 
 /**

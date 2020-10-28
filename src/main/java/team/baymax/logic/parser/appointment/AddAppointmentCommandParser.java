@@ -20,8 +20,8 @@ import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.Prefix;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
 

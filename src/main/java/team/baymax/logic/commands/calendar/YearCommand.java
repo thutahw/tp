@@ -6,9 +6,9 @@ import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
+import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
-import team.baymax.model.util.TabId;
 
 public class YearCommand extends Command {
 

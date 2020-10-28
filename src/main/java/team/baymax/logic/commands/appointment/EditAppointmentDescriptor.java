@@ -8,12 +8,10 @@ import java.util.Set;
 import team.baymax.commons.util.CollectionUtil;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
-
-import javax.swing.text.html.Option;
 
 /**
  * Stores the details to edit the appointment with. Each non-empty field value will replace the

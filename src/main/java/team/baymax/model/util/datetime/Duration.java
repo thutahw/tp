@@ -1,13 +1,14 @@
 package team.baymax.model.util.datetime;
 
-import java.util.function.Predicate;
-
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
+import java.util.function.Predicate;
+
+
 public class Duration {
-    public static final String MESSAGE_CONSTRAINTS = "Duration (in minutes) must be a valid integer spanning" +
-            "not more than one day";
+    public static final String MESSAGE_CONSTRAINTS = "Duration (in minutes) must be a valid integer spanning"
+            + "not more than one day";
 
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 24 * 60;
@@ -15,6 +16,10 @@ public class Duration {
 
     public final Integer value;
 
+    /**
+     * Constructs a {@Duration} from an integer.
+     *
+     */
     public Duration(Integer duration) {
         requireNonNull(duration);
         checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);

@@ -9,16 +9,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.DateTimeUtil;
-
+import team.baymax.model.util.datetime.Day;
 
 // Make CalendarPage a property change listener
 
 /**
  * A ui for the calendar in the application.
  */
-public class    CalendarPage extends UiPart<Region> implements PropertyChangeListener {
+public class CalendarPage extends UiPart<Region> implements PropertyChangeListener {
 
     private static final String FXML = "CalendarPage.fxml";
 

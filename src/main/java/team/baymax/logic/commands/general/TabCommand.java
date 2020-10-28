@@ -30,6 +30,10 @@ public class TabCommand extends Command {
 
     private final Index tabNumber;
 
+    /**
+     * Constructs a {@code TabCommand} given a {@code tabNumber}.
+     *
+     */
     public TabCommand(Index tabNumber) {
         requireNonNull(tabNumber);
         this.tabNumber = tabNumber;

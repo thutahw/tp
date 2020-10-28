@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
@@ -18,7 +17,9 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
+
 
 /**
  * Contains utility methods for populating {@code AppointmentManager} with sample data.

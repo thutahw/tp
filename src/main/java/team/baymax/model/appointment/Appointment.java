@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import team.baymax.model.patient.Patient;
+import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
-import team.baymax.model.patient.Patient;
-import team.baymax.model.tag.Tag;
 import team.baymax.model.util.uniquelist.UniqueListElement;
 
 /**

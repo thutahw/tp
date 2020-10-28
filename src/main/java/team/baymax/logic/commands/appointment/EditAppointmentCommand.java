@@ -19,10 +19,10 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 
 /**

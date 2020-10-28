@@ -7,13 +7,13 @@ import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Year;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
 /**
  * The API of the Model component.
