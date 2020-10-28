@@ -16,11 +16,12 @@ import team.baymax.model.appointment.Appointment;
 public class AppointmentListPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentListPanel.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
-    protected final ObservableList<Appointment> appointments;
-
     @FXML
     protected ListView<Appointment> appointmentListView;
+
+    protected final ObservableList<Appointment> appointments;
+    private final Logger logger = LogsCenter.getLogger(AppointmentListPanel.class);
+
 
     /**
      * Creates a {@code AppointmentListPanel} with the given {@code ObservableList}.

@@ -22,6 +22,8 @@ public class AddPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "addpatient";
 
+    public static final TabId TAB_ID = TabId.PATIENT;
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the appointment book. "
             + "Parameters: "
             + PREFIX_NRIC + "Nric "
@@ -62,7 +64,12 @@ public class AddPatientCommand extends Command {
 
         model.updateFilteredPatientList(new PatientIdenticalPredicate(toAdd));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TabId.PATIENT);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

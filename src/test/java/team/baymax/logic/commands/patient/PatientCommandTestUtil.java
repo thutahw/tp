@@ -99,7 +99,7 @@ public class PatientCommandTestUtil {
      */
     public static void assertPatientCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                                    Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, command.getTabNumber());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, command.getTabId());
         assertPatientCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

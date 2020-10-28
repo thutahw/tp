@@ -25,6 +25,10 @@ public class AppointmentCalendar {
         this(new Day(getCurrentDay()), new Month(getCurrentMonth()), new Year(getCurrentYear()));
     }
 
+    /**
+     * Constructs an {@code AppointmentCalendar} given the {@code day}, {@code month} and {@code year}.
+     *
+     */
     public AppointmentCalendar(Day day, Month month, Year year) {
         requireAllNonNull(day, month, year);
 

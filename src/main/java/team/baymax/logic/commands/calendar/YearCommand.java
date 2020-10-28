@@ -19,6 +19,7 @@ public class YearCommand extends Command {
             + ": Switches to a particular year and updates the calendar.\n"
             + "Parameters: YEAR (must be a positive number from year 2000 onwards).\n"
             + "Example: " + COMMAND_WORD + " 2020 ";
+    public static final TabId TAB_ID = TabId.CALENDAR;
 
     private final Year year;
 
@@ -34,6 +35,11 @@ public class YearCommand extends Command {
 
         Month month = model.getAppointmentCalendar().getMonth();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), TabId.CALENDAR);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 }

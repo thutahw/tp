@@ -1,5 +1,8 @@
 package team.baymax.ui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,10 +11,9 @@ import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.calendar.Day;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 //make CalendarPage a property change listener
+
 /**
  * A ui for the calendar in the application.
  */
@@ -33,6 +35,10 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
 
     private final AppointmentCalendar appointmentCalendar;
 
+    /**
+     * Constructs a {@Code CalendarPage} with the given {@code appointmentCalendar}.
+     *
+     */
     public CalendarPage(AppointmentCalendar appointmentCalendar) {
         super(FXML);
         this.appointmentCalendar = appointmentCalendar;

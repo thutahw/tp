@@ -19,6 +19,11 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.calendar.Day;
+import team.baymax.model.calendar.Month;
+import team.baymax.model.calendar.Year;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
@@ -202,6 +207,36 @@ public class AddPatientCommandTest {
 
         @Override
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CalendarManager getCalendarManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AppointmentCalendar getAppointmentCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDay(Day day) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMonth(Month month) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setYear(Year year) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 

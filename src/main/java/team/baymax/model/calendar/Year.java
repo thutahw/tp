@@ -6,6 +6,10 @@ public class Year {
 
     private final int value;
 
+    /**
+     * Constructs a {@code Year} given a postive integer that must be 2000 or above.
+     *
+     */
     public Year(int value) {
         requireNonNull(value);
 

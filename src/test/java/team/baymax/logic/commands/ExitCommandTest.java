@@ -20,7 +20,7 @@ public class ExitCommandTest {
                 MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 false,
                 true,
-                Index.fromOneBased(1));
+                ExitCommand.TAB_ID);
         assertPatientCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }

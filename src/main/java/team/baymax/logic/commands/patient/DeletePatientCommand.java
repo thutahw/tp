@@ -26,6 +26,7 @@ public class DeletePatientCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "The following patient is deleted:\n %1$s";
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     private final Index targetIndex;
 
@@ -46,7 +47,12 @@ public class DeletePatientCommand extends Command {
         model.deletePatient(patientToDelete);
         model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), TabId.PATIENT);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

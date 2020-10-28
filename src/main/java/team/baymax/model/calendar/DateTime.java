@@ -30,7 +30,7 @@ public class DateTime implements Comparable<DateTime> {
     /**
      * Default constructor for {@code DateTime}, with input 2020-12-12 23:59
      */
-    protected DateTime() {
+    public DateTime() {
         this.dateTime = LocalDateTime.parse("12-12-2020 23:59", FORMAT_INPUT);
     }
 

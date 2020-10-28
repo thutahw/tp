@@ -18,6 +18,7 @@ public class DayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the appointment schedule on the chosen day.\n"
             + "Parameters: DAY (must be a positive number between the first and last day of the month).\n"
             + "Example: " + COMMAND_WORD + " 21 ";
+    public static final TabId TAB_ID = TabId.SCHEDULE;
 
     private final Day day;
 
@@ -34,7 +35,12 @@ public class DayCommand extends Command {
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), TabId.SCHEDULE);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
 }

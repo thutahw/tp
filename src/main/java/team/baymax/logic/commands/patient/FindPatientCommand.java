@@ -21,6 +21,7 @@ public class FindPatientCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -33,7 +34,12 @@ public class FindPatientCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPatientList(predicate);
         return new CommandResult(String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW,
-                model.getFilteredPatientList().size()), TabId.PATIENT);
+                model.getFilteredPatientList().size()), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

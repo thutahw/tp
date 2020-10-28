@@ -14,6 +14,7 @@ import team.baymax.model.util.TabId;
 public class ListAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "listappt";
+    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments.";
 
@@ -22,7 +23,12 @@ public class ListAppointmentCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(MESSAGE_SUCCESS, TabId.APPOINTMENT);
+        return new CommandResult(MESSAGE_SUCCESS, getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
 }

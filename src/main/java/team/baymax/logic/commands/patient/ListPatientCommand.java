@@ -16,12 +16,18 @@ public class ListPatientCommand extends Command {
     public static final String COMMAND_WORD = "listpatient";
 
     public static final String MESSAGE_SUCCESS = "Listed all patients";
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(MESSAGE_SUCCESS, TabId.PATIENT);
+        return new CommandResult(MESSAGE_SUCCESS, getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

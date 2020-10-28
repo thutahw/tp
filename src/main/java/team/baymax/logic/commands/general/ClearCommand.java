@@ -17,12 +17,18 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Patients and appointments have been cleared!";
 
+    public static final TabId TAB_ID = TabId.DASHBOARD;
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setPatientManager(new PatientManager());
         model.setAppointmentManager(new AppointmentManager());
-        return new CommandResult(MESSAGE_SUCCESS, TabId.DASHBOARD);
+        return new CommandResult(MESSAGE_SUCCESS, getTabId());
     }
 
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
+    }
 }

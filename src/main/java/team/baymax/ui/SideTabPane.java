@@ -49,6 +49,10 @@ public class SideTabPane extends UiPart<Region> {
     private ObservableList<Appointment> appointments;
     private AppointmentCalendar calendar;
 
+    /**
+     * Constructs a {@SideTabPane}.
+     *
+     */
     public SideTabPane(ObservableList<Patient> patients, ObservableList<Appointment> appointments,
                        AppointmentCalendar calendar) {
         super(FXML);
@@ -92,6 +96,10 @@ public class SideTabPane extends UiPart<Region> {
 
     }
 
+    /**
+     * Switches between the tabs in the left-side tab bar.
+     * @param tabId tab identifier corresponding to the tab
+     */
     public void switchTab(TabId tabId) {
 
         SingleSelectionModel<Tab> selectionModel = sideTabPane.getSelectionModel();
@@ -114,6 +122,8 @@ public class SideTabPane extends UiPart<Region> {
             break;
         case INFO:
             selectionModel.select(infoTab);
+            break;
+        default:
             break;
         }
     }

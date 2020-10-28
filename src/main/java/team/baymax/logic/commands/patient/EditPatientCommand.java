@@ -47,6 +47,7 @@ public class EditPatientCommand extends Command {
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book.";
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     private final Index index;
     private final EditPatientDescriptor editPatientDescriptor;
@@ -82,7 +83,12 @@ public class EditPatientCommand extends Command {
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), TabId.PATIENT);
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**

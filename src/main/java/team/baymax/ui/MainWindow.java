@@ -10,7 +10,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.logic.Logic;

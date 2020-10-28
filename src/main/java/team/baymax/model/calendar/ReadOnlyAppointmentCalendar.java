@@ -2,6 +2,10 @@ package team.baymax.model.calendar;
 
 public class ReadOnlyAppointmentCalendar extends AppointmentCalendar {
 
+    /**
+     * Constructs an unmodifiable {@code ReadOnlyAppointmentCalendar} from an {@appointmentCalendar}.
+     *
+     */
     public ReadOnlyAppointmentCalendar(AppointmentCalendar appointmentCalendar) {
         super();
         dayProperty.set(appointmentCalendar.getDayProperty().get());

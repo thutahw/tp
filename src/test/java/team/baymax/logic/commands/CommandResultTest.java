@@ -8,19 +8,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.index.Index;
+import team.baymax.model.util.TabId;
 
 public class CommandResultTest {
 
-    private Index tabNumber = Index.fromOneBased(1);
+    private TabId tabId = TabId.DASHBOARD;
 
     @Test
     public void equals() {
-        CommandResult commandResult = new CommandResult("feedback", tabNumber);
+        CommandResult commandResult = new CommandResult("feedback", tabId);
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback", tabNumber)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", tabId)));
         assertTrue(commandResult.equals(new CommandResult("feedback", false,
-                false, tabNumber)));
+                false, tabId)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -32,42 +33,42 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different", tabNumber)));
+        assertFalse(commandResult.equals(new CommandResult("different", tabId)));
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", true,
-                false, tabNumber)));
+                false, tabId)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false,
-                true, tabNumber)));
+                true, tabId)));
 
         // different tabId value -> return false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
-                Index.fromOneBased(2))));
+                TabId.SCHEDULE)));
     }
 
     @Test
     public void hashcode() {
-        CommandResult commandResult = new CommandResult("feedback", tabNumber);
+        CommandResult commandResult = new CommandResult("feedback", tabId);
 
         // same values -> returns same hashcode
-        assertEquals(commandResult.hashCode(), new CommandResult("feedback", tabNumber).hashCode());
+        assertEquals(commandResult.hashCode(), new CommandResult("feedback", tabId).hashCode());
 
         // different feedbackToUser value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("different", tabNumber).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("different", tabId).hashCode());
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", true, false, tabNumber).hashCode());
+                new CommandResult("feedback", true, false, tabId).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, true, tabNumber).hashCode());
+                new CommandResult("feedback", false, true, tabId).hashCode());
 
         // different tabId value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
                 new CommandResult("feedback", false, false,
-                        Index.fromOneBased(2)).hashCode());
+                        TabId.SCHEDULE).hashCode());
     }
 }

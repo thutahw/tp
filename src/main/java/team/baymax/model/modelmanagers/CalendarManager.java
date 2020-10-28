@@ -35,6 +35,10 @@ public class CalendarManager {
         appointmentCalendar.setYear(year);
     }
 
+    /**
+     * Resets the calendar to the default current year, month and day.
+     *
+     */
     public void resetCalendar(CalendarManager newCalendar) {
         AppointmentCalendar appointmentCalendar = newCalendar.getAppointmentCalendar();
 

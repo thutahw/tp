@@ -4,10 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 public class Day {
 
-    public static final String MESSAGE_CONSTRAINTS = "A day must be specificied as an integer between 0 and 31.";
+    public static final String MESSAGE_CONSTRAINTS = "A day must be specificied as an number between 1 and 31.";
 
     private final int value;
 
+    /**
+     * Constructs a {@code Day} given a postive integer that must be between 1 and 31.
+     *
+     */
     public Day(int value) {
         requireNonNull(value);
 

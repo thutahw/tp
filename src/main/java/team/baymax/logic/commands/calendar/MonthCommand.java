@@ -19,6 +19,7 @@ public class MonthCommand extends Command {
             + ": Switches to a particular month and updates the calendar.\n"
             + "Parameters: MONTH (must be a positive number from 1 to 12 ).\n"
             + "Example: " + COMMAND_WORD + " 12 ";
+    public static final TabId TAB_ID = TabId.CALENDAR;
 
     private final Month month;
 
@@ -34,6 +35,11 @@ public class MonthCommand extends Command {
 
         Year year = model.getAppointmentCalendar().getYear();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), TabId.CALENDAR);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 }

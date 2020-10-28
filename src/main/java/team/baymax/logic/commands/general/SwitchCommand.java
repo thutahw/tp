@@ -25,7 +25,12 @@ public class SwitchCommand extends Command {
         if (tabId == null) {
             throw new CommandException(MESSAGE_INVALID_TAB);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tabId), tabId);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tabId), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TabId.valueOf(tabNumber.getOneBased());
     }
 
     @Override

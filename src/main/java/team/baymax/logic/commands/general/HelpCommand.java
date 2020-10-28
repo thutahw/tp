@@ -17,8 +17,15 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    public static final TabId TAB_ID = TabId.INFO;
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, TabId.INFO);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 }

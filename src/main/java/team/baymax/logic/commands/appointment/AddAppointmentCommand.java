@@ -26,6 +26,7 @@ import team.baymax.model.util.TabId;
 public class AddAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "addappt";
+    public static final TabId TAB_ID = TabId.SCHEDULE;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
             + "Parameters: "
@@ -83,7 +84,12 @@ public class AddAppointmentCommand extends Command {
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dateTime.getDate()));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), TabId.SCHEDULE);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class HelpCommandTest {
                 SHOWING_HELP_MESSAGE,
                 true,
                 false,
-                Index.fromOneBased(1));
+                HelpCommand.TAB_ID);
         assertPatientCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

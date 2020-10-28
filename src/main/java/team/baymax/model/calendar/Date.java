@@ -6,6 +6,10 @@ public class Date {
     private final Month month;
     private final Day day;
 
+    /**
+     * Constructs a {@Date} given the {@code day}, {@code month} and {@code year}
+     *
+     */
     public Date(Day day, Month month, Year year) {
         this.day = day;
         this.month = month;

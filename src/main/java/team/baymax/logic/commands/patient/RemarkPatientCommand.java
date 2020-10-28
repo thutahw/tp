@@ -34,6 +34,8 @@ public class RemarkPatientCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
+    public static final TabId TAB_ID = TabId.PATIENT;
+
     private final Index index;
     private final Remark remark;
 
@@ -63,7 +65,12 @@ public class RemarkPatientCommand extends Command {
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        return new CommandResult(generateSuccessMessage(editedPatient), TabId.PATIENT);
+        return new CommandResult(generateSuccessMessage(editedPatient), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**

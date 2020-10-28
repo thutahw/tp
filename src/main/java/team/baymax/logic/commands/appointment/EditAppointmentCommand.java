@@ -30,6 +30,7 @@ import team.baymax.model.util.TabId;
 public class EditAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "editappt";
+    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
             + "by the index number used in the displayed appointment list. "
@@ -82,7 +83,12 @@ public class EditAppointmentCommand extends Command {
 
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
 
-        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), TabId.APPOINTMENT);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabId());
+    }
+
+    @Override
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**

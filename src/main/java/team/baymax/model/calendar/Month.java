@@ -10,6 +10,10 @@ public class Month {
 
     private final int value;
 
+    /**
+     * Constructs a {@code Month} given a postive integer that must be between 1 and 12.
+     *
+     */
     public Month(int value) {
         requireNonNull(value);
         if (isValidMonth(value)) {
