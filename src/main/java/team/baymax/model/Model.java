@@ -7,9 +7,9 @@ import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.Year;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
@@ -126,6 +126,12 @@ public interface Model {
      * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
      */
     boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Returns true if there is an appointment existing in the manager that clashes with
+     * {@code appointment} in time.
+     */
+    boolean doesAppointmentClash(Appointment appointment);
 
     /**
      * Deletes the given appointment.

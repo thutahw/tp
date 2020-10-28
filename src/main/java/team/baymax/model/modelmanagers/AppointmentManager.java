@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentClashPredicate;
 import team.baymax.model.util.uniquelist.UniqueList;
 
 
@@ -66,6 +67,15 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
         return appointments.contains(appointment);
+    }
+
+    /**
+     * Returns true if there is an appointment existing in the manager that clashes with
+     * {@code appointment} in time.
+     */
+    public boolean doesAppointmentClash(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(new AppointmentClashPredicate(appointment));
     }
 
     /**

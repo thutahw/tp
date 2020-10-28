@@ -1,10 +1,10 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
 
-public class Minute {
+public class Hour {
 
     private final int value;
 
-    public Minute(int value) {
+    public Hour(int value) {
         this.value = value;
     }
 

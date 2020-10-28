@@ -7,7 +7,7 @@ import team.baymax.logic.commands.calendar.YearCommand;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.model.calendar.Year;
+import team.baymax.model.util.datetime.Year;
 
 public class YearCommandParser implements Parser<YearCommand> {
 

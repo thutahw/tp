@@ -7,7 +7,7 @@ import team.baymax.logic.commands.calendar.DayCommand;
 import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
-import team.baymax.model.calendar.Day;
+import team.baymax.model.util.datetime.Day;
 
 public class DayCommandParser implements Parser<DayCommand> {
 

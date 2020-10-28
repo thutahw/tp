@@ -1,5 +1,9 @@
 package team.baymax.model.calendar;
 
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
+
 public class ReadOnlyAppointmentCalendar extends AppointmentCalendar {
 
     /**

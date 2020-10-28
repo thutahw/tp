@@ -5,13 +5,14 @@ import static team.baymax.testutil.TypicalPatients.ALICE;
 import java.util.HashSet;
 import java.util.Set;
 
-import team.baymax.model.calendar.DateTime;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.SampleDataUtil;
+import team.baymax.model.util.datetime.Duration;
 
 /**
  * A utility class to help with building Appointment objects.
@@ -22,9 +23,11 @@ public class AppointmentBuilder {
     public static final String DEFAULT_DATETIME = "2020-12-12T23:59:59";
     private static final AppointmentStatus DEFAULT_APPOINTMENT_STATUS = AppointmentStatus.UPCOMING;
     private static final String DEFAULT_DESCRIPTION = "long term patient";
+    private static final Duration DEFAULT_DURATION = new Duration(60);
 
     private Patient patient;
     private DateTime dateTime;
+    private Duration duration;
     private AppointmentStatus status;
     private Set<Tag> tags;
     private Description description;
@@ -35,6 +38,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder() {
         patient = DEFAULT_PATIENT;
         dateTime = DateTime.fromString(DEFAULT_DATETIME);
+        duration = DEFAULT_DURATION;
         status = DEFAULT_APPOINTMENT_STATUS;
         tags = new HashSet<>();
         description = new Description(DEFAULT_DESCRIPTION);
@@ -47,6 +51,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder(Appointment appointmentToCopy) {
         patient = appointmentToCopy.getPatient();
         dateTime = appointmentToCopy.getDateTime();
+        duration = appointmentToCopy.getDuration();
         description = appointmentToCopy.getDescription();
         tags = appointmentToCopy.getTags();
         status = appointmentToCopy.getStatus();
@@ -89,6 +94,16 @@ public class AppointmentBuilder {
     }
 
     /**
+     * Parses the input into a Duration and sets it as the duration of the appointment we are building
+     * @param duration
+     */
+    public AppointmentBuilder withDuration(Duration duration) {
+        this.duration = duration;
+        return this;
+    }
+
+
+    /**
      * Parses the input into a Set of Tags and sets it as the tags of the appointment we are building
      * @param tags
      * @return
@@ -99,6 +114,6 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(patient, dateTime, status, description, tags);
+        return new Appointment(patient, dateTime, duration, description, tags, status);
     }
 }

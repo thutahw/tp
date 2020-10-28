@@ -1,4 +1,4 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
@@ -88,6 +88,22 @@ public class DateTime implements Comparable<DateTime> {
 
     public Time getTime() {
         return new Time(getHour(), getMinute());
+    }
+
+    public DateTime plusMinutes(Duration duration) {
+        return new DateTime(this.dateTime.plusMinutes(duration.value));
+    }
+
+    public boolean isAfter(DateTime other) {
+        return dateTime.isAfter(other.dateTime);
+    }
+
+    public boolean isBefore(DateTime other) {
+        return dateTime.isBefore(other.dateTime);
+    }
+
+    public boolean isEqual(DateTime other) {
+        return dateTime.isEqual(other.dateTime);
     }
 
     @Override

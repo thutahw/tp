@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_ID;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -18,10 +19,11 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.calendar.DateTime;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.Duration;
 
 public class AddAppointmentCommand extends Command {
 
@@ -32,32 +34,36 @@ public class AddAppointmentCommand extends Command {
             + "Parameters: "
             + PREFIX_ID + "PATIENT_ID "
             + PREFIX_DATETIME + "DATETIME "
+            + PREFIX_DURATION + "DURATION "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 "
             + PREFIX_DESCRIPTION + "Removal of braces. "
-            + PREFIX_TAG + "DrGoh "
-            + PREFIX_TAG + "1HR";
+            + PREFIX_TAG + "DrGoh ";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
             + "appointment book";
+    public static final String MESSAGE_CLASH_APPOINTMENT = "This appointment clashes with an existing appointment";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
 
     private final Index patientIndex;
     private final DateTime dateTime;
+    private final Duration duration;
     private final Description description;
     private final Set<Tag> tags;
 
     /**
      * Creates an AddAppointmentCommand to add the specified {@code Appointment}
      */
-    public AddAppointmentCommand(Index patientIndex, DateTime dateTime, Description description, Set<Tag> tags) {
-        requireAllNonNull(patientIndex, dateTime, description, tags);
+    public AddAppointmentCommand(Index patientIndex, DateTime dateTime, Duration duration, Set<Tag> tags,
+                                 Description description) {
+        requireAllNonNull(patientIndex, dateTime, duration, description, tags);
         this.patientIndex = patientIndex;
         this.dateTime = dateTime;
+        this.duration = duration;
         this.description = description;
         this.tags = tags;
     }
@@ -70,10 +76,15 @@ public class AddAppointmentCommand extends Command {
         }
 
         Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
-        Appointment toAdd = new Appointment(patient, dateTime, AppointmentStatus.UPCOMING, description, tags);
+        Appointment toAdd = new Appointment(patient, dateTime, duration, description, tags,
+                AppointmentStatus.UPCOMING);
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        if (model.doesAppointmentClash(toAdd)) {
+            throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 
         model.addAppointment(toAdd);

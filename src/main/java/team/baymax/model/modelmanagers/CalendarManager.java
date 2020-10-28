@@ -3,9 +3,9 @@ package team.baymax.model.modelmanagers;
 import static java.util.Objects.requireNonNull;
 
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.Year;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
 public class CalendarManager {
     private final AppointmentCalendar appointmentCalendar;

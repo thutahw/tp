@@ -7,6 +7,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
+import team.baymax.model.util.datetime.DateTimeUtil;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
 
 // make AppointmentCalednar a java bean class to support property change listeners
@@ -70,6 +74,13 @@ public class AppointmentCalendar {
         return year;
     }
 
+    public void updateDay() {
+        int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
+        if (this.day.getValue() > maxNumOfDays) {
+            this.setDay(new Day(maxNumOfDays));
+        }
+    }
+
     public void setDay(Day day) {
         Day oldDay = this.day;
         this.day = day;
@@ -82,6 +93,7 @@ public class AppointmentCalendar {
         this.month = month;
         monthProperty.set(month.toString());
         pcs.firePropertyChange("month", oldMonth, month);
+        updateDay();
     }
 
     public void setYear(Year year) {
@@ -89,6 +101,7 @@ public class AppointmentCalendar {
         this.year = year;
         yearProperty.set(year.toString());
         pcs.firePropertyChange("year", oldYear, year);
+        updateDay();
     }
 
     public SimpleStringProperty getDayProperty() {

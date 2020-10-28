@@ -13,10 +13,11 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.calendar.DateTime;
-import team.baymax.model.calendar.Day;
-import team.baymax.model.calendar.Month;
-import team.baymax.model.calendar.Year;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
@@ -207,6 +208,19 @@ public class ParserUtil {
             throw new ParseException(ex.getMessage());
         }
         return dateTimeObj;
+    }
+
+    /**
+     * Parses {@code String duration} (e.g. "60") into a {@code Duration}.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDuration);
+        if (invalidNumber || !Duration.isValidDuration(Integer.parseInt(trimmedDuration))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Duration(Integer.parseInt(trimmedDuration));
     }
 
     /**

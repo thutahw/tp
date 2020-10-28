@@ -1,4 +1,7 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
+
+import team.baymax.model.util.datetime.Hour;
+import team.baymax.model.util.datetime.Minute;
 
 public class Time {
 

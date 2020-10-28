@@ -2,7 +2,7 @@ package team.baymax.model.appointment;
 
 import java.util.function.Predicate;
 
-import team.baymax.model.calendar.Date;
+import team.baymax.model.util.datetime.Date;
 
 public class AppointmentMatchesDatePredicate implements Predicate<Appointment> {
 

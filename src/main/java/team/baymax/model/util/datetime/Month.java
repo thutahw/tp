@@ -1,8 +1,6 @@
-package team.baymax.model.calendar;
+package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
-
-import team.baymax.model.calendar.utils.CalendarUtil;
 
 public class Month {
 
@@ -34,10 +32,6 @@ public class Month {
         return value;
     }
 
-    public int getNumOfDays() {
-        return numOfDays[value - 1];
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -47,6 +41,6 @@ public class Month {
 
     @Override
     public String toString() {
-        return CalendarUtil.getMonthForInt(value - 1);
+        return DateTimeUtil.getMonthForInt(value - 1);
     }
 }
