@@ -23,7 +23,7 @@ import team.baymax.model.tag.Tag;
 
 public class AddAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "schedule";
+    public static final String COMMAND_WORD = "addappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book. "
             + "Parameters: "

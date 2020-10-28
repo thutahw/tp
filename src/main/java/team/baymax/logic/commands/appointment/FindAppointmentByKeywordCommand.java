@@ -13,7 +13,7 @@ import team.baymax.model.appointment.AppointmentContainsKeywordPredicate;
  */
 public class FindAppointmentByKeywordCommand extends Command {
 
-    public static final String COMMAND_WORD = "findapptkeyword";
+    public static final String COMMAND_WORD = "findappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments whose description or tags "
             + "contain the given keyword. "
