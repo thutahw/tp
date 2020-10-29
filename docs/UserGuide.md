@@ -24,11 +24,12 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.4. [Edit an appointment: `editappt`](#424-edit-an-appointment-editappt)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.5. [Cancel an appointment: `cancel`](#425-cancel-an-appointment-cancel)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.6. [Mark an appointment as done: `done`](#426-mark-an-appointment-as-done-done)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.7. [Mark an appointment as missed: `missed`](#427-mark-an-appointment-as-missed-missed)<br>
     4.3. [Calendar](#43-calendar)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.1. [Switch to a particular year: `year`](#431-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.2. [Switch to a particular month: `month`](#432-switch-to-a-particular-month-month)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.3. [View schedule of a day: `day`](#433-view-schedule-of-a-day-day)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Display appointments within a period: `period`](#434-display-appointments-within-a-period-period)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.3. [Switch to a particular day: `day`](#433-switch-to-a-particular-day-day)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Display appointments within a period: `period`](#435-display-appointments-within-a-period-coming-soon-period)<br>
     4.4. [Utilities](#44-utilities)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.1. [View help : `help`](#441-view-help--help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.2. [Switch between tabs:](#442-switch-between-tabs)<br>
@@ -84,7 +85,7 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, â
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3. About
-(Contributed by Li Jianhan & Shi Hui Ling)
+(Contributed by Li Jianhan, Thuta Htun Wai, Kaitlyn Ng, Reuben & Shi Hui Ling)
 
 ### 3.1. Structure of this Document
 To give you the most amount of flexibility over what you can do with Baymax, we have provided a large set of features.
@@ -146,7 +147,7 @@ Commands all take the following format:
 
 -----------------------------------------------------------------------------------
 ## 4. Features
-(Contributed by Thuta and ...everyone?)
+(Contributed by Thuta and Reuben)
 
 ### 4.1. Patient Information Management
 
@@ -355,10 +356,10 @@ DESCRIPTION    | The description of the appointment. It can be <ins>any text</in
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 
 **Format:**<br>
-`addappt id/ID dt/DATETIME desc/DESCRIPTION [t/TAG]`
+`addappt id/ID on/DATETIME desc/DESCRIPTION [t/TAG]`
 
 **Example:**<br>
-1. Type `addappt id/1 dt/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
+1. Type `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -424,10 +425,10 @@ This extra step helps you to confirm the appointment to be edited, and prevents 
 `editappt INDEX <at least 1 appointment information parameter>`
 
 Listed below are some examples of valid `editappt` commands:
-* `editappt INDEX dt/DATETIME`
+* `editappt INDEX on/DATETIME`
 * `editappt INDEX desc/DESC`
 * `editappt INDEX t/TAG`
-* You can also supply multiple parameters, e.g. `editappt INDEX t/TAG desc/DESC dt/DATETIME`
+* You can also supply multiple parameters, e.g. `editappt INDEX t/TAG desc/DESC on/DATETIME`
 * The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
@@ -440,7 +441,7 @@ DESCRIPTION    | The description of the appointment. It can be <ins>any text</in
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 
 **Example:**<br>
-1. Type `editappt 1 dt/12-10-2020 12:00` into the command box.
+1. Type `editappt 1 on/12-10-2020 12:00` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -457,7 +458,7 @@ You can use this command to cancel an appointment within the system by specifyin
 and the `DATETIME` of the appointment.
 
 **Format:**<br>
-`cancel INDEX (OR dt/DATETIME name/NAME)`
+`cancel INDEX (OR on/DATETIME name/NAME)`
 
 **Parameters:**
 
@@ -485,7 +486,7 @@ You can use this command to mark an appointment within the system as done by spe
 and the `DATETIME` of the appointment.
 
 **Format:**<br>
-`done INDEX (OR dt/DATETIME name/NAME)`
+`done INDEX (OR on/DATETIME name/NAME)`
 
 **Parameters:**
 
@@ -496,7 +497,7 @@ NAME           | The name by which to search for the patient. It can be an incom
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 
 **Example:**<br>
-1. Type `done dt/20-01-2020 15:00 name/Charlotte` into the command box.
+1. Type `done on/20-01-2020 15:00 name/Charlotte` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -505,8 +506,39 @@ If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be marked as done.
 
-    ![markapptdone](images/markApptDone.png)<br>
+    ![changeyear](images/markApptDone.png)<br>
     *Figure 4.2.6a Marking an appointment as done*
+    
+#### 4.2.7 Mark an appointment as missed: `missed`
+You can use this command to mark an appointment within the system as missed by specifying the patient it belongs to 
+and the `DATETIME` of the appointment.
+
+**Format:**<br>
+`missed INDEX (OR on/DATETIME name/NAME)`
+
+**Parameters:**
+
+Parameter Name | Description
+---------------|------------
+INDEX          | The index of the target appointment in the most recently displayed list. It must be a positive integer.
+NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
+DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
+
+**Example:**<br>
+1. Type `missed on/20-01-2020 15:00 name/Charlotte` into the command box.
+2. Press `Enter` on your keyboard.
+
+    ![changeyear](images/markApptMissed.jpg)<br>
+    *Figure 4.2.7a Marking an appointment as done*
+
+**Outcome:**
+
+If the command is valid (i.e. the specified appointment exists):
+1. A success message will be displayed as shown below.
+2. The appointment specified will be marked as done.
+
+    Coming soon<br>
+    *Figure 4.2.7a Marking an appointment as missed*
 -------------------------------------------------------------------------------
 
 ### 4.3. Calendar 
@@ -564,8 +596,8 @@ MONTH          | The month you want to switch to. It must be a positive number f
     ![changemonth](images/changeMonth.png)<br>
     *Figure 4.3.2a Changing the month to September*
 
-#### 4.3.3. View schedule of a day: `day`
-You can use this command to display the schedule (and hence all appointments) on a particular day.
+#### 4.3.3. Switch to a particular day: `day`
+You can use this command to select a particular day, and display its schedule (with all appointments within the day).
 
 Parameter Name | Description
 ---------------|------------
@@ -577,15 +609,40 @@ DAY            | The day of the month you want to switch to. It must be a positi
 **Example:**<br>
 1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
 2. Type `month 10` into the command box and press enter to switch to the month October.
-3. Type `day 15` into the command box.
+3. Type `day 19` into the command box.
 4. Press Enter on your keyboard.
 
 **Outcome:**<br>
-1. All appointments on 2020-10-15 will be displayed as a schedule view.
+1. The day 2020-10-15 will be selected.
 
-    ![changeday](images/changeDay.png)<br>
-    *Figure 4.3.3a Changing the day to 15th*
+    ![changeday](images/scheduleView.jpg)<br>
+    *Figure 4.3.3a Viewing the schedule on the 19th*
+    
 
+#### 4.3.4. Display appointments within a period (coming soon): `period`
+You can use this command to display all appointments within a specified period, defined by a start `day` and an end 
+`day`. The `year` and `month` are assumed to be the current `year` and `month`.
+
+**Format:**<br>
+`period from/START to/END`
+
+**Parameters:**
+
+Parameter Name | Description
+---------------|------------
+FROM           | The day of the month you want to start viewing from. It must be a positive number between 1 and `TO`. E.g. if `TO` is 10, the range of numbers you can enter is 1 to 10.
+TO             | The day of the month you want to end viewing with. It must be a positive number between `FROM` and the last day of the month. E.g. if the month is February (which only has 28 days) and `FROM` is 5, the range of numbers you can enter is 5 to 28.
+
+**Example:**<br>
+1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
+2. Type `month 3` into the command box and press Enter to switch to March.
+3. Type `period from/1 to/7` into the command box.
+4. Press Enter on your keyboard.
+
+**Outcome:**
+1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar view.
+
+[App Screenshot (Still in Progress)]
 ----------------------------------------------------------------------------------
 
 ### 4.4. Utilities
@@ -655,6 +712,7 @@ You can use this command to exit the program.
 
 ---------------------------------------------------------------------------------
 ## 5. FAQ
+(Contributed by Hui Ling)
 
 **Q:** Do I have to manually save any data? 
 
@@ -662,6 +720,7 @@ You can use this command to exit the program.
 
 ---------------------------------------------------------------------------------
 ## 6. Command Summary
+(Contributed by Hui Ling and Reuben)
 
 ### 6.1 Patient Information Management Commands
 
@@ -678,11 +737,13 @@ Add a remark: `remark PATIENT_ID r/REMARK` | `remark 2 r/Not free on Fridays`
 
 **Command**             | **Example**
 ------------------------|--------------------
-Add an Appointment: `addappt id/ID dt/DATETIME desc/DESCRIPTION [t/TAG]` | `addappt id/1 dt/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
+Add an Appointment: `addappt id/ID on/DATETIME desc/DESCRIPTION [t/TAG]` | `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
 List Appointments of a Patient: `listapptof PATIENT_ID` | `listapptof 1`
 List All Appointments: `listappt` | `listappt`
-Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 dt/12-10-2020 12:00`
-Cancel an Appointment: `cancel INDEX OR cancel dt/DATETIME name/NAME` | `cancel dt/20-01-2020 15:00 name/Alex `
+Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`
+Cancel an Appointment: `cancel INDEX OR cancel on/DATETIME name/NAME` | `cancel on/20-01-2020 15:00 name/Alex `
+Mark an Appointment as done: `done INDEX OR on/DATETIME name/NAME` | `done on/20-01-2020 15:00 name/Charlotte`
+Mark an Appointment as missed: `missed INDEX OR on/DATETIME name/NAME` | `missed 1`
 
 ### 6.3 Calendar Commands
 
@@ -690,7 +751,7 @@ Cancel an Appointment: `cancel INDEX OR cancel dt/DATETIME name/NAME` | `cancel 
 ------------------------|--------------------
 Switch to a particular year: `year YEAR` | `year 2021`
 Switch to a particular month: `month MONTH` | `month 11`
-View schedule of a day: `day DAY` | `day 30`
+Switch to a particular day: `day DAY` | `day 15`
 
 ### 6.4 Utilities Commands
 
