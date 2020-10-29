@@ -14,11 +14,11 @@ public class SameDatetimeAndPatientPredicate implements Predicate<Appointment> {
 
     /**
      * Constructor taking in a dateTime and Patient object to match Appointments with
-     * @param dt        DateTime object in the format DD-MM-YYYY HH:MM
+     * @param dateTime  DateTime object in the format DD-MM-YYYY HH:MM
      * @param patient   Patient object
      */
-    public SameDatetimeAndPatientPredicate(DateTime dt, Patient patient) {
-        this.dateTime = dt;
+    public SameDatetimeAndPatientPredicate(DateTime dateTime, Patient patient) {
+        this.dateTime = dateTime;
         this.patient = patient;
     }
 

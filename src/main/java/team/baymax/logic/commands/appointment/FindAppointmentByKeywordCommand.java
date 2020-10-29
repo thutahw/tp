@@ -18,9 +18,9 @@ public class FindAppointmentByKeywordCommand extends Command {
 
     public static final String MESSAGE_APPOINTMENTS_LISTED_SUCCESS = "%1$d appointments listed!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments whose description or tags "
-            + "contain the given keyword. "
+            + "contain the given keyword.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " xray";
+            + "For example, " + COMMAND_WORD + " xray";
 
     private final AppointmentContainsKeywordPredicate predicate;
 
@@ -31,6 +31,7 @@ public class FindAppointmentByKeywordCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredAppointmentList(predicate);
         return new CommandResult(
                 String.format(MESSAGE_APPOINTMENTS_LISTED_SUCCESS,

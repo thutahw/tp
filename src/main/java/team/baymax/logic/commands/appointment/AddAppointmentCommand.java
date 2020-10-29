@@ -5,10 +5,11 @@ import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
@@ -20,6 +21,7 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.TabId;
@@ -34,21 +36,19 @@ public class AddAppointmentCommand extends Command {
     public static final TabId TAB_ID = TabId.SCHEDULE;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to the appointment book.\n"
-            + "Parameters: "
-            + PREFIX_INDEX + "PATIENT_INDEX "
+            + "Parameters: PATIENT_INDEX (or " + PREFIX_NRIC + "NRIC) "
             + PREFIX_DATETIME + "DATETIME "
             + "(" + "or " + PREFIX_TIME + "TIME " + ") "
             + PREFIX_DURATION + "DURATION "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example 1: " + COMMAND_WORD + " "
-            + PREFIX_INDEX + "1 "
+            + "For example, " + COMMAND_WORD + " 1 "
             + PREFIX_DATETIME + "11-10-2020 12:30 "
             + PREFIX_DURATION + "60 "
             + PREFIX_DESCRIPTION + "Monthly health checkup. "
             + PREFIX_TAG + "DrGoh\n"
-            + "Example 2: " + COMMAND_WORD + " "
-            + PREFIX_INDEX + "1 "
+            + "Alternatively, " + COMMAND_WORD + " "
+            + PREFIX_NRIC + "S0123456A "
             + PREFIX_TIME + "12:30 "
             + PREFIX_DURATION + "60 "
             + PREFIX_DESCRIPTION + "Monthly health checkup. "
@@ -59,10 +59,15 @@ public class AddAppointmentCommand extends Command {
             + "appointment book";
     public static final String MESSAGE_CLASH_APPOINTMENT = "This appointment clashes with an existing appointment";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
+    public static final String MESSAGE_INDEX_AND_NRIC_BOTH_EMPTY = "The patient index and NRIC should not "
+            + "be both empty.";
+    public static final String MESSAGE_DATETIME_AND_TIME_BOTH_EMPTY = "The datetime and time should not "
+            + "be both empty.";
 
-    private final Index patientIndex;
-    private final DateTime dateTime;
-    private final Time time;
+    private final Optional<Index> patientIndex;
+    private final Optional<Nric> patientNric;
+    private final Optional<DateTime> dateTime;
+    private final Optional<Time> time;
     private final Duration duration;
     private final Description description;
     private final Set<Tag> tags;
@@ -72,13 +77,16 @@ public class AddAppointmentCommand extends Command {
      * Note that this constructor takes in either a {@code DateTime} or {@code Time}, the {@code DateTime} will be
      * taken if both values are present.
      */
-    public AddAppointmentCommand(Index patientIndex, DateTime dateTime, Time time, Duration duration,
+    public AddAppointmentCommand(Optional<Index> patientIndex, Optional<Nric> patientNric, Optional<DateTime> dateTime,
+                                 Optional<Time> time, Duration duration,
                                  Description description, Set<Tag> tags) {
+
         requireAllNonNull(patientIndex, duration, description, tags);
 
         assert dateTime != null || time != null : "At least one must be non-null";
 
         this.patientIndex = patientIndex;
+        this.patientNric = patientNric;
         this.dateTime = dateTime;
         this.time = time;
         this.duration = duration;
@@ -90,23 +98,27 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        assert patientIndex.getZeroBased() < model.getFilteredPatientList().size() : "Patient index should not "
-                + "exceed size of filtered list";
-
-        if (patientIndex.getZeroBased() >= model.getFilteredPatientList().size()) {
-            throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
-        }
-
-        Patient patient = model.getFilteredPatientList().get(patientIndex.getZeroBased());
-
+        Patient patient;
         DateTime dt;
 
+        assert patientIndex.isPresent() || !patientNric.isPresent() : "Patient index or NRIC should not be both empty.";
+        assert dateTime.isPresent() || time.isPresent() : "Datetime or time should not be both empty.";
+
+        if (patientIndex.isPresent()) {
+            if (patientIndex.get().getZeroBased() >= model.getFilteredPatientList().size()) {
+                throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
+            }
+            patient = model.getFilteredPatientList().get(patientIndex.get().getZeroBased());
+        } else {
+            patient = model.getPatient(patientNric.get());
+        }
+
         // dateTime takes precedence if both dateTime and time are non-null
-        if (dateTime != null) {
-            dt = dateTime;
+        if (dateTime.isPresent()) {
+            dt = dateTime.get();
         } else {
             Date date = Date.fromCalendar(model.getAppointmentCalendar());
-            dt = DateTime.from(date, time);
+            dt = DateTime.from(date, time.get());
         }
 
         Appointment toAdd = new Appointment(patient, dt, duration, description, tags,
@@ -142,7 +154,9 @@ public class AddAppointmentCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddAppointmentCommand // instanceof handles nulls
                 && patientIndex.equals(((AddAppointmentCommand) other).patientIndex)
+                && patientNric.equals(((AddAppointmentCommand) other).patientNric)
                 && dateTime.equals(((AddAppointmentCommand) other).dateTime)
+                && time.equals(((AddAppointmentCommand) other).time)
                 && description.equals(((AddAppointmentCommand) other).description)
                 && tags.equals(((AddAppointmentCommand) other).tags));
     }

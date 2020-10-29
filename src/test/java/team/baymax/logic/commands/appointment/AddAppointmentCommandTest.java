@@ -15,6 +15,7 @@ import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -35,21 +36,21 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null,
+        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null, null,
                 null, null, null, null, null));
     }
 
     @Test
-    public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
+    public void executeAddAppointmentByIndex_appointmentAcceptedByModel_addSuccessful() throws Exception {
         Appointment validAppointment = new AppointmentBuilder().build();
 
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(
-                Index.fromOneBased(1),
-                validAppointment.getDateTime(),
-                validAppointment.getTime(),
+                Optional.ofNullable(Index.fromOneBased(1)),
+                Optional.empty(),
+                Optional.ofNullable(validAppointment.getDateTime()),
+                Optional.ofNullable(validAppointment.getTime()),
                 validAppointment.getDuration(),
-                validAppointment.getDescription(),
-                validAppointment.getTags());
+                validAppointment.getDescription(), validAppointment.getTags());
 
         ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
 
@@ -64,14 +65,13 @@ public class AddAppointmentCommandTest {
     @Test
     public void execute_duplicateAppointment_throwsCommandException() {
         Appointment validAppointment = new AppointmentBuilder().build();
-
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(
-                Index.fromOneBased(1),
-                validAppointment.getDateTime(),
-                validAppointment.getTime(),
+                Optional.ofNullable(Index.fromOneBased(1)),
+                Optional.empty(),
+                Optional.ofNullable(validAppointment.getDateTime()),
+                Optional.ofNullable(validAppointment.getTime()),
                 validAppointment.getDuration(),
-                validAppointment.getDescription(),
-                validAppointment.getTags());
+                validAppointment.getDescription(), validAppointment.getTags());
 
         ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
 
@@ -81,16 +81,19 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void equals() {
-        AddAppointmentCommand firstCommand = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1, null,
+        AddAppointmentCommand firstCommand = new AddAppointmentCommand(Optional.ofNullable(INDEX_FIRST_PATIENT),
+                Optional.empty(), Optional.ofNullable(DATETIME1), Optional.empty(),
                 new Duration(60), new Description(VALID_DESCRIPTION_1), new HashSet<>());
-        AddAppointmentCommand secondCommand = new AddAppointmentCommand(INDEX_SECOND_PATIENT, DATETIME2, null,
+        AddAppointmentCommand secondCommand = new AddAppointmentCommand(Optional.ofNullable(INDEX_SECOND_PATIENT),
+                Optional.empty(), Optional.ofNullable(DATETIME2), Optional.empty(),
                 new Duration(60), new Description(VALID_DESCRIPTION_2), new HashSet<>());
 
         // same object -> returns True
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns True
-        AddAppointmentCommand firstCommandCopy = new AddAppointmentCommand(INDEX_FIRST_PATIENT, DATETIME1, null,
+        AddAppointmentCommand firstCommandCopy = new AddAppointmentCommand(Optional.ofNullable(INDEX_FIRST_PATIENT),
+                Optional.empty(), Optional.ofNullable(DATETIME1), Optional.empty(),
                 new Duration(60), new Description(VALID_DESCRIPTION_1), new HashSet<>());
         assertTrue(firstCommand.equals(firstCommandCopy));
 
