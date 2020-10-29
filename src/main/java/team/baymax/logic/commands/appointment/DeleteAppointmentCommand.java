@@ -15,12 +15,10 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
-import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
@@ -100,10 +98,19 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteAppointmentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteAppointmentCommand) other).targetIndex)
-                && dateTime.equals(((DeleteAppointmentCommand) other).dateTime)
-                && name.equals(((DeleteAppointmentCommand) other).name)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof DeleteAppointmentCommand) {
+            DeleteAppointmentCommand otherCommand = (DeleteAppointmentCommand) other;
+            if (targetIndex == null) {
+                return dateTime.equals(otherCommand.dateTime) && name.equals(otherCommand.name);
+            } else {
+                return targetIndex.equals(otherCommand.targetIndex);
+            }
+        }
+
+        return false;
     }
 }

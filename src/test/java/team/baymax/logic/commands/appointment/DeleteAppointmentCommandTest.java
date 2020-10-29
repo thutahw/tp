@@ -29,8 +29,7 @@ public class DeleteAppointmentCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT);
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
@@ -47,8 +46,7 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(outOfBoundIndex,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(outOfBoundIndex);
 
         assertAppointmentCommandFailure(deleteAppointmentCommand, model,
                 Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
@@ -59,8 +57,7 @@ public class DeleteAppointmentCommandTest {
 
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT);
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
@@ -81,8 +78,7 @@ public class DeleteAppointmentCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAppointmentManager().getReadOnlyList().size());
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(outOfBoundIndex,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(outOfBoundIndex);
 
         assertAppointmentCommandFailure(deleteAppointmentCommand, model,
                 Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
@@ -93,17 +89,15 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
 
-        DeleteAppointmentCommand deleteFirstCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT,
-                appointmentToDelete.getDateTime());
-        DeleteAppointmentCommand deleteSecondCommand = new DeleteAppointmentCommand(INDEX_SECOND_APPOINTMENT,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteFirstCommand = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT);
+        DeleteAppointmentCommand deleteSecondCommand = new DeleteAppointmentCommand(INDEX_SECOND_APPOINTMENT);
+
 
         // same object -> returns True
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns True
-        DeleteAppointmentCommand deleteFirstCommandCopy = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT,
-                appointmentToDelete.getDateTime());
+        DeleteAppointmentCommand deleteFirstCommandCopy = new DeleteAppointmentCommand(INDEX_FIRST_APPOINTMENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns False

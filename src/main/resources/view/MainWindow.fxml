@@ -23,7 +23,7 @@
         <URL value="@Dashboard.css" />
         <URL value="@Extensions.css" />
         <URL value="@LightTheme.css" />
-        <URL value="@SchedulePage.css" />
+        <URL value="@SchedulePanel.css" />
         <URL value="@TabPane.css" />
       </stylesheets>
 
