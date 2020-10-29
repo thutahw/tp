@@ -19,19 +19,21 @@ import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.ClearCommand;
 import team.baymax.logic.commands.CommandTestUtil;
+import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.AppointmentBuilder;
 import team.baymax.testutil.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +45,7 @@ public class EditAppointmentCommandTest {
                 editedAppointment);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                model.getAppointmentManager(), new UserPrefs());
+                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
@@ -56,7 +58,7 @@ public class EditAppointmentCommandTest {
 
         AppointmentBuilder appointmentInList = new AppointmentBuilder(lastAppointment);
         Appointment editedAppointment = appointmentInList.withDescription(VALID_DESCRIPTION_1)
-                .withTime(VALID_DATETIME_1).withTags(VALID_TAG_DIABETIC).build();
+                .withDateTime(VALID_DATETIME_1).withTags(VALID_TAG_DIABETIC).build();
 
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_1)
@@ -67,7 +69,7 @@ public class EditAppointmentCommandTest {
                 editedAppointment);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                model.getAppointmentManager(), new UserPrefs());
+                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.setAppointment(lastAppointment, editedAppointment);
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
@@ -83,7 +85,7 @@ public class EditAppointmentCommandTest {
                 editedAppointment);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                model.getAppointmentManager(), new UserPrefs());
+                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
     }
@@ -103,7 +105,7 @@ public class EditAppointmentCommandTest {
                 editedAppointment);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                model.getAppointmentManager(), new UserPrefs());
+                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
 
         expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
         CommandTestUtil.assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);

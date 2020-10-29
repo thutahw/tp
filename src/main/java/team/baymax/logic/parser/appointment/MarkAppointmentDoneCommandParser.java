@@ -7,7 +7,6 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.logic.commands.appointment.MarkAppointmentDoneCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
@@ -15,6 +14,7 @@ import team.baymax.logic.parser.Parser;
 import team.baymax.logic.parser.ParserUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.patient.Name;
+import team.baymax.model.util.datetime.DateTime;
 
 public class MarkAppointmentDoneCommandParser implements Parser<MarkAppointmentDoneCommand> {
     /**

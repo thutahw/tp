@@ -1,4 +1,4 @@
-package team.baymax.model.listmanagers;
+package team.baymax.model.modelmanagers;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,9 +8,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentClashPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
@@ -73,6 +74,15 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     }
 
     /**
+     * Returns true if there is an appointment existing in the manager that clashes with
+     * {@code appointment} in time.
+     */
+    public boolean doesAppointmentClash(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(new AppointmentClashPredicate(appointment));
+    }
+
+    /**
      * Adds a appointment to the AppointmentManager.
      * The appointment must not already exist in the AppointmentManager.
      */
@@ -117,8 +127,10 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
                 + "\nTotal number of appointments: " + appointments.size();
     }
 
-    // directly modifies appointments list to mark all appointments that have passed as DONE
-    // if they are not explicitly marked as MISSING
+    /**
+     * Modifies appointments list to mark all appointments that have passed as DONE if they
+     * are not explicitly marked as MISSING
+     */
     private void markAllPastAppointmentsAsDone() {
         Predicate<Appointment> apptPastButMarkedAsUpcoming = new Predicate<Appointment>() {
             @Override
@@ -131,8 +143,8 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         while (appointments.contains(apptPastButMarkedAsUpcoming)) {
             Appointment pastAppt = appointments.getByPredicate(apptPastButMarkedAsUpcoming);
             Appointment markedAsDoneAppt = new Appointment(pastAppt.getPatient(),
-                    pastAppt.getDateTime(), AppointmentStatus.DONE,
-                    pastAppt.getDescription(), pastAppt.getTags());
+                    pastAppt.getDateTime(), pastAppt.getDuration(), pastAppt.getDescription(),
+                    pastAppt.getTags(), AppointmentStatus.DONE);
             setAppointment(pastAppt, markedAsDoneAppt);
         }
     }

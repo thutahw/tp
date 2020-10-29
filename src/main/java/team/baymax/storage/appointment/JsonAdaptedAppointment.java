@@ -9,15 +9,16 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 import team.baymax.storage.JsonAdaptedTag;
 
@@ -30,6 +31,7 @@ class JsonAdaptedAppointment {
 
     private final String patientNric;
     private final String dateTime;
+    private final Integer duration;
     private final AppointmentStatus status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String description;
@@ -40,11 +42,13 @@ class JsonAdaptedAppointment {
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("patientNRIC") String patientNric,
                                   @JsonProperty("dateTime") String dateTime,
+                                  @JsonProperty("duration") Integer duration,
                                   @JsonProperty("status") AppointmentStatus status,
                                   @JsonProperty("description") String description,
                                   @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.patientNric = patientNric;
         this.dateTime = dateTime;
+        this.duration = duration;
         this.status = status;
         this.description = description;
         if (tagged != null) {
@@ -58,6 +62,7 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(Appointment source) {
         this.patientNric = source.getPatient().getNric().nric;
         this.dateTime = source.getDateTime().getStorageFormat();
+        this.duration = source.getDuration().value;
         this.status = source.getStatus();
         this.description = source.getDescription().value;
         tagged.addAll(source.getTags().stream()
@@ -103,6 +108,17 @@ class JsonAdaptedAppointment {
         }
         DateTime modelDateTime = DateTime.fromString(dateTime);
 
+        if (duration == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Duration.class.getSimpleName()));
+        }
+
+        if (!Duration.isValidDuration(duration)) {
+            throw new IllegalValueException(Duration.MESSAGE_CONSTRAINTS);
+        }
+        Duration modelDuration = new Duration(duration);
+
+
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppointmentStatus.class.getSimpleName()));
@@ -120,6 +136,6 @@ class JsonAdaptedAppointment {
 
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Appointment(modelPatient, modelDateTime, modelStatus, modelDescription, modelTags);
+        return new Appointment(modelPatient, modelDateTime, modelDuration, modelDescription, modelTags, modelStatus);
     }
 }

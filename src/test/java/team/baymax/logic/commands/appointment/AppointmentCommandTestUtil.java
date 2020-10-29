@@ -1,10 +1,13 @@
 package team.baymax.logic.commands.appointment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,8 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
+import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.testutil.EditAppointmentDescriptorBuilder;
 
 public class AppointmentCommandTestUtil {
@@ -69,13 +73,14 @@ public class AppointmentCommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the patient at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the appointment at the given {@code targetIndex} in the
      * {@code model}'s appointment book.
      */
     public static void showAppointmentAtIndex(Model model, Index targetIndex) {
-        // assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
-        // Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
-        // model.updateFilteredAppointmentList(new PatientHasAppointmentPredicate(patient));
-        // assertEquals(1, model.getFilteredAppointmentList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
+
+        Appointment appointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
+        model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(appointment));
+        assertEquals(1, model.getFilteredAppointmentList().size());
     }
 }

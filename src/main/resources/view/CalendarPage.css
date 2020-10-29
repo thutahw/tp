@@ -1,0 +1,12 @@
+.calendar-container {
+    -fx-alignment: center;
+}
+
+.year-label {
+    -fx-font-size: 24;
+}
+
+.month-label {
+    -fx-font-size: 16;
+    -fx-padding: 10;
+}

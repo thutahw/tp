@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.ClearCommand;
-import team.baymax.logic.commands.ExitCommand;
-import team.baymax.logic.commands.HelpCommand;
+import team.baymax.logic.commands.general.ClearCommand;
+import team.baymax.logic.commands.general.ExitCommand;
+import team.baymax.logic.commands.general.HelpCommand;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand;
@@ -33,7 +33,7 @@ public class AppointmentBookParserTest {
     private final AppointmentBookParser parser = new AppointmentBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addpatient() throws Exception {
         Patient patient = new PatientBuilder().build();
         AddPatientCommand command = (AddPatientCommand) parser.parseCommand(PatientUtil.getAddCommand(patient));
         assertEquals(new AddPatientCommand(patient), command);
@@ -46,14 +46,14 @@ public class AppointmentBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deletepatient() throws Exception {
         DeletePatientCommand command = (DeletePatientCommand) parser.parseCommand(
                 DeletePatientCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
         assertEquals(new DeletePatientCommand(INDEX_FIRST_PATIENT), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editpatient() throws Exception {
         Patient patient = new PatientBuilder().build();
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
@@ -68,7 +68,7 @@ public class AppointmentBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findpatient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
                 FindPatientCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
@@ -82,7 +82,7 @@ public class AppointmentBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listpatient() throws Exception {
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD) instanceof ListPatientCommand);
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD + " 3") instanceof ListPatientCommand);
     }

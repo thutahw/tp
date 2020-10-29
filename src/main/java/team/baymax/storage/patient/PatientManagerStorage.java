@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import team.baymax.commons.exceptions.DataConversionException;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 
 public interface PatientManagerStorage {

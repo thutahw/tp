@@ -1,26 +1,29 @@
 package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
-import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 import java.util.Set;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Duration;
 
 /**
  * Edits the details (date-and-time, description, tags) of an existing appointment in the appointment book.
@@ -28,6 +31,7 @@ import team.baymax.model.tag.Tag;
 public class EditAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "editappt";
+    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the appointment identified "
             + "by the index number used in the displayed appointment list. "
@@ -37,7 +41,7 @@ public class EditAppointmentCommand extends Command {
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATETIME + "2020-10-24 11:00AM ";
+            + PREFIX_DATETIME + "24-10-2020 11:00 ";
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -52,8 +56,7 @@ public class EditAppointmentCommand extends Command {
      * @param editAppointmentDescriptor details to edit the appointment with
      */
     public EditAppointmentCommand(Index index, EditAppointmentDescriptor editAppointmentDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editAppointmentDescriptor);
+        requireAllNonNull(index, editAppointmentDescriptor);
 
         this.index = index;
         this.editAppointmentDescriptor = new EditAppointmentDescriptor(editAppointmentDescriptor);
@@ -76,13 +79,15 @@ public class EditAppointmentCommand extends Command {
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabNumber());
+
+        model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabId());
     }
 
     @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(4);
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**
@@ -96,13 +101,16 @@ public class EditAppointmentCommand extends Command {
         Patient updatedPatient = appointmentToEdit.getPatient();
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
+        Duration updatedDuration = editAppointmentDescriptor.getDuration()
+                .orElse(appointmentToEdit.getDuration());
         Set<Tag> updatedTags = editAppointmentDescriptor.getTags()
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
         AppointmentStatus status = appointmentToEdit.getStatus();
 
-        return new Appointment(updatedPatient, updatedDateTime, status, updatedDescription, updatedTags);
+        return new Appointment(updatedPatient, updatedDateTime, updatedDuration, updatedDescription,
+                updatedTags, status);
     }
 
     @Override

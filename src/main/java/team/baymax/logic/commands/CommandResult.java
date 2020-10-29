@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import team.baymax.commons.core.index.Index;
+import team.baymax.model.util.TabId;
 
 
 /**
@@ -20,24 +20,24 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Switch to the tab indicated by tabNumber */
-    private final Index tabNumber;
+    /** Switch to the tab indicated by tab identifier */
+    private final TabId tabId;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Index tabNumber) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, TabId tabId) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.tabNumber = tabNumber;
+        this.tabId = tabId;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, Index tabId) {
+    public CommandResult(String feedbackToUser, TabId tabId) {
         this(feedbackToUser, false, false, tabId);
     }
 
@@ -53,8 +53,8 @@ public class CommandResult {
         return exit;
     }
 
-    public Index getTabNumber() {
-        return tabNumber;
+    public TabId getTabId() {
+        return tabId;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && tabNumber.equals(otherCommandResult.getTabNumber());
+                && tabId.equals(otherCommandResult.getTabId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, tabNumber);
+        return Objects.hash(feedbackToUser, showHelp, exit, tabId);
     }
 
 }

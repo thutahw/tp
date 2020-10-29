@@ -11,14 +11,16 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.patient.Remark;
+import team.baymax.model.util.TabId;
 
 /**
  * Changes the remark of an existing patient.
  */
 public class RemarkPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "remarkpatient";
+    public static final String COMMAND_WORD = "remark";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Patient: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Patient: %1$s";
@@ -31,6 +33,8 @@ public class RemarkPatientCommand extends Command {
             + "r/ [REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
+
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     private final Index index;
     private final Remark remark;
@@ -59,14 +63,14 @@ public class RemarkPatientCommand extends Command {
                 patientToEdit.getGender(), patientToEdit.getTags(), remark);
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        return new CommandResult(generateSuccessMessage(editedPatient), getTabNumber());
+        return new CommandResult(generateSuccessMessage(editedPatient), getTabId());
     }
 
     @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**
@@ -93,7 +97,6 @@ public class RemarkPatientCommand extends Command {
         // state check
         RemarkPatientCommand e = (RemarkPatientCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark)
-                && getTabNumber().equals(e.getTabNumber());
+                && remark.equals(e.remark);
     }
 }

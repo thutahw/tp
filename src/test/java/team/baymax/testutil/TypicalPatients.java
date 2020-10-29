@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import team.baymax.logic.commands.patient.PatientCommandTestUtil;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
 
 /**
@@ -18,50 +18,76 @@ public class TypicalPatients {
             .withName("Alice Pauline")
             .withGender("F")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withRemark("remark Alice")
+            .withTags("tag1").build();
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient BENSON = new PatientBuilder()
             .withNric("S1234567B")
             .withName("Benson Meier")
-            .withGender("M").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withGender("M")
+            .withPhone("98765432")
+            .withTags("tag2", "tag3")
+            .withRemark("remark Benson")
+            .build();
     public static final Patient CARL = new PatientBuilder()
             .withNric("S8546464H")
-            .withName("Carl Kurz").withPhone("95352563")
-            .withGender("F").build();
+            .withName("Carl Kurz")
+            .withPhone("95352563")
+            .withGender("F")
+            .withRemark("remark Carl")
+            .build();
     public static final Patient DANIEL = new PatientBuilder()
             .withNric("S7539514E")
-            .withName("Daniel Meier").withPhone("87652533")
-            .withGender("M").withTags("friends").build();
+            .withName("Daniel Meier")
+            .withPhone("87652533")
+            .withGender("M")
+            .withTags("tag1")
+            .withRemark("remark Daniel")
+            .build();
     public static final Patient ELLE = new PatientBuilder()
             .withNric("T0012564N")
-            .withName("Elle Meyer").withPhone("9482224")
-            .withGender("F").build();
+            .withName("Elle Meyer")
+            .withPhone("9482224")
+            .withGender("F")
+            .withRemark("remark Elle")
+            .build();
     public static final Patient FIONA = new PatientBuilder()
             .withNric("S7744115E")
-            .withName("Fiona Kunz").withPhone("9482427")
-            .withGender("F").build();
+            .withName("Fiona Kunz")
+            .withPhone("9482427")
+            .withGender("F")
+            .withRemark("remark Fiona")
+            .build();
     public static final Patient GEORGE = new PatientBuilder()
             .withNric("S0002546G")
-            .withName("George Best").withPhone("9482442")
-            .withGender("M").build();
+            .withName("George Best")
+            .withPhone("9482442")
+            .withGender("M")
+            .withRemark("remark George")
+            .build();
 
     // Manually added
     public static final Patient HOON = new PatientBuilder()
             .withNric("S0312456A")
-            .withName("Hoon Meier").withPhone("8482424")
-            .withGender("F").build();
+            .withName("Hoon Meier")
+            .withPhone("8482424")
+            .withGender("F")
+            .build();
+
     public static final Patient IDA = new PatientBuilder()
             .withNric("T7894561D")
-            .withName("Ida Mueller").withPhone("8482131")
-            .withGender("F").build();
+            .withName("Ida Mueller")
+            .withPhone("8482131")
+            .withGender("F")
+            .build();
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_AMY)
             .withName(PatientCommandTestUtil.VALID_NAME_AMY).withPhone(PatientCommandTestUtil.VALID_PHONE_AMY)
             .withGender(PatientCommandTestUtil.VALID_GENDER_AMY).withTags(PatientCommandTestUtil.VALID_TAG_LTP)
             .withRemark(PatientCommandTestUtil.VALID_REMARK_AMY).build();
+
     public static final Patient BOB = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_BOB)
             .withName(PatientCommandTestUtil.VALID_NAME_BOB).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
             .withGender(PatientCommandTestUtil.VALID_GENDER_BOB)

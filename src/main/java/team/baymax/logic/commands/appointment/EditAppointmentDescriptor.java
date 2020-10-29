@@ -5,11 +5,12 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.commons.util.CollectionUtil;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Duration;
 
 /**
  * Stores the details to edit the appointment with. Each non-empty field value will replace the
@@ -17,6 +18,7 @@ import team.baymax.model.tag.Tag;
  */
 public class EditAppointmentDescriptor {
     private DateTime dateTime;
+    private Duration duration;
     private AppointmentStatus status;
     private Set<Tag> tags;
     private Description description;
@@ -29,6 +31,7 @@ public class EditAppointmentDescriptor {
      */
     public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
         setDateTime(toCopy.dateTime);
+        setDuration(toCopy.duration);
         setStatus(toCopy.status);
         setTags(toCopy.tags);
         setDescription(toCopy.description);
@@ -47,6 +50,14 @@ public class EditAppointmentDescriptor {
 
     public Optional<DateTime> getDateTime() {
         return Optional.ofNullable(dateTime);
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public Optional<Duration> getDuration() {
+        return Optional.ofNullable(duration);
     }
 
     public void setStatus(AppointmentStatus status) {

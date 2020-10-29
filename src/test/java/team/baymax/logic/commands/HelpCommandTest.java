@@ -1,11 +1,11 @@
 package team.baymax.logic.commands;
 
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static team.baymax.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static team.baymax.logic.commands.general.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.commons.core.index.Index;
+import team.baymax.logic.commands.general.HelpCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 
@@ -19,7 +19,7 @@ public class HelpCommandTest {
                 SHOWING_HELP_MESSAGE,
                 true,
                 false,
-                Index.fromOneBased(1));
+                HelpCommand.TAB_ID);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }
