@@ -6,7 +6,7 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.DESC_APPT2;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DATETIME_2;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_2;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_LTP;
+import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_DRGOH;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,7 @@ public class EditAppointmentDescriptorTest {
         assertFalse(DESC_APPT1.equals(editedDescriptor));
 
         // different tags -> returns false
-        editedDescriptor = new EditAppointmentDescriptorBuilder(DESC_APPT1).withTags(VALID_TAG_LTP).build();
+        editedDescriptor = new EditAppointmentDescriptorBuilder(DESC_APPT1).withTags(VALID_TAG_DRGOH).build();
         assertFalse(DESC_APPT1.equals(editedDescriptor));
     }
 }

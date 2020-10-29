@@ -1,4 +1,4 @@
-package team.baymax.logic.parser;
+package team.baymax.logic.parser.patient;
 
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
@@ -33,7 +33,6 @@ import static team.baymax.testutil.TypicalPatients.BOB;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.patient.AddPatientCommand;
-import team.baymax.logic.parser.patient.AddPatientCommandParser;
 import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
@@ -99,10 +98,6 @@ public class AddPatientCommandParserTest {
         // missing gender prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_GENDER_BOB + REMARK_DESC_BOB,
                 expectedMessage);
-
-        // missing remark prefix
-        // assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + VALID_REMARK_BOB,
-        //        expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_GENDER_BOB + VALID_REMARK_BOB,

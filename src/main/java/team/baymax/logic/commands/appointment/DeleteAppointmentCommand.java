@@ -20,6 +20,7 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
@@ -74,14 +75,18 @@ public class DeleteAppointmentCommand extends Command {
 
         if (!targetIndex.isEmpty() && dateTime.isEmpty() && name.isEmpty()) {
             if (targetIndex.get().getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
             }
             toDelete = model.getFilteredAppointmentList().get(targetIndex.get().getZeroBased());
         } else if (targetIndex.isEmpty() && !dateTime.isEmpty() && !name.isEmpty()) {
-            Patient patientOfAppointment = model.getPatient(name.get());
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
-                    patientOfAppointment);
-            toDelete = model.findAppointmentByPredicate(predicate);
+            try {
+                Patient patientOfAppointment = model.getPatient(name.get());
+                SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
+                        patientOfAppointment);
+                toDelete = model.findAppointmentByPredicate(predicate);
+            } catch (ElementNotFoundException e) {
+                throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+            }
         } else {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }

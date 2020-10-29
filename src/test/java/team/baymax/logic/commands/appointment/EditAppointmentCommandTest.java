@@ -8,11 +8,11 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DATETIME_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.assertAppointmentCommandFailure;
+import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.showAppointmentAtIndex;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.TypicalAppointments.getTypicalAppointmentManager;
 import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_APPOINTMENT;
 import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_APPOINTMENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_THIRD_APPOINTMENT;
 import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
@@ -145,7 +145,8 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void execute_invalidAppointmentIndexFilteredList_failure() {
-        Index outOfBoundIndex = INDEX_THIRD_APPOINTMENT;
+        showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
+        Index outOfBoundIndex = INDEX_SECOND_APPOINTMENT;
         // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAppointmentManager().getReadOnlyList().size());
 
