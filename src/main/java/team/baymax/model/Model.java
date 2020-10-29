@@ -6,11 +6,16 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import team.baymax.commons.core.GuiSettings;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 
 /**
  * The API of the Model component.
@@ -129,6 +134,12 @@ public interface Model {
     boolean hasAppointment(Appointment appointment);
 
     /**
+     * Returns true if there is an appointment existing in the manager that clashes with
+     * {@code appointment} in time.
+     */
+    boolean doesAppointmentClash(Appointment appointment);
+
+    /**
      * Deletes the given appointment.
      * The appointment must exist in the appointment book.
      */
@@ -157,6 +168,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    //=========== CalendarManager ========
+
+    CalendarManager getCalendarManager();
+
+    AppointmentCalendar getAppointmentCalendar();
+
+    void setDay(Day day);
+
+    void setMonth(Month month);
+
+    void setYear(Year year);
+
+    void resetCalendar();
 
     Appointment findAppointmentByPredicate(Predicate<Appointment> predicate);
 

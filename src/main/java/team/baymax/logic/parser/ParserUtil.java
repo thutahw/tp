@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.commons.util.StringUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.appointment.Description;
@@ -21,6 +20,12 @@ import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Time;
+import team.baymax.model.util.datetime.Year;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -40,6 +45,48 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code day} into a {@code Day} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static Day parseDayOfMonth(String day) throws ParseException {
+        String trimmedDayOfMonth = day.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
+        if (invalidNumber || !Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Day(Integer.parseInt(trimmedDayOfMonth));
+    }
+
+    /**
+     * Parses {@code month} into a {@code Month} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static Month parseMonth(String month) throws ParseException {
+        String trimmedMonth = month.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
+        if (invalidNumber || !Month.isValidMonth(Integer.parseInt(trimmedMonth))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Month(Integer.parseInt(trimmedMonth));
+    }
+
+    /**
+     * Parses {@code year} into a {@code Year} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the given {@code year} is invalid.
+     */
+    public static Year parseYear(String year) throws ParseException {
+        String trimmedYear = year.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedYear);
+        if (invalidNumber || !Year.isValidYear(Integer.parseInt(trimmedYear))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Year(Integer.parseInt(trimmedYear));
     }
 
     /**
@@ -65,6 +112,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
+
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -80,6 +128,7 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
+
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -95,6 +144,7 @@ public class ParserUtil {
      */
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
+
         String trimmedGender = gender.trim();
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
@@ -110,6 +160,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
+
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
@@ -122,6 +173,7 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
@@ -132,8 +184,9 @@ public class ParserUtil {
     /**
      * Parses {@code String remark} into a {@code Remark}.
      */
-    public static Remark parseRemark(String remark) throws ParseException {
+    public static Remark parseRemark(String remark) {
         requireNonNull(remark);
+
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
     }
@@ -143,6 +196,7 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
+
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
@@ -151,10 +205,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String dateTime} (e.g. "2020-10-12 23:39PM") into a {@code LocalDateTime}.
+     * Parses {@code String dateTime} (e.g. "2020-10-12 23:39PM") into a {@code DateTime}.
      */
     public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
+
         String trimmedDateTime = dateTime.trim();
         DateTime dateTimeObj;
         try {
@@ -168,18 +223,48 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String time} (e.g. "23:39PM") into a {@code Time}.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+
+        String trimmedTime = time.trim();
+        Time timeObj;
+        try {
+            timeObj = Time.fromString(trimmedTime);
+        } catch (DateTimeParseException ex) {
+            throw new ParseException(ex.getMessage());
+        }
+        return timeObj;
+    }
+
+    /**
+     * Parses {@code String duration} (e.g. "60") into a {@code Duration}.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+
+        String trimmedDuration = duration.trim();
+        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDuration);
+        if (invalidNumber || !Duration.isValidDuration(Integer.parseInt(trimmedDuration))) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new Duration(Integer.parseInt(trimmedDuration));
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
     public static Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(parseTags(tagSet));
     }
 
     /**

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <VBox styleClass="datetime-label" minWidth="50">
+        <padding>
+            <Insets top="10" right="20" bottom="0" left="0" />
+        </padding>
+        <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
+    </VBox>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="patientName" text="\$patientName" styleClass="cell_big_label" />
+        </HBox>
+        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+        <FlowPane fx:id="tags" />
+    </VBox>
+</HBox>

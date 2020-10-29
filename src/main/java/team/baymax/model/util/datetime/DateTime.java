@@ -1,4 +1,4 @@
-package team.baymax.commons.core.time;
+package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
@@ -30,7 +30,7 @@ public class DateTime implements Comparable<DateTime> {
     /**
      * Default constructor for {@code DateTime}, with input 2020-12-12 23:59
      */
-    protected DateTime() {
+    public DateTime() {
         this.dateTime = LocalDateTime.parse("12-12-2020 23:59", FORMAT_INPUT);
     }
 
@@ -43,6 +43,7 @@ public class DateTime implements Comparable<DateTime> {
      */
     public static DateTime fromString(String dateTimeString) {
         requireNonNull(dateTimeString);
+
         checkArgument(isValidDateTime((dateTimeString)), MESSAGE_CONSTRAINTS);
         return new DateTime(LocalDateTime.parse(dateTimeString, FORMAT_INPUT));
     }
@@ -60,10 +61,55 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
+     * Constructs a {@code DateTime} from a {@code Date} and {@code Time}.
+     *
+     */
+    public static DateTime from(Date d, Time t) {
+        LocalDateTime dt = LocalDateTime.of(d.getDate(), t.getTime());
+        return new DateTime(dt);
+    }
+
+    /**
      * Returns the dateTime in a storage format
      */
     public String getStorageFormat() {
         return dateTime.format(FORMAT_STORAGE);
+    }
+
+    public Day getDay() {
+        return new Day(dateTime.getDayOfMonth());
+    }
+
+    public Month getMonth() {
+        return new Month(dateTime.getMonthValue());
+    }
+
+    public Year getYear() {
+        return new Year(dateTime.getYear());
+    }
+
+    public Date getDate() {
+        return new Date(getDay(), getMonth(), getYear());
+    }
+
+    public Time getTime() {
+        return new Time(dateTime.toLocalTime());
+    }
+
+    public DateTime plusMinutes(Duration duration) {
+        return new DateTime(this.dateTime.plusMinutes(duration.value));
+    }
+
+    public boolean isAfter(DateTime other) {
+        return dateTime.isAfter(other.dateTime);
+    }
+
+    public boolean isBefore(DateTime other) {
+        return dateTime.isBefore(other.dateTime);
+    }
+
+    public boolean isEqual(DateTime other) {
+        return dateTime.isEqual(other.dateTime);
     }
 
     @Override
@@ -87,5 +133,4 @@ public class DateTime implements Comparable<DateTime> {
     public String toString() {
         return dateTime.format(FORMAT_OUTPUT);
     }
-
 }

@@ -3,7 +3,7 @@ package team.baymax.logic.commands.patient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.commons.core.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
+import static team.baymax.logic.commands.patient.FindPatientCommand.MESSAGE_PATIENTS_LISTED_SUCCESS;
 import static team.baymax.testutil.TypicalPatients.CARL;
 import static team.baymax.testutil.TypicalPatients.ELLE;
 import static team.baymax.testutil.TypicalPatients.FIONA;
@@ -17,7 +17,8 @@ import org.junit.jupiter.api.Test;
 import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.userprefs.UserPrefs;
 
@@ -26,9 +27,10 @@ import team.baymax.model.userprefs.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindPatientCommandTest {
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+            new CalendarManager());
     private Model expectedModel = new ModelManager(getTypicalPatientManager(),
-            new AppointmentManager(), new UserPrefs());
+            new AppointmentManager(), new UserPrefs(), new CalendarManager());
 
     @Test
     public void equals() {
@@ -59,7 +61,7 @@ public class FindPatientCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPatientFound() {
-        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
@@ -69,7 +71,7 @@ public class FindPatientCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePatientsFound() {
-        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import team.baymax.commons.core.GuiSettings;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.storage.appointment.JsonAppointmentManagerStorage;

@@ -25,7 +25,8 @@ public class AppointmentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Appointment appointment;
+    private final Appointment appointment;
+    private final int displayedIndex;
 
     @FXML
     private HBox cardPane;
@@ -50,7 +51,12 @@ public class AppointmentCard extends UiPart<Region> {
     public AppointmentCard(Appointment appointment, int displayedIndex) {
         super(FXML);
         this.appointment = appointment;
+        this.displayedIndex = displayedIndex;
 
+        initialize();
+    }
+
+    private void initialize() {
         id.setText(displayedIndex + ". ");
         patientName.setText(appointment.getPatient().getName().fullName);
         phoneNumber.setText(appointment.getPatient().getPhone().toString());

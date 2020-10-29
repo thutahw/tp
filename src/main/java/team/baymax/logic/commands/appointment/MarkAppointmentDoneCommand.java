@@ -10,7 +10,6 @@ import java.util.List;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -20,11 +19,14 @@ import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class MarkAppointmentDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
+    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as done by either "
             + "the index or the date and time of the appointment and the name of the patient.\n"
@@ -99,18 +101,18 @@ public class MarkAppointmentDoneCommand extends Command {
         }
 
         Appointment markedAsDoneAppointment = new Appointment(appointmentToEdit.getPatient(),
-                appointmentToEdit.getDateTime(), AppointmentStatus.DONE,
-                appointmentToEdit.getDescription(), appointmentToEdit.getTags());
+                appointmentToEdit.getDateTime(), appointmentToEdit.getDuration(),
+                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.DONE);
 
         model.setAppointment(appointmentToEdit, markedAsDoneAppointment);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
 
-        return new CommandResult(String.format(MESSAGE_MARK_AS_DONE_SUCCESS, markedAsDoneAppointment), getTabNumber());
+        return new CommandResult(String.format(MESSAGE_MARK_AS_DONE_SUCCESS, markedAsDoneAppointment), getTabId());
     }
 
     @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(4);
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override

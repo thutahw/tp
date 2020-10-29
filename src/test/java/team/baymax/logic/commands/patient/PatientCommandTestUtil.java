@@ -18,7 +18,7 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.Patient;
 import team.baymax.testutil.EditPatientDescriptorBuilder;
@@ -66,13 +66,17 @@ public class PatientCommandTestUtil {
     public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
+        DESC_AMY = new EditPatientDescriptorBuilder()
+                .withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_LTP).withRemark(VALID_REMARK_AMY).build();
-        DESC_BOB = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_LTP).withRemark(VALID_REMARK_AMY)
+                .build();
+        DESC_BOB = new EditPatientDescriptorBuilder()
+                .withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_DIABETIC, VALID_TAG_LTP)
-                .withRemark(VALID_REMARK_BOB).build();
+                .withRemark(VALID_REMARK_BOB)
+                .build();
     }
 
     /**

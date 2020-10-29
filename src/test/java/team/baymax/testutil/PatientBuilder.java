@@ -17,11 +17,11 @@ import team.baymax.model.util.SampleDataUtil;
  */
 public class PatientBuilder {
 
-    public static final String DEFAULT_NRIC = "T0123456A";
+    public static final String DEFAULT_NRIC = "T1203540A";
     public static final String DEFAULT_NAME = "Daniel Gryffin";
-    public static final String DEFAULT_PHONE = "81053636";
-    public static final String DEFAULT_GENDER = "F";
-    public static final String DEFAULT_REMARK = "Likes to code";
+    public static final String DEFAULT_PHONE = "81053637";
+    public static final String DEFAULT_GENDER = "M";
+    public static final String DEFAULT_REMARK = "No allergies.";
 
     private Nric nric;
     private Name name;

@@ -12,7 +12,7 @@ import team.baymax.commons.exceptions.DataConversionException;
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.commons.util.FileUtil;
 import team.baymax.commons.util.JsonUtil;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 
 /**

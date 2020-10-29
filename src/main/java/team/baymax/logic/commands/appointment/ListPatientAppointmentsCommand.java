@@ -13,11 +13,12 @@ import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
-import team.baymax.model.listmanagers.PatientManager;
+import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.PatientHasAppointmentPredicate;
+import team.baymax.model.util.TabId;
 
 /**
  * Lists all the appointments of the chosen patient to the user.
@@ -25,6 +26,7 @@ import team.baymax.model.patient.PatientHasAppointmentPredicate;
 public class ListPatientAppointmentsCommand extends Command {
 
     public static final String COMMAND_WORD = "listapptof";
+    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_SUCCESS = "Listed all the appointments of the patient";
 
@@ -98,19 +100,18 @@ public class ListPatientAppointmentsCommand extends Command {
         }
 
         model.updateFilteredAppointmentList(new PatientHasAppointmentPredicate(patientChosen));
-        return new CommandResult(MESSAGE_SUCCESS, getTabNumber());
+        return new CommandResult(MESSAGE_SUCCESS, getTabId());
     }
 
     @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(4);
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ListPatientAppointmentsCommand // instanceof handles nulls
-                && targetIndex.equals(((ListPatientAppointmentsCommand) other).targetIndex)
-                && getTabNumber().equals(((ListPatientAppointmentsCommand) other).getTabNumber())); // state check
+                && targetIndex.equals(((ListPatientAppointmentsCommand) other).targetIndex)); // state check
     }
 }

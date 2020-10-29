@@ -15,7 +15,8 @@ import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.PatientHasAppointmentPredicate;
 import team.baymax.model.userprefs.UserPrefs;
@@ -26,7 +27,8 @@ import team.baymax.model.userprefs.UserPrefs;
  */
 public class ListPatientAppointmentsCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,7 +39,7 @@ public class ListPatientAppointmentsCommandTest {
         String expectedMessage = String.format(ListPatientAppointmentsCommand.MESSAGE_SUCCESS, patientChosen);
 
         ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                new AppointmentManager(), new UserPrefs());
+                new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.updateFilteredAppointmentList(new PatientHasAppointmentPredicate(patientChosen));
 
         CommandTestUtil.assertCommandSuccess(listPatientAppointmentsCommand,

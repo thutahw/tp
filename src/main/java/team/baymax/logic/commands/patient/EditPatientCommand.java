@@ -20,9 +20,11 @@ import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.TabId;
 
 /**
  * Edits the details of an existing patient in the appointment book.
@@ -45,6 +47,8 @@ public class EditPatientCommand extends Command {
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book.";
+
+    public static final TabId TAB_ID = TabId.PATIENT;
 
     private final Index index;
     private final EditPatientDescriptor editPatientDescriptor;
@@ -78,13 +82,14 @@ public class EditPatientCommand extends Command {
         }
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(Model.PREDICATE_SHOW_ALL_PATIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabNumber());
+        model.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient), getTabId());
     }
 
     @Override
-    public Index getTabNumber() {
-        return Index.fromOneBased(3);
+    public TabId getTabId() {
+        return TAB_ID;
     }
 
     /**
@@ -119,8 +124,7 @@ public class EditPatientCommand extends Command {
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
         return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor)
-                && getTabNumber().equals(e.getTabNumber());
+                && editPatientDescriptor.equals(e.editPatientDescriptor);
     }
 
     /**

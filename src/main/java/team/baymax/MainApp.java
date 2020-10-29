@@ -18,13 +18,20 @@ import team.baymax.logic.LogicManager;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.listmanagers.AppointmentManager;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.model.util.SampleDataUtil;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.storage.Storage;
 import team.baymax.storage.StorageManager;
 import team.baymax.storage.appointment.AppointmentManagerStorage;
@@ -74,6 +81,19 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        initDefaults(model);
+
+    }
+
+    private void initDefaults(Model model) {
+
+        Date today = new Date(
+                new Day(AppointmentCalendar.getCurrentDay()),
+                new Month(AppointmentCalendar.getCurrentMonth()),
+                new Year(AppointmentCalendar.getCurrentYear()));
+
+        model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(today));
     }
 
     /**
@@ -84,7 +104,8 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         ReadOnlyListManager<Patient> patientManager = initPatientManager(storage);
         ReadOnlyListManager<Appointment> appointmentManager = initAppointmentManager(patientManager, storage);
-        return new ModelManager(patientManager, appointmentManager, userPrefs);
+        CalendarManager calendarManager = new CalendarManager();
+        return new ModelManager(patientManager, appointmentManager, userPrefs, calendarManager);
     }
 
     /**

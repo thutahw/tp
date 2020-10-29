@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import team.baymax.commons.exceptions.DataConversionException;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 

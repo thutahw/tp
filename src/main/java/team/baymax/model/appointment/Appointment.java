@@ -3,13 +3,15 @@ package team.baymax.model.appointment;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import team.baymax.commons.core.time.DateTime;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.Duration;
+import team.baymax.model.util.datetime.Time;
 import team.baymax.model.util.uniquelist.UniqueListElement;
 
 /**
@@ -19,38 +21,20 @@ import team.baymax.model.util.uniquelist.UniqueListElement;
 public class Appointment implements UniqueListElement {
     private final Patient patient;
     private final DateTime dateTime;
+    private final Duration duration;
     private final AppointmentStatus status;
     private final Set<Tag> tags;
     private final Description description;
 
     /**
-     * For use by DeleteAppointment and FindAppointment, as they only
-     * require comparing patient and dateTime
-     * @param patient
-     * @param dateTime
-     */
-    public Appointment(Patient patient, DateTime dateTime) {
-        requireAllNonNull(patient, dateTime);
-        this.patient = patient;
-        this.dateTime = dateTime;
-        // if the dateTime is in the future, set status as UPCOMING, otherwise DONE
-        if (dateTime.compareTo(DateTime.current()) > 0) {
-            this.status = AppointmentStatus.UPCOMING;
-        } else {
-            this.status = AppointmentStatus.DONE;
-        }
-        this.description = new Description("Default description");
-        this.tags = new HashSet<>();
-    }
-
-    /**
      * Every field must be present and not null.
      */
-    public Appointment(Patient patient, DateTime dateTime, AppointmentStatus status,
-                       Description description, Set<Tag> tags) {
-        requireAllNonNull(patient, dateTime, tags, description);
+    public Appointment(Patient patient, DateTime dateTime, Duration duration, Description description,
+                       Set<Tag> tags, AppointmentStatus status) {
+        requireAllNonNull(patient, dateTime, tags, description, duration);
         this.patient = patient;
         this.dateTime = dateTime;
+        this.duration = duration;
         this.description = description;
         this.tags = tags;
         this.status = status;
@@ -62,6 +46,22 @@ public class Appointment implements UniqueListElement {
 
     public DateTime getDateTime() {
         return dateTime;
+    }
+
+    public Date getDate() {
+        return dateTime.getDate();
+    }
+
+    public Time getTime() {
+        return dateTime.getTime();
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public DateTime getEndDateTime() {
+        return this.dateTime.plusMinutes(this.duration);
     }
 
     public Description getDescription() {
@@ -96,8 +96,8 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
 
         return otherAppointment != null
-                && otherAppointment.getPatient().equals(getPatient())
-                && otherAppointment.getDateTime().equals(getDateTime());
+                && otherAppointment.getDateTime().equals(dateTime)
+                && otherAppointment.getPatient().equals(patient);
     }
 
     public int compare(Appointment a1, Appointment a2) {
@@ -121,8 +121,10 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
         return getPatient().equals(otherAppointment.getPatient())
                 && getDateTime().equals(otherAppointment.getDateTime())
-                && getStatus().equals(otherAppointment.getStatus())
+                && getTime().equals(otherAppointment.getTime())
+                && getDuration().equals(otherAppointment.duration)
                 && getDescription().equals(otherAppointment.getDescription())
+                && getStatus().equals(otherAppointment.getStatus())
                 && getTags().equals(otherAppointment.getTags());
     }
 

@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.listmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.AppointmentManager;
+import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.userprefs.UserPrefs;
 
 /**
@@ -25,8 +26,10 @@ public class ListPatientCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs());
-        expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs());
+        model = new ModelManager(getTypicalPatientManager(), new AppointmentManager(), new UserPrefs(),
+                new CalendarManager());
+        expectedModel = new ModelManager(model.getPatientManager(), new AppointmentManager(), new UserPrefs(),
+                new CalendarManager());
     }
 
     @Test

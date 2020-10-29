@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Label?>
+<StackPane fx:id="schedulePage" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="scheduleList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <Label text="Schedule"></Label>
+        <StackPane fx:id="scheduleListPanelPlaceholder"></StackPane>
+    </VBox>
+</StackPane>

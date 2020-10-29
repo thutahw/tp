@@ -8,14 +8,15 @@ import static team.baymax.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.ModelStub;
 import team.baymax.logic.commands.exceptions.CommandException;
-import team.baymax.model.listmanagers.PatientManager;
-import team.baymax.model.listmanagers.ReadOnlyListManager;
+import team.baymax.model.modelmanagers.PatientManager;
+import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.testutil.PatientBuilder;
 
@@ -33,8 +34,9 @@ public class AddPatientCommandTest {
 
         CommandResult commandResult = new AddPatientCommand(validPatient).execute(modelStub);
 
-        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient),
-                commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient);
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
     }
 
@@ -112,6 +114,9 @@ public class AddPatientCommandTest {
         public ReadOnlyListManager<Patient> getPatientManager() {
             return new PatientManager();
         }
+
+        @Override
+        public void updateFilteredPatientList(Predicate<Patient> predicate) { }
     }
 
 }
