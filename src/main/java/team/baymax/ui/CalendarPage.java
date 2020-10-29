@@ -42,6 +42,7 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
     public CalendarPage(AppointmentCalendar appointmentCalendar) {
         super(FXML);
         this.appointmentCalendar = appointmentCalendar;
+        appointmentCalendar.addPropertyChangeListener(this);
 
         initialize();
     }
@@ -107,8 +108,6 @@ public class CalendarPage extends UiPart<Region> implements PropertyChangeListen
 
     @Override
     public void propertyChange(PropertyChangeEvent e) {
-        System.out.println("Property changed!");
-        System.out.println(appointmentCalendar.getDay());
         renderCalendar();
     }
 

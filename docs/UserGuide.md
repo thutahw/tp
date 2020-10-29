@@ -354,9 +354,12 @@ PATIENT_ID     | The index of the patient in the most recently displayed list. I
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 DESCRIPTION    | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
+NRIC           | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
+DURATION       | The duration of the appointment.
 
 **Format:**<br>
-`addappt id/ID on/DATETIME desc/DESCRIPTION [t/TAG]`
+`addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
+`addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
 
 **Example:**<br>
 1. Type `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
@@ -737,7 +740,7 @@ Add a remark: `remark PATIENT_ID r/REMARK` | `remark 2 r/Not free on Fridays`
 
 **Command**             | **Example**
 ------------------------|--------------------
-Add an Appointment: `addappt id/ID on/DATETIME desc/DESCRIPTION [t/TAG]` | `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
+Add an Appointment: `addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG] OR nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
 List Appointments of a Patient: `listapptof PATIENT_ID` | `listapptof 1`
 List All Appointments: `listappt` | `listappt`
 Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`

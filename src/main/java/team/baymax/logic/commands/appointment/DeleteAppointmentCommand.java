@@ -22,19 +22,20 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
 
 public class DeleteAppointmentCommand extends Command {
+
     public static final String COMMAND_WORD = "cancel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Cancels the appointment identified by the appointment's index displayed in the list.\n"
-            + "Alternatively: use the datetime and the patient's name to identify the appointment to be cancelled.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Cancels the appointment identified by the "
+            + "appointment's index displayed in the list.\n"
             + "Parameters: INDEX or (" + PREFIX_DATETIME + "DATETIME " + PREFIX_NAME + "NAME" + ")\n"
-            + "Example: " + COMMAND_WORD + " 1 \n"
-            + "Alternatively: " + COMMAND_WORD + " "
-            + PREFIX_DATETIME + "11-10-2020 12:30 " + PREFIX_NAME + "Alex ";
+            + "For example, " + COMMAND_WORD + " 1\n"
+            + "Alternatively, " + COMMAND_WORD + " "
+            + PREFIX_DATETIME + "11-10-2020 12:30 "
+            + PREFIX_NAME + "Alex";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
 
-    private static final TabId TAB_ID = TabId.APPOINTMENT;
+    private static final TabId TAB_ID = TabId.NONE;
 
     private final Optional<Index> targetIndex;
     private final Optional<DateTime> dateTime;
@@ -72,18 +73,18 @@ public class DeleteAppointmentCommand extends Command {
 
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        if (!targetIndex.isEmpty() && dateTime.isEmpty() && name.isEmpty()) {
+        assert targetIndex.isPresent() || (dateTime.isPresent() && name.isPresent())
+                : "target index and (datetime and name) should not be both empty";
+
+        if (targetIndex.isPresent()) {
             if (targetIndex.get().getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
             }
             toDelete = model.getFilteredAppointmentList().get(targetIndex.get().getZeroBased());
-        } else if (targetIndex.isEmpty() && !dateTime.isEmpty() && !name.isEmpty()) {
-            Patient patientOfAppointment = model.getPatient(name.get());
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
-                    patientOfAppointment);
-            toDelete = model.findAppointmentByPredicate(predicate);
         } else {
-            throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
+            Patient patient = model.getPatient(name.get());
+            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(), patient);
+            toDelete = model.findAppointmentByPredicate(predicate);
         }
 
         model.deleteAppointment(toDelete);
@@ -98,10 +99,19 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteAppointmentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteAppointmentCommand) other).targetIndex)
-                && dateTime.equals(((DeleteAppointmentCommand) other).dateTime)
-                && name.equals(((DeleteAppointmentCommand) other).name)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof DeleteAppointmentCommand) {
+            DeleteAppointmentCommand otherCommand = (DeleteAppointmentCommand) other;
+            if (targetIndex == null) {
+                return dateTime.equals(otherCommand.dateTime) && name.equals(otherCommand.name);
+            } else {
+                return targetIndex.equals(otherCommand.targetIndex);
+            }
+        }
+
+        return false;
     }
 }
