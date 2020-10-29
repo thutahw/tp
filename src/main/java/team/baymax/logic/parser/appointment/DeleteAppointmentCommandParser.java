@@ -6,6 +6,8 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
+import java.util.Optional;
+
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.DeleteAppointmentCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
@@ -30,13 +32,13 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
 
         if (!argMultimap.getPreamble().isEmpty()) {
             Index targetIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-            return new DeleteAppointmentCommand(targetIndex);
+            return new DeleteAppointmentCommand(Optional.of(targetIndex));
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATETIME)) {
             DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            return new DeleteAppointmentCommand(dateTime, name);
+            return new DeleteAppointmentCommand(Optional.of(dateTime), Optional.of(name));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
