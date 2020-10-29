@@ -46,14 +46,6 @@
 Welcome to Baymax! Are you a healthcare professional looking for a reliable app to keep track of patients and
 appointments? You have come to the right place!
 
-<<<<<<< HEAD
-Baymax is a Command Line Interface Focused desktop application, it helps you manage patient appointments using just
-the keyboard itself, no fiddling with the mouse is needed! You can now schedule new appointments, change appointments,
-cancel appointments and manage patient information easily with just a few keystrokes. On top of that, it has a few
-neat features that makes appointment scheduling faster and less of a hassle. There is even a built-in appointmentCalendar that
-helps you to see at a glance how available is a particular day, so that patients can make quick decisions on the
-ground. What are you waiting for? Head on to Section 2, “Quick Start”!
-=======
 Baymax is a Command Line Interface (CLI) focused desktop application that helps you to manage patient appointments using just
 the keyboard itself, no fiddling with the mouse needed! The main features include:
 
@@ -67,7 +59,6 @@ calendar view -- it shows you how busy a particular day or week is at a glance, 
 quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
 
 --------------------------------------------------------------------------------
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
 
 ## 2. Quick Start
 
@@ -455,14 +446,7 @@ If the command is valid (i.e. the specified appointment exists):
 [App Screenshot (Still in Progress)]<br>
 *Figure 4.1.3 Deleting an appointment*
 
-<<<<<<< HEAD
-### 3.3. Using the Calendar
-This feature allows you to display the availability status of each day in a month, as well as the appointment schedule
-for a period of time or within a particular day. Section 3.3.1 and Section 3.3.2 will guide you through the commands to
-set the appointmentCalendar to a particular year and month.
-=======
 -------------------------------------------------------------------------------
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
 
 ### 4.3. Calendar 
 This feature allows you to view the availability status of each day in a month, as well as the appointment schedule
@@ -488,14 +472,14 @@ YEAR          | The year you want to switch to. It must be a 4-digit positive nu
 2. Press enter on your keyboard.
 
 **Outcome:**<br>
-1. Baymax will switch to the appointmentCalendar tabId.
+1. Baymax will switch to the calendar tab.
 2. The year 2020 will be displayed on the top right-hand corner of the window.
 
 [App Screenshot (Still in Progress)]
 
 #### 4.3.2. Switch to a particular month: `month`
 You can use this command to switch to a particular month based on the year you set in Section 3.3.1. The default is the
-current month. For example, if today is 3rd January 2020, then the appointmentCalendar will display the year 2020 and the month
+current month. For example, if today is 3rd January 2020, then the calendar will display the year 2020 and the month
 January by default.
 
 **Format:**<br>
@@ -513,11 +497,7 @@ MONTH          | The month you want to switch to. It must be a positive number f
 3. Press Enter on your keyboard.
 
 **Outcome:**<br>
-<<<<<<< HEAD
-1. The month will be set to March and be displayed in the appointmentCalendar.
-=======
 1. The month will be set to March and that month's appointments will be displayed as a calendar view.
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
 
 [App Screenshot (Still in Progress)]
 
@@ -538,11 +518,7 @@ DAY            | The day of the month you want to switch to. It must be a positi
 4. Press Enter on your keyboard.
 
 **Outcome:**<br>
-<<<<<<< HEAD
-1. All appointments on 2020-01-13 will be displayed in the appointmentCalendar.
-=======
 1. All appointments on 2020-01-13 will be displayed as a calendar view.
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
 
 [App Screenshot (Still in Progress)]
 
@@ -567,11 +543,7 @@ TO             | The day of the month you want to end viewing with. It must be a
 4. Press Enter on your keyboard.
 
 **Outcome:**
-<<<<<<< HEAD
-1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the appointmentCalendar.
-=======
 1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar view.
->>>>>>> cca0660c5c14cf48b5146e3a9dbb4966b5635807
 
 [App Screenshot (Still in Progress)]
 
