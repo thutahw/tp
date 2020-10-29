@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS = "Duration (in minutes) must be a valid integer spanning"
-            + "not more than one day";
+            + " not more than one day";
 
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 24 * 60;
