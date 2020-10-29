@@ -9,7 +9,8 @@ public enum TabId {
     SCHEDULE(3, "schedule"),
     PATIENT(4, "patient"),
     APPOINTMENT(5, "appointment"),
-    INFO(6, "info");
+    INFO(6, "info"),
+    NONE(-1, "none");
 
     private static Map map = new HashMap<Integer, TabId>();
     private final int tabNumber;
@@ -26,6 +27,7 @@ public enum TabId {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static TabId valueOf(int tabNumber) {
         return (TabId) map.get(tabNumber);
     }
