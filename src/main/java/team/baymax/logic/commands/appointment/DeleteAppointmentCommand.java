@@ -6,6 +6,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
+import java.util.Optional;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
@@ -15,12 +16,10 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
-import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
@@ -37,32 +36,32 @@ public class DeleteAppointmentCommand extends Command {
 
     private static final TabId TAB_ID = TabId.APPOINTMENT;
 
-    private final Index targetIndex;
-    private final DateTime dateTime;
-    private final Name name;
+    private final Optional<Index> targetIndex;
+    private final Optional<DateTime> dateTime;
+    private final Optional<Name> name;
 
     /**
      * Creates a {@code DeleteAppointmentCommand} which deletes an appointment by its displayed list index.
      *
      */
-    public DeleteAppointmentCommand(Index targetIndex) {
+    public DeleteAppointmentCommand(Optional<Index> targetIndex) {
         requireNonNull(targetIndex);
 
         this.targetIndex = targetIndex;
-        this.dateTime = null;
-        this.name = null;
+        this.dateTime = Optional.empty();
+        this.name = Optional.empty();
     }
 
     /**
      * Creates a {@code DeleteAppointmentCommand} which deletes an appointment by {@code dateTime} and {@code name}.
      *
      */
-    public DeleteAppointmentCommand(DateTime dateTime, Name name) {
+    public DeleteAppointmentCommand(Optional<DateTime> dateTime, Optional<Name> name) {
         requireAllNonNull(dateTime, name);
 
         this.dateTime = dateTime;
         this.name = name;
-        this.targetIndex = null;
+        this.targetIndex = Optional.empty();
     }
 
     @Override
@@ -73,15 +72,14 @@ public class DeleteAppointmentCommand extends Command {
 
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        }
-
-        if (targetIndex != null) {
-            toDelete = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
-        } else if (dateTime != null && name != null) {
-            Patient patientOfAppointment = model.getPatient(name);
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime,
+        if (!targetIndex.isEmpty() && dateTime.isEmpty() && name.isEmpty()) {
+            if (targetIndex.get().getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+            }
+            toDelete = model.getFilteredAppointmentList().get(targetIndex.get().getZeroBased());
+        } else if (targetIndex.isEmpty() && !dateTime.isEmpty() && !name.isEmpty()) {
+            Patient patientOfAppointment = model.getPatient(name.get());
+            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
                     patientOfAppointment);
             toDelete = model.findAppointmentByPredicate(predicate);
         } else {
