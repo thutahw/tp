@@ -73,7 +73,9 @@ public class SideTabPane extends UiPart<Region> {
 
         CalendarPage calendarPage = new CalendarPage(calendar);
         calendarTabContentPlaceholder.getChildren().add(calendarPage.getRoot());
-        calendar.addPropertyChangeListener(calendarPage);
+
+        SchedulePage schedulePage = new SchedulePage(calendar, appointments);
+        scheduleTabContentPlaceholder.getChildren().add(schedulePage.getRoot());
 
         Dashboard dashboard = new Dashboard(appointments);
         dashboardTabContentPlaceholder.getChildren().add(dashboard.getRoot());
@@ -81,8 +83,7 @@ public class SideTabPane extends UiPart<Region> {
         InfoPage infoPage = new InfoPage();
         infoTabContentPlaceholder.getChildren().add(infoPage.getRoot());
 
-        SchedulePage schedulePage = new SchedulePage(appointments);
-        scheduleTabContentPlaceholder.getChildren().add(schedulePage.getRoot());
+
 
         sideTabPane.addEventFilter(
             MouseEvent.ANY,

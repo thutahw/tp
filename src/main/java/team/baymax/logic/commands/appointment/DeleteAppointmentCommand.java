@@ -98,10 +98,19 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteAppointmentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteAppointmentCommand) other).targetIndex)
-                && dateTime.equals(((DeleteAppointmentCommand) other).dateTime)
-                && name.equals(((DeleteAppointmentCommand) other).name)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof DeleteAppointmentCommand) {
+            DeleteAppointmentCommand otherCommand = (DeleteAppointmentCommand) other;
+            if (targetIndex == null) {
+                return dateTime.equals(otherCommand.dateTime) && name.equals(otherCommand.name);
+            } else {
+                return targetIndex.equals(otherCommand.targetIndex);
+            }
+        }
+
+        return false;
     }
 }

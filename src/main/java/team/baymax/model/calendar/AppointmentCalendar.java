@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
@@ -19,6 +20,7 @@ public class AppointmentCalendar {
     protected final SimpleStringProperty dayProperty;
     protected final SimpleStringProperty monthProperty;
     protected final SimpleStringProperty yearProperty;
+    protected final SimpleStringProperty dateProperty;
 
     private Day day;
     private Month month;
@@ -44,6 +46,7 @@ public class AppointmentCalendar {
         this.dayProperty = new SimpleStringProperty(day.toString());
         this.monthProperty = new SimpleStringProperty(month.toString());
         this.yearProperty = new SimpleStringProperty(year.toString());
+        this.dateProperty = new SimpleStringProperty(new Date(day, month, year).toString());
     }
 
     public static int getCurrentDay() {
@@ -88,6 +91,7 @@ public class AppointmentCalendar {
         Day oldDay = this.day;
         this.day = day;
         dayProperty.set(day.toString());
+        updateDateProperty();
         pcs.firePropertyChange("day", oldDay, day);
     }
 
@@ -95,6 +99,7 @@ public class AppointmentCalendar {
         Month oldMonth = this.month;
         this.month = month;
         monthProperty.set(month.toString());
+        updateDateProperty();
         pcs.firePropertyChange("month", oldMonth, month);
         updateDay();
     }
@@ -103,8 +108,13 @@ public class AppointmentCalendar {
         Year oldYear = this.year;
         this.year = year;
         yearProperty.set(year.toString());
+        updateDateProperty();
         pcs.firePropertyChange("year", oldYear, year);
         updateDay();
+    }
+
+    public void updateDateProperty() {
+        dateProperty.set(new Date(day, month, year).toString());
     }
 
     public SimpleStringProperty getDayProperty() {
@@ -117,6 +127,10 @@ public class AppointmentCalendar {
 
     public SimpleStringProperty getYearProperty() {
         return yearProperty;
+    }
+
+    public SimpleStringProperty getDateProperty() {
+        return dateProperty;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

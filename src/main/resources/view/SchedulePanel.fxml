@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <ScrollPane fx:id="scheduleTimelineScroll">
+        <content>
+            <StackPane styleClass="schedule-view" fx:id="scheduleTimelineView"></StackPane>
+        </content>
+    </ScrollPane>
+</VBox>

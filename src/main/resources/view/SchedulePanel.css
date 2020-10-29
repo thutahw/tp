@@ -1,0 +1,24 @@
+.schedule-view {
+}
+
+.schedule-view > .half-hour-line {
+    -fx-stroke: derive(lightgray, +40%);
+}
+
+.schedule-view > .full-hour-line {
+    -fx-stroke: lightgray;
+}
+
+
+.schedule-view > .time-label {
+    -fx-font-size: 16;
+}
+
+.schedule-view > .schedule-view-cell {
+    -fx-text-fill: #0e0e0e;
+    -fx-padding: 8, 0, 0, 0;
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-width: 5;
+    -fx-font-size: 14;
+
+}
