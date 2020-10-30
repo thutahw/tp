@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.calendar;
 
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -28,6 +28,7 @@ import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Time;
+import team.baymax.ui.UiPart;
 
 /**
  * Panel containing the list of appointments along a timeline.

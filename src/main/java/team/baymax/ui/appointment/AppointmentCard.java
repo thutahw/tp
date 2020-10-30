@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.appointment;
 
 import java.util.Comparator;
 
@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.ui.UiPart;
 
 /**
  * An UI component that displays information of an {@code Appointment}.

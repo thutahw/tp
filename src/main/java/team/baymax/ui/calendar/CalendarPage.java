@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.calendar;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,6 +11,7 @@ import javafx.scene.layout.TilePane;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
+import team.baymax.ui.UiPart;
 
 // Make CalendarPage a property change listener
 

@@ -19,11 +19,11 @@
     <Scene>
       <stylesheets>
         <URL value="@AppointmentInfoPage.css" />
-        <URL value="@CalendarPage.css" />
-        <URL value="@Dashboard.css" />
+        <URL value="@calendar/CalendarPage.css" />
+        <URL value="@dashboard/Dashboard.css" />
         <URL value="@Extensions.css" />
         <URL value="@LightTheme.css" />
-        <URL value="@SchedulePanel.css" />
+        <URL value="@calendar/SchedulePanel.css" />
         <URL value="@TabPane.css" />
       </stylesheets>
 

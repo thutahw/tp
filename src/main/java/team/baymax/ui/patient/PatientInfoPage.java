@@ -1,10 +1,11 @@
-package team.baymax.ui;
+package team.baymax.ui.patient;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.patient.Patient;
+import team.baymax.ui.UiPart;
 
 /**
  * A ui for the patient information page.

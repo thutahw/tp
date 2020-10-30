@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.dashboard;
 
 import java.util.Calendar;
 
@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.ui.UiPart;
+import team.baymax.ui.appointment.AppointmentListPanel;
 
 /**
  * A ui for the dashboard in the application.

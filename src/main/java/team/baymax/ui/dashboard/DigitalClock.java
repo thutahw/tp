@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.dashboard;
 
 import java.util.Calendar;
 
