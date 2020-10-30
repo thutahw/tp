@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
 import team.baymax.model.patient.Name;
@@ -26,16 +26,16 @@ import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 public class MarkAppointmentMissedCommand extends Command {
 
     public static final String COMMAND_WORD = "missed";
-    public static final TabId TAB_ID = TabId.APPOINTMENT;
+    public static final TabId TAB_ID = TabId.NONE;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as missed by either "
-            + "the index OR the date and time of the appointment and the name of the patient.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example 1: " + COMMAND_WORD + " 1\n"
-            + "or\n"
-            + "Parameters: " + PREFIX_DATETIME + "DATETIME " + PREFIX_NAME + "NAME\n"
-            + "Example 2: " + COMMAND_WORD + " " + PREFIX_DATETIME + "10-11-2020 12:30 " + PREFIX_NAME
-            + "Alex";
+            + "the displayed index of the appointment "
+            + "OR the datetime of the appointment plus the name of the patient.\n"
+            + "Parameters: INDEX (or " + PREFIX_DATETIME + "DATETIME " + PREFIX_NAME + "NAME)\n"
+            + "For example, " + COMMAND_WORD + " 1\n"
+            + "Alternatively, " + COMMAND_WORD + " "
+            + PREFIX_DATETIME + "10-11-2020 12:30 "
+            + PREFIX_NAME + "Alex";
 
     public static final String MESSAGE_MARK_AS_MISSED_SUCCESS = "Appointment marked as missed: %1$s";
 
@@ -104,7 +104,7 @@ public class MarkAppointmentMissedCommand extends Command {
                 appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.MISSED);
 
         model.setAppointment(appointmentToEdit, markedAsMissedAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsMissedAppointment));
 
         return new CommandResult(String.format(MESSAGE_MARK_AS_MISSED_SUCCESS, markedAsMissedAppointment), getTabId());
     }
