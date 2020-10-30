@@ -15,6 +15,7 @@ import team.baymax.logic.commands.appointment.FindAppointmentByKeywordCommand;
 import team.baymax.logic.commands.appointment.ListAppointmentCommand;
 import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
 import team.baymax.logic.commands.appointment.MarkAppointmentDoneCommand;
+import team.baymax.logic.commands.appointment.MarkAppointmentMissedCommand;
 import team.baymax.logic.commands.calendar.DayCommand;
 import team.baymax.logic.commands.calendar.MonthCommand;
 import team.baymax.logic.commands.calendar.YearCommand;
@@ -34,6 +35,7 @@ import team.baymax.logic.parser.appointment.EditAppointmentCommandParser;
 import team.baymax.logic.parser.appointment.FindAppointmentByKeywordCommandParser;
 import team.baymax.logic.parser.appointment.ListPatientAppointmentsCommandParser;
 import team.baymax.logic.parser.appointment.MarkAppointmentDoneCommandParser;
+import team.baymax.logic.parser.appointment.MarkAppointmentMissedCommandParser;
 import team.baymax.logic.parser.calendar.DayCommandParser;
 import team.baymax.logic.parser.calendar.MonthCommandParser;
 import team.baymax.logic.parser.calendar.YearCommandParser;
@@ -110,6 +112,9 @@ public class AppointmentBookParser {
 
         case MarkAppointmentDoneCommand.COMMAND_WORD:
             return new MarkAppointmentDoneCommandParser().parse(arguments);
+
+        case MarkAppointmentMissedCommand.COMMAND_WORD:
+            return new MarkAppointmentMissedCommandParser().parse(arguments);
 
         case FindAppointmentByKeywordCommand.COMMAND_WORD:
             return new FindAppointmentByKeywordCommandParser().parse(arguments);
