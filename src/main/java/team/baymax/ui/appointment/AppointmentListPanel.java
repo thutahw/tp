@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.appointment;
 
 import java.util.logging.Logger;
 
@@ -9,12 +9,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.ui.UiPart;
 
 /**
  * Panel containing the list of appointments.
  */
 public class AppointmentListPanel extends UiPart<Region> {
-    private static final String FXML = "AppointmentListPanel.fxml";
+    private static final String FXML = "appointment/AppointmentListPanel.fxml";
 
     @FXML
     protected ListView<Appointment> appointmentListView;

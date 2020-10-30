@@ -13,6 +13,11 @@ import team.baymax.model.appointment.Appointment;
 import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
+import team.baymax.ui.appointment.AppointmentInfoPage;
+import team.baymax.ui.calendar.CalendarPage;
+import team.baymax.ui.calendar.SchedulePage;
+import team.baymax.ui.dashboard.Dashboard;
+import team.baymax.ui.patient.PatientInfoPage;
 
 public class SideTabPane extends UiPart<Region> {
 

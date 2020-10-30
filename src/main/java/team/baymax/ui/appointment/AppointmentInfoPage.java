@@ -1,17 +1,18 @@
-package team.baymax.ui;
+package team.baymax.ui.appointment;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.ui.UiPart;
 
 /**
  * A ui for the appointment information page.
  */
 public class AppointmentInfoPage extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentInfoPage.fxml";
+    private static final String FXML = "appointment/AppointmentInfoPage.fxml";
 
     @FXML
     private StackPane appointmentListPanelPlaceholder;

@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.patient;
 
 import java.util.logging.Logger;
 
@@ -9,12 +9,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.patient.Patient;
+import team.baymax.ui.UiPart;
 
 /**
  * Panel containing the list of patients.
  */
 public class PatientListPanel extends UiPart<Region> {
-    private static final String FXML = "PatientListPanel.fxml";
+    private static final String FXML = "patient/PatientListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PatientListPanel.class);
 
     @FXML

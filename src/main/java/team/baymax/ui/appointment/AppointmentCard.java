@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.appointment;
 
 import java.util.Comparator;
 
@@ -9,13 +9,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.ui.UiPart;
 
 /**
  * An UI component that displays information of an {@code Appointment}.
  */
 public class AppointmentCard extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentListCard.fxml";
+    private static final String FXML = "appointment/AppointmentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

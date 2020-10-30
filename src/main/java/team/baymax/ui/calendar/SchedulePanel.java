@@ -1,4 +1,4 @@
-package team.baymax.ui;
+package team.baymax.ui.calendar;
 
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -28,12 +28,13 @@ import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Time;
+import team.baymax.ui.UiPart;
 
 /**
  * Panel containing the list of appointments along a timeline.
  */
 public class SchedulePanel extends UiPart<Region> implements PropertyChangeListener {
-    private static final String FXML = "SchedulePanel.fxml";
+    private static final String FXML = "calendar/SchedulePanel.fxml";
 
     private static final String HALF_HOUR_LINE_STYLE_CLASS = "half-hour-line";
     private static final String FULL_HOUR_LINE_STYLE_CLASS = "full-hour-line";
