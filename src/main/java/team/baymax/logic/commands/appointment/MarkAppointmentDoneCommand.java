@@ -26,7 +26,6 @@ import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 public class MarkAppointmentDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as done by either "
             + "the index OR the date and time of the appointment and the name of the patient.\n"
@@ -38,6 +37,8 @@ public class MarkAppointmentDoneCommand extends Command {
             + "Alex";
 
     public static final String MESSAGE_MARK_AS_DONE_SUCCESS = "Appointment marked as done: %1$s";
+
+    public static final TabId TAB_ID = TabId.NONE;
 
     private final Index index;
     private final DateTime dateTime;

@@ -82,11 +82,11 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic);
 
-        initDefaults(model);
+        initDashboard(model);
 
     }
 
-    private void initDefaults(Model model) {
+    private void initDashboard(Model model) {
 
         Date today = new Date(
                 new Day(AppointmentCalendar.getCurrentDay()),

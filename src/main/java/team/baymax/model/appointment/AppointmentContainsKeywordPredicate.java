@@ -26,7 +26,6 @@ public class AppointmentContainsKeywordPredicate implements Predicate<Appointmen
         }
 
         String toMatch = tagSet + appointment.getDescription().toString();
-        System.out.println(toMatch);
 
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
