@@ -11,7 +11,7 @@ public class Time {
 
     public static final String MESSAGE_CONSTRAINTS = "Time entered must be in the form of <HH:mm>. Example: 14:00";
     private static final DateTimeFormatter FORMAT_INPUT = DateTimeFormatter.ofPattern("HH:mm");
-    private static final DateTimeFormatter FORMAT_OUTPUT = DateTimeFormatter.ofPattern("hh:mma");
+    private static final DateTimeFormatter FORMAT_OUTPUT = DateTimeFormatter.ofPattern("h:mm a");
 
     private final LocalTime time;
 

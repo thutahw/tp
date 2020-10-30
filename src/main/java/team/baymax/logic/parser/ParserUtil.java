@@ -32,7 +32,7 @@ import team.baymax.model.util.datetime.Year;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "The index you have entered is invalid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -234,6 +234,8 @@ public class ParserUtil {
             timeObj = Time.fromString(trimmedTime);
         } catch (DateTimeParseException ex) {
             throw new ParseException(ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(ex.getMessage());
         }
         return timeObj;
     }
@@ -247,7 +249,7 @@ public class ParserUtil {
         String trimmedDuration = duration.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDuration);
         if (invalidNumber || !Duration.isValidDuration(Integer.parseInt(trimmedDuration))) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
         }
         return new Duration(Integer.parseInt(trimmedDuration));
     }
