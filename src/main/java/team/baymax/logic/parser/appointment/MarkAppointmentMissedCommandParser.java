@@ -5,6 +5,7 @@ import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
+
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.MarkAppointmentMissedCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
