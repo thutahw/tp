@@ -31,8 +31,13 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATETIME);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            Index targetIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-            return new DeleteAppointmentCommand(Optional.of(targetIndex));
+            try {
+                Index targetIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+                return new DeleteAppointmentCommand(Optional.of(targetIndex));
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteAppointmentCommand.MESSAGE_USAGE));
+            }
         }
 
         if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATETIME)) {
