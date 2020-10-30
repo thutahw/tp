@@ -15,7 +15,7 @@ import team.baymax.ui.UiPart;
  */
 public class PatientCard extends UiPart<Region> {
 
-    private static final String FXML = "PatientListCard.fxml";
+    private static final String FXML = "patient/PatientListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

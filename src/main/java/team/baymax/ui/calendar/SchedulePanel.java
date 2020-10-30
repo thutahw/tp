@@ -34,7 +34,7 @@ import team.baymax.ui.UiPart;
  * Panel containing the list of appointments along a timeline.
  */
 public class SchedulePanel extends UiPart<Region> implements PropertyChangeListener {
-    private static final String FXML = "SchedulePanel.fxml";
+    private static final String FXML = "calendar/SchedulePanel.fxml";
 
     private static final String HALF_HOUR_LINE_STYLE_CLASS = "half-hour-line";
     private static final String FULL_HOUR_LINE_STYLE_CLASS = "full-hour-line";

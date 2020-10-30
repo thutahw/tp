@@ -13,7 +13,7 @@ import team.baymax.ui.UiPart;
  * A ui for the appointment information page.
  */
 public class SchedulePage extends UiPart<Region> {
-    private static final String FXML = "SchedulePage.fxml";
+    private static final String FXML = "calendar/SchedulePage.fxml";
 
     @FXML
     private StackPane schedulePanelPlaceholder;

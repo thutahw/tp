@@ -12,7 +12,7 @@ import team.baymax.ui.UiPart;
  */
 public class AppointmentInfoPage extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentInfoPage.fxml";
+    private static final String FXML = "appointment/AppointmentInfoPage.fxml";
 
     @FXML
     private StackPane appointmentListPanelPlaceholder;

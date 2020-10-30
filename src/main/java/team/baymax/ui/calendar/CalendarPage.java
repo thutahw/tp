@@ -20,7 +20,7 @@ import team.baymax.ui.UiPart;
  */
 public class CalendarPage extends UiPart<Region> implements PropertyChangeListener {
 
-    private static final String FXML = "CalendarPage.fxml";
+    private static final String FXML = "calendar/CalendarPage.fxml";
 
     @FXML
     private TilePane calendarGridView;

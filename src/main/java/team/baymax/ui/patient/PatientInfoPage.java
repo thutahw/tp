@@ -12,7 +12,7 @@ import team.baymax.ui.UiPart;
  */
 public class PatientInfoPage extends UiPart<Region> {
 
-    private static final String FXML = "PatientInfoPage.fxml";
+    private static final String FXML = "patient/PatientInfoPage.fxml";
 
     @FXML
     private StackPane patientListPanelPlaceholder;

@@ -16,7 +16,7 @@ import team.baymax.ui.appointment.AppointmentListPanel;
  */
 public class Dashboard extends UiPart<Region> {
 
-    private static final String FXML = "Dashboard.fxml";
+    private static final String FXML = "dashboard/Dashboard.fxml";
 
     @FXML
     private StackPane timePanel;

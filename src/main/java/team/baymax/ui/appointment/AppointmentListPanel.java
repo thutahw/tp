@@ -15,7 +15,7 @@ import team.baymax.ui.UiPart;
  * Panel containing the list of appointments.
  */
 public class AppointmentListPanel extends UiPart<Region> {
-    private static final String FXML = "AppointmentListPanel.fxml";
+    private static final String FXML = "appointment/AppointmentListPanel.fxml";
 
     @FXML
     protected ListView<Appointment> appointmentListView;

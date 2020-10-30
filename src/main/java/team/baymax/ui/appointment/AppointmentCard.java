@@ -16,7 +16,7 @@ import team.baymax.ui.UiPart;
  */
 public class AppointmentCard extends UiPart<Region> {
 
-    private static final String FXML = "AppointmentListCard.fxml";
+    private static final String FXML = "appointment/AppointmentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

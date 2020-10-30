@@ -83,8 +83,6 @@ public class AddAppointmentCommand extends Command {
 
         requireAllNonNull(patientIndex, duration, description, tags);
 
-        assert dateTime != null || time != null : "At least one must be non-null";
-
         this.patientIndex = patientIndex;
         this.patientNric = patientNric;
         this.dateTime = dateTime;
@@ -101,7 +99,7 @@ public class AddAppointmentCommand extends Command {
         Patient patient;
         DateTime dt;
 
-        assert patientIndex.isPresent() || !patientNric.isPresent() : "Patient index or NRIC should not be both empty.";
+        assert patientIndex.isPresent() || patientNric.isPresent() : "Patient index or NRIC should not be both empty.";
         assert dateTime.isPresent() || time.isPresent() : "Datetime or time should not be both empty.";
 
         if (patientIndex.isPresent()) {
