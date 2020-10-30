@@ -5,7 +5,9 @@ import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
+
 import java.util.List;
+
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.Command;
