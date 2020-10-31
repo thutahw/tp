@@ -57,11 +57,11 @@ public class JsonAdaptedPatient {
      * Converts a given {@code Patient} into this class for Jackson use.
      */
     public JsonAdaptedPatient(Patient source) {
-        nric = source.getNric().nric;
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        gender = source.getGender().gender;
-        remark = source.getRemark().value;
+        nric = source.getNric().getValue();
+        name = source.getName().getFullName();
+        phone = source.getPhone().getValue();
+        gender = source.getGender().getValue();
+        remark = source.getRemark().getValue();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

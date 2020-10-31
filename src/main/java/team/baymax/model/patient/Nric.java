@@ -11,17 +11,17 @@ public class Nric {
 
     public static final String VALIDATION_REGEX = "[STFG][0-9]{7}[A-Z]";
 
-    public final String nric;
+    private final String value;
 
     /**
      * Constructs an {@code Nric}.
      *
-     * @param nric A valid nric.
+     * @param value A valid nric.
      */
-    public Nric(String nric) {
-        requireNonNull(nric);
-        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
-        this.nric = nric;
+    public Nric(String value) {
+        requireNonNull(value);
+        checkArgument(isValidNric(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -31,20 +31,24 @@ public class Nric {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return nric;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Nric
-                && nric.equals(((Nric) other).nric));
+                && value.equals(((Nric) other).value));
     }
 
     @Override
     public int hashCode() {
-        return nric.hashCode();
+        return value.hashCode();
     }
 }

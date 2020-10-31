@@ -12,17 +12,17 @@ public class Gender {
     public static final String MESSAGE_CONSTRAINTS =
             "Gender should be specified as either M (male) or F (female)";
 
-    public final String gender;
+    private final String value;
 
     /**
      * Constructs an {@code Gender}.
      *
-     * @param gender A valid gender.
+     * @param value A valid gender.
      */
-    public Gender(String gender) {
-        requireNonNull(gender);
-        checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        this.gender = gender;
+    public Gender(String value) {
+        requireNonNull(value);
+        checkArgument(isValidGender(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -32,21 +32,25 @@ public class Gender {
         return test.equals("M") || test.equals("F");
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
-        return gender;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Gender // instanceof handles nulls
-                && gender.equals(((Gender) other).gender)); // state check
+                && value.equals(((Gender) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return gender.hashCode();
+        return value.hashCode();
     }
 
 }

@@ -119,7 +119,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      * otherwise throws an {@code ElementNotFoundException}
      */
     public Patient getPatient(Name name) throws ElementNotFoundException {
-        String[] nameKeywords = name.fullName.split("\\s+");
+        String[] nameKeywords = name.getFullName().split("\\s+");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
         return patients.getByPredicate(predicate);
     }

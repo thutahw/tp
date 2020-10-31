@@ -25,11 +25,11 @@ public class PatientUtil {
      */
     public static String getPatientDetails(Patient patient) {
         StringBuilder sb = new StringBuilder();
-        sb.append(CliSyntax.PREFIX_NRIC + patient.getNric().nric + " ");
-        sb.append(CliSyntax.PREFIX_NAME + patient.getName().fullName + " ");
-        sb.append(CliSyntax.PREFIX_PHONE + patient.getPhone().value + " ");
-        sb.append(CliSyntax.PREFIX_GENDER + patient.getGender().gender + " ");
-        sb.append(CliSyntax.PREFIX_REMARK + patient.getRemark().value + " ");
+        sb.append(CliSyntax.PREFIX_NRIC + patient.getNric().getValue() + " ");
+        sb.append(CliSyntax.PREFIX_NAME + patient.getName().getFullName() + " ");
+        sb.append(CliSyntax.PREFIX_PHONE + patient.getPhone().getValue() + " ");
+        sb.append(CliSyntax.PREFIX_GENDER + patient.getGender().getValue() + " ");
+        sb.append(CliSyntax.PREFIX_REMARK + patient.getRemark().getValue() + " ");
         patient.getTags().stream().forEach(
             s -> sb.append(CliSyntax.PREFIX_TAG + s.tagName + " ")
         );
@@ -41,11 +41,15 @@ public class PatientUtil {
      */
     public static String getEditPatientDescriptorDetails(EditPatientCommand.EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getGender().ifPresent(gender -> sb.append(CliSyntax.PREFIX_GENDER).append(gender.gender)
+        descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME)
+                .append(name.getFullName()).append(" "));
+        descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE)
+                .append(phone.getValue()).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(CliSyntax.PREFIX_GENDER)
+                .append(gender.getValue())
                 .append(" "));
-        descriptor.getRemark().ifPresent(remark -> sb.append(CliSyntax.PREFIX_REMARK).append(remark.value).append(" "));
+        descriptor.getRemark().ifPresent(remark -> sb.append(CliSyntax.PREFIX_REMARK)
+                .append(remark.getValue()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

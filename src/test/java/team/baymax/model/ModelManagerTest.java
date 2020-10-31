@@ -125,7 +125,7 @@ public class ModelManagerTest {
                 calendarManager)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = ALICE.getName().getFullName().split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, userPrefs,
                 calendarManager)));

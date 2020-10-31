@@ -104,7 +104,7 @@ public class PatientCommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());
 
         Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
-        final String[] splitName = patient.getName().fullName.split("\\s+");
+        final String[] splitName = patient.getName().getFullName().split("\\s+");
         model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPatientList().size());

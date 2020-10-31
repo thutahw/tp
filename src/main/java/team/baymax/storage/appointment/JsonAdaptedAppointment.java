@@ -60,7 +60,7 @@ class JsonAdaptedAppointment {
      * Converts a given {@code Appointment} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
-        this.patientNric = source.getPatient().getNric().nric;
+        this.patientNric = source.getPatient().getNric().getValue();
         this.dateTime = source.getDateTime().getStorageFormat();
         this.duration = source.getDuration().value;
         this.status = source.getStatus();

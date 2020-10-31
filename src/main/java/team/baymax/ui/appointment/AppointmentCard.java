@@ -59,7 +59,7 @@ public class AppointmentCard extends UiPart<Region> {
 
     private void initialize() {
         id.setText(displayedIndex + ". ");
-        patientName.setText(appointment.getPatient().getName().fullName);
+        patientName.setText(appointment.getPatient().getName().getFullName());
         phoneNumber.setText(appointment.getPatient().getPhone().toString());
         dateTime.setText(appointment.getDateTime().toString());
         description.setText(appointment.getDescription().toString());

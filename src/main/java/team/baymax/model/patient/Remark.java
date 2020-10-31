@@ -8,15 +8,19 @@ public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, and it should not be blank";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Remark}.
      *
-     * @param remark A valid remark.
+     * @param value A valid remark.
      */
-    public Remark(String remark) {
-        value = remark;
+    public Remark(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override
