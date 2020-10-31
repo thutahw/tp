@@ -27,8 +27,6 @@ public enum TabId {
         }
     }
 
-
-    @SuppressWarnings("unchecked")
     public static TabId valueOf(int tabNumber) {
         return (TabId) map.get(tabNumber);
     }
