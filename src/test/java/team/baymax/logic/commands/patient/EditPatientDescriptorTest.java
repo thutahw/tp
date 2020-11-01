@@ -12,7 +12,7 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TA
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.testutil.EditPatientDescriptorBuilder;
+import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {
 

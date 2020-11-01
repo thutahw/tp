@@ -9,8 +9,8 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME1;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME2;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
-import team.baymax.testutil.AppointmentBuilder;
+import team.baymax.testutil.appointment.AppointmentBuilder;
 
 public class AddAppointmentCommandTest {
 

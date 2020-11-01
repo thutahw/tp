@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.patient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,7 @@ import java.util.List;
 import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
+import team.baymax.testutil.patient.PatientBuilder;
 
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.

@@ -19,7 +19,7 @@ import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
-import team.baymax.testutil.AppointmentBuilder;
+import team.baymax.testutil.appointment.AppointmentBuilder;
 
 /**
  * A default model stub that have all of the methods failing.

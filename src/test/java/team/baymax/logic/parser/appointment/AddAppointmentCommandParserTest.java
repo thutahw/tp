@@ -22,8 +22,8 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.util.datetime.Duration;
-import team.baymax.testutil.AppointmentBuilder;
+import team.baymax.testutil.appointment.AppointmentBuilder;
 
 public class AddAppointmentCommandParserTest {
     private AddAppointmentCommandParser parser = new AddAppointmentCommandParser();

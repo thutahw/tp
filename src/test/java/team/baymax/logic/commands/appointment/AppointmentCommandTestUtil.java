@@ -20,7 +20,7 @@ import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.modelmanagers.AppointmentManager;
-import team.baymax.testutil.EditAppointmentDescriptorBuilder;
+import team.baymax.testutil.appointment.EditAppointmentDescriptorBuilder;
 
 public class AppointmentCommandTestUtil {
 

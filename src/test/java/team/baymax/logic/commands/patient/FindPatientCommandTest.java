@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.patient.FindPatientCommand.MESSAGE_PATIENTS_LISTED_SUCCESS;
-import static team.baymax.testutil.TypicalPatients.CARL;
-import static team.baymax.testutil.TypicalPatients.ELLE;
-import static team.baymax.testutil.TypicalPatients.FIONA;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatients.CARL;
+import static team.baymax.testutil.patient.TypicalPatients.ELLE;
+import static team.baymax.testutil.patient.TypicalPatients.FIONA;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import java.util.Arrays;
 import java.util.Collections;

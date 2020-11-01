@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.patient;
 
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 

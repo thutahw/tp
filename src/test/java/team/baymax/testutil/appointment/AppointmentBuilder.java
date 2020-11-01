@@ -1,6 +1,6 @@
-package team.baymax.testutil;
+package team.baymax.testutil.appointment;
 
-import static team.baymax.testutil.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 
 import java.util.HashSet;
 import java.util.Set;

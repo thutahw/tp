@@ -22,9 +22,9 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TA
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_THIRD_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_THIRD_PATIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ import team.baymax.model.patient.Gender;
 import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.tag.Tag;
-import team.baymax.testutil.EditPatientDescriptorBuilder;
+import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
 
 public class EditPatientCommandParserTest {
 

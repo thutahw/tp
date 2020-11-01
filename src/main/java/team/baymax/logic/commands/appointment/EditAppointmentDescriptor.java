@@ -109,6 +109,7 @@ public class EditAppointmentDescriptor {
         EditAppointmentDescriptor e = (EditAppointmentDescriptor) other;
 
         return getDateTime().equals(e.getDateTime())
+                && getDuration().equals(e.getDuration())
                 && getStatus().equals(e.getStatus())
                 && getTags().equals(e.getTags())
                 && getDescription().equals(e.getDescription());

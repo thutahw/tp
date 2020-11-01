@@ -1,8 +1,8 @@
-package team.baymax.testutil;
+package team.baymax.testutil.appointment;
 
-import static team.baymax.testutil.TypicalPatients.ALICE;
-import static team.baymax.testutil.TypicalPatients.BOB;
-import static team.baymax.testutil.TypicalPatients.CARL;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.BOB;
+import static team.baymax.testutil.patient.TypicalPatients.CARL;
 
 import java.util.ArrayList;
 import java.util.Arrays;

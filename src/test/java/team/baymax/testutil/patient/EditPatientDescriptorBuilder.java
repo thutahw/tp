@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.patient;
 
 import java.util.Set;
 import java.util.stream.Collectors;

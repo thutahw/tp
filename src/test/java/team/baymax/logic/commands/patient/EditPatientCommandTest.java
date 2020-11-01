@@ -2,6 +2,7 @@ package team.baymax.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
@@ -9,15 +10,14 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PH
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
 import team.baymax.commons.core.Messages;
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.logic.commands.patient.EditPatientCommand.EditPatientDescriptor;
 import team.baymax.model.Model;
@@ -28,8 +28,8 @@ import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.userprefs.UserPrefs;
-import team.baymax.testutil.EditPatientDescriptorBuilder;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -45,8 +45,6 @@ public class EditPatientCommandTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PATIENT, descriptor);
 
-        System.out.println(editedPatient);
-
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
@@ -54,7 +52,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -78,7 +76,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(lastPatient, editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -93,7 +91,7 @@ public class EditPatientCommandTest {
                 new AppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -112,7 +110,7 @@ public class EditPatientCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
         expectedModel.updateFilteredPatientList(new PatientIdenticalPredicate(editedPatient));
 
-        CommandTestUtil.assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editPatientCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.patient;
 
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;

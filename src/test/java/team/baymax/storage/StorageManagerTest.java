@@ -17,7 +17,7 @@ import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.storage.appointment.JsonAppointmentManagerStorage;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
-import team.baymax.testutil.TypicalPatients;
+import team.baymax.testutil.patient.TypicalPatients;
 
 public class StorageManagerTest {
 

@@ -2,7 +2,7 @@ package team.baymax.logic.commands.patient;
 
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.userprefs.UserPrefs;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

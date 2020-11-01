@@ -10,10 +10,10 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.assertAppointmentCommandFailure;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.showAppointmentAtIndex;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
-import static team.baymax.testutil.TypicalAppointments.getTypicalAppointmentManager;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_APPOINTMENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_APPOINTMENT;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
+import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
+import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_SECOND_APPOINTMENT;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,15 +24,17 @@ import team.baymax.logic.commands.general.ClearCommand;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
+import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.userprefs.UserPrefs;
-import team.baymax.testutil.AppointmentBuilder;
-import team.baymax.testutil.EditAppointmentDescriptorBuilder;
+import team.baymax.testutil.appointment.AppointmentBuilder;
+import team.baymax.testutil.appointment.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentCommandTest {
 
-    private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
+    private Model model = new ModelManager(new PatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
 
     @Test
@@ -44,9 +46,11 @@ public class EditAppointmentCommandTest {
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,
                 editedAppointment);
 
-        Model expectedModel = new ModelManager(new PatientManager(model.getPatientManager()),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
+        Model expectedModel = new ModelManager(new PatientManager(),
+                new AppointmentManager(model.getAppointmentManager()), new UserPrefs(), new CalendarManager());
+
         expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
+        expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
     }

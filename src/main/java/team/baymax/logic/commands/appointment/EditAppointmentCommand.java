@@ -79,7 +79,6 @@ public class EditAppointmentCommand extends Command {
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
-
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
 
         return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabId());

@@ -10,7 +10,9 @@ import static team.baymax.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should be specified as either M (male) or F (female)";
+            "Gender should be specified as either M (male) or F (female). This field is case-insensitive.";
+
+    public static final String VALIDATION_REGEX = "[mMfF]";
 
     private final String value;
 
@@ -29,7 +31,7 @@ public class Gender {
      * Returns true if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
-        return test.equals("M") || test.equals("F");
+        return test.matches(VALIDATION_REGEX);
     }
 
     public String getValue() {

@@ -1,7 +1,7 @@
 package team.baymax.logic.commands.appointment;
 
-import static team.baymax.testutil.TypicalAppointments.getTypicalAppointmentManager;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;

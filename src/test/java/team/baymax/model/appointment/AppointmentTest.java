@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_DUPLICATE;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_VARIANT_1;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_VARIANT_2;
-import static team.baymax.testutil.TypicalAppointments.BOB_APT;
-import static team.baymax.testutil.TypicalAppointments.CARL_APT;
-import static team.baymax.testutil.TypicalPatients.ALICE;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_DUPLICATE;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VARIANT_1;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VARIANT_2;
+import static team.baymax.testutil.appointment.TypicalAppointments.BOB_APT;
+import static team.baymax.testutil.appointment.TypicalAppointments.CARL_APT;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 
 import org.junit.jupiter.api.Test;
 

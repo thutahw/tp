@@ -3,13 +3,13 @@ package team.baymax.model.patient;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalPatients.ALICE;
-import static team.baymax.testutil.TypicalPatients.BOB;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.patient.PatientCommandTestUtil;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 public class PatientTest {
 
