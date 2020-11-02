@@ -26,10 +26,12 @@ class RemarkPatientCommandTest {
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
-        Patient firstPatient = model.getFilteredPatientList().get(TypicalPatientIndexes.INDEX_FIRST_PATIENT.getZeroBased());
+        Patient firstPatient = model.getFilteredPatientList()
+                .get(TypicalPatientIndexes.INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new PatientBuilder(firstPatient).withRemark(REMARK_STUB).build();
 
-        RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(TypicalPatientIndexes.INDEX_FIRST_PATIENT,
+        RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_FIRST_PATIENT,
                 new Remark(editedPatient.getRemark().getValue()));
 
         String expectedMessage = String.format(RemarkPatientCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPatient);
@@ -45,9 +47,11 @@ class RemarkPatientCommandTest {
     @Test
     public void equals() {
         Patient patient = new PatientBuilder().build();
-        RemarkPatientCommand remarkPatientCommandA = new RemarkPatientCommand(TypicalPatientIndexes.INDEX_FIRST_PATIENT,
+        RemarkPatientCommand remarkPatientCommandA = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_FIRST_PATIENT,
                 new Remark(REMARK_STUB));
-        RemarkPatientCommand remarkPatientCommandB = new RemarkPatientCommand(TypicalPatientIndexes.INDEX_SECOND_PATIENT,
+        RemarkPatientCommand remarkPatientCommandB = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_SECOND_PATIENT,
                 patient.getRemark());
         // null -> returns False
         assertFalse(remarkPatientCommandA.equals(null));

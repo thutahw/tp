@@ -214,7 +214,7 @@ public class SchedulePanel extends UiPart<Region> implements PropertyChangeListe
     }
 
     private ScheduleViewCell createScheduleViewCell(Appointment appointment) {
-        String cellText = appointment.getPatient().getName() + "\n" + appointment.getDescription();
+        String cellText = appointment.getPatient().getName() + " / " + appointment.getDescription();
         String cellColor = getViewCellColor(appointment);
         String cellBorderColor = getViewCellBorderColor(appointment);
         ScheduleViewCell cell = new ScheduleViewCell(
@@ -222,10 +222,12 @@ public class SchedulePanel extends UiPart<Region> implements PropertyChangeListe
                 cellText, cellColor, cellBorderColor);
         double yy = getTimeLocation(appointment.getTime());
         double height = getTimeLocation(appointment.getEndDateTime().getTime()) - yy;
+
         cell.setPrefHeight(height);
         cell.setPrefWidth(scheduleTimelineView.getPrefWidth() - rightCellPadding);
         cell.setTranslateX(leftCellAnchor);
         cell.setTranslateY(yy);
+
         scheduleTimelineView.getChildren().add(cell);
         scheduleTimelineView.setAlignment(cell, Pos.TOP_LEFT);
 
@@ -283,7 +285,7 @@ public class SchedulePanel extends UiPart<Region> implements PropertyChangeListe
 
             setTextAlignment(TextAlignment.LEFT);
             setAlignment(Pos.TOP_LEFT);
-            setText(startTime.toString() + "\n" + text);
+            setText(startTime.toString() + " - " + text);
             getStyleClass().add(SCHEDULE_VIEW_CELL_STYLE_CLASS);
             setStyle("-fx-background-color: " + color + ";"
                     + "-fx-border-color: " + borderColor + ";");

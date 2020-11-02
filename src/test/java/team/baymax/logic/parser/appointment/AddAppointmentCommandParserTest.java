@@ -18,7 +18,6 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_ID1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_1HR;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_DRGOH;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TIME_2PM;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -111,7 +110,6 @@ public class AddAppointmentCommandParserTest {
         Appointment expectedAppointmentWithoutTag = new AppointmentBuilder(ALICE_APT)
                 .withDateTime(VALID_DATETIME_1)
                 .withDuration(new Duration(Integer.parseInt(VALID_DURATION_30)))
-                .withTime(VALID_TIME_2PM)
                 .withDescription(VALID_DESCRIPTION_1)
                 .withTags()
                 .build();

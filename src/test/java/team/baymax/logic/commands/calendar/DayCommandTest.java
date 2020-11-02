@@ -3,9 +3,9 @@ package team.baymax.logic.commands.calendar;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.VALID_DAY;
 import static team.baymax.testutil.calendar.TypicalCalendar.getTypicalCalendarManager;
-import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
+
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;

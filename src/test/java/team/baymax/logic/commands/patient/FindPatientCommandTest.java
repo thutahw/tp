@@ -3,6 +3,7 @@ package team.baymax.logic.commands.patient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.FindPatientCommand.MESSAGE_PATIENTS_LISTED_SUCCESS;
 import static team.baymax.testutil.patient.TypicalPatients.CARL;
 import static team.baymax.testutil.patient.TypicalPatients.ELLE;
@@ -14,7 +15,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
@@ -65,7 +65,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
@@ -75,7 +75,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        CommandTestUtil.assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static team.baymax.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import team.baymax.model.util.datetime.Duration;
 
 public class DurationTest {

@@ -41,7 +41,7 @@ public class EditAppointmentDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(dateTime, status, tags, description);
+        return CollectionUtil.isAnyNonNull(dateTime, status, tags, description, duration);
     }
 
     public void setDateTime(DateTime dateTime) {

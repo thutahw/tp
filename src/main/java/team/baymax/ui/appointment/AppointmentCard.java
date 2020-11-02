@@ -71,7 +71,7 @@ public class AppointmentCard extends UiPart<Region> {
     }
 
     private String statusTagStyles(AppointmentStatus status) {
-        return String.format("-fx-background-color: %s;", status.getColor());
+        return String.format("-fx-background-color: %s;", status.getColorCode());
     }
 
     @Override

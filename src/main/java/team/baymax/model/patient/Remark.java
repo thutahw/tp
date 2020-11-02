@@ -1,5 +1,7 @@
 package team.baymax.model.patient;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a Patient's remark in the appointment book.
  * Guarantees: immutable;}
@@ -16,6 +18,7 @@ public class Remark {
      * @param value A valid remark.
      */
     public Remark(String value) {
+        requireNonNull(value);
         this.value = value;
     }
 
