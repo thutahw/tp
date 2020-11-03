@@ -71,6 +71,9 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         try {
             patientNric = Optional.ofNullable(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).orElse("")));
+            if (argMultimap.getAllValues(PREFIX_NRIC).size() > 1) {
+                throw new ParseException("Can only have one NRIC!");
+            }
         } catch (ParseException pe) {
             patientNric = Optional.empty();
         }

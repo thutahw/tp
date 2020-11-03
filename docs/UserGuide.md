@@ -358,11 +358,11 @@ NRIC           | The nric of the patient. It must start and end with a capital l
 DURATION       | The duration of the appointment.
 
 **Format:**<br>
-`addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
+`addappt iID on/DATE at/TIME dur/DURATION desc/DESCRIPTION [t/TAG]`
 `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
 
 **Example:**<br>
-1. Type `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
+1. Type `addappt 1 on/11-10-2020 at/12:30 dur/50 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
