@@ -118,16 +118,16 @@ public class ArgumentTokenizerTest {
         assertPreamblePresent(argMultimap, argsString); // Unknown prefix is taken as part of preamble
     }
 
-    @Test
-    public void tokenize_multipleArgumentsWithRepeats() throws ParseException, CommandException {
-        // Two arguments repeated, some have empty values
-        String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
-        assertPreamblePresent(argMultimap, "SomePreambleString");
-        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
-        assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
-        assertArgumentPresent(argMultimap, hatQ, "", "");
-    }
+//    @Test
+//    public void tokenize_multipleArgumentsWithRepeats() throws ParseException, CommandException {
+//        // Two arguments repeated, some have empty values
+//        String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t";
+//        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+//        assertPreamblePresent(argMultimap, "SomePreambleString");
+//        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
+//        assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
+//        assertArgumentPresent(argMultimap, hatQ, "", "");
+//    }
 
     @Test
     public void tokenize_multipleArgumentsJoined() throws ParseException, CommandException {
