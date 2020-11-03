@@ -21,7 +21,7 @@ import team.baymax.model.Model;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.Patient;
-import team.baymax.testutil.EditPatientDescriptorBuilder;
+import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -32,8 +32,8 @@ public class PatientCommandTestUtil {
     public static final String VALID_NRIC_BOB = "S3322115E";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "98763522";
+    public static final String VALID_PHONE_BOB = "81763222";
     public static final String VALID_GENDER_AMY = "F";
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_TAG_DIABETIC = "Diabetic";
@@ -67,13 +67,18 @@ public class PatientCommandTestUtil {
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder()
-                .withNric(VALID_NRIC_AMY).withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withGender(VALID_GENDER_AMY)
-                .withTags(VALID_TAG_LTP).withRemark(VALID_REMARK_AMY)
+                .withNric(VALID_NRIC_AMY)
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withGender(VALID_GENDER_AMY)
+                .withTags(VALID_TAG_LTP)
+                .withRemark(VALID_REMARK_AMY)
                 .build();
         DESC_BOB = new EditPatientDescriptorBuilder()
-                .withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
+                .withNric(VALID_NRIC_BOB)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withGender(VALID_GENDER_BOB)
                 .withTags(VALID_TAG_DIABETIC, VALID_TAG_LTP)
                 .withRemark(VALID_REMARK_BOB)
                 .build();

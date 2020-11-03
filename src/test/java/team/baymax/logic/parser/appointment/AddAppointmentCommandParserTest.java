@@ -18,12 +18,11 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_ID1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_1HR;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_DRGOH;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TIME_2PM;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Optional;
 
@@ -33,7 +32,7 @@ import team.baymax.logic.commands.appointment.AddAppointmentCommand;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.util.datetime.Duration;
-import team.baymax.testutil.AppointmentBuilder;
+import team.baymax.testutil.appointment.AppointmentBuilder;
 
 public class AddAppointmentCommandParserTest {
     private AddAppointmentCommandParser parser = new AddAppointmentCommandParser();
@@ -111,7 +110,6 @@ public class AddAppointmentCommandParserTest {
         Appointment expectedAppointmentWithoutTag = new AppointmentBuilder(ALICE_APT)
                 .withDateTime(VALID_DATETIME_1)
                 .withDuration(new Duration(Integer.parseInt(VALID_DURATION_30)))
-                .withTime(VALID_TIME_2PM)
                 .withDescription(VALID_DESCRIPTION_1)
                 .withTags()
                 .build();

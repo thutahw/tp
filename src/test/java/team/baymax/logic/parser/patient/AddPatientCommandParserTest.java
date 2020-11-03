@@ -27,8 +27,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TA
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.TypicalPatients.AMY;
-import static team.baymax.testutil.TypicalPatients.BOB;
+import static team.baymax.testutil.patient.TypicalPatients.AMY;
+import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.Phone;
 import team.baymax.model.tag.Tag;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 public class AddPatientCommandParserTest {
     private AddPatientCommandParser parser = new AddPatientCommandParser();

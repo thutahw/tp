@@ -1,6 +1,6 @@
 package team.baymax.logic.commands.patient;
 
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 

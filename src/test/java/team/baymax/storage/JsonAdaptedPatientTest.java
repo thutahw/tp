@@ -2,7 +2,7 @@ package team.baymax.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalPatients.BENSON;
+import static team.baymax.testutil.patient.TypicalPatients.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

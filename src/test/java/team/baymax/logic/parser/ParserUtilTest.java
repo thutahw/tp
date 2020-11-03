@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
 import java.util.Collections;

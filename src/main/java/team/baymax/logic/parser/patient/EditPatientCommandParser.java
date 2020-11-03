@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
@@ -31,7 +32,7 @@ public class EditPatientCommandParser implements Parser<EditPatientCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG,
-                        PREFIX_REMARK);
+                        PREFIX_REMARK, PREFIX_NRIC);
 
         Index index;
 
@@ -43,18 +44,33 @@ public class EditPatientCommandParser implements Parser<EditPatientCommand> {
         }
 
         EditPatientCommand.EditPatientDescriptor editPatientDescriptor = new EditPatientCommand.EditPatientDescriptor();
+
+        // edit nric
+        if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            editPatientDescriptor.setNric(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get()));
+        }
+
+        // edit name
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
+
+        // edit phone number
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
+
+        // edit gender
         if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
             editPatientDescriptor.setGender(ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get()));
         }
+
+        // edit remark
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editPatientDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
+
+        // edit tags
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {

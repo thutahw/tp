@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.patient;
 
 import java.util.Set;
 
@@ -41,6 +41,8 @@ public class PatientUtil {
      */
     public static String getEditPatientDescriptorDetails(EditPatientCommand.EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
+        descriptor.getNric().ifPresent(nric -> sb.append(CliSyntax.PREFIX_NRIC)
+                .append(nric.getValue()).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME)
                 .append(name.getFullName()).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(CliSyntax.PREFIX_PHONE)

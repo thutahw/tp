@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.assertAppointmentCommandFailure;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.showAppointmentAtIndex;
-import static team.baymax.testutil.TypicalAppointments.getTypicalAppointmentManager;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME1;
 import static team.baymax.testutil.TypicalDateTimes.DATETIME5;
-import static team.baymax.testutil.TypicalFirstNames.FIRST_NAME_ALICE;
-import static team.baymax.testutil.TypicalFirstNames.FIRST_NAME_GEORGE;
-import static team.baymax.testutil.TypicalFirstNames.FIRST_NAME_HANSON;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_APPOINTMENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_APPOINTMENT;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
+import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_SECOND_APPOINTMENT;
+import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
+import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_ALICE;
+import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_GEORGE;
+import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_HANSON;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import java.util.Optional;
 

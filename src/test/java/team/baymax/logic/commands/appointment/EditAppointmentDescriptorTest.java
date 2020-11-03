@@ -10,7 +10,7 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.testutil.EditAppointmentDescriptorBuilder;
+import team.baymax.testutil.appointment.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentDescriptorTest {
 
