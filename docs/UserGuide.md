@@ -153,11 +153,11 @@ Commands all take the following format:
 
 This feature allows you to manage patient information. You can:
 1. Add a new patient
-1. List all patients
-1. Delete a patient 
-1. Edit a patient's details
-1. Add a remark to a patient
-1. Find a patient by his name
+2. List all patients
+3. Delete a patient 
+4. Edit a patient's details
+5. Add a remark to a patient
+6. Find a patient by his name
 
 #### 4.1.1. Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
