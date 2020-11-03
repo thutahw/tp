@@ -153,42 +153,6 @@ public class EditPatientCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-//    @Test
-//    public void parse_multipleRepeatedFields_acceptsLast() {
-//        Index targetIndex = INDEX_FIRST_PATIENT;
-//        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + GENDER_DESC_AMY
-//                + TAG_DESC_FRIEND + PHONE_DESC_AMY + GENDER_DESC_AMY + TAG_DESC_FRIEND
-//                + PHONE_DESC_BOB + GENDER_DESC_BOB + TAG_DESC_HUSBAND;
-//
-//        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-//                .withPhone(VALID_PHONE_BOB)
-//                .withGender(VALID_GENDER_BOB)
-//                .withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
-//                .build();
-//        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
-//
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
-
-//    @Test
-//    public void parse_invalidValueFollowedByValidValue_success() {
-//        // no other valid values specified
-//        Index targetIndex = INDEX_FIRST_PATIENT;
-//        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-//        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
-//                .withPhone(VALID_PHONE_BOB).build();
-//        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // other valid values specified
-//        userInput = targetIndex.getOneBased() + GENDER_DESC_BOB + INVALID_PHONE_DESC
-//                + PHONE_DESC_BOB;
-//        descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB).withGender(VALID_GENDER_BOB)
-//                .build();
-//        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
-
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PATIENT;
