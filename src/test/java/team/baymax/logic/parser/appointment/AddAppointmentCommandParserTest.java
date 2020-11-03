@@ -6,11 +6,8 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DATETIME_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DATETIME_1;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DATETIME_2;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DESCRIPTION_1;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DESCRIPTION_2;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DURATION_30;
-import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_DURATION_40;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_TAG_1HR;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_TAG_DRGOH;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_TIME_2PM;
@@ -55,37 +52,13 @@ public class AddAppointmentCommandParserTest {
                         Optional.empty(), expectedAppointment.getDuration(),
                         expectedAppointment.getDescription(), expectedAppointment.getTags()));
 
-        // multiple patient indexes - last patient index accepted
-        // assertParseSuccess(parser, VALID_ID2 + VALID_ID1 + VALID_DESC_DATETIME_1
-        //                + VALID_DESC_DURATION_30 + VALID_DESC_DESCRIPTION_1 + VALID_DESC_TAG_DRGOH,
-        //        new AddAppointmentCommand(Optional.of(INDEX_FIRST_PATIENT), Optional.empty(),
-        //                Optional.of(expectedAppointment.getDateTime()),
-        //                Optional.empty(), expectedAppointment.getDuration(),
-        //                expectedAppointment.getDescription(), expectedAppointment.getTags()));
-
-        // multiple datetime(s) - last datetime accepted
+        // all valid inputs
         assertParseSuccess(parser, VALID_ID1 + VALID_DESC_DATETIME_1
                         + VALID_DESC_DURATION_30 + VALID_DESC_DESCRIPTION_1 + VALID_DESC_TAG_DRGOH,
                 new AddAppointmentCommand(Optional.of(INDEX_FIRST_PATIENT), Optional.empty(),
                         Optional.of(expectedAppointment.getDateTime()),
                         Optional.empty(), expectedAppointment.getDuration(),
                         expectedAppointment.getDescription(), expectedAppointment.getTags()));
-
-//        // multiple durations - last duration accepted
-//        assertParseSuccess(parser, VALID_ID1 + VALID_DESC_DATETIME_1 + VALID_DESC_DURATION_40
-//                        + VALID_DESC_DURATION_30 + VALID_DESC_DESCRIPTION_1 + VALID_DESC_TAG_DRGOH,
-//                new AddAppointmentCommand(Optional.of(INDEX_FIRST_PATIENT), Optional.empty(),
-//                        Optional.of(expectedAppointment.getDateTime()),
-//                        Optional.empty(), expectedAppointment.getDuration(),
-//                        expectedAppointment.getDescription(), expectedAppointment.getTags()));
-//
-//        // multiple appointment descriptions - last appointment description accepted
-//        assertParseSuccess(parser, VALID_ID1 + VALID_DESC_DATETIME_1 + VALID_DESC_DURATION_30
-//                        + VALID_DESC_DESCRIPTION_2 + VALID_DESC_DESCRIPTION_1 + VALID_DESC_TAG_DRGOH,
-//                new AddAppointmentCommand(Optional.of(INDEX_FIRST_PATIENT), Optional.empty(),
-//                        Optional.of(expectedAppointment.getDateTime()),
-//                        Optional.empty(), expectedAppointment.getDuration(),
-//                        expectedAppointment.getDescription(), expectedAppointment.getTags()));
 
         // multiple tags - all accepted
         Appointment expectedAppointmentMultipleTags = new AppointmentBuilder(ALICE_APT)

@@ -30,7 +30,6 @@ import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.patient.TypicalPatients.AMY;
 import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.logic.commands.patient.AddPatientCommand;
@@ -52,21 +51,21 @@ public class AddPatientCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
-        // multiple names - throws exception
+        // multiple names - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Name!");
 
-        // multiple phones - throws exception
+        // multiple phones - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Phone number!");
 
-        // multiple genders - throws exception
+        // multiple genders - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
                 + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Gender!");
 
-        // multiple remarks - throws exception
+        // multiple remarks - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one Remark!");
+                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one remark!");
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
