@@ -39,7 +39,7 @@ public class AddPatientCommand extends Command {
             + PREFIX_TAG + "asthmatic "
             + PREFIX_TAG + "LTP";
 
-    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New patient added: \n%1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the appointment book";
 
     private final Patient toAdd;

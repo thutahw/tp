@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentClashPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.model.appointment.BelongsToPatientPredicate;
+import team.baymax.model.patient.Patient;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
@@ -107,6 +109,17 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
+    }
+
+    /**
+     * Clears all the appointments belonging to {@code patient} from this {@code AppointmentManager}.
+     */
+    public void clearAllAppointmentsOfPatient(Patient patient) {
+        BelongsToPatientPredicate predicate = new BelongsToPatientPredicate(patient);
+        while (appointments.contains(predicate)) {
+            Appointment toRemove = appointments.getByPredicate(predicate);
+            appointments.remove(toRemove);
+        }
     }
 
     /**

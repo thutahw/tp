@@ -120,17 +120,20 @@ public class Patient implements UniqueListElement {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getNric())
-                .append(" Name: ")
+        builder.append("Name: ")
                 .append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Gender: ")
+                .append(" | NRIC: ")
+                .append(getNric())
+                .append(" | Gender: ")
                 .append(getGender())
-                .append(" Remark: ")
-                .append(getRemark())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" | Phone: ")
+                .append(getPhone())
+                .append("\n\t   Remark: ")
+                .append(getRemark());
+        if (getTags().size() > 0) {
+            builder.append(" | Tags: ");
+            getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 }

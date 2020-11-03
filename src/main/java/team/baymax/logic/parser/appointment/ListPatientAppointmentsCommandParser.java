@@ -2,7 +2,6 @@ package team.baymax.logic.parser.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -31,10 +30,10 @@ public class ListPatientAppointmentsCommandParser implements Parser<ListPatientA
     public ListPatientAppointmentsCommand parse(String args) throws ParseException, CommandException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_NAME, PREFIX_NRIC);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC);
 
-        if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+        if (!argMultimap.getPreamble().isEmpty()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
             return new ListPatientAppointmentsCommand(index);
         } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

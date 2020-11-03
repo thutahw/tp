@@ -123,6 +123,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void clearAllAppointmentsOfPatient(Patient patient) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setPatient(Patient target, Patient editedPatient) {
         throw new AssertionError("This method should not be called.");
     }

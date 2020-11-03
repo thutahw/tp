@@ -46,46 +46,33 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.getValue(PREFIX_NRIC).isPresent()
-                && argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_INDEX_AND_NRIC_BOTH_EMPTY));
-        }
-
-        if (!argMultimap.getValue(PREFIX_DATETIME).isPresent()
-                && !argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_DATETIME_AND_TIME_BOTH_EMPTY));
-        }
-
         Optional<Index> patientIndex;
         Optional<Nric> patientNric;
         Optional<DateTime> dateTime;
         Optional<Time> time;
 
-        try {
+        if (!argMultimap.getPreamble().isEmpty()) {
             patientIndex = Optional.ofNullable(ParserUtil.parseIndex(argMultimap.getPreamble()));
-        } catch (ParseException pe) {
-            patientIndex = Optional.empty();
-        }
-        try {
-            patientNric = Optional.ofNullable(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).orElse("")));
-        } catch (ParseException pe) {
             patientNric = Optional.empty();
+        } else if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
+            patientIndex = Optional.empty();
+            patientNric = Optional.ofNullable(ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).orElse("")));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_INDEX_AND_NRIC_BOTH_EMPTY));
         }
 
-        try {
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             dateTime = Optional.ofNullable(
                     ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).orElse("")));
-        } catch (ParseException pe) {
+            time = Optional.empty();
+        } else if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             dateTime = Optional.empty();
-        }
-
-        try {
             time = Optional.ofNullable(
                     ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).orElse("")));
-        } catch (ParseException pe) {
-            time = Optional.empty();
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_DATETIME_AND_TIME_BOTH_EMPTY));
         }
 
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());

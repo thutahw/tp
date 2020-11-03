@@ -146,6 +146,12 @@ public interface Model {
     void deleteAppointment(Appointment target);
 
     /**
+     * Deletes all appointments belonging to the specified patient.
+     * {@code patient} must exist in the appointment book.
+     */
+    void clearAllAppointmentsOfPatient(Patient patient);
+
+    /**
      * Adds the given appointment.
      * {@code appointment} must not already exist in the appointment book.
      */
