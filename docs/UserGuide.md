@@ -350,19 +350,22 @@ You can use this command to add a new appointment for a patient.
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
+TIME           | The time of the appointment. It must be in <ins>HH:MM</ins> format. E.g. 15:00
 DESCRIPTION    | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 NRIC           | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
 DURATION       | The duration of the appointment.
 
 **Format:**<br>
-`addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
-`addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
+`addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`
+`addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`
+`addappt INDEX at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`
+`addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`
 
 **Example:**<br>
-1. Type `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
+1. Type `addappt 1 on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -387,7 +390,7 @@ find out the patient’s `PATIENT_ID`.
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
 NRIC           | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
 NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
 
@@ -430,8 +433,8 @@ This extra step helps you to confirm the appointment to be edited, and prevents 
 Listed below are some examples of valid `editappt` commands:
 * `editappt INDEX on/DATETIME`
 * `editappt INDEX desc/DESC`
-* `editappt INDEX t/TAG`
-* You can also supply multiple parameters, e.g. `editappt INDEX t/TAG desc/DESC on/DATETIME`
+* `editappt INDEX tag/TAG`
+* You can also supply multiple parameters, e.g. `editappt INDEX tag/TAG desc/DESC on/DATETIME`
 * The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
