@@ -1,8 +1,8 @@
 package team.baymax.model.appointment;
 
 import java.util.function.Predicate;
+
 import team.baymax.model.patient.Patient;
-import team.baymax.model.util.datetime.DateTime;
 
 /**
  * Tests that an {@code Appointment}'s {@code Patient} matches the one given.

@@ -111,6 +111,9 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         appointments.remove(key);
     }
 
+    /**
+     * Clears all the appointments belonging to {@code patient} from this {@code AppointmentManager}.
+     */
     public void clearAllAppointmentsOfPatient(Patient patient) {
         BelongsToPatientPredicate predicate = new BelongsToPatientPredicate(patient);
         while (appointments.contains(predicate)) {
