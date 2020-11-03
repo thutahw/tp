@@ -67,20 +67,20 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, â
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest version of Baymax from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest version of Baymax from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
+3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data.
    
    ![Ui](images/Ui.png)
    *Figure 2.1. Baymax Graphical User Interface*
 
-1. At the top of the screen, type in your commands in the command box and press Enter to execute it.
+5. At the top of the screen, type in your commands in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
