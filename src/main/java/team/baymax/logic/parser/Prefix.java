@@ -6,9 +6,16 @@ package team.baymax.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final String type;
 
     public Prefix(String prefix) {
         this.prefix = prefix;
+        this.type = "";
+    }
+
+    public Prefix(String prefix, String type) {
+        this.prefix = prefix;
+        this.type = type;
     }
 
     public String getPrefix() {
@@ -17,6 +24,10 @@ public class Prefix {
 
     public String toString() {
         return getPrefix();
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override

@@ -11,6 +11,7 @@ import static team.baymax.logic.parser.ParserUtil.parseTagsForEdit;
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.EditAppointmentCommand;
 import team.baymax.logic.commands.appointment.EditAppointmentDescriptor;
+import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
@@ -23,7 +24,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
      * and returns an EditAppointmentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditAppointmentCommand parse(String args) throws ParseException {
+    public EditAppointmentCommand parse(String args) throws ParseException, CommandException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_DURATION);
