@@ -1,8 +1,5 @@
 package team.baymax.logic.parser;
 
-import team.baymax.logic.commands.exceptions.CommandException;
-import team.baymax.logic.parser.exceptions.ParseException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+import team.baymax.logic.commands.exceptions.CommandException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
