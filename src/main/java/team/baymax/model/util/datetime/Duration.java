@@ -29,8 +29,8 @@ public class Duration {
     /**
      * Returns true if a given Integer is a valid duration.
      */
-    public static boolean isValidDuration(Integer test) {
-        return VALIDATION_PREDICATE.test(test);
+    public static boolean isValidDuration(Integer dur) {
+        return VALIDATION_PREDICATE.test(dur);
     }
 
     @Override

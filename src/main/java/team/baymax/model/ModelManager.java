@@ -25,6 +25,7 @@ import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
+import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 
 /**
@@ -152,12 +153,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Patient getPatient(Nric nric) {
+    public Patient getPatient(Nric nric) throws ElementNotFoundException {
         return patientManager.getPatient(nric);
     }
 
     @Override
-    public Patient getPatient(Name name) {
+    public Patient getPatient(Name name) throws ElementNotFoundException {
         return patientManager.getPatient(name);
     }
 
