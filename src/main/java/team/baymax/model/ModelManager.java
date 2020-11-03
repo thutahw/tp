@@ -210,6 +210,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearAllAppointmentsOfPatient(Patient patient) {
+        appointmentManager.clearAllAppointmentsOfPatient(patient);
+    }
+
+    @Override
     public void addAppointment(Appointment appointment) {
         appointmentManager.addAppointment(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
