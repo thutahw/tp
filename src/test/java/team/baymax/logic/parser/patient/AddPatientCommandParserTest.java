@@ -65,7 +65,7 @@ public class AddPatientCommandParserTest {
 
         // multiple remarks - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one remark!");
+                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one Remark!");
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
