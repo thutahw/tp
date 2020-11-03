@@ -67,20 +67,20 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, �
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest version of Baymax from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest version of Baymax from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
+3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data.
    
    ![Ui](images/Ui.png)
    *Figure 2.1. Baymax Graphical User Interface*
 
-1. At the top of the screen, type in your commands in the command box and press Enter to execute it.
+5. At the top of the screen, type in your commands in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -151,20 +151,19 @@ Commands all take the following format:
 
 ### 4.1. Patient Information Management
 
-This feature allows you to manage patient information. You can add a new patient, delete an existing patient and edit a
-patient's details.
-
-This section will also feature a range of methods for finding patients depending on your needs. For example,
-1. If you know a patient's NRIC, you can directly find his profile using the `findByNric` command.
-2. However, if you only remember a patient's first name, you can narrow down to a list of patients with that first name using
-the `findByName` command. 
-3. Lastly, you can find patients by the tags assigned to them.
+This feature allows you to manage patient information. You can:
+1. Add a new patient
+2. List all patients
+3. Delete a patient 
+4. Edit a patient's details
+5. Add a remark to a patient
+6. Find a patient by his name
 
 #### 4.1.1. Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
 
 **Format:**<br>
-`addpatient nric/NRIC name/NAME phone/PHONE gender/GENDER [r/REMARK] [t/TAG]`
+`addpatient nric/NRIC name/NAME phone/PHONE gender/GENDER [r/REMARK] [tag/TAG]`
 
 **Parameters:** 
 
@@ -209,18 +208,18 @@ the list of patients with all their information: name, nric, contact number, gen
     *Figure 4.1.2a Listing all patients*
 
 #### 4.1.3 Delete a patient: `deletepatient`
-You can use this command to delete a patient’s profile by his or her ID. However, you will first need to use the `listpatient` command
-or the `findpatient` command to find out the patient’s ID `PATIENT_ID`. 
+You can use this command to delete a patient’s profile by his or her `INDEX`. However, you will first need to use the `listpatient` command
+to get the patient's `INDEX`.
 This extra step helps you to confirm the profile to be deleted, and prevents accidental deletes.
 
 **Format:**<br>
-`deletepatient PATIENT_ID`
+`deletepatient INDEX`
 
 **Parameters:**
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 
 **Example:**<br>
 1. Type `deletepatient 4` into the command box.
@@ -228,7 +227,7 @@ PATIENT_ID     | The index of the patient in the most recently displayed list. I
 
 **Outcome:**
 
-If the `PATIENT_ID` (i.e 4) is valid:
+If the `INDEX` (i.e 4) is valid:
 1. A success message will be displayed as shown below.
 2. The patient at index 4 in the previously displayed list will be deleted.
 
@@ -237,28 +236,28 @@ If the `PATIENT_ID` (i.e 4) is valid:
 
 #### 4.1.4 Edit a patient's information: `editpatient`
 You can use this command to edit a patient’s profile information. You can edit any field of a patient in any order. 
-However, you will first need to use the `listpatient` command or the `findpatient` command to find out the 
-patient’s `PATIENT_ID`, i.e. index within the displayed list. This extra step helps you to confirm the profile 
+However, you will first need to use the `listpatient` command to find out the 
+patient’s `INDEX` within the displayed list. This extra step helps you to confirm the profile 
 to be edited, and prevents accidental edits. 
 
 **Format:**<br>
-`editpatient PATIENT_ID <at least 1 patient information parameter>`
+`editpatient INDEX <at least 1 patient information parameter>`
 
 Listed below are some examples of valid `editpatient` commands:
-* `editpatient PATIENT_ID t/TAG`
-* `editpatient PATIENT_ID name/NAME`
-* `editpatient PATIENT_ID nric/NRIC`
-* `editpatient PATIENT_ID gender/GENDER`
-* `editpatient PATIENT_ID phone/PHONE`
-* `editpatient PATIENT_ID r/REMARK`
-* You can also supply multiple parameters, e.g. `editpatient PATIENT_ID gender/GENDER name/NAME phone/PHONE`
+* `editpatient INDEX tag/TAG`
+* `editpatient INDEX name/NAME`
+* `editpatient INDEX nric/NRIC`
+* `editpatient INDEX gender/GENDER`
+* `editpatient INDEX phone/PHONE`
+* `editpatient INDEX r/REMARK`
+* You can also supply multiple parameters, e.g. `editpatient INDEX gender/GENDER name/NAME phone/PHONE`
 * The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 NRIC    | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
 NAME    | The name of the patient. It must consist solely of alphabets, and should be a combination of the first and last name in that order. E.g. Alice Tan
 PHONE   | The hand phone number which the patient wishes to be contacted by. It must consist solely of numbers. E.g. 91710012
@@ -267,12 +266,12 @@ REMARK  | Any remarks about the patient. It can be any text -- alphanumerical, s
 TAG     | The tag for the patient. It must only be alphanumerical and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic
 
 **Example:**<br>
-1. Type `editpatient 2 t/Asthmatic` into the command box.
+1. Type `editpatient 2 tag/Asthmatic` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the `PATIENT_ID` (i.e 2) is valid:
+If the `INDEX` (i.e 2) is valid:
 1. A success message will be displayed as shown below.
 2. The tag of the patient at index 2 in the recent list will be edited.
 
@@ -284,13 +283,13 @@ You can use this command to find a patient by entering a part of his name (or hi
 The search string for the name is case-insensitive.
 
 **Format:**<br>
-`findpatient name/NAME`
+`findpatient NAME_KEYWORD`
 
 **Parameters:**
 
 Parameter Name | Description
 ---------------|------------
-NAME           | The name or keyword by which to search for the patient. It can be an incomplete part of the patient's name you are searching for. E.g. Alice
+NAME_KEYWORD   | The name or keyword by which to search for the patient. It can be an incomplete part of the patient's name you are searching for. E.g. Alice
 
 **Example:**<br>
 1. Type `findpatient Alex` into the command box.
@@ -309,16 +308,19 @@ NAME           | The name or keyword by which to search for the patient. It can 
     *Figure 4.1.5b Finding a patient by name - failure*
     
 #### 4.1.6 Add a remark to a patient: `remark`
-You can use this command to add a remark to a patient by entering their index in the most recently displayed list.
+You can use this command to add or replace a remark to a patient using their `INDEX` in the most recently displayed list.
+
+Note: each patient can only have one remark. Using this command when a patient already has a remark will
+*replace* the existing remark with the new one entered.
 
 **Format:**<br>
-`remark PATIENT_ID r/REMARK`
+`remark INDEX r/REMARK`
 
 **Parameters:**
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 REMARK         | The remark to be added to the patient.
 
 **Example:**<br>
@@ -327,12 +329,12 @@ REMARK         | The remark to be added to the patient.
 
 **Outcome:**
 
-1. If the PATIENT_ID entered is valid, a success message will be displayed as shown below.
+1. If the INDEX entered is valid, a success message will be displayed as shown below.
 
     ![remark](images/remarkSuccessOutput.png)<br>
     *Figure 4.1.6a Adding a remark to a patient - success*
     
-2. If the PATIENT_ID entered is invalid (either beyond the list or negative), an error message will be displayed as shown below.
+2. If the INDEX entered is invalid (either beyond the list or negative), an error message will be displayed as shown below.
     
     ![remark](images/remarkFailureOutput.png)<br>
     *Figure 4.1.6b Adding a remark to a patient - failure*
@@ -350,19 +352,22 @@ You can use this command to add a new appointment for a patient.
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
+TIME           | The time of the appointment. It must be in <ins>HH:MM</ins> format. E.g. 15:00
 DESCRIPTION    | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 NRIC           | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
 DURATION       | The duration of the appointment.
 
 **Format:**<br>
-`addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
-`addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]`
+`addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
+`addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
+`addappt INDEX at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
+`addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
 **Example:**<br>
-1. Type `addappt id/1 on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR` into the command box.
+1. Type `addappt 1 on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -375,24 +380,24 @@ If the command is valid (i.e. the user keyed in the valid fields):
 
 #### 4.2.2. List all appointments of a patient: `listapptof`
 You can use this command to list all the appointments belonging to a certain patient.
-However, you will first need to use the `listpatient` command or the `findpatient` command to 
-find out the patient’s `PATIENT_ID`. 
+However, you will first need to use the `listpatient` command to 
+find out the patient’s `INDEX`. 
 
 **Format:**<br>
-`listapptof id/PATIENT_ID`
-`listapptof nric/NRIC`
-`listapptof name/NAME`
+`listapptof INDEX`<br>
+`listapptof nric/NRIC`<br>
+`listapptof name/NAME`<br>
 
 **Parameters:**
 
 Parameter Name | Description
 ---------------|------------
-PATIENT_ID     | The index of the patient in the most recently displayed list. It must be a positive integer.
+INDEX     | The index of the patient in the most recently displayed list. It must be a positive integer.
 NRIC           | The nric of the patient. It must start and end with a capital letter and contain 7 numbers in between them. E.g. S1234567A
 NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
 
 **Example:**<br>
-1. Type `listapptof id/ 1` into the command box.
+1. Type `listapptof 1` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -430,8 +435,8 @@ This extra step helps you to confirm the appointment to be edited, and prevents 
 Listed below are some examples of valid `editappt` commands:
 * `editappt INDEX on/DATETIME`
 * `editappt INDEX desc/DESC`
-* `editappt INDEX t/TAG`
-* You can also supply multiple parameters, e.g. `editappt INDEX t/TAG desc/DESC on/DATETIME`
+* `editappt INDEX tag/TAG`
+* You can also supply multiple parameters, e.g. `editappt INDEX tag/TAG desc/DESC on/DATETIME`
 * The parameter(s) supplied will directly replace the original one(s)
 
 **Parameters:**
@@ -552,7 +557,7 @@ set the calendar view to a particular year and month.
 #### 4.3.1. Switch to a particular year: `year`
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
 scheduled one year in advance, you can use this function to switch to the following year. The year set by this command
-will affect the command we will discuss in Section 3.3.2 (Switching to a particular month).
+will affect the command we will discuss in Section 4.3.2 (Switching to a particular month).
 
 **Format:**<br>
 `year YEAR`
@@ -729,19 +734,19 @@ You can use this command to exit the program.
 
 **Command**             | **Example**
 ------------------------|--------------------
-Add a Patient: `addpatient nric/NRIC name/NAME phone/PHONE gender/GENDER [r/REMARK] [t/TAG]` | `addpatient nric/S9772234F name/Jason Tan phone/98765432 gender/M` 
+Add a Patient: `addpatient nric/NRIC name/NAME phone/PHONE gender/GENDER [r/REMARK] [tag/TAG]` | `addpatient nric/S9772234F name/Jason Tan phone/98765432 gender/M` 
 List All Patients: `listpatient` | `listpatient`
-Delete a Patient: `deletepatient PATIENT_ID` | `deletepatient 4`
-Edit a Patient's Information: `editpatient PATIENT_ID <at least 1 patient information parameter>` | `editpatient PATIENT_ID phone/82345678`
-Find a Patient: `findpatient name/NAME` | `findpatient Alex`
-Add a remark: `remark PATIENT_ID r/REMARK` | `remark 2 r/Not free on Fridays`
+Delete a Patient: `deletepatient INDEX` | `deletepatient 4`
+Edit a Patient's Information: `editpatient INDEX <at least 1 patient information parameter>` | `editpatient INDEX phone/82345678`
+Find a Patient: `findpatient NAME_KEYWORD` | `findpatient Alex`
+Add a remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 
 ### 6.2 Appointment Management Commands
 
 **Command**             | **Example**
 ------------------------|--------------------
-Add an Appointment: `addappt id/ID on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG] OR nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [t/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 desc/Removal of braces. t/DrGoh t/1HR`
-List Appointments of a Patient: `listapptof PATIENT_ID` | `listapptof 1`
+Add an Appointment: `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG] OR addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 desc/Removal of braces. tag/DrGoh tag/1HR`
+List Appointments of a Patient: `listapptof INDEX` | `listapptof 1`
 List All Appointments: `listappt` | `listappt`
 Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`
 Cancel an Appointment: `cancel INDEX OR cancel on/DATETIME name/NAME` | `cancel on/20-01-2020 15:00 name/Alex `

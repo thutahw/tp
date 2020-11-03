@@ -8,8 +8,9 @@ public class Nric {
     public static final String MESSAGE_CONSTRAINTS =
             "Nric should be of the format @XXXXXXX#, where:\n"
                     + "(1) @ is a letter that can be 'S', 'T', 'F' or 'G',\n"
-                    + "(2) X is a numeric digit from 0 to 9 and\n"
-                    + "(3) # is a capitalised alphabetical character";
+                    + "(2) X is a numeric digit from 0 to 9, and\n"
+                    + "(3) # is a capitalised alphabetical character"
+                    + "Note: there should be exactly 7 X's";
 
     public static final String VALIDATION_REGEX = "[stfgSTFG][0-9]{7}[a-zA-Z]";
 

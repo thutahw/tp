@@ -22,7 +22,7 @@ public class RemarkPatientCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Patient: %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Patient: \n%1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Patient: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

@@ -135,13 +135,16 @@ public class Appointment implements UniqueListElement {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getPatient())
-                .append(" Date time: ")
+        builder.append("\nPatient ")
+                .append(getPatient())
+                .append("\nDate-time: ")
                 .append(getDateTime())
-                .append(" Description: ")
-                .append(getDescription())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append("\nDescription: ")
+                .append(getDescription());
+        if (getTags().size() > 0) {
+            builder.append("\nTags: ");
+            getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 }

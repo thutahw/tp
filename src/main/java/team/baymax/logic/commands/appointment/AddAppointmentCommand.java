@@ -29,6 +29,7 @@ import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
+import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class AddAppointmentCommand extends Command {
 
@@ -59,6 +60,7 @@ public class AddAppointmentCommand extends Command {
             + "appointment book";
     public static final String MESSAGE_CLASH_APPOINTMENT = "This appointment clashes with an existing appointment";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "The patient at the specified index does not exist.";
+    public static final String MESSAGE_INVALID_NRIC = "The patient with the specified nric does not exist.";
     public static final String MESSAGE_INDEX_AND_NRIC_BOTH_EMPTY = "The patient index and NRIC should not "
             + "be both empty.";
     public static final String MESSAGE_DATETIME_AND_TIME_BOTH_EMPTY = "The datetime and time should not "
@@ -108,7 +110,11 @@ public class AddAppointmentCommand extends Command {
             }
             patient = model.getFilteredPatientList().get(patientIndex.get().getZeroBased());
         } else {
-            patient = model.getPatient(patientNric.get());
+            try {
+                patient = model.getPatient(patientNric.get());
+            } catch (ElementNotFoundException e) {
+                throw new CommandException(MESSAGE_INVALID_NRIC);
+            }
         }
 
         // dateTime takes precedence if both dateTime and time are non-null

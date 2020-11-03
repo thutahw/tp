@@ -1,7 +1,6 @@
 package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_INDEX;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -34,7 +33,7 @@ public class ListPatientAppointmentsCommand extends Command {
             + ": Lists all the appointments of the patient identified by the index number "
             + "used in the displayed patient list, a name or an nric number.\n"
             + "Parameters: "
-            + PREFIX_INDEX + " INDEX "
+            + "INDEX "
             + "(OR "
             + PREFIX_NRIC + "PATIENT_NRIC "
             + "OR "
