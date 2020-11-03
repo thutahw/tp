@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_DUPLICATE;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_VARIANT_1;
-import static team.baymax.testutil.TypicalAppointments.ALICE_APT_VARIANT_2;
-import static team.baymax.testutil.TypicalAppointments.BOB_APT;
-import static team.baymax.testutil.TypicalAppointments.CARL_APT;
-import static team.baymax.testutil.TypicalPatients.ALICE;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_DUPLICATE;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VAR_1;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VAR_2;
+import static team.baymax.testutil.appointment.TypicalAppointments.BOB_APT;
+import static team.baymax.testutil.appointment.TypicalAppointments.CARL_APT;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ public class AppointmentTest {
     @Test
     public void isSameAppointment() {
         // same dateTime and same patient -> return True
-        assertTrue(ALICE_APT.isSame(ALICE_APT_VARIANT_1));
+        assertTrue(ALICE_APT.isSame(ALICE_APT_VAR_1));
         // same dateTime and same Patient -> returns True
         assertTrue(ALICE_APT.isSame(ALICE_APT_DUPLICATE));
         // same dateTime but different Patient -> return False
@@ -34,7 +34,7 @@ public class AppointmentTest {
         // different dateTime -> return False
         assertFalse(ALICE_APT.isSame(CARL_APT));
         //same patient but different dateTime ->  returns False
-        assertFalse(ALICE_APT.isSame(ALICE_APT_VARIANT_2));
+        assertFalse(ALICE_APT.isSame(ALICE_APT_VAR_2));
     }
 
     @Test

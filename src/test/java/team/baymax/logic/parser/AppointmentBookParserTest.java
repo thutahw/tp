@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +24,9 @@ import team.baymax.logic.commands.patient.ListPatientCommand;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.Patient;
-import team.baymax.testutil.EditPatientDescriptorBuilder;
-import team.baymax.testutil.PatientBuilder;
-import team.baymax.testutil.PatientUtil;
+import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
+import team.baymax.testutil.patient.PatientUtil;
 
 public class AppointmentBookParserTest {
 
@@ -56,8 +56,9 @@ public class AppointmentBookParserTest {
     public void parseCommand_editpatient() throws Exception {
         Patient patient = new PatientBuilder().build();
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
-        EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_PATIENT.getOneBased() + " "
+                + PatientUtil.getEditPatientDescriptorDetails(descriptor));
         assertEquals(new EditPatientCommand(INDEX_FIRST_PATIENT, descriptor), command);
     }
 

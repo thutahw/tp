@@ -234,6 +234,8 @@ public class ParserUtil {
             timeObj = Time.fromString(trimmedTime);
         } catch (DateTimeParseException ex) {
             throw new ParseException(ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(ex.getMessage());
         }
         return timeObj;
     }

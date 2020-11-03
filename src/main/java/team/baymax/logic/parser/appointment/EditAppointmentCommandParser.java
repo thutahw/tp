@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.ParserUtil.parseTagsForEdit;
 
@@ -25,7 +26,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
     public EditAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_DESCRIPTION, PREFIX_TAG, PREFIX_DURATION);
 
         Index index;
 
@@ -37,9 +38,15 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
         }
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
+
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editAppointmentDescriptor.setDateTime(ParserUtil.parseDateTime(
                     argMultimap.getValue(PREFIX_DATETIME).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
+            editAppointmentDescriptor.setDuration(ParserUtil.parseDuration(
+                    argMultimap.getValue(PREFIX_DURATION).get()));
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {

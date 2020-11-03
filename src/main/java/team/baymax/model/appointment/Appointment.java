@@ -121,8 +121,7 @@ public class Appointment implements UniqueListElement {
         Appointment otherAppointment = (Appointment) other;
         return getPatient().equals(otherAppointment.getPatient())
                 && getDateTime().equals(otherAppointment.getDateTime())
-                && getTime().equals(otherAppointment.getTime())
-                && getDuration().equals(otherAppointment.duration)
+                && getDuration().equals(otherAppointment.getDuration())
                 && getDescription().equals(otherAppointment.getDescription())
                 && getStatus().equals(otherAppointment.getStatus())
                 && getTags().equals(otherAppointment.getTags());

@@ -3,13 +3,13 @@ package team.baymax.logic.commands.appointment;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
-import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.userprefs.UserPrefs;
@@ -20,9 +20,9 @@ public class ListAppointmentCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new PatientManager(), new AppointmentManager(),
+        model = new ModelManager(new PatientManager(), getTypicalAppointmentManager(),
                 new UserPrefs(), new CalendarManager());
-        expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
+        expectedModel = new ModelManager(new PatientManager(), model.getAppointmentManager(),
                 new UserPrefs(), new CalendarManager());
     }
 

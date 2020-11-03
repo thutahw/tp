@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalPatients.ALICE;
-import static team.baymax.testutil.TypicalPatients.BENSON;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +20,7 @@ import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.userprefs.UserPrefs;
-import team.baymax.testutil.PatientManagerBuilder;
+import team.baymax.testutil.patient.PatientManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -125,7 +125,7 @@ public class ModelManagerTest {
                 calendarManager)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = ALICE.getName().getFullName().split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(patientManager, appointmentManager, userPrefs,
                 calendarManager)));

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.baymax.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.appointment.AppointmentIdenticalPredicate;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.SameDatetimeAndPatientPredicate;
 import team.baymax.model.patient.Name;
@@ -28,12 +28,10 @@ public class MarkAppointmentDoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment as done by either "
-            + "the index (must be a positive number) or the date and time of the appointment and the name "
-            + "of the patient.\n"
-            + "Parameters: INDEX  or ("
-            + PREFIX_DATETIME + "DATETIME "
-            + PREFIX_NAME + "NAME\n"
-            + "For example,: " + COMMAND_WORD + " 1\n"
+            + "the displayed index of the appointment "
+            + "OR the datetime of the appointment and the name of the patient.\n"
+            + "Parameters: INDEX (or " + PREFIX_DATETIME + "DATETIME " + PREFIX_NAME + "NAME)\n"
+            + "For example, " + COMMAND_WORD + " 1\n"
             + "Alternatively, " + COMMAND_WORD + " "
             + PREFIX_DATETIME + "10-11-2020 12:30 "
             + PREFIX_NAME + "Alex";
@@ -81,7 +79,6 @@ public class MarkAppointmentDoneCommand extends Command {
         requireNonNull(model);
 
         Patient patient;
-
         Appointment appointmentToEdit;
 
         if (isFindByIndex()) {
@@ -108,7 +105,7 @@ public class MarkAppointmentDoneCommand extends Command {
                 appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.DONE);
 
         model.setAppointment(appointmentToEdit, markedAsDoneAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
 
         return new CommandResult(String.format(MESSAGE_MARK_AS_DONE_SUCCESS, markedAsDoneAppointment), getTabId());
     }

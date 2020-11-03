@@ -3,8 +3,8 @@ package team.baymax.logic.commands.patient;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -15,9 +15,9 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.patient.PatientIdenticalPredicate;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.userprefs.UserPrefs;
-import team.baymax.testutil.PatientBuilder;
-import team.baymax.testutil.TypicalIndexes;
-import team.baymax.testutil.TypicalPatients;
+import team.baymax.testutil.patient.PatientBuilder;
+import team.baymax.testutil.patient.TypicalPatientIndexes;
+import team.baymax.testutil.patient.TypicalPatients;
 
 class RemarkPatientCommandTest {
     private static final String REMARK_STUB = "Some remark";
@@ -26,11 +26,13 @@ class RemarkPatientCommandTest {
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
-        Patient firstPatient = model.getFilteredPatientList().get(TypicalIndexes.INDEX_FIRST_PATIENT.getZeroBased());
+        Patient firstPatient = model.getFilteredPatientList()
+                .get(TypicalPatientIndexes.INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new PatientBuilder(firstPatient).withRemark(REMARK_STUB).build();
 
-        RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(TypicalIndexes.INDEX_FIRST_PATIENT,
-                new Remark(editedPatient.getRemark().value));
+        RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_FIRST_PATIENT,
+                new Remark(editedPatient.getRemark().getValue()));
 
         String expectedMessage = String.format(RemarkPatientCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPatient);
 
@@ -45,9 +47,11 @@ class RemarkPatientCommandTest {
     @Test
     public void equals() {
         Patient patient = new PatientBuilder().build();
-        RemarkPatientCommand remarkPatientCommandA = new RemarkPatientCommand(TypicalIndexes.INDEX_FIRST_PATIENT,
+        RemarkPatientCommand remarkPatientCommandA = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_FIRST_PATIENT,
                 new Remark(REMARK_STUB));
-        RemarkPatientCommand remarkPatientCommandB = new RemarkPatientCommand(TypicalIndexes.INDEX_SECOND_PATIENT,
+        RemarkPatientCommand remarkPatientCommandB = new RemarkPatientCommand(
+                TypicalPatientIndexes.INDEX_SECOND_PATIENT,
                 patient.getRemark());
         // null -> returns False
         assertFalse(remarkPatientCommandA.equals(null));
@@ -58,7 +62,7 @@ class RemarkPatientCommandTest {
         // remark command but with different state-> returns False
         assertFalse(remarkPatientCommandA.equals(remarkPatientCommandB));
         // remark command with same state -> returns True
-        assertTrue(remarkPatientCommandB.equals(new RemarkPatientCommand(TypicalIndexes.INDEX_SECOND_PATIENT,
+        assertTrue(remarkPatientCommandB.equals(new RemarkPatientCommand(TypicalPatientIndexes.INDEX_SECOND_PATIENT,
                 patient.getRemark())));
     }
 }

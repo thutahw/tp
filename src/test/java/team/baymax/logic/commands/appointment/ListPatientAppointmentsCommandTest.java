@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.assertPatientCommandFailure;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
-import static team.baymax.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static team.baymax.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -73,26 +73,26 @@ public class ListPatientAppointmentsCommandTest {
 
     @Test
     public void equals() {
-        ListPatientAppointmentsCommand listFirstCommand =
+        ListPatientAppointmentsCommand firstIndexCommand =
                 new ListPatientAppointmentsCommand(INDEX_FIRST_PATIENT);
-        ListPatientAppointmentsCommand listSecondCommand =
+        ListPatientAppointmentsCommand secondIndexCommand =
                 new ListPatientAppointmentsCommand(INDEX_SECOND_PATIENT);
 
         // same object -> returns True
-        assertTrue(listFirstCommand.equals(listFirstCommand));
+        assertTrue(firstIndexCommand.equals(firstIndexCommand));
 
         // same values -> returns True
-        ListPatientAppointmentsCommand listFirstCommandCopy =
+        ListPatientAppointmentsCommand firstIndexCommandCopy =
                 new ListPatientAppointmentsCommand(INDEX_FIRST_PATIENT);
-        assertTrue(listFirstCommand.equals(listFirstCommandCopy));
+        assertTrue(firstIndexCommand.equals(firstIndexCommandCopy));
 
         // different types -> returns False
-        assertFalse(listFirstCommand.equals(1));
+        assertFalse(firstIndexCommand.equals(1));
 
         // null -> returns False
-        assertFalse(listFirstCommand.equals(null));
+        assertFalse(firstIndexCommand.equals(null));
 
         // different patient -> returns False
-        assertFalse(listFirstCommand.equals(listSecondCommand));
+        assertFalse(firstIndexCommand.equals(secondIndexCommand));
     }
 }

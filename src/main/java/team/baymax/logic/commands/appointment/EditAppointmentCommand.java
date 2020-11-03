@@ -79,7 +79,6 @@ public class EditAppointmentCommand extends Command {
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
-
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(editedAppointment));
 
         return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment), getTabId());
@@ -98,7 +97,7 @@ public class EditAppointmentCommand extends Command {
                                                        EditAppointmentDescriptor editAppointmentDescriptor) {
         assert appointmentToEdit != null;
 
-        Patient updatedPatient = appointmentToEdit.getPatient();
+        Patient unchangedPatient = appointmentToEdit.getPatient();
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
@@ -107,10 +106,10 @@ public class EditAppointmentCommand extends Command {
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
-        AppointmentStatus status = appointmentToEdit.getStatus();
+        AppointmentStatus unchangedStatus = appointmentToEdit.getStatus();
 
-        return new Appointment(updatedPatient, updatedDateTime, updatedDuration, updatedDescription,
-                updatedTags, status);
+        return new Appointment(unchangedPatient, updatedDateTime, updatedDuration, updatedDescription,
+                updatedTags, unchangedStatus);
     }
 
     @Override

@@ -3,10 +3,10 @@ package team.baymax.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalPatients.ALICE;
-import static team.baymax.testutil.TypicalPatients.HOON;
-import static team.baymax.testutil.TypicalPatients.IDA;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.HOON;
+import static team.baymax.testutil.patient.TypicalPatients.IDA;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import java.io.IOException;
 import java.nio.file.Path;

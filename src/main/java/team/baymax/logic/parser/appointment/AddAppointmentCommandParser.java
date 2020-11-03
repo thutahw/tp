@@ -41,7 +41,6 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
                         PREFIX_DESCRIPTION, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DURATION)) {
-            System.out.println("Error no description and prefix");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }

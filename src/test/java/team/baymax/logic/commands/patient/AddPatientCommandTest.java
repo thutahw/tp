@@ -18,7 +18,7 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 public class AddPatientCommandTest {
 

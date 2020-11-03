@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 

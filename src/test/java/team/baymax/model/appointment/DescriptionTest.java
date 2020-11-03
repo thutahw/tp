@@ -20,6 +20,7 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
+
         // null Description
         assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
 

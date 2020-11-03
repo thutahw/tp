@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalPatients.ALICE;
-import static team.baymax.testutil.TypicalPatients.getTypicalPatientManager;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
+import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,7 +21,7 @@ import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.modelmanagers.ReadOnlyListManager;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.uniquelist.exceptions.DuplicateElementException;
-import team.baymax.testutil.PatientBuilder;
+import team.baymax.testutil.patient.PatientBuilder;
 
 public class PatientManagerTest {
 
