@@ -41,19 +41,26 @@ public class PatientCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label remark;
+    @FXML
+    private Label nric;
 
     /**
      * Creates a {@code PatientCard} with the given {@code Patient} and index to display.
      */
     public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
-
         this.patient = patient;
+
+        renderCard(displayedIndex);
+    }
+
+    private void renderCard(int displayedIndex) {
         id.setText(displayedIndex + ". ");
-        name.setText(patient.getName().fullName);
-        phone.setText(patient.getPhone().value);
-        gender.setText(patient.getGender().gender);
-        remark.setText(patient.getRemark().value);
+        name.setText(patient.getName().getFullName());
+        phone.setText(patient.getPhone().getValue());
+        gender.setText(patient.getGender().getValue());
+        remark.setText(patient.getRemark().getValue());
+        nric.setText(patient.getNric().getValue());
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

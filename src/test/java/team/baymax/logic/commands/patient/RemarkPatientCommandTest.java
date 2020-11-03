@@ -30,7 +30,7 @@ class RemarkPatientCommandTest {
         Patient editedPatient = new PatientBuilder(firstPatient).withRemark(REMARK_STUB).build();
 
         RemarkPatientCommand remarkPatientCommand = new RemarkPatientCommand(TypicalIndexes.INDEX_FIRST_PATIENT,
-                new Remark(editedPatient.getRemark().value));
+                new Remark(editedPatient.getRemark().getValue()));
 
         String expectedMessage = String.format(RemarkPatientCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPatient);
 
