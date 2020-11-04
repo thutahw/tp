@@ -10,8 +10,6 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
 
-import java.time.DateTimeException;
-
 public class MonthCommand extends Command {
 
     public static final String COMMAND_WORD = "month";

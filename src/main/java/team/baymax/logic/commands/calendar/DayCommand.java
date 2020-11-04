@@ -2,6 +2,8 @@ package team.baymax.logic.commands.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -11,7 +13,6 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 
-import java.time.DateTimeException;
 
 public class DayCommand extends Command {
 
