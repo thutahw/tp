@@ -2,6 +2,7 @@ package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -52,6 +53,7 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if a given string is a valid DateTime format
      */
     public static boolean isValidDateTime(String test) {
+        requireNonNull(test);
         try {
             LocalDateTime.parse(test, FORMAT_INPUT);
             return true;
@@ -65,6 +67,7 @@ public class DateTime implements Comparable<DateTime> {
      *
      */
     public static DateTime from(Date d, Time t) {
+        requireAllNonNull(d, t);
         LocalDateTime dt = LocalDateTime.of(d.getDate(), t.getTime());
         return new DateTime(dt);
     }
@@ -96,24 +99,52 @@ public class DateTime implements Comparable<DateTime> {
         return new Time(dateTime.toLocalTime());
     }
 
+    /**
+     * Returns a new {@code DateTime} with the specified duration (in minutes) added.
+     *
+     * @param duration
+     * @return
+     */
     public DateTime plusMinutes(Duration duration) {
         return new DateTime(this.dateTime.plusMinutes(duration.value));
     }
 
+    /**
+     * Checks if this {@code DateTime} is after the specified date-time.
+     *
+     * @param other
+     * @return
+     */
     public boolean isAfter(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isAfter(other.dateTime);
     }
 
+    /**
+     * Checks if this {@code DateTime} is before the specified date-time.
+     *
+     * @param other
+     * @return
+     */
     public boolean isBefore(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isBefore(other.dateTime);
     }
 
+    /**
+     * Checks if this {@code DateTime} is equal to the specified date-time.
+     *
+     * @param other
+     * @return
+     */
     public boolean isEqual(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isEqual(other.dateTime);
     }
 
     @Override
     public int compareTo(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.compareTo(other.dateTime);
     }
 

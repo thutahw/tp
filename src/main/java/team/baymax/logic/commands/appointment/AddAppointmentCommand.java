@@ -66,6 +66,8 @@ public class AddAppointmentCommand extends Command {
     public static final String MESSAGE_DATETIME_AND_TIME_BOTH_EMPTY = "The datetime and time should not "
             + "be both empty.";
 
+    public static final String MESSAGE_INVALID_DURATION = "The appointment cannot last to the next day.";
+
     private final Optional<Index> patientIndex;
     private final Optional<Nric> patientNric;
     private final Optional<DateTime> dateTime;
@@ -123,6 +125,11 @@ public class AddAppointmentCommand extends Command {
         } else {
             Date date = Date.fromCalendar(model.getAppointmentCalendar());
             dt = DateTime.from(date, time.get());
+        }
+
+        //check if duration extends appointment to the next day
+        if (!(dt.getDate().equals(dt.plusMinutes(duration).getDate()))) {
+            throw new CommandException(MESSAGE_INVALID_DURATION);
         }
 
         Appointment toAdd = new Appointment(patient, dt, duration, description, tags,
