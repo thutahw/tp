@@ -22,7 +22,7 @@ package Model <<Rectangle>> {
 Class Appointment
 }
 
-HiddenOutside ..> AppointmentInfoPage
+HiddenOutside .left.> AppointmentInfoPage
 
 AppointmentInfoPage -down-> AppointmentListPanel
 AppointmentListPanel -down-> AppointmentCard

@@ -22,12 +22,7 @@ Class ResultDisplay
 Class StatusBarFooter
 Class CommandBox
 Class SideTabPane
-Class PatientInfoPage
-Class AppointmentInfoPage
-Class CalendarPage
-Class SchedulePage
-Class Dashboard
-Class InfoPage
+Class XYZPage
 }
 
 package Model <<Rectangle>> {
@@ -41,43 +36,22 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
-UiManager -down-> MainWindow
+Ui <|-- UiManager
+UiManager --> MainWindow
+MainWindow *--> SideTabPane
+SideTabPane --> XYZPage
 MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
-MainWindow *-down-> ResultDisplay
-MainWindow *-down-> StatusBarFooter
-MainWindow *-down--> SideTabPane
-SideTabPane *-down-> Dashboard
-SideTabPane *-down-> CalendarPage
-SideTabPane *-down-> SchedulePage
-SideTabPane *-down-> PatientInfoPage
-SideTabPane *-down-> AppointmentInfoPage
-SideTabPane *-down-> InfoPage
-
-MainWindow -left-|> UiPart
+MainWindow *-right-> ResultDisplay
+MainWindow *--> CommandBox
+MainWindow *-left-> StatusBarFooter
 
 SideTabPane --|> UiPart
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ResultDisplay --|> UiPart
 
-Dashboard --|> UiPart
-CalendarPage --|> UiPart
-SchedulePage --|> UiPart
-PatientInfoPage --|> UiPart
-AppointmentInfoPage --|> UiPart
-InfoPage --|> UiPart
+MainWindow ---> Logic
+XYZPage .up.> Model
 
-PatientInfoPage ...> Model
-AppointmentInfoPage ...> Model
-CalendarPage ...> Model
-SchedulePage ...> Model
-InfoPage ...> Model
+note bottom of XYZPage: XYZPage = PatientInfoPage, AppointmentInfoPage, \nSchedulePage, CalendarPage, InfoPage etc
 
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-MainWindow -[hidden]-|> UiPart
 @enduml

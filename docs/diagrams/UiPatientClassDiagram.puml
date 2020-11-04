@@ -22,7 +22,7 @@ package Model <<Rectangle>> {
 Class Patient
 }
 
-HiddenOutside ..> PatientInfoPage
+HiddenOutside .left.> PatientInfoPage
 
 PatientInfoPage -down-> PatientListPanel
 PatientListPanel -down-> PatientCard
