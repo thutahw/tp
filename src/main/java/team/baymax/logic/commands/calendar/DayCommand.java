@@ -11,6 +11,8 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 
+import java.time.DateTimeException;
+
 public class DayCommand extends Command {
 
     public static final String COMMAND_WORD = "day";
@@ -18,6 +20,7 @@ public class DayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the appointment schedule on the chosen day.\n"
             + "Parameters: DAY (must be a positive number between the first and last day of the month).\n"
             + "Example: " + COMMAND_WORD + " 21 ";
+    public static final String MESSAGE_INVALID_DATE = "The date requested is invalid.";
 
     public static final TabId TAB_ID = TabId.SCHEDULE;
 
@@ -31,7 +34,11 @@ public class DayCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.setDay(day);
+        try {
+            model.setDay(day);
+        } catch (DateTimeException e) {
+            throw new CommandException(MESSAGE_INVALID_DATE);
+        }
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));

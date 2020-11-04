@@ -10,6 +10,8 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
 
+import java.time.DateTimeException;
+
 public class MonthCommand extends Command {
 
     public static final String COMMAND_WORD = "month";
@@ -19,6 +21,7 @@ public class MonthCommand extends Command {
             + ": Switches to a particular month and updates the calendar.\n"
             + "Parameters: MONTH (must be a positive number from 1 to 12 ).\n"
             + "Example: " + COMMAND_WORD + " 12 ";
+    // public static final String MESSAGE_INVALID_DATE = "The date requested is invalid.";
     public static final TabId TAB_ID = TabId.CALENDAR;
 
     private final Month month;

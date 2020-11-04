@@ -10,6 +10,8 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
 
+import java.time.DateTimeException;
+
 public class YearCommand extends Command {
 
     public static final String COMMAND_WORD = "year";
@@ -19,6 +21,7 @@ public class YearCommand extends Command {
             + ": Switches to a particular year and updates the calendar.\n"
             + "Parameters: YEAR (must be a positive number from year 2000 onwards).\n"
             + "Example: " + COMMAND_WORD + " 2020 ";
+    public static final String MESSAGE_INVALID_DATE = "The date requested is invalid.";
     public static final TabId TAB_ID = TabId.CALENDAR;
 
     private final Year year;
@@ -31,7 +34,11 @@ public class YearCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.setYear(year);
+        try {
+            model.setYear(year);
+        } catch (DateTimeException e) {
+            throw new CommandException(MESSAGE_INVALID_DATE);
+        }
 
         Month month = model.getAppointmentCalendar().getMonth();
 

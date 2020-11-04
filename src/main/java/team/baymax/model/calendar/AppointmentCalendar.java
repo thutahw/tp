@@ -84,6 +84,8 @@ public class AppointmentCalendar {
         int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
         if (day.getValue() > maxNumOfDays) {
             setDay(new Day(maxNumOfDays));
+        } else {
+            setDay(day);
         }
     }
 
@@ -91,26 +93,24 @@ public class AppointmentCalendar {
         Day oldDay = this.day;
         this.day = day;
         dayProperty.set(day.toString());
-        updateDateProperty();
         pcs.firePropertyChange("day", oldDay, day);
+        updateDateProperty();
     }
 
     public void setMonth(Month month) {
         Month oldMonth = this.month;
         this.month = month;
         monthProperty.set(month.toString());
-        updateDateProperty();
-        pcs.firePropertyChange("month", oldMonth, month);
         updateDay();
+        pcs.firePropertyChange("month", oldMonth, month);
     }
 
     public void setYear(Year year) {
         Year oldYear = this.year;
         this.year = year;
         yearProperty.set(year.toString());
-        updateDateProperty();
-        pcs.firePropertyChange("year", oldYear, year);
         updateDay();
+        pcs.firePropertyChange("year", oldYear, year);
     }
 
     public void updateDateProperty() {
