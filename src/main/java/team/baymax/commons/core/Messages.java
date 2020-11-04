@@ -12,5 +12,5 @@ public class Messages {
             + "is invalid";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "No such appointment exists.";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "No such patient exists.";
-
+    public static final String MESSAGE_DUPLICATE_PARAM = "There can only be one %s !";
 }

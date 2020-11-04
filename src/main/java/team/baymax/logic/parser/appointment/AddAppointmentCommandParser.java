@@ -36,7 +36,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      * and returns an AddAppointmentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddAppointmentCommand parse(String args) throws ParseException, CommandException {
+    public AddAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_DATETIME, PREFIX_TIME, PREFIX_DURATION,
                         PREFIX_DESCRIPTION, PREFIX_TAG);

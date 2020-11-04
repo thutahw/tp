@@ -6,7 +6,6 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.commons.exceptions.IllegalValueException;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.commands.patient.RemarkPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
@@ -22,7 +21,7 @@ public class RemarkPatientCommandParser implements Parser<RemarkPatientCommand> 
      * and returns a RemarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RemarkPatientCommand parse(String args) throws ParseException, CommandException {
+    public RemarkPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
 
