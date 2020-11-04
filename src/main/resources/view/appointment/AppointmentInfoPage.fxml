@@ -11,6 +11,6 @@
             <Insets top="10" right="10" bottom="100" left="10"/>
         </padding>
         <Label text="Appointment Information"></Label>
-        <StackPane fx:id="appointmentListPanelPlaceholder"/>
+        <StackPane fx:id="appointmentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
     </VBox>
 </StackPane>

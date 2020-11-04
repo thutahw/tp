@@ -1,6 +1,7 @@
 package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
@@ -52,6 +53,7 @@ public class DateTime implements Comparable<DateTime> {
      * Returns true if a given string is a valid DateTime format
      */
     public static boolean isValidDateTime(String test) {
+        requireNonNull(test);
         try {
             LocalDateTime.parse(test, FORMAT_INPUT);
             return true;
@@ -65,6 +67,7 @@ public class DateTime implements Comparable<DateTime> {
      *
      */
     public static DateTime from(Date d, Time t) {
+        requireAllNonNull(d, t);
         LocalDateTime dt = LocalDateTime.of(d.getDate(), t.getTime());
         return new DateTime(dt);
     }
@@ -101,19 +104,23 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     public boolean isAfter(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isAfter(other.dateTime);
     }
 
     public boolean isBefore(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isBefore(other.dateTime);
     }
 
     public boolean isEqual(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.isEqual(other.dateTime);
     }
 
     @Override
     public int compareTo(DateTime other) {
+        requireAllNonNull(other);
         return dateTime.compareTo(other.dateTime);
     }
 
