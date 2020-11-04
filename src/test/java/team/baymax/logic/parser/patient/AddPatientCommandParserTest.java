@@ -51,21 +51,21 @@ public class AddPatientCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
                 + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        // multiple names - throws command error
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Name!");
 
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        // multiple phones - throws command error
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Phone number!");
 
-        // multiple genders - last gender accepted
-        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        // multiple genders - throws command error
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
+                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Gender!");
 
-        // multiple remarks - last remark accepted
-        assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+        // multiple remarks - throws command error
+        assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
+                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one Remark!");
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)

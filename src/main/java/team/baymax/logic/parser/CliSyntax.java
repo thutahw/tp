@@ -6,16 +6,16 @@ package team.baymax.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_NRIC = new Prefix("nric/");
-    public static final Prefix PREFIX_NAME = new Prefix("name/");
-    public static final Prefix PREFIX_PHONE = new Prefix("phone/");
-    public static final Prefix PREFIX_GENDER = new Prefix("gender/");
-    public static final Prefix PREFIX_TAG = new Prefix("tag/");
-    public static final Prefix PREFIX_REMARK = new Prefix("r/");
-    public static final Prefix PREFIX_INDEX = new Prefix("id/");
-    public static final Prefix PREFIX_DATETIME = new Prefix("on/");
-    public static final Prefix PREFIX_TIME = new Prefix("at/");
-    public static final Prefix PREFIX_DURATION = new Prefix("dur/");
-    public static final Prefix PREFIX_DESCRIPTION = new Prefix("desc/");
+    public static final Prefix PREFIX_NRIC = new Prefix("nric/", "NRIC");
+    public static final Prefix PREFIX_NAME = new Prefix("name/", "Name");
+    public static final Prefix PREFIX_PHONE = new Prefix("phone/", "Phone number");
+    public static final Prefix PREFIX_GENDER = new Prefix("gender/", "Gender");
+    public static final Prefix PREFIX_TAG = new Prefix("tag/", "Tag");
+    public static final Prefix PREFIX_REMARK = new Prefix("r/", "Remark");
+    public static final Prefix PREFIX_INDEX = new Prefix("id/", "Index");
+    public static final Prefix PREFIX_DATETIME = new Prefix("on/", "DateTime");
+    public static final Prefix PREFIX_TIME = new Prefix("at/", "Time");
+    public static final Prefix PREFIX_DURATION = new Prefix("dur/", "Duration");
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("desc/", "Description");
 
 }

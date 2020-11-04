@@ -11,6 +11,7 @@ import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
 
+import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
@@ -35,7 +36,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddPatientCommand parse(String args) throws ParseException {
+    public AddPatientCommand parse(String args) throws ParseException, CommandException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG,
                         PREFIX_REMARK);

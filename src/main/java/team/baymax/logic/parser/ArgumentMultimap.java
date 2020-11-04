@@ -1,10 +1,14 @@
 package team.baymax.logic.parser;
 
+import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import team.baymax.logic.commands.exceptions.CommandException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -25,8 +29,11 @@ public class ArgumentMultimap {
      * @param prefix   Prefix key with which the specified argument value is to be associated
      * @param argValue Argument value to be associated with the specified prefix key
      */
-    public void put(Prefix prefix, String argValue) {
+    public void put(Prefix prefix, String argValue) throws CommandException {
         List<String> argValues = getAllValues(prefix);
+        if (!prefix.equals(PREFIX_TAG) && argValues.size() >= 1) {
+            throw new CommandException("There can only be one " + prefix.getType() + "!");
+        }
         argValues.add(argValue);
         argMultimap.put(prefix, argValues);
     }

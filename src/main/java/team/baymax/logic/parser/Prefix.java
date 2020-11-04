@@ -6,9 +6,25 @@ package team.baymax.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final String type;
 
+    /**
+     * Constructor for Prefix
+     * @param prefix String to be matched with for prefix (e.g. "tag/")
+     */
     public Prefix(String prefix) {
         this.prefix = prefix;
+        this.type = "";
+    }
+
+    /**
+     * Constructor for Prefix
+     * @param prefix String to be matched with for prefix (e.g. "tag/")
+     * @param type String describing type of prefix (e.g. "Tag" for tag/ prefix)
+     */
+    public Prefix(String prefix, String type) {
+        this.prefix = prefix;
+        this.type = type;
     }
 
     public String getPrefix() {
@@ -17,6 +33,10 @@ public class Prefix {
 
     public String toString() {
         return getPrefix();
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override
