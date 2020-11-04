@@ -9,10 +9,10 @@ import team.baymax.model.tag.Tag;
 /**
  * Tests that an {@code Appointment}'s {@code Description} or {@code Tags} contain any of the keywords given.
  */
-public class AppointmentContainsKeywordPredicate implements Predicate<Appointment> {
+public class AppointmentContainsKeywordsPredicate implements Predicate<Appointment> {
     private final List<String> keywords;
 
-    public AppointmentContainsKeywordPredicate(List<String> keywords) {
+    public AppointmentContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -35,8 +35,8 @@ public class AppointmentContainsKeywordPredicate implements Predicate<Appointmen
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same objectF
-                || (other instanceof AppointmentContainsKeywordPredicate // instanceof handles nulls
-                && keywords.equals(((AppointmentContainsKeywordPredicate) other).keywords)); // state check
+                || (other instanceof AppointmentContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((AppointmentContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
