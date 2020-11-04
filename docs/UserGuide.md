@@ -3,10 +3,11 @@
 2. [Quick Start](#2-quick-start)
 3. [About](#3-about)<br>
     3.1. [Structure of this Document](#31-structure-of-this-document)<br>
-    3.1. [Reading this Document](#32-reading-this-document)<br>
+    3.2. [Reading this Document](#32-reading-this-document)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3.3. [Command Format & Syntax](#323-command-format--syntax)<br>
+    3.3  [Navigation between tabs](#33-navigation-between-tabs)<br>
 4. [Features](#4-features)<br>
     4.1. [Patient Information Management](#41-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Add a new patient: `addpatient`](#411-add-a-new-patient-addpatient)<br>
@@ -142,6 +143,15 @@ Commands all take the following format:
   E.g. `name/NAME phone/PHONE_NUMBER`: can also be used as `phone/PHONE_NUMBER name/NAME`.
 
 </div>
+
+### 3.3 Navigation between tabs
+
+1. Type `dashboard` inside the command box to switch to the dashboard tab.
+2. Type `calendar` inside the command box to switch to the calendar tab.
+3. Type `schedule` inside the command box to switch to the schedule tab.
+4. Type `patient` inside the command box to switch to the patients tab.
+5. Type `appt` inside the command box to switch to the appointments tab.
+6. Type `help` inside the command box to receive the link to this user guide.
 
 -----------------------------------------------------------------------------------
 ## 4. Features
