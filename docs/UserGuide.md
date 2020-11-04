@@ -1,21 +1,20 @@
-# Baymax - User Guide
-
 ## Table of Contents
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [About](#3-about)<br>
     3.1. [Structure of this Document](#31-structure-of-this-document)<br>
-    3.1. [Reading this Document](#32-reading-this-document)<br>
+    3.2. [Reading this Document](#32-reading-this-document)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3.3. [Command Format & Syntax](#323-command-format--syntax)<br>
+    3.3  [Navigation between tabs](#33-navigation-between-tabs)<br>
 4. [Features](#4-features)<br>
     4.1. [Patient Information Management](#41-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Add a new patient: `addpatient`](#411-add-a-new-patient-addpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.2. [List all patients: `listpatient`](#412-list-all-patients-listpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.3. [Delete a patient profile: `deletepatient`](#413-delete-a-patient-profile-deletepatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.4. [Edit a patient profile: `editpatient`](#414-edit-a-patient-profile-editpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.5. [Find a patient: `findpatient`](#415-find-a-patient-find)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.3. [Delete a patient profile: `deletepatient`](#413-delete-a-patient-deletepatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.4. [Edit a patient profile: `editpatient`](#414-edit-a-patients-information-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.5. [Find a patient: `findpatient`](#415-find-a-patient-findpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.6. [Add a remark to a patient: `remark`](#416-add-a-remark-to-a-patient-remark)<br>
     4.2. [Appointment Management](#42-appointment-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2.1. [Add a new appointment: `addappt`](#421-add-a-new-appointment-addappt)<br>
@@ -29,9 +28,9 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.1. [Switch to a particular year: `year`](#431-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.2. [Switch to a particular month: `month`](#432-switch-to-a-particular-month-month)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.3. [Switch to a particular day: `day`](#433-switch-to-a-particular-day-day)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Display appointments within a period: `period`](#435-display-appointments-within-a-period-coming-soon-period)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3.4. [Display appointments within a period: `period`](#434-display-appointments-within-a-period-coming-soon-period)<br>
     4.4. [Utilities](#44-utilities)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.1. [View help : `help`](#441-view-help--help)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.1. [View help : `help`](#441-view-help-help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.2. [Switch between tabs:](#442-switch-between-tabs)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4.3. [Exit the program: `exit`](#443-exit-the-program--exit)<br>
 5. [FAQ](#5-faq)<br>
@@ -67,7 +66,7 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, â
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest version of Baymax from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest version of Baymax from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
@@ -144,6 +143,15 @@ Commands all take the following format:
   E.g. `name/NAME phone/PHONE_NUMBER`: can also be used as `phone/PHONE_NUMBER name/NAME`.
 
 </div>
+
+### 3.3 Navigation between tabs
+
+1. Type `dashboard` inside the command box to switch to the dashboard tab.
+2. Type `calendar` inside the command box to switch to the calendar tab.
+3. Type `schedule` inside the command box to switch to the schedule tab.
+4. Type `patient` inside the command box to switch to the patients tab.
+5. Type `appt` inside the command box to switch to the appointments tab.
+6. Type `help` inside the command box to receive the link to this user guide.
 
 -----------------------------------------------------------------------------------
 ## 4. Features
