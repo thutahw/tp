@@ -1,7 +1,6 @@
 package team.baymax.logic.parser;
 
 import team.baymax.logic.commands.Command;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
 
 /**

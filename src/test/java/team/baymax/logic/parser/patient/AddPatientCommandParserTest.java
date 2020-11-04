@@ -18,8 +18,8 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.PREAMBLE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_LTP;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_DIABETIC;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_LTP;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;

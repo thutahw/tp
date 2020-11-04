@@ -77,8 +77,8 @@ Figure 2. Class Diagram of the Logic Component
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
-<img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
-Figure 3. Delete Appointment Sequence Diagram<br><br>
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+Figure 3. Architecture Sequence Diagram<br><br>
 
 The sections below give more details of each component.
 

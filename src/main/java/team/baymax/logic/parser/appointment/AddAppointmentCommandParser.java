@@ -14,7 +14,6 @@ import java.util.Set;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.AddAppointmentCommand;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
