@@ -13,7 +13,7 @@ import team.baymax.model.util.TabId;
  */
 public class ListPatientCommand extends Command {
 
-    public static final String COMMAND_WORD = "listpatient";
+    public static final String COMMAND_WORD = "listpatients";
 
     public static final String MESSAGE_SUCCESS = "Listed all patients";
     public static final TabId TAB_ID = TabId.PATIENT;

@@ -29,11 +29,11 @@
 
       <VBox>
         <MenuBar VBox.vgrow="NEVER" fx:id="menuBar">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+          <Menu mnemonicParsing="false" text="File" >
+            <MenuItem mnemonicParsing="false" style="-fx-text-fill: black;" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          <Menu mnemonicParsing="false" text="Help" >
+            <MenuItem fx:id="helpMenuItem" style="-fx-text-fill: black;" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
 
