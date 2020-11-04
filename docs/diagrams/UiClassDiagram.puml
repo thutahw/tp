@@ -4,17 +4,30 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+package UI <<Rectangle>> {
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PatientListPanel
-Class PatientCard
 Class StatusBarFooter
 Class CommandBox
+Class SideTabPane
+Class PatientInfoPage
+Class AppointmentInfoPage
+Class CalendarPage
+Class SchedulePage
+Class Dashboard
+Class InfoPage
 }
 
 package Model <<Rectangle>> {
@@ -33,28 +46,38 @@ UiManager -down-> MainWindow
 MainWindow --> HelpWindow
 MainWindow *-down-> CommandBox
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PatientListPanel
 MainWindow *-down-> StatusBarFooter
-
-PatientListPanel -down-> PatientCard
+MainWindow *-down--> SideTabPane
+SideTabPane *-down-> Dashboard
+SideTabPane *-down-> CalendarPage
+SideTabPane *-down-> SchedulePage
+SideTabPane *-down-> PatientInfoPage
+SideTabPane *-down-> AppointmentInfoPage
+SideTabPane *-down-> InfoPage
 
 MainWindow -left-|> UiPart
 
+SideTabPane --|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PatientListPanel --|> UiPart
-PatientCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
+HelpWindow --|> UiPart
 
-PatientCard ..> Model
+Dashboard --|> UiPart
+CalendarPage --|> UiPart
+SchedulePage --|> UiPart
+PatientInfoPage --|> UiPart
+AppointmentInfoPage --|> UiPart
+InfoPage --|> UiPart
+
+PatientInfoPage ...> Model
+AppointmentInfoPage ...> Model
+CalendarPage ...> Model
+SchedulePage ...> Model
+InfoPage ...> Model
+
 UiManager -right-> Logic
 MainWindow -left-> Logic
-
-PatientListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml

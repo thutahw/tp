@@ -1,42 +1,49 @@
 @startuml
-hide empty members
-skinparam linetype ortho
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor MODEL_COLOR
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor MODEL_COLOR_T3
 
-interface ReadOnlyListManager
-interface Model
-interface UniqueListElement
+Class HiddenOutside #FFFFFF
 
-class UniqueList<? extends UniqueListElement>
-class PatientManager {
-    UniqueList<Patient>
-}
-class AppointmentManager {
-    UniqueList<Appointment>
-}
-class Description {
-    String value
+package Model <<Rectangle>> {
+Interface ReadOnlyListManager<<Interface>>
+Interface Model<<Interface>>
+Class ModelManager
+Class UserPrefs
+Class PatientManager
+Class AppointmentManager
+Class CalendarManager
 }
 
-enum AppointmentStatus {
-    DONE, MISSED, UPCOMING
-}
+HiddenOutside ..> Model
 
 Model <|.. ModelManager
-UserPrefs <.. ModelManager
-Patient <-r- ModelManager: filtered list
-Appointment <-l- ModelManager: filtered list
-Patient <-- Appointment: < has a list of
-Appointment <-- Patient: < contains
-Appointment -- Description
-Appointment -- AppointmentStatus
+ModelManager ..> UserPrefs
+ModelManager ..> PatientManager
+ModelManager ..> AppointmentManager
+ModelManager ..> CalendarManager
+AppointmentManager ..|> ReadOnlyListManager
+PatientManager ..|> ReadOnlyListManager
 
-ReadOnlyListManager <|.. PatientManager
-PatientManager <.. ModelManager
+'Patient <-r- ModelManager: filtered list
+'Appointment <-l- ModelManager: filtered list
+'Patient <-- Appointment: < has a list of
+'Appointment <-- Patient: < contains
+'Appointment -- Description
+'Appointment -- AppointmentStatus
 
-UniqueListElement <|.. Patient
-UniqueListElement <|.. Appointment
-
-ReadOnlyListManager <|.. AppointmentManager
-AppointmentManager <.. ModelManager
+'ReadOnlyListManager <|.. PatientManager
+'PatientManager <.. ModelManager
+'
+'UniqueListElement <|.. Patient
+'UniqueListElement <|.. Appointment
+'
+'ReadOnlyListManager <|.. AppointmentManager
+'AppointmentManager <.. ModelManager
 
 @enduml

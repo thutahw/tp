@@ -61,10 +61,6 @@ public class AppointmentCalendar {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
 
-    public ReadOnlyAppointmentCalendar asUnmodifiableAppointmentCalendar() {
-        return new ReadOnlyAppointmentCalendar(this);
-    }
-
     public Day getDay() {
         return day;
     }

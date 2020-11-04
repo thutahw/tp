@@ -121,10 +121,17 @@ public class EditPatientCommandParserTest {
     @Test
     public void parse_duplicateFieldsExceptTag_parseExceptionThrown() {
         // all duplicate fields with the exception of tags should throw an exception
+
+        // name
         assertThrows(ParseException.class, () -> parser.parse("1" + NAME_DESC_AMY + NAME_DESC_BOB));
+
+        // phone
         assertThrows(ParseException.class, () -> parser.parse("1" + PHONE_DESC_AMY + PHONE_DESC_BOB));
+
+        // gender
         assertThrows(ParseException.class, () -> parser.parse("1" + GENDER_DESC_AMY + GENDER_DESC_BOB));
-        assertThrows(ParseException.class, () -> parser.parse("1" + PHONE_DESC_AMY + PHONE_DESC_BOB));
+
+        // remark
         assertThrows(ParseException.class, () -> parser.parse("1" + REMARK_DESC_AMY + REMARK_DESC_BOB));
     }
 

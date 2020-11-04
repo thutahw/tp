@@ -30,6 +30,7 @@ public class Dashboard extends UiPart<Region> {
     private Label dayLabel;
 
     private AppointmentListPanel appointmentListPanel;
+    private DigitalClock clock;
 
     /**
      * Constructs a dashboard with the given {@code ObservableList}.
@@ -38,8 +39,8 @@ public class Dashboard extends UiPart<Region> {
     public Dashboard(ObservableList<Appointment> appointmentsToday) {
         super(FXML);
 
-        timePanel.getChildren().add(new DigitalClock());
-
+        clock = new DigitalClock();
+        timePanel.getChildren().add(clock);
 
         dayLabel.setText(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/");
         monthLabel.setText(Calendar.getInstance().get(Calendar.MONTH) + 1 + "/");
