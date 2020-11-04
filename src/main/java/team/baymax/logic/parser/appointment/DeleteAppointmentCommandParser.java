@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.DeleteAppointmentCommand;
+import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
@@ -24,7 +25,7 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteAppointmentCommand parse(String args) throws ParseException {
+    public DeleteAppointmentCommand parse(String args) throws ParseException, CommandException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =

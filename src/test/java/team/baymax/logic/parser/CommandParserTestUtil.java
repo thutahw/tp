@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Assertions;
 
 import team.baymax.logic.commands.Command;
+import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
 
 /**
@@ -20,7 +21,7 @@ public class CommandParserTestUtil {
         try {
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
-        } catch (ParseException pe) {
+        } catch (ParseException | CommandException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }
     }
@@ -33,7 +34,7 @@ public class CommandParserTestUtil {
         try {
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
-        } catch (ParseException pe) {
+        } catch (ParseException | CommandException pe) {
             Assertions.assertEquals(expectedMessage, pe.getMessage());
         }
     }
