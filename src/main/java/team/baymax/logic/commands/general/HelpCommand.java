@@ -12,8 +12,7 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = String.format("Enter '%s' into the command box to see "
-            + "a list of commands you can use.", COMMAND_WORD);
+    public static final String MESSAGE_USAGE = String.format("Enter '%s' to see our User Guide.", COMMAND_WORD);
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 

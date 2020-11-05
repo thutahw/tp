@@ -1,0 +1,24 @@
+#commandScrollView {
+    -fx-background-color: #eeeeee;
+    -fx-max-height: 400;
+}
+
+.heading {
+    -fx-font-size: 18;
+}
+
+.command-label {
+    -fx-padding: 2 5 2 5;
+    -fx-border-insets: 2 5 2 5;
+    -fx-background-insets: 2 5 2 5;
+    -fx-background-color: #dddbdb;
+    -fx-border-style: solid;
+    -fx-border-color: #bebcbc;
+    -fx-border-width: 2;
+    -fx-border-radius: 2;
+}
+
+.gridbox {
+    -fx-min-width: 300;
+    -fx-padding: 10;
+}

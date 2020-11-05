@@ -5,11 +5,67 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
 <StackPane fx:id="infoPage" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@InfoPage.css" />
+    </stylesheets>
     <VBox fx:id="infoList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <Label text="Additional information"></Label>
+        <Label text="Command List"/>
+        <Label text="The following is a list of commands currently supported in Baymax:"/>
+        <ScrollPane fx:id="commandScrollView">
+            <VBox>
+                <HBox>
+                    <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
+                        <Label styleClass="heading" text="Navigation"/>
+                        <Label styleClass="command-label" text="dashboard"/>
+                        <Label styleClass="command-label" text="calendar"/>
+                        <Label styleClass="command-label" text="schedule"/>
+                        <Label styleClass="command-label" text="patient"/>
+                        <Label styleClass="command-label" text="appt"/>
+                    </VBox>
+                    <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
+                        <Label styleClass="heading" text="Patient Management"/>
+                        <Label styleClass="command-label" text="addpatient"/>
+                        <Label styleClass="command-label" text="listpatients"/>
+                        <Label styleClass="command-label" text="deletepatient"/>
+                        <Label styleClass="command-label" text="editpatient"/>
+                        <Label styleClass="command-label" text="findpatient"/>
+                        <Label styleClass="command-label" text="remark"/>
+                    </VBox>
+                    <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
+                        <Label styleClass="heading" text="Utilities"/>
+                        <Label styleClass="command-label" text="help"/>
+                        <Label styleClass="command-label" text="exit"/>
+                    </VBox>
+                </HBox>
+                <HBox>
+                    <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
+                        <Label styleClass="heading" text="Appointment Management"/>
+                        <Label styleClass="command-label" text="addappt"/>
+                        <Label styleClass="command-label" text="listapptof"/>
+                        <Label styleClass="command-label" text="listappts"/>
+                        <Label styleClass="command-label" text="editappt"/>
+                        <Label styleClass="command-label" text="cancel"/>
+                        <Label styleClass="command-label" text="done"/>
+                        <Label styleClass="command-label" text="missed"/>
+                        <Label styleClass="command-label" text="findappt"/>
+                    </VBox>
+                    <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
+                        <Label styleClass="heading" text="Calendar"/>
+                        <Label styleClass="command-label" text="year"/>
+                        <Label styleClass="command-label" text="month"/>
+                        <Label styleClass="command-label" text="day"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+        <Label text="Note: Some commands are removed from this list as they can cause you to lose data."/>
+        <Label text="Please refer to the User Guide for more details on how to use them properly."/>
     </VBox>
 </StackPane>
