@@ -101,7 +101,7 @@ public class ParserUtil {
         if (!Nric.isValidNric(trimmedNric)) {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
-        return new Nric(trimmedNric);
+        return new Nric(trimmedNric.toUpperCase());
     }
 
     /**
@@ -149,7 +149,7 @@ public class ParserUtil {
         if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
-        return new Gender(trimmedGender);
+        return new Gender(trimmedGender.toUpperCase());
     }
 
     /**
