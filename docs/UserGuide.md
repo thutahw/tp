@@ -33,7 +33,7 @@ title: Baymax - User Guide
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.1. [Switch to a particular year: `year`](#531-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.2. [Switch to a particular month: `month`](#532-switch-to-a-particular-month-month)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.3. [Switch to a particular day: `day`](#533-switch-to-a-particular-day-day)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.4. [Display appointments within a period: `period`](#534-display-appointments-within-a-period-coming-soon-period)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.4. [Display appointments within a period (coming soon): `period`](#534-display-appointments-within-a-period-coming-soon-period)<br>
     5.4. [Utilities](#54-utilities)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.1. [View help : `help`](#541-view-help-help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.2. [Exit the program: `exit`](#542-exit-the-program--exit)<br>
@@ -103,6 +103,7 @@ This subsection familiarises you with all the technical terms, symbols and synta
 document, so as to make it easier for you to read the rest of the document. 
 
 #### 3.2.1 GUI Terminology
+
 ![addpatient](images/gui.png)<br>
 *Figure 3.2.1 GUI Components*
 
@@ -252,7 +253,7 @@ the list of patients with all their information: name, nric, contact number, gen
 
 1. All the patients in the system will be listed as shown below.
 
-    ![listpatient](images/listpatient.png)<br>
+    ![listpatients](images/listpatients.png)<br>
     *Figure 5.1.2a Listing all patients*
 
 #### 5.1.3 Delete a patient: `deletepatient`
@@ -270,16 +271,16 @@ Parameter Name | Description
 INDEX     | The index of the patient in the most recently displayed list. It must be a <ins>positive</ins> integer.
 
 **Example:**<br>
-1. Type `deletepatient 4` into the command box.
+1. Type `deletepatient 1` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the `INDEX` (i.e 4) is valid:
+If the `INDEX` (i.e 1) is valid:
 1. A success message will be displayed as shown below.
-2. The patient at index 4 in the previously displayed list will be deleted.
+2. The patient at index 1 in the previously displayed list will be deleted.
 
-    ![deletepatient](images/deletepatient.png)<br>
+    ![deletepatient](images/deletepatientsuccess.png)<br>
     *Figure 5.1.3a Deleting a patient - success*
 
 In the case where the `INDEX` is invalid (E.g `deletepatient 11` is entered, but there are only 8 patients):
@@ -329,7 +330,7 @@ If the `INDEX` (i.e 2) is valid:
 1. A success message will be displayed as shown below.
 2. The tag of the patient at index 2 in the recent list will be edited.
 
-    ![editpatient](images/editpatient.png)<br>
+    ![editpatient](images/editpatientsuccess.png)<br>
     *Figure 5.1.4a Editing a patient's information - success*
     
 In the case where the field to edit is absent (E.g `editpatient 3` is entered):
@@ -360,7 +361,7 @@ NAME_KEYWORD   | The name or keyword by which to search for the patient. It can 
 
 1. If the patient is found, a success message will be displayed as shown below.
 
-    ![findpatient](images/findpatient.png)<br>
+    ![findpatient](images/findpatientsuccess.png)<br>
     *Figure 5.1.5a Finding a patient by name - success*
     
 2. If patient is not found, then none will be displayed as shown below.
@@ -435,7 +436,7 @@ Note:
 2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
 
 **Example:**<br>
-1. Type `addappt 1 on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR` into the command box.
+1. Type `addappt 1 on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -489,7 +490,7 @@ You can use this command to list all the appointments in the system, which belon
 
 1. All the appointments in the system will be listed as shown below.
 
-    ![listappt](images/listappt.png)<br>
+    ![listappts](images/listappts.png)<br>
     *Figure 5.2.3a Listing all appointments*
 
 #### 5.2.4. Edit an appointment: `editappt`
@@ -517,14 +518,14 @@ DESCRIPTION    | The description of the appointment. It can be <ins>any text</in
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 
 **Example:**<br>
-1. Type `editappt 1 on/12-10-2020 12:00` into the command box.
+1. Type `editappt 6 on/12-10-2020 12:00` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the INDEX (i.e 1) is valid:
+If the INDEX (i.e 6) is valid:
 1. A success message will be displayed as shown below.
-2. The `DATETIME` of the appointment at index 1 in the recent list will be edited.
+2. The `DATETIME` of the appointment at index 6 in the recent list will be edited.
 
     ![editappt](images/editappt.png)<br>
     *Figure 5.2.4a Editing an appointment*
@@ -562,7 +563,7 @@ If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be removed.
 
-    ![cancelappt](images/cancelappt.png)<br>
+    ![cancelappt](images/cancelAppt.png)<br>
     *Figure 5.2.5a Cancelling an appointment*
 
 #### 5.2.6 Mark an appointment as done: `done`
@@ -597,7 +598,7 @@ If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be marked as done.
 
-    ![changeyear](images/markapptdone.png)<br>
+    ![markapptdone](images/markApptDone.png)<br>
     *Figure 5.2.6a Marking an appointment as done*
     
 #### 5.2.7 Mark an appointment as missed: `missed`
@@ -633,7 +634,7 @@ If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be marked as missed.
 
-    ![changeyear](images/markapptmissed.png)<br>
+    ![markapptmissed](images/markapptmissed.png)<br>
     *Figure 5.2.7a Marking an appointment as missed*
 
 #### 5.2.8 Find appointment by keyword: `findappt`
@@ -775,7 +776,6 @@ TO             | The day of the month you want to end viewing with. It must be a
 **Outcome:**
 1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar view.
 
-[App Screenshot (Still in Progress)]
 ----------------------------------------------------------------------------------
 
 ### 5.4. Utilities
@@ -845,6 +845,7 @@ Cancel an Appointment: `cancel INDEX` OR `cancel on/DATETIME name/NAME` | `cance
 Mark an Appointment as done: `done INDEX` OR `done on/DATETIME name/NAME` | `done on/20-01-2020 15:00 name/Charlotte`
 Mark an Appointment as missed: `missed INDEX` OR `missed on/DATETIME name/NAME` | `missed 1`
 Find an Appointment: `findappt DESCRIPTION_KEYWORD` OR `findappt TAG_KEYWORD` | `findappt eye`
+
 ### 7.3 Calendar Commands
 
 **Command**             | **Example**
