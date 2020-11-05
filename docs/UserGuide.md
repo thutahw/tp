@@ -77,7 +77,7 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, â
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    Note how the app contains some sample data.
    
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png)<br>
    *Figure 2.1. Baymax Graphical User Interface*
 
 5. At the top of the screen, type in your commands in the command box and press Enter to execute it.
@@ -151,7 +151,7 @@ Commands all take the following format:
     
   E.g Entering `addpatient name/John name/Jane nric/S1234567G phone/12345678 gender/F` where `name` is a compulsory field will give:
    
-  ![invalidparams](images/multipleparamsnotaccepted.png)
+  ![invalidparams](images/multipleparamsnotaccepted.png)<br>
   *Figure 3.2.3a Multiple compulsory details are not accepted*
 </div>
 
@@ -336,7 +336,7 @@ If the `INDEX` (i.e 2) is valid:
 In the case where the field to edit is absent (E.g `editpatient 3` is entered):
 1. A message prompting the user to provide at least 1 field to edit will be displayed as shown below.
 
-    ![editfailure](images/editpatientmissingfield.png)
+    ![editfailure](images/editpatientmissingfield.png)<br>
     *Figure 5.1.4b Editing a patient's information - failure*
 
 Note: You can clear all tags of the patient by entering ` editpatient INDEX tag/ `
