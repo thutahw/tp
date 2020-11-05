@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor MODEL_COLOR_T4
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor MODEL_COLOR_T4
+
+class PatientManager {
+- patients : UniqueList
++ addPatient(p : Patient)
++ setPatient(target : Patient, editedPatient : Patient)
++ removePatient(key : Patient)
++ hasPatient(patient : Patient) : boolean
++ hasPatient(nric : Nric) : boolean
++ getPatient(name : Name) : Patient
++ getPatient(nric : Nric) : Patient
+}
+
+class UniqueList {
+- internalList : ObservableList
+- internalUnmodifiableList : ObservableList
++ contains(toCheck : UniqueListElement) : boolean
++ add(toAdd : UniqueListElement)
++ sort(cmp : Comparator)
++ setElement(target : UniqueListElement, edited : UniqueListElement)
++ remove(toRemove : UniqueListElement)
+}
+
+@enduml
