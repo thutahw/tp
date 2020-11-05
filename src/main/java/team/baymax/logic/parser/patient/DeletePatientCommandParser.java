@@ -1,7 +1,5 @@
 package team.baymax.logic.parser.patient;
 
-import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.parser.Parser;
