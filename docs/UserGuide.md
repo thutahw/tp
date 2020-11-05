@@ -794,7 +794,7 @@ You can use this command to view the URL link to the full *User Guide* (this doc
 **Outcome:**<br>
 1. A link directing the user to the help page will be displayed as shown below, together with a summarised list of commands.
 
-    ![help](images/help.png)
+    ![help](images/help.png)<br>
     *Figure 5.4.1a Executing `help` command*
 
 #### 5.4.2 Exit the program : `exit`
