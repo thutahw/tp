@@ -3,16 +3,16 @@ layout: page
 title: Baymax - User Guide
 ---
 ## Table of Contents
-1. [Introduction](#1-introduction)
-2. [Quick Start](#2-quick-start)
-3. [About](#3-about)<br>
+1. [**Introduction**](#1-introduction)<br>
+2. [**Quick start**](#2-quick-start)<br>
+3. [**About**](#3-about)<br>
     3.1. [Structure of this Document](#31-structure-of-this-document)<br>
     3.2. [Reading this Document](#32-reading-this-document)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3. [Command Format & Syntax](#323-command-format--syntax)<br>
-4. [Navigating between tabs](#4-navigating-between-tabs)
-5. [Features](#5-features)<br>
+4. [**Navigating between tabs**](#4-navigating-between-tabs)
+5. [**Features**](#5-features)<br>
     5.1. [Patient Information Management](#51-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.1. [Add a new patient: `addpatient`](#511-add-a-new-patient-addpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.2. [List all patients: `listpatients`](#512-list-all-patients-listpatients)<br>
@@ -33,16 +33,19 @@ title: Baymax - User Guide
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.1. [Switch to a particular year: `year`](#531-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.2. [Switch to a particular month: `month`](#532-switch-to-a-particular-month-month)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.3. [Switch to a particular day: `day`](#533-switch-to-a-particular-day-day)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.4. [Display appointments within a period (coming soon): `period`](#534-display-appointments-within-a-period-coming-soon-period)<br>
     5.4. [Utilities](#54-utilities)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.1. [View help : `help`](#541-view-help-help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.2. [Exit the program: `exit`](#542-exit-the-program--exit)<br>
-6. [FAQ](#6-faq)<br>
-7. [Command Summary](#7-command-summary)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.3. [Clear all data: `clear`](#543-clear-all-data-in-baymax-clear)<br>
+    5.5. [Features coming soon in Version 2.0](#55-features-coming-in-version-20)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.1. [Undo/Redo v2.0](#551-undoredo-v20)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.2. [Display appointments within a period v2.0](#552-display-appointments-within-a-period-v20)<br>
+6. [**FAQ**](#6-faq)<br>
+7. [**Command summary**](#7-command-summary)<br>
     7.1. [Patient Information Management Commands](#71-patient-information-management-commands)<br>
     7.2. [Appointment Management Commands](#72-appointment-management-commands)<br>
     7.3. [Calendar Commands](#73-calendar-commands)<br>
-    7.4. [Utilities Commands](#74-utilities-commands)<br>
+    7.4. [Utility Commands](#74-utility-commands)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -62,15 +65,15 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 
 All of these can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
 calendar view -- it shows you how busy a particular day or week is at a glance, so that you can help patients make 
-quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
+quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick start”!
 
 --------------------------------------------------------------------------------
 
-## 2. Quick Start
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest version of Baymax from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
+2. Download the latest version of `Baymax.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
@@ -78,7 +81,7 @@ quick decisions on the ground! What are you waiting for? Head on to Section 2, �
    Note how the app contains some sample data.
    
    ![Ui](images/Ui.png)<br>
-   *Figure 2.1. Baymax Graphical User Interface*
+   *Figure 2a. Baymax Graphical User Interface*
 
 5. At the top of the screen, type in your commands in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -100,19 +103,19 @@ and commands easily by referring to the Table of Contents at the top of this Use
 
 ### 3.2. Reading this Document
 This subsection familiarises you with all the technical terms, symbols and syntax that are used throughout this 
-document, so as to make it easier for you to read the rest of the document. 
+document, in order to make it easier for you to read the rest of the document. 
 
-#### 3.2.1 GUI Terminology
+#### 3.2.1. GUI Terminology
 
 ![addpatient](images/gui.png)<br>
-*Figure 3.2.1 GUI Components*
+*Figure 3.2.1a. GUI Components*
 
 GUI Component | Description
 --------------|--------------
-Command Box   | Commands are entered here
-Command Result Box | Success and error messages of command executions are displayed here
-Tabs | Dashboard, Calendar, Schedule, Patient, Appointment, and Additional Information tabs can be accessed here
-Main Display | Calendar views, Patient lists and Appointment lists are displayed here in their respective tabs
+Command Box   | Commands are entered here.
+Command Result Box | Success and error messages of command executions are displayed here.
+Tabs | Dashboard, Calendar, Schedule, Patient, Appointment, and Additional Information tabs can be accessed here. Note that the tabs are **not** clickable. See [here](#4-navigating-between-tabs) to find out how to navigate between tabs.
+Main Display | Calendar views, Patient lists and Appointment lists are displayed here in their respective tabs.
 
 #### 3.2.2. General Symbols
 
@@ -135,9 +138,13 @@ Commands all take the following format:
 
   E.g. `addpatient name/NAME`: can be used as `addpatient name/Alice Tan`.
 
+* When the command requires time in HH:MM format, it follows the **24 Hour** System. 
+ 
+  E.g. 01:00 means 1 a.m. and 13:00 means 1 p.m.
+
 * Items in square brackets are **optional**.
 
-  E.g `name/NAME [remark/REMARK]`: can be used as `name/Alice Tan remark/No drug allergy` or as `name/Alice Tan`.
+  E.g. `name/NAME [remark/REMARK]`: can be used as `name/Alice Tan remark/No drug allergy` or as `name/Alice Tan`.
 
 * Items with `…`​ after them can be used **multiple** times including zero times.<br>
   
@@ -149,10 +156,10 @@ Commands all take the following format:
   
 * Compulsory parameters supplied more than once will be deemed **invalid**.
     
-  E.g Entering `addpatient name/John name/Jane nric/S1234567G phone/12345678 gender/F` where `name` is a compulsory field will give:
+  E.g. Entering `addpatient name/John name/Jane nric/S1234567G phone/12345678 gender/F` where `name` is a compulsory field will give:
    
   ![invalidparams](images/multipleparamsnotaccepted.png)<br>
-  *Figure 3.2.3a Multiple compulsory details are not accepted*
+  *Figure 3.2.3a. Multiple compulsory details are not accepted*
 </div>
 
 ------------------------------------------------------------------------------------------
@@ -187,7 +194,7 @@ help       | Help/Additional Information
 1. The second tab, featuring the calendar page, will be displayed as shown in the image below.<br>
 
     ![editappt](images/tabToCalendar.png)<br>
-    *Figure 4a Changing to calendar tab*
+    *Figure 4a. Changing to calendar tab*
 
 -----------------------------------------------------------------------------------
 ## 5. Features
@@ -227,17 +234,23 @@ TAG           | The tag for the patient. It must only be <ins>alphanumerical</in
 **Outcome:**
 
 If the command is valid (i.e. the user keyed in the valid fields):
-1. A success message will be displayed in the *Command Result* box. <br>
+1. A success message will be displayed in the *Command Result* box as shown in Figure 5.1.1a. <br>
+2. The patient with the information supplied by the parameters will be created and added to the system.
 
     ![addpatient](images/addpatient.png)<br>
-    *Figure 5.1.1a Adding a patient - success*
-2. The patient with the information supplied by the parameters will be created and added to the system.
+    *Figure 5.1.1a. Adding a patient - success*
+
+**Note**:
+
+When the patient is added successfully, the main display only shows the newly added patient so that you do not need to scroll down all the way to the bottom of the patient list to ensure that the new patient is added.    
+If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
 
 In the case where the command entered is invalid (e.g `NRIC` has 8 numbers in the middle):
 1. An invalid command message will be displayed in the *Command Result* box, specifying which field was entered incorrectly. <br>
 
     ![invalidnric](images/invalidNRIC.png)<br>
-    *Figure 5.1.1b Adding a patient - failure*
+    *Figure 5.1.1b. Adding a patient - failure*
+    
 #### 5.1.2. List all patients: `listpatients`
 You can use this command to list all the patients in the system. The *Main Display* of the GUI will show
 the list of patients with all their information: name, nric, contact number, gender, remark, tags, and appointments.
@@ -254,12 +267,16 @@ the list of patients with all their information: name, nric, contact number, gen
 1. All the patients in the system will be listed as shown below.
 
     ![listpatients](images/listpatients.png)<br>
-    *Figure 5.1.2a Listing all patients*
+    *Figure 5.1.2a. Listing all patients*
 
-#### 5.1.3 Delete a patient: `deletepatient`
+#### 5.1.3. Delete a patient: `deletepatient`
 You can use this command to delete a patient’s profile by his or her `INDEX`. However, you will first need to use the `listpatients` command
 to get the patient's `INDEX`.
 This extra step helps you to confirm the profile to be deleted, and prevents accidental deletes.
+
+**Note**: 
+
+When you delete a patient, all the appointments associated with that patient will also be deleted.
 
 **Format:**<br>
 `deletepatient INDEX`
@@ -281,15 +298,15 @@ If the `INDEX` (i.e 1) is valid:
 2. The patient at index 1 in the previously displayed list will be deleted.
 
     ![deletepatient](images/deletepatientsuccess.png)<br>
-    *Figure 5.1.3a Deleting a patient - success*
+    *Figure 5.1.3a. Deleting a patient - success*
 
 In the case where the `INDEX` is invalid (E.g `deletepatient 11` is entered, but there are only 8 patients):
 1. "**Invalid patient index**" message will be displayed as shown below.
 
     ![invaliddelete](images/invaliddeletepatient.png)<br>
-    *Figure 5.1.3b Deleting a patient - failure*
+    *Figure 5.1.3b. Deleting a patient - failure*
     
-#### 5.1.4 Edit a patient's information: `editpatient`
+#### 5.1.4. Edit a patient's information: `editpatient`
 You can use this command to edit a patient’s profile information. You can edit any field of a patient in any order. 
 However, you will first need to use the `listpatients` command to find out the 
 patient’s `INDEX` within the displayed list. This extra step helps you to confirm the profile 
@@ -331,16 +348,24 @@ If the `INDEX` (i.e 2) is valid:
 2. The tag of the patient at index 2 in the recent list will be edited.
 
     ![editpatient](images/editpatientsuccess.png)<br>
-    *Figure 5.1.4a Editing a patient's information - success*
+    *Figure 5.1.4a. Editing a patient's information - success*
+
+**Note**:
+
+When the patient's information is edited successfully, the main display only shows the recently edited patient so that you do not need to scroll through the patient list to ensure that the patient's details are edited.    
+If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
     
 In the case where the field to edit is absent (E.g `editpatient 3` is entered):
 1. A message prompting the user to provide at least 1 field to edit will be displayed as shown below.
 
     ![editfailure](images/editpatientmissingfield.png)<br>
-    *Figure 5.1.4b Editing a patient's information - failure*
+    *Figure 5.1.4b. Editing a patient's information - failure*
 
-Note: You can clear all tags of the patient by entering ` editpatient INDEX tag/ `
-#### 5.1.5 Find patient by name: `findpatient`
+**Note**: 
+
+You can clear all the tags of the patient by entering ` editpatient INDEX tag/ `
+
+#### 5.1.5. Find patient by name: `findpatient`
 You can use this command to find a patient by entering a part of his name (or his full name). 
 The search string for the name is case-insensitive.
 
@@ -362,17 +387,19 @@ NAME_KEYWORD   | The name or keyword by which to search for the patient. It can 
 1. If the patient is found, a success message will be displayed as shown below.
 
     ![findpatient](images/findpatientsuccess.png)<br>
-    *Figure 5.1.5a Finding a patient by name - success*
+    *Figure 5.1.5a. Finding a patient by name - success*
     
 2. If patient is not found, then none will be displayed as shown below.
     
     ![findpatient](images/findPatientFailure.png)<br>
-    *Figure 5.1.5b Finding a patient by name - failure*
+    *Figure 5.1.5b. Finding a patient by name - failure*
     
-#### 5.1.6 Add a remark to a patient: `remark`
+#### 5.1.6. Add a remark to a patient: `remark`
 You can use this command to add or replace a remark to a patient using their `INDEX` in the most recently displayed list.
 
-Note: each patient can only have one remark. Using this command when a patient already has a remark will
+**Note**: 
+
+Each patient can only have one remark. Using this command when a patient already has a remark will
 *replace* the existing remark with the new one entered.
 
 **Format:**<br>
@@ -394,12 +421,17 @@ REMARK         | The remark to be added to the patient.
 1. If the INDEX entered is valid, a success message will be displayed as shown below.
 
     ![remark](images/remarkSuccessOutput.png)<br>
-    *Figure 5.1.6a Adding a remark to a patient - success*
+    *Figure 5.1.6a. Adding a remark to a patient - success*
     
 2. If the INDEX entered is invalid (either beyond the list or negative), an error message will be displayed as shown below.
     
     ![remark](images/remarkFailureOutput.png)<br>
-    *Figure 5.1.6b Adding a remark to a patient - failure*
+    *Figure 5.1.6b. Adding a remark to a patient - failure*
+
+**Note**:
+
+When a remark is added to a patient successfully, the main display only shows the patient with the edited remark so that you do not need to scroll through the patient list to ensure that the new remark is added to that patient.    
+If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
 
 ----------------------------------------------------------------------------------
 
@@ -431,7 +463,7 @@ DURATION       | The duration of the appointment in minutes, not spanning more t
 
 `addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
-Note: 
+**Note**: 
 1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
 2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
 
@@ -445,7 +477,7 @@ If the command is valid (i.e. the user keyed in the valid fields):
 1. A success message will be displayed as shown below. <br>
 
     ![addappt](images/addappt.png)<br>
-    *Figure 5.2.1a Scheduling a new appointment for a patient*
+    *Figure 5.2.1a. Scheduling a new appointment for a patient*
 
 #### 5.2.2. List all appointments of a patient: `listapptof`
 You can use this command to list all the appointments belonging to a certain patient.
@@ -474,7 +506,7 @@ NAME           | The name by which to search for the patient. It can be an incom
 1. All appointments associated with the patient will be displayed as shown below.
 
     ![listapptof](images/listApptOf.png)<br>
-    *Figure 5.2.2a Listing the appointments of a patient*
+    *Figure 5.2.2a. Listing the appointments of a patient*
 
 #### 5.2.3. List all appointments: `listappts`
 You can use this command to list all the appointments in the system, which belong to any patient.
@@ -491,7 +523,7 @@ You can use this command to list all the appointments in the system, which belon
 1. All the appointments in the system will be listed as shown below.
 
     ![listappts](images/listappts.png)<br>
-    *Figure 5.2.3a Listing all appointments*
+    *Figure 5.2.3a. Listing all appointments*
 
 #### 5.2.4. Edit an appointment: `editappt`
 You can use this command to edit an appointment. You can edit any field of an appointment in any order. 
@@ -528,9 +560,14 @@ If the INDEX (i.e 6) is valid:
 2. The `DATETIME` of the appointment at index 6 in the recent list will be edited.
 
     ![editappt](images/editappt.png)<br>
-    *Figure 5.2.4a Editing an appointment*
+    *Figure 5.2.4a. Editing an appointment*
 
-#### 5.2.5 Cancel an appointment: `cancel`
+**Note**:
+
+When an appointment is edited successfully, the main display only shows the recently edited appointment so that you do not need to scroll through the appointment list to ensure that the appointment is edited.    
+If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.
+
+#### 5.2.5. Cancel an appointment: `cancel`
 You can use this command to cancel an appointment within the system either by specifying the `INDEX` of the appointment 
 or the `DATETIME` of the appointment with the `NAME` of the patient.
 
@@ -564,10 +601,10 @@ If the command is valid (i.e. the specified appointment exists):
 2. The appointment specified will be removed.
 
     ![cancelappt](images/cancelAppt.png)<br>
-    *Figure 5.2.5a Cancelling an appointment*
+    *Figure 5.2.5a. Cancelling an appointment*
 
-#### 5.2.6 Mark an appointment as done: `done`
-You can use this command to mark an appointment within the system as done either by specifying `INDEX` of the appointment or the `DATETIME` of the appointment with the `NAME` of the patient.
+#### 5.2.6. Mark an appointment as done: `done`
+You can use this command to mark an appointment within the system as done either by specifying `INDEX` of the appointment, or the `DATETIME` of the appointment with the `NAME` of the patient.
 
 **Format:**<br>
 `done INDEX`<br>
@@ -599,9 +636,14 @@ If the command is valid (i.e. the specified appointment exists):
 2. The appointment specified will be marked as done.
 
     ![markapptdone](images/markApptDone.png)<br>
-    *Figure 5.2.6a Marking an appointment as done*
+    *Figure 5.2.6a. Marking an appointment as done*
+   
+**Note**:
+
+When an appointment is marked as `done` successfully, the main display only shows that appointment so that you do not need to scroll through the appointment list to ensure that the appointment is marked as `done`.    
+If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.   
     
-#### 5.2.7 Mark an appointment as missed: `missed`
+#### 5.2.7. Mark an appointment as missed: `missed`
 You can use this command to mark an appointment within the system as missed by specifying the patient it belongs to 
 and the `DATETIME` of the appointment.
 
@@ -635,9 +677,14 @@ If the command is valid (i.e. the specified appointment exists):
 2. The appointment specified will be marked as missed.
 
     ![markapptmissed](images/markapptmissed.png)<br>
-    *Figure 5.2.7a Marking an appointment as missed*
+    *Figure 5.2.7a. Marking an appointment as missed*
 
-#### 5.2.8 Find appointment by keyword: `findappt`
+**Note**:
+
+When an appointment is marked as `missed` successfully, the main display only shows that appointment so that you do not need to scroll through the appointment list to ensure that the appointment is marked as `missed`.    
+If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.   
+
+#### 5.2.8. Find appointment by keyword: `findappt`
 You can use this command to find an appointment or appointments by entering a part of the appointment description, or a part of the tag name. 
 The search string for the keyword entered is case-insensitive.
 
@@ -651,6 +698,7 @@ Parameter Name | Description
 ---------------|------------
 DESCRIPTION_KEYWORD   | The keyword by which to search for the appointment. It can be an incomplete part of the <ins>description</ins> of the appointment you are searching for. E.g. Removal
 TAG_KEYWORD           | The keyword by which to search for the appointment. It can be an incomplete part of the <ins>tag</ins> of the appointment you are searching for. E.g DrG, Dr
+
 **Example:**<br>
 1. Type `findappt check` into the command box.
 2. Press `Enter` on your keyboard.
@@ -660,7 +708,7 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
 1. If the appointment is found, a success message will be displayed as shown below.
 
     ![findappt](images/findapptbydesc.png)<br>
-    *Figure 5.2.8a Finding an appointment by description*
+    *Figure 5.2.8a. Finding an appointment by description*
 
 **Example:**<br>
 1. Type `findappt dr` into the command box.
@@ -671,7 +719,7 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
 1. If appointment is found, a succcess message will be displayed as shown below.
     
     ![findappt](images/findapptbytag.png)<br>
-    *Figure 5.2.8b Finding an appointment by tag*
+    *Figure 5.2.8b. Finding an appointment by tag*
     
 -------------------------------------------------------------------------------
 
@@ -679,6 +727,10 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
 This feature allows you to view the availability status of each day in a month, as well as the appointment schedule
 for a period of time or within a particular day / week. The following subsections will guide you through the commands to
 set the calendar view to a particular year and month.
+
+**Note**:
+
+The dates in the calendar view are **not** clickable.
 
 #### 5.3.1. Switch to a particular year: `year`
 You can use this command to switch to a particular year. The default is the current year. Suppose there are appointments
@@ -728,7 +780,7 @@ MONTH          | The month you want to switch to. It must be a <ins>positive</in
 1. The month will be set to September.
 
     ![changemonth](images/changeMonth.png)<br>
-    *Figure 5.3.2a Changing the month to September*
+    *Figure 5.3.2a. Changing the month to September*
 
 #### 5.3.3. Switch to a particular day: `day`
 You can use this command to select a particular day, and display its schedule (with all appointments within the day).
@@ -750,32 +802,8 @@ DAY            | The day of the month you want to switch to. It must be a <ins>p
 1. The day 04-11-2020 will be selected.
 
     ![changeday](images/scheduleview.png)<br>
-    *Figure 5.3.3a Viewing the schedule on the 4th November 2020*
+    *Figure 5.3.3a. Viewing the schedule on the 4th November 2020*
     
-
-#### 5.3.4. Display appointments within a period (coming soon): `period`
-You can use this command to display all appointments within a specified period, defined by a start `day` and an end 
-`day`. The `year` and `month` are assumed to be the current `year` and `month`.
-
-**Format:**<br>
-`period from/START to/END`
-
-**Parameters:**
-
-Parameter Name | Description
----------------|------------
-FROM           | The day of the month you want to start viewing from. It must be a <ins>positive</ins> number between 1 and `TO`. E.g. if `TO` is 10, the range of numbers you can enter is 1 to 10.
-TO             | The day of the month you want to end viewing with. It must be a <ins>positive</ins> number **between** `FROM` and the last day of the month, both inclusive. E.g. if the month is February (which only has 28 days) and `FROM` is 5, the range of numbers you can enter is 5 to 28.
-
-**Example:**<br>
-1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
-2. Type `month 3` into the command box and press Enter to switch to March.
-3. Type `period from/1 to/7` into the command box.
-4. Press Enter on your keyboard.
-
-**Outcome:**
-1. All appointments from 2020-03-01 to 2020-03-07 will be displayed in the calendar view.
-
 ----------------------------------------------------------------------------------
 
 ### 5.4. Utilities
@@ -795,9 +823,9 @@ You can use this command to view the URL link to the full *User Guide* (this doc
 1. A link directing the user to the help page will be displayed as shown below, together with a summarised list of commands.
 
     ![help](images/help.png)<br>
-    *Figure 5.4.1a Executing `help` command*
+    *Figure 5.4.1a. Executing `help` command*
 
-#### 5.4.2 Exit the program : `exit`
+#### 5.4.2. Exit the program : `exit`
 
 You can use this command to exit the program.
 
@@ -809,6 +837,43 @@ You can use this command to exit the program.
 
 **Outcome:**<br>
 1. The application window will close,and it will stop running. 
+
+#### 5.4.3. Clear all data in Baymax: `clear`
+
+**Note**: This is a command to be used with **caution**. 
+
+You can use this command to clear all the patient and appointment information. Once cleared, it cannot be undone.
+
+**Format:** `clear`
+
+**Example:**<br>
+1. Type `clear` into the command box.
+2. Press `Enter` on your keyboard.
+
+**Outcome:**<br>
+1. The patients and appointments in the system will be cleared as shown below.
+    
+    ![clear](images/clearcommand.png)<br>
+    *Figure 5.4.3a. Executing `clear` command*
+    
+    ![emptypatients](images/listemptypatients.png)<br>
+    *Figure 5.4.3b. Patient List when `listpatients` is entered*
+    
+    ![emptyappts](images/listemptyappts.png)<br>
+    *Figure 5.4.3c. Appointment List when `listappts` is entered*
+    
+---------------------------------------------------------------------------------
+
+### 5.5. Features coming in Version 2.0
+
+#### 5.5.1. Undo/Redo `v2.0`
+
+This feature will allow you to undo/redo certain commands.
+
+#### 5.5.2. Display appointments within a period `v2.0`
+
+This feature will allow you to view all the appointments within a specified period, defined by a start `day` and an end
+`day`. 
 
 ---------------------------------------------------------------------------------
 ## 6. FAQ
@@ -822,7 +887,7 @@ You can use this command to exit the program.
 ## 7. Command Summary
 (Contributed by Hui Ling and Reuben)
 
-### 7.1 Patient Information Management Commands
+### 7.1. Patient Information Management Commands
 
 **Command**             | **Example**
 ------------------------|--------------------
@@ -831,22 +896,22 @@ List All Patients: `listpatients` | `listpatients`
 Delete a Patient: `deletepatient INDEX` | `deletepatient 4`
 Edit a Patient's Information: `editpatient INDEX <at least 1 patient information parameter>` | `editpatient INDEX phone/82345678`
 Find a Patient: `findpatient NAME_KEYWORD` | `findpatient Alex`
-Add a remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
+Add a Remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 
-### 7.2 Appointment Management Commands
+### 7.2. Appointment Management Commands
 
 **Command**             | **Example**
 ------------------------|--------------------
-Add an Appointment: `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` OR `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 desc/Removal of braces. tag/DrGoh tag/1HR`
+Add an Appointment: `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` OR `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR`
 List Appointments of a Patient: `listapptof INDEX` | `listapptof 1`
-List All Appointments: `listappts` | `listappts`
+List all Appointments: `listappts` | `listappts`
 Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`
 Cancel an Appointment: `cancel INDEX` OR `cancel on/DATETIME name/NAME` | `cancel on/20-01-2020 15:00 name/Alex `
 Mark an Appointment as done: `done INDEX` OR `done on/DATETIME name/NAME` | `done on/20-01-2020 15:00 name/Charlotte`
 Mark an Appointment as missed: `missed INDEX` OR `missed on/DATETIME name/NAME` | `missed 1`
 Find an Appointment: `findappt DESCRIPTION_KEYWORD` OR `findappt TAG_KEYWORD` | `findappt eye`
 
-### 7.3 Calendar Commands
+### 7.3. Calendar Commands
 
 **Command**             | **Example**
 ------------------------|--------------------
@@ -854,10 +919,11 @@ Switch to a particular year: `year YEAR` | `year 2021`
 Switch to a particular month: `month MONTH` | `month 11`
 Switch to a particular day: `day DAY` | `day 15`
 
-### 7.4 Utilities Commands
+### 7.4. Utility Commands
 
 **Command**             | **Example**
 ------------------------|--------------------
 View help: `help` | `help`
 Switch between tabs: `TAB_NAME` | `calendar`
 Exit the program : `exit` | `exit`
+Clear all data: `clear`   | `clear`
