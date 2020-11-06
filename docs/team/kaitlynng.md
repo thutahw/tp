@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Li Jianhan's Project Portfolio Page
+title: Kaitlyn Ng's Project Portfolio Page
 ---
 
 ## Project: AddressBook Level 3

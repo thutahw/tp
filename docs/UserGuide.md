@@ -848,7 +848,16 @@ You can use this command to clear all the patient and appointment information. O
 
 **Outcome:**<br>
 1. The patients and appointments in the system will be cleared as shown below.
-
+    
+    ![clear](images/clearcommand.png)<br>
+    *Figure 5.4.3a. Executing `clear` command*
+    
+    ![emptypatients](images/listemptypatients.png)<br>
+    *Figure 5.4.3b. Patient List when `listpatients` is entered*
+    
+    ![emptyappts](images/listemptyappts.png)<br>
+    *Figure 5.4.3c. Appointment List when `listappts` is entered*
+    
 ---------------------------------------------------------------------------------
 
 ### 5.5. Features coming in Version 2.0
@@ -883,7 +892,7 @@ List All Patients: `listpatients` | `listpatients`
 Delete a Patient: `deletepatient INDEX` | `deletepatient 4`
 Edit a Patient's Information: `editpatient INDEX <at least 1 patient information parameter>` | `editpatient INDEX phone/82345678`
 Find a Patient: `findpatient NAME_KEYWORD` | `findpatient Alex`
-Add a remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
+Add a Remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 
 ### 7.2. Appointment Management Commands
 
@@ -891,7 +900,7 @@ Add a remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 ------------------------|--------------------
 Add an Appointment: `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` OR `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR`
 List Appointments of a Patient: `listapptof INDEX` | `listapptof 1`
-List All Appointments: `listappts` | `listappts`
+List all Appointments: `listappts` | `listappts`
 Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`
 Cancel an Appointment: `cancel INDEX` OR `cancel on/DATETIME name/NAME` | `cancel on/20-01-2020 15:00 name/Alex `
 Mark an Appointment as done: `done INDEX` OR `done on/DATETIME name/NAME` | `done on/20-01-2020 15:00 name/Charlotte`
