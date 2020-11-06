@@ -2,11 +2,15 @@ package team.baymax.logic.commands.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.util.TabId;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
 
@@ -31,7 +35,12 @@ public class MonthCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.setMonth(month);
+        try {
+            model.setDay(new Day((1)));
+            model.setMonth(month);
+        } catch (DateTimeException ex) {
+            throw new CommandException(Date.MESSAGE_INVALID_DATE);
+        }
 
         Year year = model.getAppointmentCalendar().getYear();
 
