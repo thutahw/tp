@@ -45,6 +45,10 @@ public class DayCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabId());
     }
 
+    public Day getDay() {
+        return day;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;

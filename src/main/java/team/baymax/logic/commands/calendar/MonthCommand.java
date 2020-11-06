@@ -47,6 +47,10 @@ public class MonthCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), getTabId());
     }
 
+    public Month getMonth() {
+        return month;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;

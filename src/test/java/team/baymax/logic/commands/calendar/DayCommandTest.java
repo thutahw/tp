@@ -1,7 +1,9 @@
 package team.baymax.logic.commands.calendar;
 
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.VALID_DAY;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_1;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.assertCalendarCommandFailure;
 import static team.baymax.testutil.calendar.TypicalCalendar.getTypicalCalendarManager;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +24,7 @@ public class DayCommandTest {
 
     @Test
     public void execute_validDay_success() {
-        Day validDay = new Day(VALID_DAY);
+        Day validDay = new Day(DAY_1);
 
         DayCommand dayCommand = new DayCommand(validDay);
 
@@ -39,4 +41,13 @@ public class DayCommandTest {
         assertCommandSuccess(dayCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_invalidDay_failure() {
+
+        // Current date in appointment calendar is 01-02-2021 (non-leap-year)
+        Day invalidDay = new Day(DAY_29);
+        DayCommand dayCommand = new DayCommand(invalidDay);
+
+        assertCalendarCommandFailure(dayCommand, model, Date.MESSAGE_INVALID_DATE);
+    }
 }

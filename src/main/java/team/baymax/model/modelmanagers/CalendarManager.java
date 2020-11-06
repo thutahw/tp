@@ -3,6 +3,7 @@ package team.baymax.model.modelmanagers;
 import static java.util.Objects.requireNonNull;
 
 import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.patient.Patient;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -15,6 +16,14 @@ public class CalendarManager {
     }
 
     public CalendarManager() {}
+
+    /**
+     * Creates a CalendarManager using the day, month and year in {@code toBeCopied}
+     */
+    public CalendarManager(CalendarManager toBeCopied) {
+        this();
+        resetCalendar(toBeCopied);
+    }
 
     public AppointmentCalendar getAppointmentCalendar() {
         return appointmentCalendar;

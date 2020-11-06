@@ -84,33 +84,36 @@ public class AppointmentCalendar {
     }
 
     public void setDay(Day day) {
-        Day oldDay = this.day;
+        Day prev = this.day;
+        Date newDate = new Date(day, month, year);
         this.day = day;
-        dayProperty.set(day.toString());
-        updateDateProperty();
-        pcs.firePropertyChange("day", oldDay, day);
+        updateDateProperty(newDate);
+        pcs.firePropertyChange("day", prev, day);
     }
 
     public void setMonth(Month month) {
-        Month oldMonth = this.month;
+        Month prev = this.month;
+        Date newDate = new Date(day, month, year);
         this.month = month;
-        monthProperty.set(month.toString());
-        updateDateProperty();
-        pcs.firePropertyChange("month", oldMonth, month);
+        updateDateProperty(newDate);
+        pcs.firePropertyChange("month", prev, month);
         updateDay();
     }
 
     public void setYear(Year year) {
-        Year oldYear = this.year;
+        Year prev = this.year;
+        Date newDate = new Date(day, month, year);
         this.year = year;
-        yearProperty.set(year.toString());
-        updateDateProperty();
-        pcs.firePropertyChange("year", oldYear, year);
+        updateDateProperty(newDate);
+        pcs.firePropertyChange("year", prev, year);
         updateDay();
     }
 
-    public void updateDateProperty() {
-        dateProperty.set(new Date(day, month, year).toString());
+    public void updateDateProperty(Date date) {
+        dateProperty.set(date.toString());
+        dayProperty.set(date.getDay().toString());
+        monthProperty.set(date.getMonth().toString());
+        yearProperty.set(date.getYear().toString());
     }
 
     public SimpleStringProperty getDayProperty() {
