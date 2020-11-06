@@ -3,7 +3,6 @@ package team.baymax.model.modelmanagers;
 import static java.util.Objects.requireNonNull;
 
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.model.patient.Patient;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;

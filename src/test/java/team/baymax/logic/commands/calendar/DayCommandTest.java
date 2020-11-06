@@ -1,8 +1,8 @@
 package team.baymax.logic.commands.calendar;
 
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_1;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.assertCalendarCommandFailure;
 import static team.baymax.testutil.calendar.TypicalCalendar.getTypicalCalendarManager;
 

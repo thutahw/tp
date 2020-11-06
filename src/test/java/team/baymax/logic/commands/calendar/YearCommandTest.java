@@ -1,17 +1,15 @@
 package team.baymax.logic.commands.calendar;
 
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_31;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.LEAP_YEAR;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_FEB;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.COMMON_YEAR;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.LEAP_YEAR;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_JAN;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_MAY;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.assertCalendarCommandFailure;
 import static team.baymax.testutil.calendar.TypicalCalendar.getTypicalCalendarManager;
 
 import org.junit.jupiter.api.Test;
+
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;

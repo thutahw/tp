@@ -109,6 +109,10 @@ public class AppointmentCalendar {
         updateDay();
     }
 
+    /**
+     * Updates the date property of the {@code AppointmentCalendar}.
+     *
+     */
     public void updateDateProperty(Date date) {
         dateProperty.set(date.toString());
         dayProperty.set(date.getDay().toString());
