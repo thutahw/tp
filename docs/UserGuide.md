@@ -3,8 +3,8 @@ layout: page
 title: Baymax - User Guide
 ---
 ## Table of Contents
-1. [**Introduction**](#1-introduction)
-2. [**Quick start**](#2-quick-start)
+1. [**Introduction**](#1-introduction)<br>
+2. [**Quick start**](#2-quick-start)<br>
 3. [**About**](#3-about)<br>
     3.1. [Structure of this Document](#31-structure-of-this-document)<br>
     3.2. [Reading this Document](#32-reading-this-document)<br>
@@ -65,15 +65,15 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 
 All of these can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
 calendar view -- it shows you how busy a particular day or week is at a glance, so that you can help patients make 
-quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
+quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick start”!
 
 --------------------------------------------------------------------------------
 
-## 2. Quick Start
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest version of Baymax from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
+2. Download the latest version of `Baymax.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
@@ -138,7 +138,9 @@ Commands all take the following format:
 
   E.g. `addpatient name/NAME`: can be used as `addpatient name/Alice Tan`.
 
-* When the command requires time in HH:MM format, it follows the **24 Hour** System. E.g entering 01:00 means 1 am and 13:00 means 1 pm.
+* When the command requires time in HH:MM format, it follows the **24 Hour** System. 
+ 
+  E.g. 01:00 means 1 a.m. and 13:00 means 1 p.m.
 
 * Items in square brackets are **optional**.
 
@@ -430,6 +432,7 @@ REMARK         | The remark to be added to the patient.
 
 When a remark is added to a patient successfully, the main display only shows the patient with the edited remark so that you do not need to scroll through the patient list to ensure that the new remark is added to that patient.    
 If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
+
 ----------------------------------------------------------------------------------
 
 ### 5.2. Appointment Management
@@ -695,6 +698,7 @@ Parameter Name | Description
 ---------------|------------
 DESCRIPTION_KEYWORD   | The keyword by which to search for the appointment. It can be an incomplete part of the <ins>description</ins> of the appointment you are searching for. E.g. Removal
 TAG_KEYWORD           | The keyword by which to search for the appointment. It can be an incomplete part of the <ins>tag</ins> of the appointment you are searching for. E.g DrG, Dr
+
 **Example:**<br>
 1. Type `findappt check` into the command box.
 2. Press `Enter` on your keyboard.
