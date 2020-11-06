@@ -1,0 +1,13 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor MODEL_COLOR_T4
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor MODEL_COLOR_T4
+
+
+
+@enduml
