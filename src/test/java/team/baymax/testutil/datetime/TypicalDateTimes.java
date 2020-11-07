@@ -1,4 +1,4 @@
-package team.baymax.testutil;
+package team.baymax.testutil.datetime;
 
 import team.baymax.model.util.datetime.DateTime;
 

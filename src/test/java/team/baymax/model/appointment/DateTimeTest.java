@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME1;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME2;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME3;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME4;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME5;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME3;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME4;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME5;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
