@@ -54,4 +54,10 @@ public class DayCommand extends Command {
         return TAB_ID;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DayCommand // instanceof handles nulls
+                && day.equals(((DayCommand) other).day));
+    }
 }

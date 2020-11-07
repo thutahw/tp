@@ -55,4 +55,11 @@ public class YearCommand extends Command {
     public TabId getTabId() {
         return TAB_ID;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof YearCommand // instanceof handles nulls
+                && year.equals(((YearCommand) other).year));
+    }
 }

@@ -55,4 +55,11 @@ public class MonthCommand extends Command {
     public TabId getTabId() {
         return TAB_ID;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MonthCommand // instanceof handles nulls
+                && month.equals(((MonthCommand) other).month));
+    }
 }

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 public class Day {
 
-    public static final String MESSAGE_CONSTRAINTS = "A day must be specificied as an number between 1 and 31.";
+    public static final String MESSAGE_CONSTRAINTS = "A day must be specified as a number between 1 and 31.";
 
     private final int value;
 
