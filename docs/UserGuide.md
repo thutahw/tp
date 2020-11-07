@@ -4,14 +4,14 @@ title: Baymax - User Guide
 ---
 ## Table of Contents
 1. [**Introduction**](#1-introduction)<br>
-2. [**Quick start**](#2-quick-start)<br>
+2. [**Quick Start**](#2-quick-start)<br>
 3. [**About**](#3-about)<br>
     3.1. [Structure of this Document](#31-structure-of-this-document)<br>
     3.2. [Reading this Document](#32-reading-this-document)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3. [Command Format & Syntax](#323-command-format--syntax)<br>
-4. [**Navigating between tabs**](#4-navigating-between-tabs)
+4. [**Navigating Between Tabs**](#4-navigating-between-tabs)
 5. [**Features**](#5-features)<br>
     5.1. [Patient Information Management](#51-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.1. [Add a new patient: `addpatient`](#511-add-a-new-patient-addpatient)<br>
@@ -41,7 +41,7 @@ title: Baymax - User Guide
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.1. [Undo/Redo v2.0](#551-undoredo-v20)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.2. [Display appointments within a period v2.0](#552-display-appointments-within-a-period-v20)<br>
 6. [**FAQ**](#6-faq)<br>
-7. [**Command summary**](#7-command-summary)<br>
+7. [**Command Summary**](#7-command-summary)<br>
     7.1. [Patient Information Management Commands](#71-patient-information-management-commands)<br>
     7.2. [Appointment Management Commands](#72-appointment-management-commands)<br>
     7.3. [Calendar Commands](#73-calendar-commands)<br>
@@ -65,15 +65,15 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 
 All of these can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
 calendar view -- it shows you how busy a particular day or week is at a glance, so that you can help patients make 
-quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick start”!
+quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
 
 --------------------------------------------------------------------------------
 
-## 2. Quick start
+## 2. Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest version of `Baymax.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
+2. Download the latest version of `baymax.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Baymax application.
 
@@ -164,7 +164,7 @@ Commands all take the following format:
 
 ------------------------------------------------------------------------------------------
 
-## 4. Navigating between tabs
+## 4. Navigating Between Tabs
 
 You can use this command to switch between tabs by specifying the tab name.
 
@@ -203,6 +203,7 @@ help       | Help/Additional Information
 ### 5.1. Patient Information Management
 
 This feature allows you to manage patient information. You can:
+
 1. Add a new patient
 2. List all patients
 3. Delete a patient 
@@ -436,8 +437,22 @@ If you wish to view the whole patient list again, you can use the `listpatients`
 ----------------------------------------------------------------------------------
 
 ### 5.2. Appointment Management
-This feature allows you to manage the appointments of every patient. You can
-add, edit, cancel, mark or find an appointment, and list all the appointments in the system.
+
+This feature allows you to manage the appointments of all patients. You can:
+
+1. Add a new appointment
+2. List all the appointments
+3. List all the appointments of a specific patient
+4. Cancel an appointment
+5. Edit an appointment's details
+6. Mark an appointment as done
+7. Mark an appointment as missed
+8. Find an appointment by keyword
+
+**Note**:
+
+The current version of Baymax does **not** allow undoing/redoing. The next version (v2.0) will support undoing so that users
+can recover from accidentally marking an appointment as missed/done.
 
 #### 5.2.1. Add a new appointment: `addappt`
 You can use this command to add a new appointment for a patient.
@@ -627,7 +642,7 @@ Method 2:
 1. Type `done on/04-11-2020 20:00 name/Irfan` into the command box.
 2. Press `Enter` on your keyboard.
 
-Warning: Method 2 is for convenience only. Use this method only if you are sure that there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
+Warning: Method 2 is for convenience only. Use this method only if you are sure there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
 
 **Outcome:**
 

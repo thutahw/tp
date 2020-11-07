@@ -66,7 +66,7 @@ public class JsonPatientManagerStorageTest {
 
     @Test
     public void readAndSavePatientManager_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempAppointmentBook.json");
         PatientManager original = getTypicalPatientManager();
         JsonPatientManagerStorage jsonPatientManagerStorage = new JsonPatientManagerStorage(filePath);
 
