@@ -47,8 +47,19 @@ public class MonthCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, month, year), getTabId());
     }
 
+    public Month getMonth() {
+        return month;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MonthCommand // instanceof handles nulls
+                && month.equals(((MonthCommand) other).month));
     }
 }

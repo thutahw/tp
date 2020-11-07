@@ -16,6 +16,14 @@ public class CalendarManager {
 
     public CalendarManager() {}
 
+    /**
+     * Creates a CalendarManager using the day, month and year in {@code toBeCopied}
+     */
+    public CalendarManager(CalendarManager toBeCopied) {
+        this();
+        resetCalendar(toBeCopied);
+    }
+
     public AppointmentCalendar getAppointmentCalendar() {
         return appointmentCalendar;
     }

@@ -9,7 +9,6 @@ skinparam Class {
 skinparam ArrowColor MODEL_COLOR_T4
 
 class PatientManager {
-- patients : UniqueList
 + addPatient(p : Patient)
 + setPatient(target : Patient, editedPatient : Patient)
 + removePatient(key : Patient)
@@ -28,5 +27,33 @@ class UniqueList {
 + setElement(target : UniqueListElement, edited : UniqueListElement)
 + remove(toRemove : UniqueListElement)
 }
+
+Interface UniqueListElement <<Interface>> {
++ isSame(other : UniqueListElement) : boolean
+}
+
+Interface ReadOnlyListManager <<Interface>> {
++ getReadOnlyList() : ObservableList
+}
+
+Class Patient {
+- nric : Nric
+- name : Name
+- phone : Phone
+- gender : Gender
+- remark : Remark
+- tags : Set
++ getNric() : Nric
++ getName() : Name
++ getPhone() : Phone
++ getGender() : Gender
++ getRemark() : Remark
++ getTags() : Set
+}
+
+ReadOnlyListManager <|.. PatientManager
+UniqueListElement <|.. Patient
+PatientManager -->"1" UniqueList
+UniqueList -->"*" UniqueListElement
 
 @enduml

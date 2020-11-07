@@ -2,12 +2,10 @@
 start
 :Receives an addpatient command;
 
-
 if () then ([valid command])
     :Parses the addpatient command
     and keywords;
-    :Executes the addpatient command
-    with the specified tab number;
+    :Executes the addpatient command;
     :Shows a success message;
 else ([else])
     :Shows invalid command error message;

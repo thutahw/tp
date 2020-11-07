@@ -2,6 +2,7 @@ package team.baymax.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.showPatientAtIndex;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
@@ -9,7 +10,6 @@ import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientMana
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.CommandTestUtil;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.modelmanagers.AppointmentManager;
@@ -34,14 +34,14 @@ public class ListPatientCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandTestUtil.assertCommandSuccess(new ListPatientCommand(), model,
+        assertCommandSuccess(new ListPatientCommand(), model,
                 ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
-        CommandTestUtil.assertCommandSuccess(new ListPatientCommand(), model,
+        assertCommandSuccess(new ListPatientCommand(), model,
                 ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
