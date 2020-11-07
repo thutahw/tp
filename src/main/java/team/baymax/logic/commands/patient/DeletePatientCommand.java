@@ -39,11 +39,14 @@ public class DeletePatientCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
 
+        assert targetIndex != null;
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
+
         model.deletePatient(patientToDelete);
         model.clearAllAppointmentsOfPatient(patientToDelete);
 

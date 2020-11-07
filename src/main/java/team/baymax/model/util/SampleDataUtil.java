@@ -54,18 +54,18 @@ public class SampleDataUtil {
     public static Appointment[] getSampleAppointments() {
         Patient[] patients = getSamplePatients();
         return new Appointment[] {
-            new Appointment(patients[0], DateTime.fromString("10-10-2020 14:00"), new Duration(60),
-                    new Description("Full body checkup"), getTagSet("Xray"), AppointmentStatus.DONE),
-            new Appointment(patients[3], DateTime.fromString("28-10-2020 10:45"), new Duration(60),
+            new Appointment(patients[0], DateTime.fromString("13-11-2020 09:00"), new Duration(60),
+                    new Description("Full body checkup"), getTagSet("Xray"), AppointmentStatus.UPCOMING),
+            new Appointment(patients[3], DateTime.fromString("13-11-2020 10:00"), new Duration(60),
                     new Description("Diabetes checkup"), getTagSet(), AppointmentStatus.UPCOMING),
-            new Appointment(patients[0], DateTime.fromString("10-01-2021 12:00"), new Duration(60),
+            new Appointment(patients[0], DateTime.fromString("13-11-2021 11:00"), new Duration(60),
                     new Description("Blood pressure checkup"), getTagSet(), AppointmentStatus.UPCOMING),
-            new Appointment(patients[2], DateTime.fromString("15-10-2020 09:30"), new Duration(60),
-                    new Description("Wrist fracture checkup"), getTagSet("Xray"), AppointmentStatus.MISSED),
-            new Appointment(patients[1], DateTime.fromString("23-11-2020 15:00"), new Duration(60),
+            new Appointment(patients[2], DateTime.fromString("13-11-2020 13:00"), new Duration(60),
+                    new Description("Wrist fracture checkup"), getTagSet("Xray"), AppointmentStatus.UPCOMING),
+            new Appointment(patients[1], DateTime.fromString("14-11-2020 09:00"), new Duration(60),
                     new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
                     AppointmentStatus.UPCOMING),
-            new Appointment(patients[1], DateTime.fromString("02-01-2021 15:00"), new Duration(60),
+            new Appointment(patients[1], DateTime.fromString("15-11-2021 10:00"), new Duration(60),
                     new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
                     AppointmentStatus.UPCOMING)
         };

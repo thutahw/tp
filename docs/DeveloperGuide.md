@@ -77,8 +77,8 @@ Figure 2. Class Diagram of the Logic Component
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
 
-<img src="images/DeleteAppointmentSequenceDiagram.png" width="574" />
-Figure 3. Structure of the UI component<br><br>
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+Figure 3. Architecture Sequence Diagram<br><br>
 
 The sections below give more details of each component.
 
@@ -89,7 +89,7 @@ This segment will explain the structure and responsibilities of the `UI` compone
 
 #### 3.2.1. Structure
 ![Structure of the UI Component](images/UiClassDiagram.png)<br>
-Figure 4. Structure of the UI componentr
+Figure 4. Structure of the UI component
 
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -120,7 +120,7 @@ Figure 5. Structure of the Logic Component
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
 1. The command execution can affect the `Model` (e.g. adding a patient), which is executed by the `ModelManager` which calls `PatientManager` and `AppointmentManager`.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -731,15 +731,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
-   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   1. Prerequisites: List all patients using the `listpatients` command. Multiple patients in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `deletepatient 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deletepatient 0`<br>
       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `deletepatient`, `deletepatient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

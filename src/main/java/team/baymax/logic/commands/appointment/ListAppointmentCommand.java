@@ -13,7 +13,7 @@ import team.baymax.model.util.TabId;
  */
 public class ListAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "listappt";
+    public static final String COMMAND_WORD = "listappts";
     public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_SUCCESS = "Listed all appointments.";

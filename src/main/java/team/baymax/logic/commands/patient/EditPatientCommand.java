@@ -40,6 +40,7 @@ public class EditPatientCommand extends Command {
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_GENDER + "GENDER] "
+            + "[" + CliSyntax.PREFIX_REMARK + "REMARK] "
             + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + "91234567 ";

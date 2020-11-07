@@ -8,7 +8,6 @@ import static team.baymax.logic.parser.ParserUtil.arePrefixesPresent;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.MarkAppointmentDoneCommand;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
@@ -23,7 +22,7 @@ public class MarkAppointmentDoneCommandParser implements Parser<MarkAppointmentD
      * and returns a MarkAppointmentDoneCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public MarkAppointmentDoneCommand parse(String args) throws ParseException, CommandException {
+    public MarkAppointmentDoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_NAME);

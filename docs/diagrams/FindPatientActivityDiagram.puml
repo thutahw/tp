@@ -1,0 +1,18 @@
+@startuml
+start
+:Receives a findpatient command;
+
+if () then ([valid command])
+    :Parses the findpatient command
+    and keywords;
+    :Searches for all patients whose
+    names contain the keywords;
+    :Displays all found patients
+    to the user;
+    :Displays a success message;
+else ([else])
+    :Shows invalid command error message;
+
+endif
+stop
+@enduml

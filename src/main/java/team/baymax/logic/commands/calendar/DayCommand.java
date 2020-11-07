@@ -2,6 +2,8 @@ package team.baymax.logic.commands.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+
 import team.baymax.logic.commands.Command;
 import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
@@ -31,7 +33,11 @@ public class DayCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.setDay(day);
+        try {
+            model.setDay(day);
+        } catch (DateTimeException ex) {
+            throw new CommandException(Day.MESSAGE_CONSTRAINTS);
+        }
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));
@@ -39,9 +45,19 @@ public class DayCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabId());
     }
 
+    public Day getDay() {
+        return day;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DayCommand // instanceof handles nulls
+                && day.equals(((DayCommand) other).day));
+    }
 }

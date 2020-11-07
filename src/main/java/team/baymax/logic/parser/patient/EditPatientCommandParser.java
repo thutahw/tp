@@ -11,7 +11,6 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.ParserUtil.parseTagsForEdit;
 
 import team.baymax.commons.core.index.Index;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.commands.patient.EditPatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
@@ -29,7 +28,7 @@ public class EditPatientCommandParser implements Parser<EditPatientCommand> {
      * and returns an EditPatientCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditPatientCommand parse(String args) throws ParseException, CommandException {
+    public EditPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_TAG,
