@@ -36,7 +36,7 @@ public class DayCommand extends Command {
         try {
             model.setDay(day);
         } catch (DateTimeException ex) {
-            throw new CommandException(Date.MESSAGE_INVALID_DATE);
+            throw new CommandException(Day.MESSAGE_CONSTRAINTS);
         }
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());

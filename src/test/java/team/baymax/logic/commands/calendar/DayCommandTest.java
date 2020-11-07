@@ -48,6 +48,6 @@ public class DayCommandTest {
         Day invalidDay = new Day(DAY_29);
         DayCommand dayCommand = new DayCommand(invalidDay);
 
-        assertCalendarCommandFailure(dayCommand, model, Date.MESSAGE_INVALID_DATE);
+        assertCalendarCommandFailure(dayCommand, model, Day.MESSAGE_CONSTRAINTS);
     }
 }
