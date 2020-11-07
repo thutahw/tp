@@ -61,18 +61,18 @@ public class PatientManagerTest {
     }
 
     @Test
-    public void hasPatient_patientNotInAddressBook_returnsFalse() {
+    public void hasPatient_patientNotInAppointmentBook_returnsFalse() {
         assertFalse(patientManager.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPatient_patientInAddressBook_returnsTrue() {
+    public void hasPatient_patientInAppointmentBook_returnsTrue() {
         patientManager.addPatient(ALICE);
         assertTrue(patientManager.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPatient_patientWithSameIdentityFieldsInAppointmentBook_returnsTrue() {
         patientManager.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_DIABETIC)
                 .build();
