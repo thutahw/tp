@@ -4,16 +4,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1_DUPLICATE;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME3;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME4;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME5;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
+import static team.baymax.testutil.datetime.TypicalDates.DATE1;
+import static team.baymax.testutil.datetime.TypicalDates.DATE2;
+import static team.baymax.testutil.datetime.TypicalTimes.TIME1;
+import static team.baymax.testutil.datetime.TypicalTimes.TIME2;
+import static team.baymax.testutil.datetime.TypicalTimes.TIME3;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.testutil.Assert;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 class DateTimeTest {
 
     @Test
+    void constructor() {
+        assertEquals(new DateTime(), DATETIME1);
+    }
+
+    @Test
+    void current() {
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mma")),
+                DateTime.current().toString());
+    }
+
+    @Test
     void isValidDateTime_nullDateTime_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> DateTime.isValidDateTime(null));
+        assertThrows(NullPointerException.class, () -> DateTime.isValidDateTime(null));
     }
 
     @Test
@@ -28,7 +53,6 @@ class DateTimeTest {
         assertFalse(DateTime.isValidDateTime("12-12-2020 25:03"));
         assertFalse(DateTime.isValidDateTime("12-12-2020 25:03:02"));
         assertFalse(DateTime.isValidDateTime("12-12-2020 02:45 AM"));
-
     }
 
     @Test
@@ -39,9 +63,9 @@ class DateTimeTest {
 
     @Test
     void from_nullDateAndTime_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> DateTime.from(null, Time.fromString("12:00")));
-        Assert.assertThrows(NullPointerException.class, () -> DateTime.from(Date.fromString("01-01-2020"), null));
-        Assert.assertThrows(NullPointerException.class, () -> DateTime.from(null, null));
+        assertThrows(NullPointerException.class, () -> DateTime.from(null, Time.fromString("12:00")));
+        assertThrows(NullPointerException.class, () -> DateTime.from(Date.fromString("01-01-2020"), null));
+        assertThrows(NullPointerException.class, () -> DateTime.from(null, null));
 
     }
 
@@ -50,6 +74,43 @@ class DateTimeTest {
         assertEquals(DateTime.fromString("01-01-2020 12:00"),
                 DateTime.from(Date.fromString("01-01-2020"), Time.fromString("12:00")));
 
+    }
+
+    @Test
+    void getStorageFormat_returnsCorrectFormat() {
+        assertEquals("01-01-2020 20:00", DATETIME2.getStorageFormat());
+        assertEquals("01-01-2020 20:01", DATETIME3.getStorageFormat());
+    }
+
+    @Test
+    void getDay() {
+        assertNotEquals(DATETIME3.getDay(), DATETIME4.getDay());
+        assertEquals(DATETIME5.getDay(), DATETIME4.getDay());
+    }
+
+    @Test
+    void getMonth() {
+        assertNotEquals(DATETIME5.getMonth(), DATETIME6.getMonth());
+        assertEquals(DATETIME1.getMonth(), DATETIME5.getMonth());
+    }
+
+    @Test
+    void getYear() {
+        assertNotEquals(DATETIME1.getYear(), DATETIME6.getYear());
+        assertEquals(DATETIME1.getYear(), DATETIME5.getYear());
+    }
+
+    @Test
+    void getDate() {
+        assertNotEquals(DATE1, DATETIME1.getDate());
+        assertEquals(DATE2, DATETIME4.getDate());
+    }
+
+    @Test
+    void getTime() {
+        assertNotEquals(TIME1, DATETIME2.getTime());
+        assertEquals(TIME2, DATETIME5.getTime());
+        assertEquals(TIME3, DATETIME6.getTime());
     }
 
     @Test
@@ -95,5 +156,33 @@ class DateTimeTest {
         assertTrue(before.isEqual(before));
         assertTrue(before.isEqual(DateTime.fromString("01-01-2020 12:00")));
         assertFalse(before.isEqual(after));
+    }
+
+    @Test
+    void compareTo_nullDateTime_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> DATETIME1.compareTo(null));
+    }
+
+    @Test
+    void compareTo_validDateTime() {
+        assertTrue(DATETIME1.compareTo(DATETIME2) > 0);
+        assertTrue(DATETIME3.compareTo(DATETIME4) < 0);
+        assertTrue(DATETIME1.compareTo(DATETIME1_DUPLICATE) == 0);
+    }
+
+    @Test
+    void hashCode_sameDateTime_equal() {
+        assertEquals(DATETIME1.hashCode(), DATETIME1_DUPLICATE.hashCode());
+    }
+
+    @Test
+    void hashCode_differentDateTime_notEqual() {
+        assertNotEquals(DATETIME2.hashCode(), DATETIME3.hashCode());
+    }
+
+    @Test
+    void toString_validDateTime() {
+        assertEquals(DATETIME1.toString(), "12 Dec 2020, 11:59PM");
+        assertNotEquals(DATETIME4.toString(), "12-01-2020 10:00");
     }
 }
