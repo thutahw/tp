@@ -2,7 +2,9 @@ package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,6 +35,7 @@ public class Date {
      *
      */
     public Date(Day day, Month month, Year year) {
+        requireAllNonNull(day, month, year);
         date = LocalDate.of(year.getValue(), month.getValue(), day.getValue());
     }
 

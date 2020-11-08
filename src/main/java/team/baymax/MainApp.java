@@ -29,6 +29,7 @@ import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.model.util.SampleDataUtil;
 import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -88,10 +89,7 @@ public class MainApp extends Application {
 
     private void initDashboard(Model model) {
 
-        Date today = new Date(
-                new Day(AppointmentCalendar.getCurrentDay()),
-                new Month(AppointmentCalendar.getCurrentMonth()),
-                new Year(AppointmentCalendar.getCurrentYear()));
+        Date today = DateTimeUtil.getCurrentDate();
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(today));
     }

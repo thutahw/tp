@@ -145,9 +145,7 @@ public class AddAppointmentCommand extends Command {
         model.addAppointment(toAdd);
 
         // switches calendar to the day of the appointment
-        model.setDay(dt.getDay());
-        model.setMonth(dt.getMonth());
-        model.setYear(dt.getYear());
+        model.setDate(dt.getDate());
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dt.getDate()));
 

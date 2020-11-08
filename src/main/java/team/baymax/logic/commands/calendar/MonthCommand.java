@@ -38,7 +38,7 @@ public class MonthCommand extends Command {
         try {
             model.setMonth(month);
         } catch (DateTimeException ex) {
-            throw new CommandException(Date.MESSAGE_INVALID_DATE);
+            throw new CommandException(Month.MESSAGE_CONSTRAINTS);
         }
 
         Year year = model.getAppointmentCalendar().getYear();

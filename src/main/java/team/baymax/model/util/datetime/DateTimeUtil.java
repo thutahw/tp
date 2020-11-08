@@ -1,21 +1,72 @@
 package team.baymax.model.util.datetime;
+
+import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.text.DateFormatSymbols;
+import java.time.DateTimeException;
+import java.util.Calendar;
 
 public class DateTimeUtil {
-
     private static int[] numOfDaysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static int numOfDaysInFebLeapYear = 29;
 
+    public static Day getCurrentDay() {
+        return new Day(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+    }
 
-    public static String getMonthForInt(int num) {
+    public static Month getCurrentMonth() {
+        return new Month(Calendar.getInstance().get(Calendar.MONTH) + 1);
+    }
 
-        String month = "wrong";
+    public static Year getCurrentYear() {
+        return new Year(Calendar.getInstance().get(Calendar.YEAR));
+    }
+
+    public static Date getCurrentDate() {
+        return new Date(getCurrentDay(), getCurrentMonth(), getCurrentYear());
+    }
+
+    public static Date getClosestValidDate(Day day, Month month, Year year) {
+        requireAllNonNull(day, month, year);
+
+        try {
+            return new Date(day, month, year);
+        } catch (DateTimeException e) {
+            int maxNumOfDays = DateTimeUtil.getNumOfDays(month, year);
+            return new Date(new Day(maxNumOfDays), month, year);
+        }
+    }
+
+    public static String getMonthStringFromInt(int num) {
+        requireNonNull(num);
+
+        assert num >= 1 && num <= 12 : "invalid integer for month";
+
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] months = dfs.getMonths();
-        if (num >= 0 && num <= 11) {
-            month = months[num];
+        return months[num - 1];
+    }
+
+    public static int getMonthIntFromString(String monthString) {
+        requireNonNull(monthString);
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        String[] shortMonths = dfs.getShortMonths();
+
+        for (int i = 0; i < months.length; i++) {
+            if (monthString.equalsIgnoreCase(months[i])) {
+                return i + 1;
+            }
         }
-        return month;
+
+        for (int i = 0; i < shortMonths.length; i++) {
+            if (monthString.equalsIgnoreCase(shortMonths[i])) {
+                return i + 1;
+            }
+        }
+
+        return 0;
     }
 
     public static int getNumOfDays(Month month, Year year) {

@@ -15,7 +15,7 @@ public class DateTimeUtilTest {
     @Test
     void getMonthForInt_validInt() {
         //check it it should be 1 or 2
-        assertEquals(DateTimeUtil.getMonthForInt(1), FEBRUARY.toString());
+        assertEquals(DateTimeUtil.getMonthStringFromInt(1), JANUARY.toString());
     }
 
     @Test

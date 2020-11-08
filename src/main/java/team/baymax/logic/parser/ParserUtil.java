@@ -21,6 +21,7 @@ import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Month;
@@ -54,11 +55,13 @@ public class ParserUtil {
      */
     public static Day parseDayOfMonth(String day) throws ParseException {
         String trimmedDayOfMonth = day.trim();
-        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
-        if (invalidNumber || !Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
-            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
+        boolean isValidNumber = StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
+
+        if (isValidNumber && Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
+            return new Day(Integer.parseInt(trimmedDayOfMonth));
         }
-        return new Day(Integer.parseInt(trimmedDayOfMonth));
+
+        throw new ParseException(Day.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -68,11 +71,17 @@ public class ParserUtil {
      */
     public static Month parseMonth(String month) throws ParseException {
         String trimmedMonth = month.trim();
-        boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
-        if (invalidNumber || !Month.isValidMonth(Integer.parseInt(trimmedMonth))) {
-            throw new ParseException(Month.MESSAGE_CONSTRAINTS);
+        boolean validNumber = StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
+
+        if (validNumber && Month.isValidMonth(Integer.parseInt(trimmedMonth))) {
+            return new Month(Integer.parseInt(trimmedMonth));
         }
-        return new Month(Integer.parseInt(trimmedMonth));
+
+        if (Month.isValidMonth(trimmedMonth)) {
+            return new Month(trimmedMonth);
+        }
+
+        throw new ParseException(Month.MESSAGE_CONSTRAINTS);
     }
 
     /**

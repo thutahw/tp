@@ -1,6 +1,7 @@
 package team.baymax.model.patient;
 
 import static java.util.Objects.requireNonNull;
+import static team.baymax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Patient's remark in the appointment book.
@@ -8,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values,";
 
     private final String value;
 

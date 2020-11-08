@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 public class Year {
 
-    public static final String MESSAGE_CONSTRAINTS = "A year must be specified as a number 2000 or above.";
+    public static final String MESSAGE_CONSTRAINTS = "A year must be specified as a number from 1900 to 2100.";
 
     private final int value;
 
     /**
-     * Constructs a {@code Year} given a postive integer that must be 2000 or above.
+     * Constructs a {@code Year} given a postive integer that must be between 1900 and 2100 (inclusive).
      *
      */
     public Year(int value) {
@@ -26,7 +26,7 @@ public class Year {
      * Returns true if a given number is a valid year.
      */
     public static boolean isValidYear(int n) {
-        return n >= 2000;
+        return (n >= 1900 && n <= 2100);
     }
 
     public int getValue() {

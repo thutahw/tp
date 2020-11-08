@@ -16,6 +16,7 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -177,6 +178,11 @@ public class ModelStub implements Model {
 
     @Override
     public AppointmentCalendar getAppointmentCalendar() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setDate(Date date) {
         throw new AssertionError("This method should not be called.");
     }
 

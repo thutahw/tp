@@ -16,9 +16,12 @@ public class CalendarCommandTestUtil {
     public static final int DAY_30 = 30;
     public static final int DAY_31 = 31;
 
-    public static final int MONTH_JAN = 1;
-    public static final int MONTH_FEB = 2;
-    public static final int MONTH_MAY = 5;
+    public static final int MONTH_JAN_INT = 1;
+    public static final int MONTH_FEB_INT = 2;
+    public static final int MONTH_MAY_INT = 5;
+
+    public static final String MONTH_JAN_STRING = "january";
+    public static final String MONTH_JAN_SHORT_STRING = "jan";
 
     public static final int COMMON_YEAR = 2021;
     public static final int LEAP_YEAR = 2020;
@@ -35,9 +38,7 @@ public class CalendarCommandTestUtil {
         // only do so by copying its components.
         CalendarManager expectedCalendarManager = new CalendarManager(actualModel.getCalendarManager());
         AppointmentCalendar expectedAppointmentCalendar = new AppointmentCalendar(
-                actualModel.getAppointmentCalendar().getDay(),
-                actualModel.getAppointmentCalendar().getMonth(),
-                actualModel.getAppointmentCalendar().getYear());
+                actualModel.getAppointmentCalendar().getDate());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedCalendarManager, actualModel.getCalendarManager());
