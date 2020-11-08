@@ -123,6 +123,25 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     }
 
     /**
+     * Updates all appointments of a {@code patient} with new patient information in the {@code editedPatient}.
+     * @param patient patient with outdated profile information
+     * @param editedPatient patient with newly updated profile information
+     */
+    public void updatePatientAppointments(Patient patient, Patient editedPatient) {
+        BelongsToPatientPredicate predicate = new BelongsToPatientPredicate(patient);
+        while (appointments.contains(predicate)) {
+            Appointment toEdit = appointments.getByPredicate(predicate);
+            Appointment edited = new Appointment(editedPatient,
+                    toEdit.getDateTime(),
+                    toEdit.getDuration(),
+                    toEdit.getDescription(),
+                    toEdit.getTags(),
+                    toEdit.getStatus());
+            appointments.setElement(toEdit, edited);
+        }
+    }
+
+    /**
      * Returns the Appointment matching the given predicate. If no Appointment matches the
      * predicate given, an {@code ElementNotFoundException} is thrown.
      * @return

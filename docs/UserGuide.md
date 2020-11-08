@@ -231,7 +231,7 @@ You can use this command to add a new patient who has not yet been registered.
 Parameter Name | Description
 ---------------|------------
 NRIC          | The nric of the patient. It must <ins>start with either 'S', 'T', 'F' or 'G' (all case-insensitive) and end with an alphabet (case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
-NAME          | The name of the patient. It must consist <ins>solely</ins> of alphabets (case-insensitive). E.g. Alice Tan
+NAME          | The name of the patient. It must consist <ins>solely</ins> of alphanumerics (case-insensitive). E.g. Alice Tan, Alice1
 PHONE         | The hand phone number that the patient wishes to be contacted by and it must be at least 3 digits long. It must consist <ins>solely</ins> of numbers. E.g. 91234567
 GENDER        | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’ (both case-insensitive). E.g M, m, F, f
 REMARK        | Any remarks about the patient. It can be any text -- alphanumerical, special characters etc. are allowed. E.g. Only available on Mon / Tues
@@ -342,7 +342,7 @@ Parameter Name | Description
 ---------------|------------
 INDEX     | The index of the patient in the most recently displayed list. It must be a <ins>positive</ins> integer.
 NRIC    | The nric of the patient. It must <ins>start with either 'S', 'T', 'F' or 'G' (all case-insensitive) and end with an alphabet (case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
-NAME    | The name of the patient. It must consist <ins>solely</ins> of alphabets. E.g. Alice Tan
+NAME    | The name of the patient. It must consist <ins>solely</ins> of alphanumerics. E.g. Alice Tan, Alice1
 PHONE   | The hand phone number which the patient wishes to be contacted by. It must consist <ins>solely</ins> of numbers and it must be at least 3 digits long. E.g. 91710012
 GENDER  | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’ <ins>(both case-insensitive)</ins>.
 REMARK  | Any remarks about the patient. It can be any text -- alphanumerical, special characters etc. are allowed. E.g. Only available on Mon / Tues

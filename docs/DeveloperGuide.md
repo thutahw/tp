@@ -288,6 +288,7 @@ Following the Don't Repeat Yourself design principle will allow for more abstrac
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
 ### **4.2. Patient Management Features**
+
 (Contributed by Thuta Htun Wai)
 
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
@@ -389,9 +390,8 @@ Additionally, we only require matching of `DateTime` and `Patient` of appointmen
 
 To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
-=======
 ### **4.3 Appointment Manager**
-(Contributed by Shi Huiling & Reuben Teng)
+(Contributed by Shi Hui Ling & Reuben Teng)
 Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
 
 `AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
@@ -435,46 +435,30 @@ existing list of patients before a valid `Appointment` object is created contain
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
-Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the 
-application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and 
-month, following which any calendar-related commands entered will be with respect to that year and month.
+Baymax allows the user to manage appointments using a built-in calendar.
+The calendar brings greater convenience to the user by showing them what days are available in a month.
+It is also coupled with a schedule view that can be accessed by entering the `day` command, which shows the user
+all appointments on a chosen day, laid out chronologically on a timeline.
 
 #### 4.4.1 Rationale
 
-The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of 
-that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the 
-receptionist to avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of 
-giving a broad overview of how busy each day is in a month.
+The Calendar feature is included in Baymax because it can shorten some commands by allowing the user to only specify
+the time, as the date can be directly inferred from the calendar. For example, in the Calendar 
+Manager, a user can set a custom year, month and day. This influences the execution of the `addappt` command shown 
+in the sequence diagram below. In this example, suppose the user has set year to 2020, 
+month to February and day to 1, he can directly enter an `addappt` command that adds an appointment to 1, 
+February, 2020 without having to enter a date into the command fields. This makes the command shorter, more convenient
+and more user-friendly.
+
+![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
+Figure X. Workflow of an `addappt` with the use of date set in the calendar
 
 #### 4.4.2. Current Implementation
-The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set 
+The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
 `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
-current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should 
-be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to 
-view all appointments relative to a particular year or month.
-
-The following table shows the commands related to managing the appointment calendar:
-
-|Command    | Purpose
-| --------- | ------------------------------------------
-| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
-| `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
-| `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
+present year, month and day. Rather, it is dependent on what the user set them to be. 
 
 #### 4.4.3. Design Consideration
-Aspect: the necessity of a day view
-
-Option 1: Necessary (Current)
-- Pros: User is able to see all appointments on a particular day, in chronological order. This gives the receptionist better clarity of which other appointments are booked on that day. Thus, it will lead to better user experience.
-- Cons: More difficult to implement as another view needs to be implemented which adds to the complexity of the application.
-
-Option 2: Not necessary
-- Pros: User can simply find appointments by date to list out all appointments on that day. This is much easier to implement, and also means less commands to remember since it can be grouped under a find command.
-- Cons: It is less intuitive and requires longer commands.
-
-Reason for choosing Option 1:
-- Having a day view in the calendar allows the user to zoom in to a particular day, and hence makes the calendar more complete.
-- Having a chronological view of the appointments in a day allows the receptionist to spot timing collisions, and hence schedule appointments more efficiently.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -506,7 +490,7 @@ Reason for choosing Option 1:
 * prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
+* is reasonably comfortable using *CLI* apps
 
 **Value proposition**:
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
@@ -547,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ## **Appendix C: Use cases**
-(Contributed by Li Jianhan)
+(Contributed by Li Jianhan and Shi Hui Ling)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
 
@@ -653,7 +637,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 *{More to be added}*
 
 ## **Appendix D: Non-Functional Requirements**
-(Contributed by Shi Hui Ling))
+(Contributed by Shi Hui Ling)
 
 **Technical Environment**
 * Application should work on any mainstream OS as long as it has Java 11 or above installed.

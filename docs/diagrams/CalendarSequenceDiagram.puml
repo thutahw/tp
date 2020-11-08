@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AppointmentBookParser" as AppointmentBookParser LOGIC_COLOR
+participant ":YearCommandParser" as YearCommandParser LOGIC_COLOR
+participant "d:YearCommand" as YearCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("year 2020")
+activate LogicManager
+
+LogicManager -> AppointmentBookParser : parseCommand("year 2020")
+activate AppointmentBookParser
+
+create YearCommandParser
+AppointmentBookParser -> YearCommandParser
+activate YearCommandParser
+
+YearCommandParser -> AppointmentBookParser
+deactivate YearCommandParser
+
+AppointmentBookParser -> YearCommandParser : parse("2020")
+activate YearCommandParser
+
+create YearCommand
+YearCommandParser -> YearCommand
+activate YearCommand
+
+YearCommand -> YearCommandParser
+deactivate YearCommand
+
+LogicManager -> YearCommand : execute()
+activate YearCommand
+
+
+
+
+@enduml
