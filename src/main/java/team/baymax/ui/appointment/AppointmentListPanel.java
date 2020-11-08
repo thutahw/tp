@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.ui.UiPart;
 

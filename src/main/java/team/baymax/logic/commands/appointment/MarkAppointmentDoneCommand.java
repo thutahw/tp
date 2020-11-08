@@ -21,7 +21,6 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class MarkAppointmentDoneCommand extends Command {

@@ -11,11 +11,8 @@ import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentClashPredicate;
 import team.baymax.model.appointment.AppointmentSortByDateAndNameComparator;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.BelongsToPatientPredicate;
 import team.baymax.model.patient.Patient;
-import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 

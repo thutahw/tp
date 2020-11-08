@@ -36,7 +36,7 @@ public class YearCommandParserTest {
         assertParseFailure(parser, "0", Year.MESSAGE_CONSTRAINTS);
 
         // year before 2000
-        assertParseFailure(parser, "1999", Year.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1899", Year.MESSAGE_CONSTRAINTS);
     }
 
 }

@@ -21,7 +21,6 @@ import team.baymax.model.patient.Phone;
 import team.baymax.model.patient.Remark;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.DateTime;
-import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Month;

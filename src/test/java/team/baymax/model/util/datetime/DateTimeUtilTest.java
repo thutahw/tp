@@ -9,10 +9,10 @@ import static team.baymax.testutil.calendar.TypicalMonths.JANUARY;
 import static team.baymax.testutil.calendar.TypicalYears.YEAR_2020;
 import static team.baymax.testutil.calendar.TypicalYears.YEAR_2021;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 public class DateTimeUtilTest {
     @Test

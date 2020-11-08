@@ -1,8 +1,8 @@
 package team.baymax.model.util.datetime;
 
-import java.text.DateFormatSymbols;
-
 import static java.util.Objects.requireNonNull;
+
+import java.text.DateFormatSymbols;
 
 public class Month {
 

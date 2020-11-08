@@ -10,13 +10,9 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
-import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTimeUtil;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Year;
 
 public class TabCommand extends Command {
 

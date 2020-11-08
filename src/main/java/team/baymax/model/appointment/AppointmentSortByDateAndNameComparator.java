@@ -1,8 +1,8 @@
 package team.baymax.model.appointment;
 
-import team.baymax.model.patient.PatientSortByNameComparator;
-
 import java.util.Comparator;
+
+import team.baymax.model.patient.PatientSortByNameComparator;
 
 public class AppointmentSortByDateAndNameComparator implements Comparator<Appointment> {
 

@@ -1,7 +1,6 @@
 package team.baymax.model.patient;
 
 import static java.util.Objects.requireNonNull;
-import static team.baymax.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Patient's remark in the appointment book.

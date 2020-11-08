@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Nric;

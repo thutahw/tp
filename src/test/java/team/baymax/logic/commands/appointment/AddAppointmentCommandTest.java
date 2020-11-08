@@ -26,6 +26,7 @@ import team.baymax.logic.commands.ModelStub;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.Description;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Month;
@@ -162,6 +163,9 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
+        public void setDate(Date date) {}
+
+        @Override
         public void setYear(Year year) { }
 
         @Override
@@ -174,4 +178,3 @@ public class AddAppointmentCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) { }
     }
 }
-
