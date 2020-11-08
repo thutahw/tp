@@ -8,6 +8,8 @@ skinparam Class {
 }
 skinparam ArrowColor LOGIC_COLOR_T3
 
+hide method
+hide attribute
 
 package Logic {
 
