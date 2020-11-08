@@ -12,6 +12,11 @@ public class AppointmentClashPredicate implements Predicate<Appointment> {
     private final Appointment appointment;
     private final Appointment toExclude;
 
+    /**
+     * Constructs a {@code AppointmentClashPredicate} that checks for clashes between appointments.
+     * @param appointment
+     * @param toExclude
+     */
     public AppointmentClashPredicate(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
         this.appointment = appointment;
