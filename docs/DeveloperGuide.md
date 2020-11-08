@@ -1,22 +1,25 @@
-# Baymax - Developer Guide
+---
+layout: page
+title: Baymax - Developer Guide
+---
 ## Table of Contents
-[1. Introduction](#1-introduction)<br>
-[2. Setting up](#2-setting-up-getting-started)<br>
-[3. Design](#3-design)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.1. Architecture](#31-architecture)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2. UI Component](#32-ui-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.3. Logic Component](#33-logic-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.4. Model Component](#34-model-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.5. Storage Component](#35-storage-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.6. Storage Component](#36-common-classes)<br>
-[4. Implementation](#4-implementation)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1 List Managers](#41-list-managers)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2 Patient Manager](#42-patient-manager)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3 Apointment Manager](#43-appointment-manager)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4 Calendar Feature](#44-calendar-feature)<br>
-[5. Documentation](#5-documentation)<br>
-[6. Testing](#6-testing)<br>
-[7. Dev Ops](#7-dev-ops)<br>
+1. [Introduction](#1-introduction)<br>
+2. [Setting up](#2-setting-up-getting-started)<br>
+3. [Design](#3-design)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. [Architecture](#31-architecture)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. [UI Component](#32-ui-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
+4. [Implementation](#4-implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
+5. [Documentation](#5-documentation)<br>
+6. [Testing](#6-testing)<br>
+7. [Dev Ops](#7-dev-ops)<br>
 [Appendix A: Product Scope](#appendix-a-product-scope)<br>
 [Appendix B: User Stories](#appendix-b-user-stories)<br>
 [Appendix C: Use Cases](#appendix-c-use-cases)<br>
@@ -291,52 +294,74 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-### **4.2 Patient Manager**
+### **4.2. Patient Management Features**
+
 (Contributed by Thuta Htun Wai)
 
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
 a single patient's information can be managed at one time. A user can:
+
 * Add a new patient
 * Delete an existing patient
 * Edit a patient's details
+* Add a remark to a patient
 * List all the patients in the system
 * Find a patient by using a keyword from his/her name
-* List all the appointments of a specific patient
 
-#### 4.2.1 Rationale
-The Patient Manager feature is included in Baymax because it is one of the core features of the application.
+#### 4.2.1. Rationale
+
+The Patient Management Features are included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
 of the patient and be able to look up a patient in the system easily.
+
 #### 4.2.2. Current Implementation
-The `patient` package in the `Model` component contains the necessary information related to a patient. <br>
 
-When a user enters a valid command (Let's say the `addpatient` command), the parser classes parses the command word
-and the arguments and then creates an `AddPatientCommand` object. When the `AddPatientCommand` is executed,
-the new patient is added into the appointment book and a success message is printed in the results display box. <br>
+The `patient` package in the `Model` component contains the necessary information related to a patient.
+The current implementation of the Patient Management Features allows the user to keep track of a list of patients in the appointment book.
 
-The following diagram shows what happens when a user enters an `addpatient` command.
+In this section, we will outline the `findpatient` command from the Patient Management Features which is summarised by the Activity Diagram in Figure 9 below.
 
-![AddPatientActivityDiagram](images/AddPatientActivityDiagram.png)<br>
-Figure 9. Workflow of an addpatient command
+The parameters of the `findpatient` command are keywords in the patient's name that the user wants to search for. 
+E.g. `findpatient alex` will search and list all patients whose name has the word `alex`. 
+
+![FindPatientActivityDiagram](images/FindPatientActivityDiagram.png)<br>
+Figure 9. Workflow of a `findpatient` command
+
+When the user enters the `findpatient` command to search for a patient, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+During the parsing, a predicate is created. This predicate checks if a given Patient contains the user input keywords. The `FindPatientCommand` will then receive this predicate when it is created.
+
+The following steps will describe the execution of the `FindPatientCommand` in detail, assuming that no error is encountered.
+
+1. When the `execute()` method of the `FindActivityCommand` is called, the `ModelManager`’s `updateFilteredPatientList()` method is called.
+2. The `ModelManager` then proceeds to call the `setPredicate()` method of the `FilteredList<Patient>`.
+3. The `FilteredList<Patient>` will then update its filtered list of patients to contain only patients that fulfil the given predicate.
+4. The Ui component will detect this change and update the GUI.
+5. If the above steps are all successful, the `FindPatientCommand` will then create a CommandResult object and return the result.
+
+The *Sequence Diagram* below summarises the aforementioned steps.
+
+![FindPatientSequenceDiagram](images/FindPatientSequenceDiagram.png)<br>
+Figure . Execution of the `FindPatientCommand`
+
+**Note**:
+
+1. The lifeline for the `FindPatientCommand` should end at the destroy mark (X). However, due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+2. This sequence diagram does not take into consideration the possible exceptions which might occur during the `FindPatientCommand` execution.
+
 
 The following table shows the commands related to managing a patient's details.<br>
 
 | Command | Purpose
 | --------- | ------------------------------------------
-| `addpatient` | Adds a patient to the appointment book.
+| `addpatient` | Adds a new patient.
 | `deletepatient` | Deletes a patient.
-| `listpatient` | Lists all patients.
+| `listpatients` | Lists all patients.
 | `editpatient` | Edits a patient's details.
-| `findpatient` | Finds a patient with the given search string (name).
-| `listpatientappts` | Lists all the appointments of a specific patient.
+| `findpatient` | Finds a patient with the given keyword in his/her name.
+| `remark` | Adds/Edits the remark of a patient.
 
 #### 4.2.3. Design Consideration
-For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
-making the user easily understand the commands. <br>
 
-As for the `listpatientappts` command, we decided not to continue this functionality from the `listappt` command in the
- `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
- the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
  
 ### **4.3 Appointment Manager**
 (Contributed by Shi Hui Ling & Reuben Teng)
@@ -479,7 +504,7 @@ The following sequence diagram illustrates how the `Logic` component interacts w
 * prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using [CLI](https://en.wikipedia.org/wiki/Command-line_interface) apps
+* is reasonably comfortable using *CLI* apps
 
 **Value proposition**:
 * A handy tool for clinic staff, especially the receptionists, to deal with a large amount of patient information and their appointments.
