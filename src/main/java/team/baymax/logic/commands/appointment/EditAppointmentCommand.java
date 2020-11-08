@@ -121,10 +121,10 @@ public class EditAppointmentCommand extends Command {
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
-        AppointmentStatus unchangedStatus = appointmentToEdit.getStatus();
+        boolean unchangedIsMissed = appointmentToEdit.checkIfMissed();
 
         return new Appointment(unchangedPatient, updatedDateTime, updatedDuration, updatedDescription,
-                updatedTags, unchangedStatus);
+                updatedTags, unchangedIsMissed);
     }
 
     @Override

@@ -132,7 +132,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         Appointment toAdd = new Appointment(patient, dt, duration, description, tags,
-                AppointmentStatus.UPCOMING);
+                false);
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);

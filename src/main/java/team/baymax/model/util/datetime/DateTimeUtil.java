@@ -5,6 +5,8 @@ import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.text.DateFormatSymbols;
 import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 public class DateTimeUtil {
@@ -25,6 +27,11 @@ public class DateTimeUtil {
 
     public static Date getCurrentDate() {
         return new Date(getCurrentDay(), getCurrentMonth(), getCurrentYear());
+    }
+
+
+    public static DateTime getCurrentDateTime() {
+        return new DateTime(LocalDateTime.now());
     }
 
     public static Date getClosestValidDate(Day day, Month month, Year year) {

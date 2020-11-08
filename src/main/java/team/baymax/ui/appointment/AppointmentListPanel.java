@@ -44,15 +44,15 @@ public class AppointmentListPanel extends UiPart<Region> {
     protected void initialize() {
         appointmentListView.setPlaceholder(new Label(EMPTY_LIST_PLACEHOLDER_TEXT));
         appointmentListView.setItems(appointments);
+        appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
+
         int scrollTarget = 0;
         for (int i = 0; i < appointments.size(); i++) {
-            if (!appointments.get(i).getDate().isBefore(DateTimeUtil.getCurrentDate())) {
+            if (appointments.get(i).getDateTime().isBefore(DateTimeUtil.getCurrentDateTime())) {
                 scrollTarget = i;
             }
         }
-
         appointmentListView.scrollTo(scrollTarget);
-        appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }
 
     /**

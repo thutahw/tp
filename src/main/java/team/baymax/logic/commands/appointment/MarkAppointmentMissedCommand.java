@@ -101,7 +101,7 @@ public class MarkAppointmentMissedCommand extends Command {
 
         Appointment markedAsMissedAppointment = new Appointment(appointmentToEdit.getPatient(),
                 appointmentToEdit.getDateTime(), appointmentToEdit.getDuration(),
-                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.MISSED);
+                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), true);
 
         model.setAppointment(appointmentToEdit, markedAsMissedAppointment);
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsMissedAppointment));

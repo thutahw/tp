@@ -21,6 +21,7 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
 public class MarkAppointmentDoneCommand extends Command {
@@ -38,6 +39,8 @@ public class MarkAppointmentDoneCommand extends Command {
 
     public static final String MESSAGE_MARK_AS_DONE_SUCCESS = "Appointment marked as done: %1$s";
 
+    public static final String MESSAGE_UPCOMING_APPOINTMENT = "This appointment has not passed yet, "
+            + "it cannot be marked as done.";
     public static final TabId TAB_ID = TabId.NONE;
 
     private final Index index;
@@ -100,9 +103,13 @@ public class MarkAppointmentDoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }
 
+        if (appointmentToEdit.getStatus().equals(AppointmentStatus.UPCOMING)) {
+            throw new CommandException(MESSAGE_UPCOMING_APPOINTMENT);
+        }
+
         Appointment markedAsDoneAppointment = new Appointment(appointmentToEdit.getPatient(),
                 appointmentToEdit.getDateTime(), appointmentToEdit.getDuration(),
-                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.DONE);
+                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), false);
 
         model.setAppointment(appointmentToEdit, markedAsDoneAppointment);
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));

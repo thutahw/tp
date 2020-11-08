@@ -23,12 +23,12 @@ public class AppointmentBuilder {
     public static final String DEFAULT_DATETIME = "11-10-2020 19:45";
     public static final int DEFAULT_DURATION = 60;
     public static final String DEFAULT_DESCRIPTION = "Monthly checkup.";
-    public static final AppointmentStatus DEFAULT_APPOINTMENT_STATUS = AppointmentStatus.UPCOMING;
+    public static final Boolean DEFAULT_IS_MISSED = false;
 
     private Patient patient;
     private DateTime dateTime;
     private Duration duration;
-    private AppointmentStatus status;
+    private Boolean isMissed;
     private Set<Tag> tags;
     private Description description;
 
@@ -39,7 +39,7 @@ public class AppointmentBuilder {
         patient = DEFAULT_PATIENT;
         dateTime = DateTime.fromString(DEFAULT_DATETIME);
         duration = new Duration(DEFAULT_DURATION);
-        status = DEFAULT_APPOINTMENT_STATUS;
+        isMissed = DEFAULT_IS_MISSED;
         tags = new HashSet<>();
         description = new Description(DEFAULT_DESCRIPTION);
     }
@@ -54,7 +54,7 @@ public class AppointmentBuilder {
         duration = appointmentToCopy.getDuration();
         description = appointmentToCopy.getDescription();
         tags = appointmentToCopy.getTags();
-        status = appointmentToCopy.getStatus();
+        isMissed = appointmentToCopy.checkIfMissed();
     }
 
     /**
@@ -68,10 +68,10 @@ public class AppointmentBuilder {
 
     /**
      * Sets the status of the appointment we are building to the input
-     * @param status
+     * @param isMissed
      */
-    public AppointmentBuilder withStatus(AppointmentStatus status) {
-        this.status = status;
+    public AppointmentBuilder withIsMissed(Boolean isMissed) {
+        this.isMissed = isMissed;
         return this;
     }
 
@@ -114,6 +114,6 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(patient, dateTime, duration, description, tags, status);
+        return new Appointment(patient, dateTime, duration, description, tags, isMissed);
     }
 }

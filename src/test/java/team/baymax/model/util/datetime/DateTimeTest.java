@@ -31,12 +31,6 @@ class DateTimeTest {
     }
 
     @Test
-    void current() {
-        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mma")),
-                DateTime.current().toString());
-    }
-
-    @Test
     void isValidDateTime_nullDateTime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> DateTime.isValidDateTime(null));
     }
