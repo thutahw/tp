@@ -15,13 +15,12 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import team.baymax.model.calendar.AppointmentCalendar;
-import team.baymax.testutil.Assert;
 
 class DateTest {
 
     @Test
     void isValidDate_nullDate_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
+        assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
     }
 
     @Test
@@ -36,13 +35,13 @@ class DateTest {
 
     @Test
     void isValidDate_validDate() {
-        assertTrue(DateTime.isValidDateTime("01-02-2020"));
-        assertTrue(DateTime.isValidDateTime("30-01-2021"));
+        assertTrue(Date.isValidDate("01-02-2020"));
+        assertTrue(Date.isValidDate("30-01-2021"));
     }
 
     @Test
     void from_nullDate_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> Date.fromString(null));
+        assertThrows(NullPointerException.class, () -> Date.fromString(null));
     }
 
     @Test
