@@ -8,6 +8,9 @@ skinparam Class {
 }
 skinparam ArrowColor UI_COLOR_T3
 
+hide method
+hide attribute
+
 package Ui <<Rectangle>> {
 Class HiddenOutside #FFFFFF
 Class "{abstract}\nUiPart" as UiPart

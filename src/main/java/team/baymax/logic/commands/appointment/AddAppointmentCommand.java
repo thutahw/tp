@@ -53,7 +53,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_TIME + "12:30 "
             + PREFIX_DURATION + "60 "
             + PREFIX_DESCRIPTION + "Monthly health checkup. "
-            + PREFIX_TAG + "DrGoh\n";
+            + PREFIX_TAG + "Xray\n";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the "
@@ -127,8 +127,7 @@ public class AddAppointmentCommand extends Command {
             dt = DateTime.from(date, time.get());
         }
 
-        //check if duration extends appointment to the next day
-        if (!(dt.getDate().equals(dt.plusMinutes(duration).getDate()))) {
+        if (dt.extendsUntilNextDay(duration)) {
             throw new CommandException(MESSAGE_INVALID_DURATION);
         }
 
@@ -139,7 +138,7 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
-        if (model.doesAppointmentClash(toAdd)) {
+        if (model.doesAppointmentClash(toAdd, null)) {
             throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 

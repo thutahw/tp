@@ -32,4 +32,11 @@ public class CollectionUtil {
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
     }
+
+    /**
+     * Returns true if {@code item} is non-null.
+     */
+    public static boolean isNonNull(Object item) {
+        return item != null;
+    }
 }

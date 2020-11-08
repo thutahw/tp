@@ -79,9 +79,9 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      * Returns true if there is an appointment existing in the manager that clashes with
      * {@code appointment} in time.
      */
-    public boolean doesAppointmentClash(Appointment appointment) {
+    public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
-        return appointments.contains(new AppointmentClashPredicate(appointment));
+        return appointments.contains(new AppointmentClashPredicate(appointment, toExclude));
     }
 
     /**
@@ -119,6 +119,25 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         while (appointments.contains(predicate)) {
             Appointment toRemove = appointments.getByPredicate(predicate);
             appointments.remove(toRemove);
+        }
+    }
+
+    /**
+     * Updates all appointments of a {@code patient} with new patient information in the {@code editedPatient}.
+     * @param patient patient with outdated profile information
+     * @param editedPatient patient with newly updated profile information
+     */
+    public void updatePatientAppointments(Patient patient, Patient editedPatient) {
+        BelongsToPatientPredicate predicate = new BelongsToPatientPredicate(patient);
+        while (appointments.contains(predicate)) {
+            Appointment toEdit = appointments.getByPredicate(predicate);
+            Appointment edited = new Appointment(editedPatient,
+                    toEdit.getDateTime(),
+                    toEdit.getDuration(),
+                    toEdit.getDescription(),
+                    toEdit.getTags(),
+                    toEdit.getStatus());
+            appointments.setElement(toEdit, edited);
         }
     }
 

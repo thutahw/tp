@@ -4,6 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
+hide method
+hide attribute
+
 skinparam Class {
     BorderColor BACKGROUND_COLOR
     FontColor BACKGROUND_COLOR
@@ -36,21 +39,26 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-Ui <|-- UiManager
+Ui <|.. UiManager
 UiManager --> MainWindow
 MainWindow *--> SideTabPane
 SideTabPane --> XYZPage
 MainWindow --> HelpWindow
-MainWindow *-right-> ResultDisplay
+MainWindow *--> ResultDisplay
 MainWindow *--> CommandBox
-MainWindow *-left-> StatusBarFooter
+MainWindow *--> StatusBarFooter
 
+MainWindow --|> UiPart
 SideTabPane --|> UiPart
 HelpWindow --|> UiPart
 ResultDisplay --|> UiPart
+StatusBarFooter --|> UiPart
+CommandBox --|> UiPart
+'XYZPage -left-|> UiPart
 
 MainWindow ---> Logic
-XYZPage .up.> Model
+UiManager --> Logic
+XYZPage ..> Model
 
 note bottom of XYZPage: XYZPage = PatientInfoPage, AppointmentInfoPage, \nSchedulePage, CalendarPage, InfoPage etc
 

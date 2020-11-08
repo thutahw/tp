@@ -67,6 +67,7 @@ public class EditAppointmentCommandTest {
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_1)
                 .withDateTime(VALID_DATETIME_1).withTags(VALID_TAG_DIABETIC).build();
+
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(indexLastAppointment, descriptor);
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS,

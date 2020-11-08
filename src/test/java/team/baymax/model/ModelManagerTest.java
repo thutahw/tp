@@ -82,12 +82,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPatient_patientNotInAddressBook_returnsFalse() {
+    public void hasPatient_patientNotInAppointmentBook_returnsFalse() {
         assertFalse(modelManager.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPatient_patientInAddressBook_returnsTrue() {
+    public void hasPatient_patientInAppointmentBook_returnsTrue() {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
     }

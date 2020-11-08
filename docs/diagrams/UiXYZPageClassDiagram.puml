@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+hide method
+hide attribute
+
+Class XYZPage
+Class XYZListPanel
+Class XYZCard
+Class "{abstract}\nUiPart" as UiPart
+
+package Model <<Rectangle>> {
+}
+
+XYZPage --> XYZListPanel
+XYZListPanel --> XYZCard
+
+XYZCard ..> Model
+
+XYZPage --|> UiPart
+XYZListPanel --|> UiPart
+XYZCard --|> UiPart
+
+note right of XYZPage: PatientInfoPage, AppointmentInfoPage
+
+@enduml

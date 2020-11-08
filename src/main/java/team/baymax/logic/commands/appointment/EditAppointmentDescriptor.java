@@ -44,6 +44,13 @@ public class EditAppointmentDescriptor {
         return CollectionUtil.isAnyNonNull(dateTime, status, tags, description, duration);
     }
 
+    /**
+     * Returns true if the datetime field is edited.
+     */
+    public boolean isDateTimeEdited() {
+        return CollectionUtil.isNonNull(dateTime);
+    }
+
     public void setDateTime(DateTime dateTime) {
         this.dateTime = dateTime;
     }

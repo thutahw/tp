@@ -4,6 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+hide method
+hide attribute
+
 AddressBook *-right-> "1" UniquePatientList
 AddressBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniquePatientList

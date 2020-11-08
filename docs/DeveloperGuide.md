@@ -96,14 +96,20 @@ Figure 4. Structure of the UI component
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
-The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts such as the `CommandBox` and `SideTabPane` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `Page` is an abstract class that represents a page corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The following classes inherit from the `Page` abstract class:
+The `SideTabPane` class creates `XYZPage` corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The `XYZPage` is a generic name given to the following elements:
 - Dashboard
 - PatientInfoPage
 - AppointmentInfoPage
 - CalendarPage
+- SchedulePage
 - InfoPage
+
+Each of these classes (except InfoPage) displays data from the `Model` to the user.
+For example, The PatientInfoPage and AppointmentInfoPage display lists of patients and appointments respectively. Hence they contain `XYZListPanel` (shown in the diagram below), which in turn contains a collection of `XYZCard` that displays each data field in the Patient and Appointment class.
+
+![Structure of an XYZPage](images/UiXYZPageClassDiagram.png)<br>
 
 #### 3.2.2. Responsibilities
 
@@ -121,10 +127,10 @@ Figure 5. Structure of the Logic Component
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
-1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a patient), which is executed by the `ModelManager` which calls `PatientManager` and `AppointmentManager`.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+2. This results in a `Command` object which is executed by the `LogicManager`.
+3. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on AppointmentManager).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
@@ -144,11 +150,12 @@ Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
-Each type of data is handled by a separate `ListManager` (to give `PatientManager` and `AppointmentManager`), and a 
-`ModelManager` facade class exposes the methods 
+The `Model` component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
+Each type of data is handled by a separate `ListManager` (`PatientManager` and `AppointmentManager`). A `ModelManager` facade class then exposes the methods 
 that enable other components to perform getting, setting, searching and editing functions on the different 
 types of data.
+
+Apart from `ListManager`s, the `Model` component also contains a `CalendarManager` that manages an `AppointmentCalendar`. The `CalendarManager` supports operations on the `AppointmentCalendar` such as getting and setting the `year`, `month` and `day`. 
 
 The `Model` component also contains
 
@@ -194,7 +201,7 @@ The `Storage` component,
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `team.baymax.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +291,6 @@ Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
-=======
 ### **4.2 Patient Manager**
 (Contributed by Thuta Htun Wai)
 
@@ -297,7 +303,6 @@ a single patient's information can be managed at one time. A user can:
 * Find a patient by using a keyword from his/her name
 * List all the appointments of a specific patient
 
-=======
 #### 4.2.1 Rationale
 The Patient Manager feature is included in Baymax because it is one of the core features of the application.
 If the user wants to keep track of the patient's information, he/she has to record the details
@@ -325,8 +330,6 @@ The following table shows the commands related to managing a patient's details.<
 | `findpatient` | Finds a patient with the given search string (name).
 | `listpatientappts` | Lists all the appointments of a specific patient.
 
-=======
-
 #### 4.2.3. Design Consideration
 For all the commands except the `listpatientappts` command, the current implementation is the best we came up with in terms of following good coding principles and
 making the user easily understand the commands. <br>
@@ -335,7 +338,6 @@ As for the `listpatientappts` command, we decided not to continue this functiona
  `appointment` package. This is because we feel that it is better to have a separate class and a separate command word to list all
  the appointments of a specific patient instead of adding a new prefix keyword after `listappt` i.e `listappt by/PATIENT INDEX`.
  
-========
 ### **4.3 Appointment Manager**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
@@ -370,9 +372,8 @@ Additionally, we only require matching of `DateTime` and `Patient` of appointmen
 
 To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
-=======
 ### **4.3 Appointment Manager**
-(Contributed by Shi Huiling & Reuben Teng)
+(Contributed by Shi Hui Ling & Reuben Teng)
 Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
 
 `AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
@@ -416,46 +417,37 @@ existing list of patients before a valid `Appointment` object is created contain
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
 
-Baymax allows the user to manage appointments using a built-in calendar. Baymax is implemented in such a way that the 
-application revolves around one central calendar. In the Calendar Manager, the user can set a particular year and 
-month, following which any calendar-related commands entered will be with respect to that year and month.
+Baymax allows the user to manage appointments using a built-in calendar.
+The calendar brings greater convenience to the user by showing them what days are available in a month.
+It is also coupled with a schedule view that can be accessed by entering the `day` command, which shows the user
+all appointments on the chosen day, laid out chronologically on a timeline.
 
 #### 4.4.1 Rationale
 
-The Calendar feature is included in Baymax because it makes displaying appointments by date more intuitive. On top of 
-that, it provides a visual view of appointments in a day relative to time, serving as a tool for helping the 
-receptionist to avoid potential collisions in appointment timings. The calendar's month view also serves the purpose of 
-giving a broad overview of how busy each day is in a month.
+The Calendar feature is included in Baymax because it can shorten some commands by allowing the user to only specify
+the time of appointments, as the date can be inferred from the calendar. For example, in the Calendar 
+Manager, a user can set a custom year, month and day. This influences the execution of the `addappt` command shown 
+in the sequence diagram below. In this example, suppose the user has set year to 2020, 
+month to February and day to 1, he can directly enter an `addappt` command that adds an appointment to 1, 
+February, 2020 without having to enter a date into the command fields. This makes the command shorter, more convenient
+and more user-friendly.
+
+![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
+Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
-The `CalendarManager` class in the `Model` component contains a `AppointmentCalendar` object, storing the currently set 
+The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
 `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
-current year, month and day. Rather, it is dependent on what the user set them to. Hence, it follows that there should 
-be setter methods inside the `CalendarManager` class that allow the user to change the value of those fields, so as to 
-view all appointments relative to a particular year or month.
+present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
+constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
+`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
 
-The following table shows the commands related to managing the appointment calendar:
+The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
+`year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
-|Command    | Purpose
-| --------- | ------------------------------------------
-| `year`    | Sets the calendar to a particular year. <br>This defaults to the current year.
-| `month`   | Sets the calendar to a particular month. At the same time, the calendar UI changes to reflect the data in the newly declared month. <br>This defaults to the current month.
-| `day`     | Sets the calendar to a particular day. At the same time, the calendar UI changes to reflect a list of appointments on this day. <br>This defaults to the current day of the month.
+
 
 #### 4.4.3. Design Consideration
-Aspect: the necessity of a day view
-
-Option 1: Necessary (Current)
-- Pros: User is able to see all appointments on a particular day, in chronological order. This gives the receptionist better clarity of which other appointments are booked on that day. Thus, it will lead to better user experience.
-- Cons: More difficult to implement as another view needs to be implemented which adds to the complexity of the application.
-
-Option 2: Not necessary
-- Pros: User can simply find appointments by date to list out all appointments on that day. This is much easier to implement, and also means less commands to remember since it can be grouped under a find command.
-- Cons: It is less intuitive and requires longer commands.
-
-Reason for choosing Option 1:
-- Having a day view in the calendar allows the user to zoom in to a particular day, and hence makes the calendar more complete.
-- Having a chronological view of the appointments in a day allows the receptionist to spot timing collisions, and hence schedule appointments more efficiently.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -528,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ## **Appendix C: Use cases**
-(Contributed by Li Jianhan)
+(Contributed by Li Jianhan and Shi Hui Ling)
 
 For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
 
@@ -634,7 +626,7 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 *{More to be added}*
 
 ## **Appendix D: Non-Functional Requirements**
-(Contributed by Shi Hui Ling))
+(Contributed by Shi Hui Ling)
 
 **Technical Environment**
 * Application should work on any mainstream OS as long as it has Java 11 or above installed.

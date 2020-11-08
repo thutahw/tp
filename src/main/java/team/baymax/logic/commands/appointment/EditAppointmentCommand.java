@@ -2,8 +2,11 @@ package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
+import static team.baymax.logic.commands.appointment.AddAppointmentCommand.MESSAGE_CLASH_APPOINTMENT;
+import static team.baymax.logic.commands.appointment.AddAppointmentCommand.MESSAGE_INVALID_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_DURATION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -38,6 +41,7 @@ public class EditAppointmentCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DATETIME + "DATETIME] "
+            + "[" + PREFIX_DURATION + "DURATION] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -76,6 +80,17 @@ public class EditAppointmentCommand extends Command {
 
         if (!appointmentToEdit.isSame(editedAppointment) && model.hasAppointment(editedAppointment)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        if (editAppointmentDescriptor.isDateTimeEdited()
+                && model.doesAppointmentClash(editedAppointment, appointmentToEdit)) {
+            throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
+        }
+
+        DateTime dateTime = editedAppointment.getDateTime();
+
+        if (dateTime.extendsUntilNextDay(editedAppointment.getDuration())) {
+            throw new CommandException(MESSAGE_INVALID_DURATION);
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);

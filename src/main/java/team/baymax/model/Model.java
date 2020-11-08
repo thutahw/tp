@@ -136,8 +136,11 @@ public interface Model {
     /**
      * Returns true if there is an appointment existing in the manager that clashes with
      * {@code appointment} in time.
+     * @param appointment
+     * @param toExclude the appointment to exclude for checking clashes
+     * @return
      */
-    boolean doesAppointmentClash(Appointment appointment);
+    boolean doesAppointmentClash(Appointment appointment, Appointment toExclude);
 
     /**
      * Deletes the given appointment.
