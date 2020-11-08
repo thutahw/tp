@@ -11,7 +11,7 @@ import static team.baymax.testutil.appointment.TypicalAppointments.BOB_APT_VAR_2
 import static team.baymax.testutil.appointment.TypicalAppointments.CARL_APT;
 import static team.baymax.testutil.appointment.TypicalAppointments.SAME_DATETIME_AND_PATIENT_PREDICATE;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
-import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME7;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
 import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
@@ -49,6 +49,6 @@ public class SameDatetimeAndPatientPredicateTest {
 
     @Test
     void equals_sameValue_returnsTrue() {
-        assertEquals(new SameDatetimeAndPatientPredicate(DATETIME7, BOB), SAME_DATETIME_AND_PATIENT_PREDICATE);
+        assertEquals(new SameDatetimeAndPatientPredicate(DATETIME6, BOB), SAME_DATETIME_AND_PATIENT_PREDICATE);
     }
 }

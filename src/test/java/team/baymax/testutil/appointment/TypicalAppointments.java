@@ -1,6 +1,5 @@
 package team.baymax.testutil.appointment;
 
-<<<<<<< HEAD
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME3;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
@@ -40,30 +39,45 @@ public class TypicalAppointments {
     public static final HashSet<Tag> TAGS_VAR_2 = new HashSet<>(tagsAsList2);
 
     public static final Appointment ALICE_APT = new Appointment(ALICE,
-            DateTime.fromString("11-10-2020 12:45"),
+            DateTime.fromString("30-12-2020 12:45"),
             new Duration(60), new Description("desc 1"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
     // Exact duplicate of APT1
     public static final Appointment ALICE_APT_DUPLICATE = new Appointment(ALICE,
-            DateTime.fromString("11-10-2020 12:45"),
+            DateTime.fromString("30-12-2020 12:45"),
             new Duration(60), new Description("desc 1"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
     // Variant 1 - same patient and datetime with APT1, but other fields are different
     public static final Appointment ALICE_APT_VAR_1 = new Appointment(ALICE,
-            DateTime.fromString("11-10-2020 12:45"),
+            DateTime.fromString("30-12-2020 12:45"),
             new Duration(60), new Description("desc 2"),
             new HashSet<>(), AppointmentStatus.MISSED);
 
     // Variant 2 - same patient, but different datetime and tags
     public static final Appointment ALICE_APT_VAR_2 = new Appointment(ALICE,
-            DateTime.fromString("12-01-2020 12:45"),
+            DateTime.fromString("28-12-2020 12:30"),
             new Duration(60), new Description("desc 2"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
+    public static final Appointment BOB_APT = new Appointment(BOB,
+            DateTime.fromString("11-01-2020 12:45"),
+            new Duration(40), new Description("desc 4"),
+            BOB.getTags(), AppointmentStatus.DONE);
+
+    public static final Appointment BOB_APT_VAR_2 = new Appointment(BOB,
+            DateTime.fromString("11-02-2020 12:45"),
+            new Duration(40), new Description("desc 4"),
+            BOB.getTags(), AppointmentStatus.DONE);
+
+    public static final Appointment BOB_APT_CLASH_WITH_BOBV2 = new Appointment(BOB,
+            DateTime.fromString("11-02-2020 12:55"),
+            new Duration(40), new Description("desc 4"),
+            BOB.getTags(), AppointmentStatus.DONE);
+
     public static final Appointment CARL_APT = new Appointment(CARL,
-            DateTime.fromString("11-11-2020 11:30"),
+            DateTime.fromString("25-12-2020 11:30"),
             new Duration(50), new Description("desc 3"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
@@ -74,21 +88,6 @@ public class TypicalAppointments {
     public static final Appointment ELLE_APT = new Appointment(ELLE, DATETIME3,
             new Duration(60), new Description("Blood test needed"),
             TAGS_VAR_2, AppointmentStatus.UPCOMING);
-
-    public static final Appointment BOB_APT = new Appointment(BOB,
-            DateTime.fromString("11-10-2020 12:45"),
-            new Duration(40), new Description("desc 4"),
-            BOB.getTags(), AppointmentStatus.DONE);
-
-    public static final Appointment BOB_APT_VAR_2 = new Appointment(BOB,
-            DateTime.fromString("11-12-2020 12:45"),
-            new Duration(40), new Description("desc 4"),
-            BOB.getTags(), AppointmentStatus.DONE);
-
-    public static final Appointment BOB_APT_CLASH_WITH_BOBV2 = new Appointment(BOB,
-            DateTime.fromString("11-12-2020 12:55"),
-            new Duration(40), new Description("desc 4"),
-            BOB.getTags(), AppointmentStatus.DONE);
 
     public static final AppointmentContainsKeywordsPredicate KEYWORDS_PREDICATE =
             new AppointmentContainsKeywordsPredicate(List.of("Diabetes", "LTP"));
@@ -121,10 +120,6 @@ public class TypicalAppointments {
     }
 
     public static List<Appointment> getTypicalAppointments() {
-        return new ArrayList<>(Arrays.asList(ALICE_APT, CARL_APT, BOB_APT));
-    }
-
-    public static List<Appointment> getTaggedAndDescriptiveAppointments() {
-        return new ArrayList<>(Arrays.asList(CARL_APT, DANIEL_APT, ELLE_APT));
+        return new ArrayList<>(Arrays.asList(ALICE_APT, CARL_APT, BOB_APT, DANIEL_APT, ELLE_APT));
     }
 }

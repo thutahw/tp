@@ -41,9 +41,9 @@ public class AppointmentTest {
 
     @Test
     public void getDateTime() {
-        assertEquals(DateTime.fromString("11-10-2020 12:45"), ALICE_APT.getDateTime());
-        assertEquals(DateTime.fromString("11-11-2020 11:30"), CARL_APT.getDateTime());
-        assertEquals(DateTime.fromString("11-10-2020 12:45"), BOB_APT.getDateTime());
+        assertEquals(DateTime.fromString("30-12-2020 12:45"), ALICE_APT.getDateTime());
+        assertEquals(DateTime.fromString("25-12-2020 11:30"), CARL_APT.getDateTime());
+        assertEquals(DateTime.fromString("11-01-2020 12:45"), BOB_APT.getDateTime());
     }
 
     @Test
@@ -53,9 +53,9 @@ public class AppointmentTest {
 
     @Test
     public void getDate() {
-        assertEquals(Date.fromString("11-10-2020"), ALICE_APT.getDate());
-        assertEquals(Date.fromString("11-11-2020"), CARL_APT.getDate());
-        assertEquals(Date.fromString("11-10-2020"), BOB_APT.getDate());
+        assertEquals(Date.fromString("30-12-2020"), ALICE_APT.getDate());
+        assertEquals(Date.fromString("25-12-2020"), CARL_APT.getDate());
+        assertEquals(Date.fromString("11-01-2020"), BOB_APT.getDate());
     }
 
     @Test
@@ -74,9 +74,9 @@ public class AppointmentTest {
 
     @Test
     public void getEndDateTime() {
-        assertEquals(DateTime.fromString("11-10-2020 13:45"), ALICE_APT.getEndDateTime());
-        assertEquals(DateTime.fromString("11-11-2020 12:20"), CARL_APT.getEndDateTime());
-        assertEquals(DateTime.fromString("11-10-2020 13:25"), BOB_APT.getEndDateTime());
+        assertEquals(DateTime.fromString("30-12-2020 13:45"), ALICE_APT.getEndDateTime());
+        assertEquals(DateTime.fromString("25-12-2020 12:20"), CARL_APT.getEndDateTime());
+        assertEquals(DateTime.fromString("11-01-2020 13:25"), BOB_APT.getEndDateTime());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class AppointmentTest {
     public void equals_sameValue_returnsTrue() {
         assertEquals(ALICE_APT, ALICE_APT);
         assertEquals(ALICE_APT, new Appointment(ALICE,
-                DateTime.fromString("11-10-2020 12:45"),
+                DateTime.fromString("30-12-2020 12:45"),
                 new Duration(60), new Description("desc 1"),
                 new HashSet<>(), AppointmentStatus.UPCOMING));
     }
@@ -133,11 +133,11 @@ public class AppointmentTest {
     @Test
     public void hashCode_sameValue_sameHashcode() {
         assertEquals(ALICE_APT.hashCode(), new Appointment(ALICE,
-                DateTime.fromString("11-10-2020 12:45"),
+                DateTime.fromString("30-12-2020 12:45"),
                 new Duration(60), new Description("desc 1"),
                 new HashSet<>(), AppointmentStatus.UPCOMING).hashCode());
         assertEquals(BOB_APT.hashCode(), new Appointment(BOB,
-                DateTime.fromString("11-10-2020 12:45"),
+                DateTime.fromString("11-01-2020 12:45"),
                 new Duration(40), new Description("desc 4"),
                 BOB.getTags(), AppointmentStatus.DONE).hashCode());
     }
@@ -162,23 +162,23 @@ public class AppointmentTest {
     public void toString_appointments() {
         assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: Female | Phone: 94351253"
                 + "\n\t   Remark: remark Alice | Tags: [tag1]"
-                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDate-time: 30 Dec 2020, 12:45PM"
                 + "\nDuration: 1 Hour(s)"
                 + "\nDescription: desc 1", ALICE_APT.toString());
         assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: Female | Phone: 94351253"
                 + "\n\t   Remark: remark Alice | Tags: [tag1]"
-                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDate-time: 30 Dec 2020, 12:45PM"
                 + "\nDuration: 1 Hour(s)"
                 + "\nDescription: desc 2", ALICE_APT_VAR_1.toString());
         assertEquals("\nPatient Name: Bob Choo | NRIC: S3322115E | Gender: Male | Phone: 81763222"
                 + "\n\t   Remark: Only free on weekends. | Tags: [Diabetic][LTP]"
-                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDate-time: 11 Jan 2020, 12:45PM"
                 + "\nDuration: 40 Minute(s)"
                 + "\nDescription: desc 4"
                 + "\nTags: [Diabetic][LTP]", BOB_APT.toString());
         assertEquals("\nPatient Name: Carl Kurz | NRIC: S8546464H | Gender: Female | Phone: 95352563"
                 + "\n\t   Remark: remark Carl"
-                + "\nDate-time: 11 Nov 2020, 11:30AM"
+                + "\nDate-time: 25 Dec 2020, 11:30AM"
                 + "\nDuration: 50 Minute(s)"
                 + "\nDescription: desc 3", CARL_APT.toString());
     }
