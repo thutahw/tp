@@ -1,5 +1,7 @@
 package team.baymax.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import team.baymax.model.patient.Patient;
@@ -12,9 +14,10 @@ public class BelongsToPatientPredicate implements Predicate<Appointment> {
 
     /**
      * Constructor taking in a Patient object to match Appointments with
-     * @param patient   Patient object
+     * @param patient Patient object
      */
     public BelongsToPatientPredicate(Patient patient) {
+        requireNonNull(patient);
         this.patient = patient;
     }
 

@@ -3,8 +3,8 @@ package team.baymax.model.appointment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
 import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_DUPLICATE;
 import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VAR_1;
@@ -14,6 +14,8 @@ import static team.baymax.testutil.appointment.TypicalAppointments.CARL_APT;
 import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import team.baymax.model.tag.Tag;
@@ -22,21 +24,19 @@ import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
 
-import java.util.HashSet;
-
 public class AppointmentTest {
     @Test
     public void constructor_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Appointment(null, DateTime.fromString("01-01-2020 00:00")
-                , new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
-        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, null
-                , new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
-        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00")
-                , null, new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
-        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00")
-                , new Duration(60), null, new HashSet<Tag>(), AppointmentStatus.UPCOMING));
-        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00")
-                , new Duration(60), new Description("Test."), null, AppointmentStatus.UPCOMING));
+        assertThrows(NullPointerException.class, () -> new Appointment(null, DateTime.fromString("01-01-2020 00:00"),
+                new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, null,
+                new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
+                null, new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
+                new Duration(60), null, new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+        assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
+                new Duration(60), new Description("Test."), null, AppointmentStatus.UPCOMING));
     }
 
     @Test
@@ -139,7 +139,7 @@ public class AppointmentTest {
         assertEquals(BOB_APT.hashCode(), new Appointment(BOB,
                 DateTime.fromString("11-10-2020 12:45"),
                 new Duration(40), new Description("desc 4"),
-                new HashSet<>(), AppointmentStatus.DONE).hashCode());
+                BOB.getTags(), AppointmentStatus.DONE).hashCode());
     }
 
     @Test
@@ -160,21 +160,26 @@ public class AppointmentTest {
 
     @Test
     public void toString_appointments() {
-        assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: F | Phone: 94351253" +
-                "\n\t   Remark: remark Alice | Tags: [tag1]" +
-                "\nDate-time: 11 Oct 2020, 12:45PM" +
-                "\nDescription: desc 1", ALICE_APT.toString());
-        assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: F | Phone: 94351253" +
-                "\n\t   Remark: remark Alice | Tags: [tag1]" +
-                "\nDate-time: 11 Oct 2020, 12:45PM" +
-                "\nDescription: desc 2", ALICE_APT_VAR_1.toString());
-        assertEquals("\nPatient Name: Bob Choo | NRIC: S3322115E | Gender: M | Phone: 81763222" +
-                "\n\t   Remark: Only free on weekends. | Tags: [Diabetic][LTP]" +
-                "\nDate-time: 11 Oct 2020, 12:45PM" +
-                "\nDescription: desc 4", BOB_APT.toString());
-        assertEquals("\nPatient Name: Carl Kurz | NRIC: S8546464H | Gender: F | Phone: 95352563" +
-                "\n\t   Remark: remark Carl" +
-                "\nDate-time: 11 Nov 2020, 11:30AM" +
-                "\nDescription: desc 3", CARL_APT.toString());
+        assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: Female | Phone: 94351253"
+                + "\n\t   Remark: remark Alice | Tags: [tag1]"
+                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDuration: 1 Hour(s)"
+                + "\nDescription: desc 1", ALICE_APT.toString());
+        assertEquals("\nPatient Name: Alice Pauline | NRIC: T1234567A | Gender: Female | Phone: 94351253"
+                + "\n\t   Remark: remark Alice | Tags: [tag1]"
+                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDuration: 1 Hour(s)"
+                + "\nDescription: desc 2", ALICE_APT_VAR_1.toString());
+        assertEquals("\nPatient Name: Bob Choo | NRIC: S3322115E | Gender: Male | Phone: 81763222"
+                + "\n\t   Remark: Only free on weekends. | Tags: [Diabetic][LTP]"
+                + "\nDate-time: 11 Oct 2020, 12:45PM"
+                + "\nDuration: 40 Minute(s)"
+                + "\nDescription: desc 4"
+                + "\nTags: [Diabetic][LTP]", BOB_APT.toString());
+        assertEquals("\nPatient Name: Carl Kurz | NRIC: S8546464H | Gender: Female | Phone: 95352563"
+                + "\n\t   Remark: remark Carl"
+                + "\nDate-time: 11 Nov 2020, 11:30AM"
+                + "\nDuration: 50 Minute(s)"
+                + "\nDescription: desc 3", CARL_APT.toString());
     }
 }
