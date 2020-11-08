@@ -132,14 +132,6 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Checks if this {@code Duration} extends the appointment to the next day.
-     *
-     */
-    public boolean extendsUntilNextDay(Duration duration) {
-        return !(getDate().equals(plusMinutes(duration).getDate()));
-    }
-
-    /**
      * Checks if this {@code DateTime} is equal to the specified date-time.
      *
      * @param other
@@ -148,6 +140,14 @@ public class DateTime implements Comparable<DateTime> {
     public boolean isEqual(DateTime other) {
         requireAllNonNull(other);
         return dateTime.isEqual(other.dateTime);
+    }
+
+    /**
+     * Checks if this {@code Duration} extends the appointment to the next day.
+     *
+     */
+    public boolean extendsUntilNextDay(Duration duration) {
+        return !(getDate().equals(plusMinutes(duration).getDate()));
     }
 
     @Override

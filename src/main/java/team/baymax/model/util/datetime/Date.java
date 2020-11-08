@@ -81,6 +81,39 @@ public class Date {
         return new Day(date.getDayOfMonth());
     }
 
+    /**
+     * Checks if this {@code Date} is after the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isAfter(Date other) {
+        requireAllNonNull(other);
+        return date.isAfter(other.date);
+    }
+
+    /**
+     * Checks if this {@code Date} is before the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isBefore(Date other) {
+        requireAllNonNull(other);
+        return date.isBefore(other.date);
+    }
+
+    /**
+     * Checks if this {@code Date} is equal to the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isEqual(Date other) {
+        requireAllNonNull(other);
+        return date.isEqual(other.date);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

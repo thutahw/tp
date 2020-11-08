@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentClashPredicate;
+import team.baymax.model.appointment.AppointmentSortByDateAndNameComparator;
 import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.BelongsToPatientPredicate;
 import team.baymax.model.patient.Patient;
@@ -47,6 +48,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void setAppointments(List<Appointment> appointments) {
         this.appointments.setElements(appointments);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -55,6 +57,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public void resetData(ReadOnlyListManager<Appointment> newData) {
         requireNonNull(newData);
         setAppointments(newData.getReadOnlyList());
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -90,6 +93,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void addAppointment(Appointment p) {
         appointments.add(p);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -101,6 +105,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireNonNull(editedAppointment);
         appointments.setElement(target, editedAppointment);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -139,6 +144,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
                     toEdit.getStatus());
             appointments.setElement(toEdit, edited);
         }
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**

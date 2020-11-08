@@ -10,6 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import team.baymax.commons.core.LogsCenter;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.ui.UiPart;
 
 /**
@@ -34,6 +36,7 @@ public class AppointmentListPanel extends UiPart<Region> {
     public AppointmentListPanel(ObservableList<Appointment> appointments) {
         super(FXML);
         this.appointments = appointments;
+        System.out.println("hellooo");
 
         initialize();
     }
@@ -41,6 +44,14 @@ public class AppointmentListPanel extends UiPart<Region> {
     protected void initialize() {
         appointmentListView.setPlaceholder(new Label(EMPTY_LIST_PLACEHOLDER_TEXT));
         appointmentListView.setItems(appointments);
+        int scrollTarget = 0;
+        for (int i = 0; i < appointments.size(); i++) {
+            if (!appointments.get(i).getDate().isBefore(DateTimeUtil.getCurrentDate())) {
+                scrollTarget = i;
+            }
+        }
+
+        appointmentListView.scrollTo(scrollTarget);
         appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }
 
