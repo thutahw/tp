@@ -22,7 +22,7 @@ title: Baymax - User Guide
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.6. [Add a remark to a patient: `remark`](#516-add-a-remark-to-a-patient-remark)<br>
     5.2. [Appointment Management](#52-appointment-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.1. [Add a new appointment: `addappt`](#521-add-a-new-appointment-addappt)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. [List all appointments of a patient: `listapptof`](#522-list-all-appointments-of-a-patient-listapptof)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. [List all appointments of a patient: `listapptsof`](#522-list-all-appointments-of-a-patient-listapptsof)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.3. [List all appointments: `listappts`](#523-list-all-appointments-listappts)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.4. [Edit an appointment: `editappt`](#524-edit-an-appointment-editappt)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.5. [Cancel an appointment: `cancel`](#525-cancel-an-appointment-cancel)<br>
@@ -503,15 +503,15 @@ If the command is valid (i.e. the user keyed in the valid fields):
     ![addappt](images/addappt.png)<br>
     *Figure 5.2.1a. Scheduling a new appointment for a patient*
 
-#### 5.2.2. List all appointments of a patient: `listapptof`
+#### 5.2.2. List all appointments of a patient: `listapptsof`
 You can use this command to list all the appointments belonging to a certain patient.
 However, you will first need to use the `listpatients` command to 
 find out the patient’s `INDEX`. 
 
 **Format:**<br>
-`listapptof INDEX`<br>
-`listapptof nric/NRIC`<br>
-`listapptof name/NAME`<br>
+`listapptsof INDEX`<br>
+`listapptsof nric/NRIC`<br>
+`listapptsof name/NAME`<br>
 
 **Parameters:**
 
@@ -522,14 +522,14 @@ NRIC           | The nric of the patient.
 NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
 
 **Example:**<br>
-1. Type `listapptof 1` into the command box.
+1. Type `listapptsof 1` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
 1. All appointments associated with the patient will be displayed as shown below.
 
-    ![listapptof](images/listApptOf.png)<br>
+    ![listapptsof](images/listApptOf.png)<br>
     *Figure 5.2.2a. Listing the appointments of a patient*
 
 #### 5.2.3. List all appointments: `listappts`
@@ -956,7 +956,7 @@ Add a Remark: `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 **Command**             | **Example**
 ------------------------|--------------------
 Add an Appointment: `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` OR `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]` | `addappt nric/S1234567C on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh tag/1HR`
-List Appointments of a Patient: `listapptof INDEX` | `listapptof 1`
+List Appointments of a Patient: `listapptsof INDEX` | `listapptsof 1`
 List all Appointments: `listappts` | `listappts`
 Edit an Appointment: `editappt INDEX <at least 1 appointment information parameter>` | `editappt 1 on/12-10-2020 12:00`
 Cancel an Appointment: `cancel INDEX` OR `cancel on/DATETIME name/NAME` | `cancel on/20-01-2020 15:00 name/Alex `

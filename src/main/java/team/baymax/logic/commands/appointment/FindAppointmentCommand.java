@@ -24,6 +24,11 @@ public class FindAppointmentCommand extends Command {
 
     private final AppointmentContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a @{code FindAppointmentCommand} that will filter the appointment list to
+     * those appointments that contain certain keywords in their description or tags
+     * @param predicate  predicate to check whether an appointment contains certain keywords
+     */
     public FindAppointmentCommand(AppointmentContainsKeywordsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
