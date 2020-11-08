@@ -5,20 +5,21 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AppointmentBookParser" as AppointmentBookParser LOGIC_COLOR
 participant ":AddAppointmentCommandParser" as AddAppointmentCommandParser LOGIC_COLOR
-participant "d:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
+participant "c:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
 participant "a:Appointment" as Appointment MODEL_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:ModelManager" as ModelManager MODEL_COLOR
+participant ":CalendarManager" as CalendarManager MODEL_COLOR
 end box
 
 [-> LogicManager : execute("addappt 1 at/12:30 \ndur/60 desc/removal of \nbraces")
 activate LogicManager
 
 note left
-note that only the time
+notice that only the time
 is supplied in the user
 input
 end note
@@ -40,42 +41,51 @@ create AddAppointmentCommand
 AddAppointmentCommandParser -> AddAppointmentCommand
 activate AddAppointmentCommand
 
-AddAppointmentCommand --> AddAppointmentCommandParser
+AddAppointmentCommand --> AddAppointmentCommandParser : c
 deactivate AddAppointmentCommand
 
-AddAppointmentCommandParser --> AppointmentBookParser
+AddAppointmentCommandParser --> AppointmentBookParser : c
 destroy AddAppointmentCommandParser
 
-AppointmentBookParser --> LogicManager
+AppointmentBookParser --> LogicManager : c
 deactivate AppointmentBookParser
 
 LogicManager -> AddAppointmentCommand : execute()
 activate AddAppointmentCommand
 
-create Model
-AddAppointmentCommand -> Model : getAppointmentCalendar()
-activate Model
+AddAppointmentCommand -> ModelManager : getAppointmentCalendar()
+activate ModelManager
 
-Model --> AddAppointmentCommand : date
+ModelManager -> CalendarManager : getAppointmentCalendar()
+activate CalendarManager
+
+CalendarManager -> ModelManager : calendar
+deactivate CalendarManager
+
+ModelManager --> AddAppointmentCommand : calendar
+deactivate ModelManager
 
 create Appointment
-AddAppointmentCommand -> Appointment : Appointment(p, dt, dur, \ndesc, tags, s)
+AddAppointmentCommand -> Appointment : Appointment(patient, dt, dur, \ndesc, tags, status)
 activate Appointment
 
 note left
 ""dt"" is the datetime
-constructed
-from the date retrieved
-from the calendar and
-the time given.
+constructed using the
+date retrieved from
+the calendar and
+the time supplied by the
+user.
 end note
 
 Appointment --> AddAppointmentCommand : a
 deactivate Appointment
 
-AddAppointmentCommand -> Model : addAppointment(a)
-Model --> AddAppointmentCommand
-deactivate Model
+AddAppointmentCommand -> ModelManager : addAppointment(a)
+activate ModelManager
+
+ModelManager --> AddAppointmentCommand
+deactivate ModelManager
 
 create CommandResult
 AddAppointmentCommand -> CommandResult

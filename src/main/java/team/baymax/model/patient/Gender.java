@@ -38,9 +38,28 @@ public class Gender {
         return value;
     }
 
+    /**
+     * Returns true if the gender is male.
+     * @return
+     */
+    public boolean isMale() {
+        return value.equals("m") || value.equals("M");
+    }
+
+    /**
+     * Returns true if the gender is female.
+     * @return
+     */
+    public boolean isFemale() {
+        return value.equals("f") || value.equals("F");
+    }
+
     @Override
     public String toString() {
-        return value;
+        if (isMale()) {
+            return "Male";
+        }
+        return "Female";
     }
 
     @Override

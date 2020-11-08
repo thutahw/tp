@@ -106,7 +106,7 @@ public class DateTime implements Comparable<DateTime> {
      * @return
      */
     public DateTime plusMinutes(Duration duration) {
-        return new DateTime(this.dateTime.plusMinutes(duration.value));
+        return new DateTime(dateTime.plusMinutes(duration.value));
     }
 
     /**
@@ -129,6 +129,14 @@ public class DateTime implements Comparable<DateTime> {
     public boolean isBefore(DateTime other) {
         requireAllNonNull(other);
         return dateTime.isBefore(other.dateTime);
+    }
+
+    /**
+     * Checks if this {@code Duration} extends the appointment to the next day.
+     *
+     */
+    public boolean extendsUntilNextDay(Duration duration) {
+        return !(getDate().equals(plusMinutes(duration).getDate()));
     }
 
     /**

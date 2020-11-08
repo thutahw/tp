@@ -28,7 +28,7 @@ public class AppointmentCommandTestUtil {
     public static final String VALID_ID2 = "2";
     public static final String VALID_ID3 = "3";
 
-    public static final String VALID_DATETIME_1 = "11-10-2020 12:00";
+    public static final String VALID_DATETIME_1 = "11-10-2020 19:00";
     public static final String VALID_DATETIME_2 = "13-10-2020 09:00";
 
     public static final String VALID_TIME_2PM = "14:00";

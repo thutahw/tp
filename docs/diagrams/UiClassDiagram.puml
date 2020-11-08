@@ -48,13 +48,16 @@ MainWindow *--> ResultDisplay
 MainWindow *--> CommandBox
 MainWindow *--> StatusBarFooter
 
+MainWindow --|> UiPart
 SideTabPane --|> UiPart
 HelpWindow --|> UiPart
 ResultDisplay --|> UiPart
 StatusBarFooter --|> UiPart
 CommandBox --|> UiPart
+'XYZPage -left-|> UiPart
 
 MainWindow ---> Logic
+UiManager --> Logic
 XYZPage ..> Model
 
 note bottom of XYZPage: XYZPage = PatientInfoPage, AppointmentInfoPage, \nSchedulePage, CalendarPage, InfoPage etc
