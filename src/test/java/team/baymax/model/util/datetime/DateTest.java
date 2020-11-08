@@ -1,14 +1,14 @@
 package team.baymax.model.util.datetime;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.testutil.datetime.TypicalDates.DATE1;
 import static team.baymax.testutil.calendar.TypicalDays.FIRST;
 import static team.baymax.testutil.calendar.TypicalMonths.JANUARY;
 import static team.baymax.testutil.calendar.TypicalYears.YEAR_2020;
-import static team.baymax.testutil.datetime.TypicalDates.DATE1;
 
 import java.time.LocalDate;
 
