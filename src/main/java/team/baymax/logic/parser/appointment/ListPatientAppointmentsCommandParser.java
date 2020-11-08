@@ -7,7 +7,6 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.appointment.ListPatientAppointmentsCommand;
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.ArgumentMultimap;
 import team.baymax.logic.parser.ArgumentTokenizer;
 import team.baymax.logic.parser.Parser;
@@ -27,7 +26,7 @@ public class ListPatientAppointmentsCommandParser implements Parser<ListPatientA
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public ListPatientAppointmentsCommand parse(String args) throws ParseException, CommandException {
+    public ListPatientAppointmentsCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC);

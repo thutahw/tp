@@ -1,7 +1,6 @@
 package team.baymax.logic.parser.calendar;
 
 import static java.util.Objects.requireNonNull;
-import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import team.baymax.logic.commands.calendar.MonthCommand;
 import team.baymax.logic.parser.Parser;
@@ -17,12 +16,7 @@ public class MonthCommandParser implements Parser<MonthCommand> {
 
         Month month;
 
-        try {
-            month = ParserUtil.parseMonth(args);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MonthCommand.MESSAGE_USAGE), pe);
-        }
+        month = ParserUtil.parseMonth(args);
 
         return new MonthCommand(month);
     }

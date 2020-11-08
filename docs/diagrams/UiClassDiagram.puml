@@ -4,17 +4,28 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+hide method
+hide attribute
+
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+package UI <<Rectangle>> {
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PatientListPanel
-Class PatientCard
 Class StatusBarFooter
 Class CommandBox
+Class SideTabPane
+Class XYZPage
 }
 
 package Model <<Rectangle>> {
@@ -28,33 +39,27 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
-UiManager -down-> MainWindow
+Ui <|.. UiManager
+UiManager --> MainWindow
+MainWindow *--> SideTabPane
+SideTabPane --> XYZPage
 MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
-MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PatientListPanel
-MainWindow *-down-> StatusBarFooter
+MainWindow *--> ResultDisplay
+MainWindow *--> CommandBox
+MainWindow *--> StatusBarFooter
 
-PatientListPanel -down-> PatientCard
-
-MainWindow -left-|> UiPart
-
+MainWindow --|> UiPart
+SideTabPane --|> UiPart
+HelpWindow --|> UiPart
 ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PatientListPanel --|> UiPart
-PatientCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
+CommandBox --|> UiPart
+'XYZPage -left-|> UiPart
 
-PatientCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow ---> Logic
+UiManager --> Logic
+XYZPage ..> Model
 
-PatientListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+note bottom of XYZPage: XYZPage = PatientInfoPage, AppointmentInfoPage, \nSchedulePage, CalendarPage, InfoPage etc
 
-MainWindow -[hidden]-|> UiPart
 @enduml

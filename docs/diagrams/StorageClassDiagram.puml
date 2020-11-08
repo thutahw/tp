@@ -1,52 +1,33 @@
 @startuml
-hide empty members
-skinparam linetype ortho
-class JsonAppointmentManagerStorage {
-    FilePath path
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor STORAGE_COLOR_T2
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor STORAGE_COLOR_T2
+
+hide method
+hide attribute
+
+package Storage <<Rectangle>> {
+Interface Storage<<Interface>>
+Interface PatientManagerStorage<<Interface>>
+Interface AppointmentManagerStorage<<Interface>>
+Interface UserPrefsStorage<<Interface>>
+Class JsonAppointmentManagerStorage
+Class JsonPatientManagerStorage
+Class JsonUserPrefsStorage
+Class StorageManager
 }
 
-class JsonPatientManagerStorage {
-    FilePath path
-}
-
-class JsonUserPrefsStorage {
-    FilePath path
-}
-
-interface PatientManagerStorage
-interface AppointmentManagerStorage
-interface UserPrefsStorage
-interface Storage
-
-JsonAdaptedPatient .right.> JsonAdaptedTag
-JsonAdaptedAppointment .left.> JsonAdaptedTag
-
-StorageManager ..u..|> Storage
-PatientManagerStorage -r[hidden]- AppointmentManagerStorage
-AppointmentManagerStorage -r[hidden]- UserPrefsStorage
-StorageManager .u.> AppointmentManagerStorage
-StorageManager .u.> UserPrefsStorage
-StorageManager .u.> PatientManagerStorage
-
-JsonAdaptedPatient .d.> Patient
-JsonAdaptedPatient <.d. JsonSerializablePatientManager
-JsonAdaptedAppointment .d.> Appointment
-JsonSerializableAppointmentManager .u.> JsonAdaptedAppointment
-
-JsonPatientManagerStorage -r-> Patient
-JsonPatientManagerStorage .u.> JsonSerializablePatientManager
-JsonPatientManagerStorage .d.|> PatientManagerStorage
-
-JsonAppointmentManagerStorage -u-> Appointment
-JsonAppointmentManagerStorage .d.|> AppointmentManagerStorage
-JsonSerializableAppointmentManager <.d. JsonAppointmentManagerStorage
-
-JsonUserPrefsStorage -r-> UserPrefs
-JsonUserPrefsStorage .d.|> UserPrefsStorage
-JsonUserPrefsStorage -l[hidden]- JsonAppointmentManagerStorage
-
-Storage -u-|> PatientManagerStorage
-Storage -u-|> AppointmentManagerStorage
-Storage -u-|> UserPrefsStorage
+StorageManager .up.|> Storage
+PatientManagerStorage <|-- Storage
+PatientManagerStorage <|.up. JsonPatientManagerStorage
+AppointmentManagerStorage <|-- Storage
+AppointmentManagerStorage <|.up. JsonAppointmentManagerStorage
+UserPrefsStorage <|-- Storage
+UserPrefsStorage <|.up. JsonUserPrefsStorage
 
 @enduml

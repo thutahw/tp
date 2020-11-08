@@ -1,5 +1,6 @@
 package team.baymax.logic.parser.patient;
 
+import static team.baymax.commons.core.Messages.MESSAGE_DUPLICATE_PARAM;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.GENDER_DESC_BOB;
@@ -17,14 +18,18 @@ import static team.baymax.logic.commands.patient.PatientCommandTestUtil.PREAMBLE
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_AMY;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.REMARK_DESC_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_FRIEND;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_HUSBAND;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_DIABETIC;
+import static team.baymax.logic.commands.patient.PatientCommandTestUtil.TAG_DESC_LTP;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_LTP;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.patient.TypicalPatients.AMY;
@@ -49,29 +54,33 @@ public class AddPatientCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
+                + GENDER_DESC_BOB + TAG_DESC_LTP + REMARK_DESC_BOB, new AddPatientCommand(expectedPatient));
 
         // multiple names - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Name!");
+                + GENDER_DESC_BOB + TAG_DESC_LTP + REMARK_DESC_BOB,
+                String.format(MESSAGE_DUPLICATE_PARAM, PREFIX_NAME.getType()));
 
         // multiple phones - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Phone number!");
+                + GENDER_DESC_BOB + TAG_DESC_LTP + REMARK_DESC_BOB,
+                String.format(MESSAGE_DUPLICATE_PARAM, PREFIX_PHONE.getType()));
 
         // multiple genders - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_AMY
-                + GENDER_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB, "There can only be one Gender!");
+                + GENDER_DESC_BOB + TAG_DESC_LTP + REMARK_DESC_BOB,
+                String.format(MESSAGE_DUPLICATE_PARAM, PREFIX_GENDER.getType()));
 
         // multiple remarks - throws command error
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_FRIEND + REMARK_DESC_AMY + REMARK_DESC_BOB, "There can only be one Remark!");
+                + TAG_DESC_LTP + REMARK_DESC_AMY + REMARK_DESC_BOB,
+                String.format(MESSAGE_DUPLICATE_PARAM, PREFIX_REMARK.getType()));
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withTags(VALID_TAG_LTP, VALID_TAG_DIABETIC)
                 .build();
         assertParseSuccess(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
+                + TAG_DESC_DIABETIC + TAG_DESC_LTP + REMARK_DESC_BOB,
                 new AddPatientCommand(expectedPatientMultipleTags));
     }
 
@@ -108,15 +117,15 @@ public class AddPatientCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, NRIC_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_DIABETIC + TAG_DESC_LTP + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC + GENDER_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_DIABETIC + TAG_DESC_LTP + REMARK_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_GENDER_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_DIABETIC + TAG_DESC_LTP + REMARK_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB
@@ -129,7 +138,7 @@ public class AddPatientCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NRIC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + REMARK_DESC_BOB,
+                        + GENDER_DESC_BOB + TAG_DESC_DIABETIC + TAG_DESC_LTP + REMARK_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
     }
 }

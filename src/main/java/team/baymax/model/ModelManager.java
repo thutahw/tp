@@ -150,6 +150,7 @@ public class ModelManager implements Model {
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
         patientManager.setPatient(target, editedPatient);
+        appointmentManager.updatePatientAppointments(target, editedPatient);
     }
 
     @Override
@@ -199,9 +200,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean doesAppointmentClash(Appointment appointment) {
+    public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
-        return appointmentManager.doesAppointmentClash(appointment);
+        return appointmentManager.doesAppointmentClash(appointment, toExclude);
     }
 
     @Override

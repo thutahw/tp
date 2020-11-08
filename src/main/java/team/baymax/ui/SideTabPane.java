@@ -88,8 +88,6 @@ public class SideTabPane extends UiPart<Region> {
         InfoPage infoPage = new InfoPage();
         infoTabContentPlaceholder.getChildren().add(infoPage.getRoot());
 
-
-
         sideTabPane.addEventFilter(
             MouseEvent.ANY,
             new EventHandler<MouseEvent>() {

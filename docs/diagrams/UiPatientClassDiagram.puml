@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+package Ui <<Rectangle>> {
+Class "{abstract}\nUiPart" as UiPart
+Class HiddenOutside #FFFFFF
+package PatientTab <<Rectangle>> {
+Class PatientInfoPage
+Class PatientListPanel
+Class PatientCard
+}
+}
+
+package Model <<Rectangle>> {
+Class Patient
+}
+
+HiddenOutside .left.> PatientInfoPage
+
+PatientInfoPage -down-> PatientListPanel
+PatientListPanel -down-> PatientCard
+
+PatientCard .right.> Patient
+
+PatientInfoPage --|> UiPart
+PatientListPanel -left-|> UiPart
+PatientCard --|> UiPart
+
+@enduml

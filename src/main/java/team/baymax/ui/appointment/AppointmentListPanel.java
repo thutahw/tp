@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -15,6 +16,9 @@ import team.baymax.ui.UiPart;
  * Panel containing the list of appointments.
  */
 public class AppointmentListPanel extends UiPart<Region> {
+
+    private static final String EMPTY_LIST_PLACEHOLDER_TEXT = "No appointments here.";
+
     private static final String FXML = "appointment/AppointmentListPanel.fxml";
 
     @FXML
@@ -35,6 +39,7 @@ public class AppointmentListPanel extends UiPart<Region> {
     }
 
     protected void initialize() {
+        appointmentListView.setPlaceholder(new Label(EMPTY_LIST_PLACEHOLDER_TEXT));
         appointmentListView.setItems(appointments);
         appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }

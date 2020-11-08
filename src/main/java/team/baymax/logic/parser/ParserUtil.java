@@ -56,7 +56,7 @@ public class ParserUtil {
         String trimmedDayOfMonth = day.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedDayOfMonth);
         if (invalidNumber || !Day.isValidDay(Integer.parseInt(trimmedDayOfMonth))) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
         return new Day(Integer.parseInt(trimmedDayOfMonth));
     }
@@ -70,7 +70,7 @@ public class ParserUtil {
         String trimmedMonth = month.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedMonth);
         if (invalidNumber || !Month.isValidMonth(Integer.parseInt(trimmedMonth))) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Month.MESSAGE_CONSTRAINTS);
         }
         return new Month(Integer.parseInt(trimmedMonth));
     }
@@ -84,7 +84,7 @@ public class ParserUtil {
         String trimmedYear = year.trim();
         boolean invalidNumber = !StringUtil.isNonZeroUnsignedInteger(trimmedYear);
         if (invalidNumber || !Year.isValidYear(Integer.parseInt(trimmedYear))) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Year.MESSAGE_CONSTRAINTS);
         }
         return new Year(Integer.parseInt(trimmedYear));
     }
@@ -101,7 +101,7 @@ public class ParserUtil {
         if (!Nric.isValidNric(trimmedNric)) {
             throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
         }
-        return new Nric(trimmedNric);
+        return new Nric(trimmedNric.toUpperCase());
     }
 
     /**

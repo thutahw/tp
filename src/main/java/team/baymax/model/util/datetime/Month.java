@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 public class Month {
 
+    public static final String MESSAGE_CONSTRAINTS = "A month must be specified as a number "
+            + "between 1 (January) and 12 (December).";
+
     private static int[] numOfDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     private final int value;

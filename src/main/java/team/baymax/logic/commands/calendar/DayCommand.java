@@ -21,7 +21,6 @@ public class DayCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the appointment schedule on the chosen day.\n"
             + "Parameters: DAY (must be a positive number between the first and last day of the month).\n"
             + "Example: " + COMMAND_WORD + " 21 ";
-    public static final String MESSAGE_INVALID_DATE = "The date requested is invalid.";
 
     public static final TabId TAB_ID = TabId.SCHEDULE;
 
@@ -37,8 +36,8 @@ public class DayCommand extends Command {
 
         try {
             model.setDay(day);
-        } catch (DateTimeException e) {
-            throw new CommandException(MESSAGE_INVALID_DATE);
+        } catch (DateTimeException ex) {
+            throw new CommandException(Date.MESSAGE_INVALID_DATE);
         }
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
@@ -47,9 +46,19 @@ public class DayCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, date.toString()), getTabId());
     }
 
+    public Day getDay() {
+        return day;
+    }
+
     @Override
     public TabId getTabId() {
         return TAB_ID;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DayCommand // instanceof handles nulls
+                && day.equals(((DayCommand) other).day));
+    }
 }

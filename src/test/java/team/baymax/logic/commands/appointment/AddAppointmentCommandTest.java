@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_2;
 import static team.baymax.testutil.Assert.assertThrows;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME1;
-import static team.baymax.testutil.TypicalDateTimes.DATETIME2;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
 
@@ -145,13 +145,15 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public boolean doesAppointmentClash(Appointment appointment) {
+        public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
             if (appointmentsAdded.size() == 0) {
                 return false;
             }
 
             for (Appointment appt : appointmentsAdded) {
-                if (appointmentsAdded.equals(appt)) {
+                if (appointmentsAdded.equals(toExclude)) {
+                    continue;
+                } else if (appointmentsAdded.equals(appt)) {
                     return true;
                 }
             }

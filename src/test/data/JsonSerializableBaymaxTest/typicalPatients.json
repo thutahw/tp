@@ -1,5 +1,5 @@
 {
-  "_comment": "Baymax save file which contains the same Patient values as in TypicalPatients#getTypicalAddressBook()",
+  "_comment": "Baymax save file which contains the same Patient values as in TypicalPatients#getTypicalPatientManager()",
   "patients" : [ {
     "nric": "T1234567A",
     "name" : "Alice Pauline",

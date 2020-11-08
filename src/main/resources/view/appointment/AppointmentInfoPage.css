@@ -1,7 +1,6 @@
 #statusTag {
     -fx-text-fill: white;
     -fx-background-color: #4d66bc;
-    -fx-border-style: hidden hidden solid hidden;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;

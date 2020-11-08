@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AppointmentBookParser" as AppointmentBookParser LOGIC_COLOR
+participant ":YearCommandParser" as YearCommandParser LOGIC_COLOR
+participant "y:YearCommand" as YearCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:ModelManager" as ModelManager MODEL_COLOR
+participant ":CalendarManager" as CalendarManager MODEL_COLOR
+participant ":AppointmentCalendar" as AppointmentCalendar MODEL_COLOR
+end box
+
+[-> LogicManager : execute("year 2020")
+activate LogicManager
+
+LogicManager -> AppointmentBookParser : parseCommand("year 2020")
+activate AppointmentBookParser
+
+create YearCommandParser
+AppointmentBookParser -> YearCommandParser
+activate YearCommandParser
+
+YearCommandParser --> AppointmentBookParser
+deactivate YearCommandParser
+
+AppointmentBookParser -> YearCommandParser : parse("2020")
+activate YearCommandParser
+
+create YearCommand
+YearCommandParser -> YearCommand
+activate YearCommand
+
+YearCommand --> YearCommandParser : y
+deactivate YearCommand
+
+YearCommandParser --> AppointmentBookParser : y
+destroy YearCommandParser
+
+AppointmentBookParser --> LogicManager : y
+deactivate AppointmentBookParser
+
+LogicManager -> YearCommand : execute()
+activate YearCommand
+
+YearCommand -> ModelManager : setYear(yr)
+activate ModelManager
+
+ModelManager -> CalendarManager : setYear(yr)
+activate CalendarManager
+
+CalendarManager -> AppointmentCalendar : setYear(yr)
+activate AppointmentCalendar
+
+AppointmentCalendar --> CalendarManager
+deactivate AppointmentCalendar
+
+CalendarManager --> ModelManager
+deactivate CalendarManager
+
+ModelManager --> YearCommand
+deactivate ModelManager
+
+create CommandResult
+YearCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> YearCommand : r
+deactivate CommandResult
+
+YearCommand --> LogicManager : r
+destroy YearCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+
+@enduml

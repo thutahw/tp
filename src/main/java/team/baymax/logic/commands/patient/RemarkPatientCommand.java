@@ -54,6 +54,8 @@ public class RemarkPatientCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Patient> lastShownList = model.getFilteredPatientList();
 
+        assert index != null;
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }

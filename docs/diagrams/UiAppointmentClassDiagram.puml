@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+hide method
+hide attribute
+
+package Ui <<Rectangle>> {
+Class "{abstract}\nUiPart" as UiPart
+Class HiddenOutside #FFFFFF
+package Appointment <<Rectangle>> {
+Class AppointmentInfoPage
+Class AppointmentListPanel
+Class AppointmentCard
+}
+}
+
+package Model <<Rectangle>> {
+Class Appointment
+}
+
+HiddenOutside .left.> AppointmentInfoPage
+
+AppointmentInfoPage -down-> AppointmentListPanel
+AppointmentListPanel -down-> AppointmentCard
+
+AppointmentCard .right.> Appointment
+
+AppointmentInfoPage --|> UiPart
+AppointmentListPanel -left-|> UiPart
+AppointmentCard --|> UiPart
+
+@enduml

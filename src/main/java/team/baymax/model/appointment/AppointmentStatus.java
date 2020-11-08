@@ -3,7 +3,7 @@ package team.baymax.model.appointment;
 public enum AppointmentStatus {
     DONE("done", "#3e9149"),
     MISSED("missed", "#ac4848"),
-    UPCOMING("upcoming", "#4d66bc");
+    UPCOMING("", "transparent");
 
     private String status;
     private String colorCode;

@@ -139,6 +139,8 @@ public class Appointment implements UniqueListElement {
                 .append(getPatient())
                 .append("\nDate-time: ")
                 .append(getDateTime())
+                .append("\nDuration: ")
+                .append(getDuration())
                 .append("\nDescription: ")
                 .append(getDescription());
         if (getTags().size() > 0) {

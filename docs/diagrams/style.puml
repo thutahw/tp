@@ -38,10 +38,24 @@ skinparam BackgroundColor #FFFFFFF
 skinparam Shadowing false
 
 skinparam Class {
-    FontColor #FFFFFF
     BorderThickness 1
-    BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+        BorderColor MAIN_DARK_COLOR
+        BackgroundColor MAIN_MEDIUM_COLOR
+        AttributeFontColor MAIN_MEDIUM_DARK_COLOR
+        AttributeIconSize 0
+        StereotypeFontColor MAIN_DARK_COLOR
+        StereotypeFontStyle normal
+        FontName Arial
+}
+
+skinparam Object {
+    BorderThickness 2
+    BorderColor MAIN_DARK_COLOR
+    BackgroundColor MAIN_LIGHT_COLOR
+    AttributeFontColor MAIN_MEDIUM_DARK_COLOR
+    AttributeIconSize 0
+    StereotypeFontColor MAIN_DARK_COLOR
+    StereotypeFontStyle normal
     FontName Arial
 }
 
@@ -71,5 +85,5 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 hide footbox
-hide members
 hide circle
+

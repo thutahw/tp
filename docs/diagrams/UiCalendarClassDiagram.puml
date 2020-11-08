@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam Class {
+    BorderColor BACKGROUND_COLOR
+    FontColor BACKGROUND_COLOR
+    BackgroundColor UI_COLOR_T3
+    StereotypeFontColor BACKGROUND_COLOR
+}
+skinparam ArrowColor UI_COLOR_T3
+
+hide method
+hide attribute
+
+Interface PropertyChangeListener<<Interface>>
+Class CalendarPage
+Class CalendarViewCell
+Class SchedulePage
+Class SchedulePanel
+Class ScheduleViewCell
+Class Button
+Class "{abstract}\nUiPart" as UiPart
+
+package Model <<Rectangle>> {
+}
+
+CalendarPage --> CalendarViewCell
+CalendarViewCell --|> Button
+
+SchedulePage -left-> SchedulePanel
+SchedulePanel --> ScheduleViewCell
+ScheduleViewCell --|> Button
+
+PropertyChangeListener <|..CalendarPage
+PropertyChangeListener <|.. SchedulePanel
+
+CalendarPage --|> UiPart
+SchedulePage --|> UiPart
+SchedulePanel --|> UiPart
+
+CalendarPage -left-> Model
+SchedulePanel -left-> Model
+
+
+@enduml

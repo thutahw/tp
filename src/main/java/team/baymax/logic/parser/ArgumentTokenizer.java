@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,8 +25,7 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes)
-            throws ParseException, CommandException {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -89,7 +87,7 @@ public class ArgumentTokenizer {
      * @return                ArgumentMultimap object that maps prefixes to their arguments
      */
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions)
-            throws CommandException {
+            throws ParseException {
 
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());

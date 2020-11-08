@@ -11,7 +11,10 @@ import team.baymax.model.calendar.AppointmentCalendar;
 
 public class Date {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date entered must be in the form of <dd-MM-yyyy";
+    public static final String MESSAGE_CONSTRAINTS = "Date entered must be in the form of <dd-MM-yyyy>";
+    public static final String MESSAGE_INVALID_DATE = "The date given does not exist. Please refer to the "
+            + "calendar to choose a valid date.";
+
     private static final DateTimeFormatter FORMAT_INPUT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter FORMAT_OUTPUT = DateTimeFormatter.ofPattern("dd MMM yyyy");
 

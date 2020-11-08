@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 public class Year {
 
+    public static final String MESSAGE_CONSTRAINTS = "A year must be specified as a number 2000 or above.";
+
     private final int value;
 
     /**
