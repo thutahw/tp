@@ -62,22 +62,22 @@ class DateTest {
     }
 
     @Test
-    void getDate_LocalDateReturned() {
+    void getDate_localDateReturned() {
         assertEquals(DATE1.getDate(), LocalDate.parse("2020-01-01"));
     }
 
     @Test
-    void getYear_YearReturned() {
+    void getYear_yearReturned() {
         assertEquals(DATE1.getYear(), YEAR_2020);
     }
 
     @Test
-    void getMonth_MonthReturned() {
+    void getMonth_monthReturned() {
         assertEquals(DATE1.getMonth(), JANUARY);
     }
 
     @Test
-    void getDay_DayReturned() {
+    void getDay_dayReturned() {
         assertEquals(DATE1.getDay(), FIRST);
     }
 

@@ -6,8 +6,8 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_ID1;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
 import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_ALICE;
 import static team.baymax.testutil.patient.TypicalFirstNames.VALID_FIRST_NAME_ALICE;
 

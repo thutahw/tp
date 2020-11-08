@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.baymax.testutil.calendar.TypicalDays.THIRTY_FIRST;
 import static team.baymax.testutil.calendar.TypicalMonths.FEBRUARY;
 import static team.baymax.testutil.calendar.TypicalMonths.JANUARY;
-import static team.baymax.testutil.calendar.TypicalDays.THIRTY_FIRST;
 
 import org.junit.jupiter.api.Test;
 

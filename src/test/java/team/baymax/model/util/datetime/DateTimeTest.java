@@ -3,8 +3,8 @@ package team.baymax.model.util.datetime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1_DUPLICATE;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
@@ -18,10 +18,10 @@ import static team.baymax.testutil.datetime.TypicalTimes.TIME1;
 import static team.baymax.testutil.datetime.TypicalTimes.TIME2;
 import static team.baymax.testutil.datetime.TypicalTimes.TIME3;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 class DateTimeTest {
 
