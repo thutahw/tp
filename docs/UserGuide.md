@@ -11,7 +11,7 @@ title: Baymax - User Guide
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3. [Command Format & Syntax](#323-command-format--syntax)<br>
-4. [**Navigating Between Tabs**](#4-navigating-between-tabs)
+4. [**Navigating Between Tabs**](#4-navigating-between-tabs)<br>
 5. [**Features**](#5-features)<br>
     5.1. [Patient Information Management](#51-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.1. [Add a new patient: `addpatient`](#511-add-a-new-patient-addpatient)<br>
@@ -119,11 +119,20 @@ Main Display | Calendar views, Patient lists and Appointment lists are displayed
 
 #### 3.2.2. General Symbols
 
+The table below explains the general symbols and syntax used throughout the document.
+
+Symbol/Syntax    |  What does it mean?
+---------------- | -------------------
+<ins>underlined</ins> | Information that you need to pay special attention to, especially for the parameters.
+`command`           | A grey highlight (called a code-block markup) indicates that this is a command that can be typed into the command box and executed by the application.
+**Note:**        | Special notes/tips regarding that specific command/feature.
+**Warning:**       | Notes prompting you to confirm that the command you are going to enter is really intended.
+
 #### 3.2.3. Command Format & Syntax
 
 You enter specific commands into the *Command box* of the GUI to use Baymax's features and perform tasks.
 
-Commands all take the following format: 
+Most of the commands take the following format: 
 
 `command_word prefix/PARAMETER`, e.g. `addpatient name/Alex Yeoh nric/S1234567A phone/98765432 gender/M`
 * **Command_word:** word that specifies the task being performed, e.g. `addpatient`
@@ -241,16 +250,17 @@ If the command is valid (i.e. the user keyed in the valid fields):
     ![addpatient](images/addpatient.png)<br>
     *Figure 5.1.1a. Adding a patient - success*
 
-**Note**:
-
-When the patient is added successfully, the main display only shows the newly added patient so that you do not need to scroll down all the way to the bottom of the patient list to ensure that the new patient is added.    
-If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
-
 In the case where the command entered is invalid (e.g `NRIC` has 8 numbers in the middle):
 1. An invalid command message will be displayed in the *Command Result* box, specifying which field was entered incorrectly. <br>
 
     ![invalidnric](images/invalidNRIC.png)<br>
     *Figure 5.1.1b. Adding a patient - failure*
+
+**Note:**
+
+When the patient is added successfully, the main display only shows the newly added patient so that you do not need to scroll
+down all the way to the bottom of the patient list to ensure that the new patient is added. 
+If you wish to view the whole patient list again, you can use the `listpatients` command from [section 5.1.2](#512-list-all-patients-listpatients).    
     
 #### 5.1.2. List all patients: `listpatients`
 You can use this command to list all the patients in the system. The *Main Display* of the GUI will show
@@ -275,9 +285,9 @@ You can use this command to delete a patient’s profile by his or her `INDEX`. 
 to get the patient's `INDEX`.
 This extra step helps you to confirm the profile to be deleted, and prevents accidental deletes.
 
-**Note**: 
+**Note:** 
 
-When you delete a patient, all the appointments associated with that patient will also be deleted.
+When you delete a patient, **all** the appointments associated with that patient will also be deleted.
 
 **Format:**<br>
 `deletepatient INDEX`
@@ -334,9 +344,9 @@ INDEX     | The index of the patient in the most recently displayed list. It mus
 NRIC    | The nric of the patient. It must <ins>start with either 'S', 'T', 'F' or 'G' (all case-insensitive) and end with an alphabet (case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
 NAME    | The name of the patient. It must consist <ins>solely</ins> of alphabets. E.g. Alice Tan
 PHONE   | The hand phone number which the patient wishes to be contacted by. It must consist <ins>solely</ins> of numbers and it must be at least 3 digits long. E.g. 91710012
-GENDER  | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’ (both case-insensitive).
+GENDER  | The gender of the patient. In short, female is indicated by the letter ‘F’ and male is indicated by the letter ‘M’ <ins>(both case-insensitive)</ins>.
 REMARK  | Any remarks about the patient. It can be any text -- alphanumerical, special characters etc. are allowed. E.g. Only available on Mon / Tues
-TAG     | The tag for the patient. It must only be alphanumerical and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic
+TAG     | The tag for the patient. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic
 
 **Example:**<br>
 1. Type `editpatient 2 tag/Asthmatic` into the command box.
@@ -350,21 +360,20 @@ If the `INDEX` (i.e 2) is valid:
 
     ![editpatient](images/editpatientsuccess.png)<br>
     *Figure 5.1.4a. Editing a patient's information - success*
-
-**Note**:
-
-When the patient's information is edited successfully, the main display only shows the recently edited patient so that you do not need to scroll through the patient list to ensure that the patient's details are edited.    
-If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
     
-In the case where the field to edit is absent (E.g `editpatient 3` is entered):
+In the case where the field to be edited is absent (E.g `editpatient 3` is entered):
+
 1. A message prompting the user to provide at least 1 field to edit will be displayed as shown below.
 
     ![editfailure](images/editpatientmissingfield.png)<br>
     *Figure 5.1.4b. Editing a patient's information - failure*
 
-**Note**: 
+**Note:** 
 
-You can clear all the tags of the patient by entering ` editpatient INDEX tag/ `
+1. When the patient's information is edited successfully, the main display only shows the recently edited patient so that you do not need to scroll through the patient list to ensure that the patient's details are edited. 
+If you wish to view the whole patient list again, you can use the `listpatients` command from [section 5.1.2](#512-list-all-patients-listpatients).
+
+2. You can clear all the tags of the patient by entering ` editpatient INDEX tag/ `
 
 #### 5.1.5. Find patient by name: `findpatient`
 You can use this command to find a patient by entering a part of his name (or his full name). 
@@ -398,11 +407,6 @@ NAME_KEYWORD   | The name or keyword by which to search for the patient. It can 
 #### 5.1.6. Add a remark to a patient: `remark`
 You can use this command to add or replace a remark to a patient using their `INDEX` in the most recently displayed list.
 
-**Note**: 
-
-Each patient can only have one remark. Using this command when a patient already has a remark will
-*replace* the existing remark with the new one entered.
-
 **Format:**<br>
 `remark INDEX r/REMARK`
 
@@ -429,10 +433,15 @@ REMARK         | The remark to be added to the patient.
     ![remark](images/remarkFailureOutput.png)<br>
     *Figure 5.1.6b. Adding a remark to a patient - failure*
 
-**Note**:
+**Note:**
 
-When a remark is added to a patient successfully, the main display only shows the patient with the edited remark so that you do not need to scroll through the patient list to ensure that the new remark is added to that patient.    
-If you wish to view the whole patient list again, you can use the `listpatients` command from section 5.1.2.
+1. When a remark is added to a patient successfully, the main display only shows the patient with the edited remark so that you do not need to scroll through the patient list to ensure that the new remark is added to that patient. 
+If you wish to view the whole patient list again, you can use the `listpatients` command from [section 5.1.2](#512-list-all-patients-listpatients).
+
+2. Each patient can only have one remark. Using this command when a patient already has a remark will
+**replace** the existing remark with the new one entered.
+
+3. Entering only `remark INDEX` will automatically **remove** the current remark of the patient at that `INDEX`.
 
 ----------------------------------------------------------------------------------
 
@@ -449,7 +458,7 @@ This feature allows you to manage the appointments of all patients. You can:
 7. Mark an appointment as missed
 8. Find an appointment by keyword
 
-**Note**:
+**Note:**
 
 The current version of Baymax does **not** allow undoing/redoing. The next version (v2.0) will support undoing so that users
 can recover from accidentally marking an appointment as missed/done.
@@ -467,7 +476,7 @@ TIME           | The time of the appointment. It must be in <ins>HH:MM</ins> for
 DESCRIPTION    | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
 NRIC           | The nric of the patient. It must <ins>start with either 'S', 'T', 'F' or 'G' (all case-insensitive) and end with an alphabet (case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
-DURATION       | The duration of the appointment in minutes, not spanning more than one day.
+DURATION       | The <ins>integer</ins> duration of the appointment in minutes, not spanning more than <ins>one</ins> day and must <ins>not</ins> extend to the next day. <br> E.g. <br> 1. A new appointment at 23:58 can have maximum duration of 1 minute. <br> 2. An appointment at 00:00 can have a maximum duration of 1439 minutes.
 
 **Format:**<br>
 `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
@@ -478,7 +487,7 @@ DURATION       | The duration of the appointment in minutes, not spanning more t
 
 `addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
-**Note**: 
+**Note:** 
 1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
 2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
 
@@ -524,7 +533,12 @@ NAME           | The name by which to search for the patient. It can be an incom
     *Figure 5.2.2a. Listing the appointments of a patient*
 
 #### 5.2.3. List all appointments: `listappts`
+
 You can use this command to list all the appointments in the system, which belong to any patient.
+
+**Note:**
+
+The appointments in the `listappts` view are **not** sorted by date or time. They appear in the same order as when the appointments are added.
 
 **Format:**<br>
 `listappts`
@@ -552,6 +566,7 @@ Listed below are some examples of valid `editappt` commands:
 * `editappt INDEX on/DATETIME`
 * `editappt INDEX desc/DESC`
 * `editappt INDEX tag/TAG`
+* `editappt INDEX dur/DURATION`
 * You can also supply multiple parameters, e.g. `editappt INDEX tag/TAG desc/DESC on/DATETIME`
 * The parameter(s) supplied will directly replace the original one(s)
 
@@ -563,6 +578,7 @@ INDEX          | The index of the target appointment in the most recently displa
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 DESCRIPTION    | The description of the appointment. It can be <ins>any text</ins> -- alphanumerical, special characters etc. are allowed. E.g. Wrist fracture check-up #3
 TAG            | The tag related to the appointment. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Xray
+DURATION       | The <ins>integer</ins> duration of the appointment in minutes, not spanning more than <ins>one</ins> day and must <ins>not</ins> extend to the next day. <br> E.g. <br> 1. A new appointment at 23:58 can have maximum duration of 1 minute. <br> 2. An appointment at 00:00 can have a maximum duration of 1439 minutes.
 
 **Example:**<br>
 1. Type `editappt 6 on/12-10-2020 12:00` into the command box.
@@ -577,10 +593,11 @@ If the INDEX (i.e 6) is valid:
     ![editappt](images/editappt.png)<br>
     *Figure 5.2.4a. Editing an appointment*
 
-**Note**:
+**Note:**
 
-When an appointment is edited successfully, the main display only shows the recently edited appointment so that you do not need to scroll through the appointment list to ensure that the appointment is edited.    
-If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.
+When an appointment is edited successfully, the main display only shows the recently edited appointment so that
+you do not need to scroll through the appointment list to ensure that the appointment is edited. 
+If you wish to view the whole appointment list again, you can use the `listappts` command from [section 5.2.3](#523-list-all-appointments-listappts).
 
 #### 5.2.5. Cancel an appointment: `cancel`
 You can use this command to cancel an appointment within the system either by specifying the `INDEX` of the appointment 
@@ -607,7 +624,9 @@ Method 2:
 1. Type `cancel on/12-10-2020 12:00 name/Chin` into the command box.
 2. Press `Enter` on your keyboard.
 
-Warning: Method 2 is for convenience only. Use this method only if you are sure that there is only one patient with the name that you are going to enter, in order to prevent accidental deletes.
+**Warning:**
+ 
+Method 2 is for convenience only. Use this method only if you are sure that there is only one patient with the name that you are going to enter, in order to prevent accidental deletes.
 
 **Outcome:**
 
@@ -642,7 +661,9 @@ Method 2:
 1. Type `done on/04-11-2020 20:00 name/Irfan` into the command box.
 2. Press `Enter` on your keyboard.
 
-Warning: Method 2 is for convenience only. Use this method only if you are sure there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
+**Warning:**
+ 
+Method 2 is for convenience only. Use this method only if you are sure there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
 
 **Outcome:**
 
@@ -653,7 +674,7 @@ If the command is valid (i.e. the specified appointment exists):
     ![markapptdone](images/markApptDone.png)<br>
     *Figure 5.2.6a. Marking an appointment as done*
    
-**Note**:
+**Note:**
 
 When an appointment is marked as `done` successfully, the main display only shows that appointment so that you do not need to scroll through the appointment list to ensure that the appointment is marked as `done`.    
 If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.   
@@ -683,7 +704,9 @@ Method 2:
 1. Type `missed on/31-10-2020 13:30 name/Calvini` into the command box.
 2. Press `Enter` on your keyboard.
 
-Warning: Method 2 is for convenience only. Use this method only if you are sure that there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
+**Warning:**
+ 
+Method 2 is for convenience only. Use this method only if you are sure that there is only one patient with the name that you are going to enter, in order to prevent accidental edits.
 
 **Outcome:**
 
@@ -694,7 +717,7 @@ If the command is valid (i.e. the specified appointment exists):
     ![markapptmissed](images/markapptmissed.png)<br>
     *Figure 5.2.7a. Marking an appointment as missed*
 
-**Note**:
+**Note:**
 
 When an appointment is marked as `missed` successfully, the main display only shows that appointment so that you do not need to scroll through the appointment list to ensure that the appointment is marked as `missed`.    
 If you wish to view the whole appointment list again, you can use the `listappts` command from section 5.2.3.   
@@ -743,7 +766,7 @@ This feature allows you to view the availability status of each day in a month, 
 for a period of time or within a particular day / week. The following subsections will guide you through the commands to
 set the calendar view to a particular year and month.
 
-**Note**:
+**Note:**
 
 The dates in the calendar view are **not** clickable.
 
@@ -766,6 +789,7 @@ YEAR          | The year you want to switch to. It must be a <ins>4-digit positi
 2. Press enter on your keyboard.
 
 **Outcome:**<br>
+
 1. Baymax will switch to the calendar tab.
 2. The year 2019 will be displayed on the top of the window together with the currently selected month.
 
@@ -787,11 +811,13 @@ Parameter Name | Description
 MONTH          | The month you want to switch to. It must be a <ins>positive</ins> number from 1 (January) to 12 (December).
 
 **Example:**<br>
+
 1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
 2. Type `month 9` into the command box.
 3. Press Enter on your keyboard.
 
 **Outcome:**<br>
+
 1. The month will be set to September.
 
     ![changemonth](images/changeMonth.png)<br>
@@ -855,7 +881,8 @@ You can use this command to exit the program.
 
 #### 5.4.3. Clear all data in Baymax: `clear`
 
-**Note**: This is a command to be used with **caution**. 
+**Warning**: 
+This is a command to be used with **caution** as it cannot be undone. 
 
 You can use this command to clear all the patient and appointment information. Once cleared, it cannot be undone.
 
@@ -897,6 +924,17 @@ This feature will allow you to view all the appointments within a specified peri
 **Q:** Do I have to manually save any data? 
 
 **A:** No. Baymax saves your data to the hard disk automatically after any command that changes data. 
+
+**Q:** How do I transfer my data to another computer?
+
+**A:** Baymax automatically saves all your data in a folder named `data` in the same directory as the application.
+ You can copy and transfer the `data` folder into the same directory as Baymax on your other computer and Baymax 
+ will automatically load your data upon launching Baymax.
+
+**Q:** What do I do if I marked an appointment as `done`/`missed` wrongly?
+
+**A:** Unfortunately, the current version of Baymax does not have the `undo` features yet to help you change it back to `upcoming`. You will need to delete that appointment and add it back again.
+However, if you wish to change `done` to `missed` and vice versa, you can use the `missed` command and `done` command respectively.
 
 ---------------------------------------------------------------------------------
 ## 7. Command Summary
