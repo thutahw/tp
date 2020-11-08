@@ -25,6 +25,7 @@ public class AppointmentClashPredicate implements Predicate<Appointment> {
 
     @Override
     public boolean test(Appointment other) {
+        requireNonNull(other);
         Patient patient = appointment.getPatient();
         DateTime startDateTime = appointment.getDateTime();
         DateTime endDateTime = appointment.getEndDateTime();

@@ -113,10 +113,6 @@ public class Appointment implements UniqueListElement {
                 && otherAppointment.getPatient().equals(patient);
     }
 
-    public int compare(Appointment a1, Appointment a2) {
-        return a2.getDateTime().compareTo(a1.getDateTime());
-    }
-
     /**
      * Returns true if both patients have the same identity and data fields.
      * This defines a stronger notion of equality between two patients.
