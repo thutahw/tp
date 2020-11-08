@@ -46,13 +46,13 @@ public class TypicalAppointments {
 
     public static final Appointment CARL_APT = new Appointment(CARL,
             DateTime.fromString("11-11-2020 11:30"),
-            new Duration(60), new Description("desc 3"),
+            new Duration(50), new Description("desc 3"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
     public static final Appointment BOB_APT = new Appointment(BOB,
             DateTime.fromString("11-10-2020 12:45"),
-            new Duration(60), new Description("desc 4"),
-            new HashSet<>(), AppointmentStatus.UPCOMING);
+            new Duration(40), new Description("desc 4"),
+            new HashSet<>(), AppointmentStatus.DONE);
 
 
     private TypicalAppointments() {} // prevents instantiation
