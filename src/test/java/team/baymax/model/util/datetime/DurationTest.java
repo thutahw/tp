@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT_VAR_1;
 import static team.baymax.testutil.appointment.TypicalAppointments.BOB_APT;
 
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,8 @@ public class DurationTest {
 
     @Test
     void toString_validDuration_returnsString() {
-        assertEquals("60", ALICE_APT.getDuration().toString());
-        assertEquals("45", new Duration(45).toString());
+        assertEquals("1 Hour(s)", ALICE_APT.getDuration().toString());
+        assertEquals("40 Minute(s)", BOB_APT.getDuration().toString());
     }
 
     @Test
@@ -49,16 +50,16 @@ public class DurationTest {
 
     @Test
     void equals_sameValue_returnsTrue() {
-        assertEquals(ALICE_APT.getDuration(), BOB_APT.getDuration());
+        assertEquals(ALICE_APT.getDuration(), ALICE_APT_VAR_1.getDuration());
     }
 
     @Test
     void hashCode_differentValue() {
-        assertNotEquals(ALICE_APT.hashCode(), new Duration(45).hashCode());
+        assertNotEquals(ALICE_APT.hashCode(), BOB_APT.hashCode());
     }
 
     @Test
     void hashCode_sameValue() {
-        assertEquals(ALICE_APT.getDuration().hashCode(), BOB_APT.getDuration().hashCode());
+        assertEquals(ALICE_APT.getDuration().hashCode(), new Duration(60).hashCode());
     }
 }
