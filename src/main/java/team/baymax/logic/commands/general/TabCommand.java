@@ -54,10 +54,11 @@ public class TabCommand extends Command {
 
         if (tabId == TabId.DASHBOARD || tabId == TabId.SCHEDULE) {
             model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(today));
-            model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         } else {
             model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         }
+
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, tabId), getTabId());
     }
