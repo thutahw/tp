@@ -420,12 +420,12 @@ existing list of patients before a valid `Appointment` object is created contain
 Baymax allows the user to manage appointments using a built-in calendar.
 The calendar brings greater convenience to the user by showing them what days are available in a month.
 It is also coupled with a schedule view that can be accessed by entering the `day` command, which shows the user
-all appointments on a chosen day, laid out chronologically on a timeline.
+all appointments on the chosen day, laid out chronologically on a timeline.
 
 #### 4.4.1 Rationale
 
 The Calendar feature is included in Baymax because it can shorten some commands by allowing the user to only specify
-the time, as the date can be directly inferred from the calendar. For example, in the Calendar 
+the time of appointments, as the date can be inferred from the calendar. For example, in the Calendar 
 Manager, a user can set a custom year, month and day. This influences the execution of the `addappt` command shown 
 in the sequence diagram below. In this example, suppose the user has set year to 2020, 
 month to February and day to 1, he can directly enter an `addappt` command that adds an appointment to 1, 
