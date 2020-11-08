@@ -25,6 +25,7 @@ public class FindAppointmentCommand extends Command {
     private final AppointmentContainsKeywordsPredicate predicate;
 
     public FindAppointmentCommand(AppointmentContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

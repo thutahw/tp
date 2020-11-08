@@ -11,7 +11,6 @@ import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME2;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME3;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME4;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME5;
-import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
 import static team.baymax.testutil.datetime.TypicalDates.DATE1;
 import static team.baymax.testutil.datetime.TypicalDates.DATE2;
 import static team.baymax.testutil.datetime.TypicalTimes.TIME1;
@@ -85,19 +84,19 @@ class DateTimeTest {
     @Test
     void getDay() {
         assertNotEquals(DATETIME3.getDay(), DATETIME4.getDay());
-        assertEquals(DATETIME5.getDay(), DATETIME4.getDay());
+        assertEquals(DATETIME1.getDay(), DATETIME4.getDay());
     }
 
     @Test
     void getMonth() {
-        assertNotEquals(DATETIME5.getMonth(), DATETIME6.getMonth());
-        assertEquals(DATETIME1.getMonth(), DATETIME5.getMonth());
+        assertNotEquals(DATETIME1.getMonth(), DATETIME5.getMonth());
+        assertEquals(DATETIME1.getMonth(), DATETIME1.getMonth());
     }
 
     @Test
     void getYear() {
-        assertNotEquals(DATETIME1.getYear(), DATETIME6.getYear());
-        assertEquals(DATETIME1.getYear(), DATETIME5.getYear());
+        assertNotEquals(DATETIME1.getYear(), DATETIME5.getYear());
+        assertEquals(DATETIME1.getYear(), DATETIME1.getYear());
     }
 
     @Test
@@ -109,8 +108,8 @@ class DateTimeTest {
     @Test
     void getTime() {
         assertNotEquals(TIME1, DATETIME2.getTime());
-        assertEquals(TIME2, DATETIME5.getTime());
-        assertEquals(TIME3, DATETIME6.getTime());
+        assertEquals(TIME2, DATETIME1.getTime());
+        assertEquals(TIME3, DATETIME5.getTime());
     }
 
     @Test

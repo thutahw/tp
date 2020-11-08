@@ -89,9 +89,9 @@ public class MarkAppointmentDoneCommand extends Command {
             }
             appointmentToEdit = lastShownList.get(index.getZeroBased());
         } else if (isFindByNameAndTime()) {
-            patient = model.getPatient(patientName);
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
             try {
+                patient = model.getPatient(patientName);
+                SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
                 appointmentToEdit = model.findAppointmentByPredicate(predicate);
             } catch (ElementNotFoundException e) {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
@@ -129,8 +129,9 @@ public class MarkAppointmentDoneCommand extends Command {
 
         // state check
         MarkAppointmentDoneCommand m = (MarkAppointmentDoneCommand) other;
-        return index.equals(m.index)
-                && dateTime.equals(m.dateTime)
-                && patientName.equals(m.patientName);
+        return index == null
+            ? dateTime.equals(m.dateTime)
+                && patientName.equals(m.patientName)
+            : index.equals(m.index);
     }
 }

@@ -8,7 +8,7 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_TAG_1HR;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESC_TAG_DRGOH;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_ID1;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.NAME_DESC_AMY;
+import static team.baymax.testutil.patient.PatientUtil.NAME_DESC_AMY;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 

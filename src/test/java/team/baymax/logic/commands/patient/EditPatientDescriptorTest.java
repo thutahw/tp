@@ -2,13 +2,13 @@ package team.baymax.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_AMY;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.DESC_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_GENDER_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_NAME_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_PHONE_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_REMARK_BOB;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
+import static team.baymax.testutil.patient.PatientUtil.DESC_AMY;
+import static team.baymax.testutil.patient.PatientUtil.DESC_BOB;
+import static team.baymax.testutil.patient.PatientUtil.VALID_GENDER_BOB;
+import static team.baymax.testutil.patient.PatientUtil.VALID_NAME_BOB;
+import static team.baymax.testutil.patient.PatientUtil.VALID_PHONE_BOB;
+import static team.baymax.testutil.patient.PatientUtil.VALID_REMARK_BOB;
+import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 
 import org.junit.jupiter.api.Test;
 
