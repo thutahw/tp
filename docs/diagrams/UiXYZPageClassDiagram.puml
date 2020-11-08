@@ -28,4 +28,6 @@ XYZPage --|> UiPart
 XYZListPanel --|> UiPart
 XYZCard --|> UiPart
 
+note right of XYZPage: PatientInfoPage, AppointmentInfoPage
+
 @enduml

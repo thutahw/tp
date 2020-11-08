@@ -145,13 +145,15 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public boolean doesAppointmentClash(Appointment appointment) {
+        public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
             if (appointmentsAdded.size() == 0) {
                 return false;
             }
 
             for (Appointment appt : appointmentsAdded) {
-                if (appointmentsAdded.equals(appt)) {
+                if (appointmentsAdded.equals(toExclude)) {
+                    continue;
+                } else if (appointmentsAdded.equals(appt)) {
                     return true;
                 }
             }

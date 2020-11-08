@@ -20,7 +20,7 @@ import team.baymax.model.util.datetime.Duration;
 public class AppointmentBuilder {
 
     public static final Patient DEFAULT_PATIENT = ALICE;
-    public static final String DEFAULT_DATETIME = "11-10-2020 12:45";
+    public static final String DEFAULT_DATETIME = "11-10-2020 19:45";
     public static final int DEFAULT_DURATION = 60;
     public static final String DEFAULT_DESCRIPTION = "Monthly checkup.";
     public static final AppointmentStatus DEFAULT_APPOINTMENT_STATUS = AppointmentStatus.UPCOMING;

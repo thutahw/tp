@@ -96,14 +96,20 @@ Figure 4. Structure of the UI component
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
-The UI consists of a `MainWindow` that is made up of parts such as `PatientListPanel`, `CalendarPage` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts such as the `CommandBox` and `SideTabPane` as shown in the *Class Diagram* above. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `Page` is an abstract class that represents a page corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The following classes inherit from the `Page` abstract class:
+The `SideTabPane` class creates `XYZPage` corresponding to each tab in the GUI. Each tab will display information on different features of Baymax. The `XYZPage` is a generic name given to the following elements:
 - Dashboard
 - PatientInfoPage
 - AppointmentInfoPage
 - CalendarPage
+- SchedulePage
 - InfoPage
+
+Each of these classes (except InfoPage) displays data from the `Model` to the user.
+For example, The PatientInfoPage and AppointmentInfoPage display lists of patients and appointments respectively. Hence they contain `XYZListPanel` (shown in the diagram below), which in turn contains a collection of `XYZCard` that displays each data field in the Patient and Appointment class.
+
+![Structure of an XYZPage](images/UiXYZPageClassDiagram.png)<br>
 
 #### 3.2.2. Responsibilities
 
@@ -121,10 +127,10 @@ Figure 5. Structure of the Logic Component
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
-1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a patient), which is executed by the `ModelManager` which calls `PatientManager` and `AppointmentManager`.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+2. This results in a `Command` object which is executed by the `LogicManager`.
+3. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on AppointmentManager).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
@@ -144,11 +150,12 @@ Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
-Each type of data is handled by a separate `ListManager` (to give `PatientManager` and `AppointmentManager`), and a 
-`ModelManager` facade class exposes the methods 
+The `Model` component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
+Each type of data is handled by a separate `ListManager` (`PatientManager` and `AppointmentManager`). A `ModelManager` facade class then exposes the methods 
 that enable other components to perform getting, setting, searching and editing functions on the different 
 types of data.
+
+Apart from `ListManager`s, the `Model` component also contains a `CalendarManager` that manages an `AppointmentCalendar`. The `CalendarManager` supports operations on the `AppointmentCalendar` such as getting and setting the `year`, `month` and `day`. 
 
 The `Model` component also contains
 
@@ -194,7 +201,7 @@ The `Storage` component,
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `team.baymax.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -413,12 +420,12 @@ existing list of patients before a valid `Appointment` object is created contain
 Baymax allows the user to manage appointments using a built-in calendar.
 The calendar brings greater convenience to the user by showing them what days are available in a month.
 It is also coupled with a schedule view that can be accessed by entering the `day` command, which shows the user
-all appointments on a chosen day, laid out chronologically on a timeline.
+all appointments on the chosen day, laid out chronologically on a timeline.
 
 #### 4.4.1 Rationale
 
 The Calendar feature is included in Baymax because it can shorten some commands by allowing the user to only specify
-the time, as the date can be directly inferred from the calendar. For example, in the Calendar 
+the time of appointments, as the date can be inferred from the calendar. For example, in the Calendar 
 Manager, a user can set a custom year, month and day. This influences the execution of the `addappt` command shown 
 in the sequence diagram below. In this example, suppose the user has set year to 2020, 
 month to February and day to 1, he can directly enter an `addappt` command that adds an appointment to 1, 
@@ -426,12 +433,19 @@ February, 2020 without having to enter a date into the command fields. This make
 and more user-friendly.
 
 ![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
-Figure X. Workflow of an `addappt` with the use of date set in the calendar
+Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
 `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
-present year, month and day. Rather, it is dependent on what the user set them to be. 
+present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
+constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
+`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+
+The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
+`year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
+
+
 
 #### 4.4.3. Design Consideration
 

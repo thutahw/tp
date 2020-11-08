@@ -79,9 +79,9 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      * Returns true if there is an appointment existing in the manager that clashes with
      * {@code appointment} in time.
      */
-    public boolean doesAppointmentClash(Appointment appointment) {
+    public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
-        return appointments.contains(new AppointmentClashPredicate(appointment));
+        return appointments.contains(new AppointmentClashPredicate(appointment, toExclude));
     }
 
     /**
