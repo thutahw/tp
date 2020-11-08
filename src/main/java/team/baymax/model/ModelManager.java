@@ -199,9 +199,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean doesAppointmentClash(Appointment appointment) {
+    public boolean doesAppointmentClash(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
-        return appointmentManager.doesAppointmentClash(appointment);
+        return appointmentManager.doesAppointmentClash(appointment, toExclude);
     }
 
     @Override

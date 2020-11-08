@@ -10,10 +10,12 @@ import team.baymax.model.util.datetime.DateTime;
 public class AppointmentClashPredicate implements Predicate<Appointment> {
 
     private final Appointment appointment;
+    private final Appointment toExclude;
 
-    public AppointmentClashPredicate(Appointment appointment) {
+    public AppointmentClashPredicate(Appointment appointment, Appointment toExclude) {
         requireNonNull(appointment);
         this.appointment = appointment;
+        this.toExclude = toExclude;
     }
 
     @Override
@@ -22,7 +24,8 @@ public class AppointmentClashPredicate implements Predicate<Appointment> {
         DateTime startDateTime = appointment.getDateTime();
         DateTime endDateTime = appointment.getEndDateTime();
 
-        return patient.equals(other.getPatient())
+        return (toExclude == null || !toExclude.isSame(other))
+                && patient.equals(other.getPatient())
                 && !(endDateTime.isEqual(other.getDateTime())
                     || endDateTime.isBefore(other.getDateTime())
                     || startDateTime.isEqual(other.getEndDateTime())

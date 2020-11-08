@@ -138,7 +138,7 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
-        if (model.doesAppointmentClash(toAdd)) {
+        if (model.doesAppointmentClash(toAdd, null)) {
             throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 

@@ -11,6 +11,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -28,14 +29,30 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="patientName" text="\$patientName" styleClass="cell_big_label" />
-                <ImageView>
-                    <Image url="@/images/IconPhone.png"/>
-                </ImageView>
-                <Label fx:id="phoneNumber" text="\$phoneNumber" styleClass="cell_big_label" />
                 <Label fx:id="statusTag"/>
             </HBox>
-            <Label fx:id="patientNric" styleClass="cell_small_label" text="\$patientNric" />
+            <HBox>
+                <StackPane styleClass="icon_small">
+                    <ImageView>
+                        <Image url="@/images/IconHuman.png"/>
+                    </ImageView>
+                </StackPane>
+                <Label fx:id="patientNric" styleClass="cell_big_label" text="\$patientNric" />
+            </HBox>
+            <HBox>
+                <StackPane styleClass="icon_small">
+                    <ImageView>
+                        <Image url="@/images/IconPhone.png"/>
+                    </ImageView>
+                </StackPane>
+                <Label fx:id="phoneNumber" text="\$phoneNumber" styleClass="cell_big_label" />
+            </HBox>
+            <Label text=""/>
+            <Label text="Details:"/>
             <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
+            <Label fx:id="duration" styleClass="cell_small_label" text="\$duration" />
+            <Label text=""/>
+            <Label text="Description:"/>
             <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
             <FlowPane fx:id="tags" />
         </VBox>

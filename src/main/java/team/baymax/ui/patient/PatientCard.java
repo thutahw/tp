@@ -58,7 +58,7 @@ public class PatientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(patient.getName().getFullName());
         phone.setText(patient.getPhone().getValue());
-        gender.setText(patient.getGender().getValue());
+        gender.setText(patient.getGender().toString());
         remark.setText(patient.getRemark().getValue());
         nric.setText(patient.getNric().getValue());
         patient.getTags().stream()

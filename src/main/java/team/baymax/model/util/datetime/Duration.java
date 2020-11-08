@@ -26,6 +26,14 @@ public class Duration {
         this.value = duration;
     }
 
+    public int numberOfHours() {
+        return value / 60;
+    }
+
+    public int numberOfMinutes() {
+        return value % 60;
+    }
+
     /**
      * Returns true if a given Integer is a valid duration.
      */
@@ -35,7 +43,12 @@ public class Duration {
 
     @Override
     public String toString() {
-        return value.toString();
+        if (numberOfHours() == 0) {
+            return String.format("%d Minute(s)", numberOfMinutes());
+        } else if (numberOfMinutes() == 0) {
+            return String.format("%d Hour(s)", numberOfHours());
+        }
+        return String.format("%1$d Hour(s) %2$d Minute(s)", numberOfHours(), numberOfMinutes());
     }
 
     @Override

@@ -82,7 +82,8 @@ public class EditAppointmentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
-        if (editAppointmentDescriptor.isDateTimeEdited() && model.doesAppointmentClash(editedAppointment)) {
+        if (editAppointmentDescriptor.isDateTimeEdited()
+                && model.doesAppointmentClash(editedAppointment, appointmentToEdit)) {
             throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 
