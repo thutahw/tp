@@ -37,8 +37,8 @@ public class DurationTest {
 
     @Test
     void toString_validDuration_returnsString() {
-        assertEquals("60", ALICE_APT.getDuration().toString());
-        assertEquals("45", new Duration(45).toString());
+        assertEquals("1 Hour(s)", ALICE_APT.getDuration().toString());
+        assertEquals("45 Minute(s)", new Duration(45).toString());
     }
 
     @Test
