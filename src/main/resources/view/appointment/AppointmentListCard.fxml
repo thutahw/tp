@@ -34,6 +34,7 @@
                 <Label fx:id="phoneNumber" text="\$phoneNumber" styleClass="cell_big_label" />
                 <Label fx:id="statusTag"/>
             </HBox>
+            <Label fx:id="patientNric" styleClass="cell_small_label" text="\$patientNric" />
             <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
             <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
             <FlowPane fx:id="tags" />

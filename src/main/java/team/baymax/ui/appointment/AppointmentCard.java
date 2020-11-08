@@ -44,6 +44,8 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label statusTag;
     @FXML
+    private Label patientNric;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -60,6 +62,7 @@ public class AppointmentCard extends UiPart<Region> {
     private void initialize() {
         id.setText(displayedIndex + ". ");
         patientName.setText(appointment.getPatient().getName().getFullName());
+        patientNric.setText(appointment.getPatient().getNric().toString());
         phoneNumber.setText(appointment.getPatient().getPhone().toString());
         dateTime.setText(appointment.getDateTime().toString());
         description.setText(appointment.getDescription().toString());

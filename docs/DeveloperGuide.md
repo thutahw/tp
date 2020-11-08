@@ -439,7 +439,13 @@ Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
 `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
-constructs a YearCommand, MonthCommand and DayCommand respectively. When 
+constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
+`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+
+The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
+`year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
+
+
 
 #### 4.4.3. Design Consideration
 

@@ -1,5 +1,7 @@
 package team.baymax.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import team.baymax.model.patient.Patient;
@@ -10,6 +12,7 @@ public class AppointmentClashPredicate implements Predicate<Appointment> {
     private final Appointment appointment;
 
     public AppointmentClashPredicate(Appointment appointment) {
+        requireNonNull(appointment);
         this.appointment = appointment;
     }
 
