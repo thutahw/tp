@@ -19,6 +19,7 @@ public class Time {
      * Constructs a {@code Time} from a {@code LocalDateTime}.
      */
     public Time(LocalTime time) {
+        requireNonNull(time);
         this.time = time;
     }
 
@@ -27,7 +28,6 @@ public class Time {
      */
     public static Time fromString(String timeString) {
         requireNonNull(timeString);
-
         checkArgument(isValidTime((timeString)), MESSAGE_CONSTRAINTS);
         return new Time(LocalTime.parse(timeString, FORMAT_INPUT));
     }
