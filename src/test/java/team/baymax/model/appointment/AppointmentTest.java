@@ -28,15 +28,15 @@ public class AppointmentTest {
     @Test
     public void constructor_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(null, DateTime.fromString("01-01-2020 00:00"),
-                new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+                    new Duration(60), new Description("Test."), new HashSet<Tag>(), false));
         assertThrows(NullPointerException.class, () -> new Appointment(ALICE, null,
-                new Duration(60), new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+                new Duration(60), new Description("Test."), new HashSet<Tag>(), false));
         assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
-                null, new Description("Test."), new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+                null, new Description("Test."), new HashSet<Tag>(), false));
         assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
-                new Duration(60), null, new HashSet<Tag>(), AppointmentStatus.UPCOMING));
+                new Duration(60), null, new HashSet<Tag>(), false));
         assertThrows(NullPointerException.class, () -> new Appointment(ALICE, DateTime.fromString("01-01-2020 00:00"),
-                new Duration(60), new Description("Test."), null, AppointmentStatus.UPCOMING));
+                new Duration(60), new Description("Test."), null, false));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class AppointmentTest {
 
     @Test
     public void getStatus() {
-        assertEquals(AppointmentStatus.UPCOMING, ALICE_APT.getStatus());
+        assertEquals(AppointmentStatus.DONE, ALICE_APT.getStatus());
         assertEquals(AppointmentStatus.MISSED, ALICE_APT_VAR_1.getStatus());
         assertEquals(AppointmentStatus.DONE, BOB_APT.getStatus());
     }
@@ -120,7 +120,7 @@ public class AppointmentTest {
         assertEquals(ALICE_APT, new Appointment(ALICE,
                 DateTime.fromString("11-10-2020 12:45"),
                 new Duration(60), new Description("desc 1"),
-                new HashSet<>(), AppointmentStatus.UPCOMING));
+                new HashSet<>(), false));
     }
 
     @Test
@@ -135,11 +135,11 @@ public class AppointmentTest {
         assertEquals(ALICE_APT.hashCode(), new Appointment(ALICE,
                 DateTime.fromString("11-10-2020 12:45"),
                 new Duration(60), new Description("desc 1"),
-                new HashSet<>(), AppointmentStatus.UPCOMING).hashCode());
+                new HashSet<>(), false).hashCode());
         assertEquals(BOB_APT.hashCode(), new Appointment(BOB,
                 DateTime.fromString("11-10-2020 12:45"),
                 new Duration(40), new Description("desc 4"),
-                BOB.getTags(), AppointmentStatus.DONE).hashCode());
+                BOB.getTags(), false).hashCode());
     }
 
     @Test
