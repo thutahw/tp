@@ -34,6 +34,8 @@ public class MarkAppointmentDoneCommandTest {
 
     private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
+    private Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -58,9 +60,6 @@ public class MarkAppointmentDoneCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
                 appt);
-
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.DONE).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
@@ -88,9 +87,6 @@ public class MarkAppointmentDoneCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
                 appt);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.DONE).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
@@ -122,9 +118,6 @@ public class MarkAppointmentDoneCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
                 appointmentChosen);
-
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
                 .withStatus(AppointmentStatus.DONE).build();
 
@@ -175,9 +168,6 @@ public class MarkAppointmentDoneCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
                 appointmentChosen);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
                 .withStatus(AppointmentStatus.DONE).build();
 

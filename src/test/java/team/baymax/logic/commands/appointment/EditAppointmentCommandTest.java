@@ -9,10 +9,10 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.assertAppointmentCommandFailure;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.showAppointmentAtIndex;
-import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_SECOND_APPOINTMENT;
 import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
+import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 
 import org.junit.jupiter.api.Test;
 

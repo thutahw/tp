@@ -3,8 +3,8 @@ package team.baymax.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.Assert.assertThrows;
+import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 import static team.baymax.testutil.patient.TypicalPatients.getTypicalPatientManager;
 

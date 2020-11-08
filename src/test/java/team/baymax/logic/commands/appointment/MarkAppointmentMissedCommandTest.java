@@ -34,6 +34,8 @@ public class MarkAppointmentMissedCommandTest {
 
     private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
+    private Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -59,9 +61,6 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.MISSED).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
@@ -90,9 +89,6 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.MISSED).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
@@ -124,9 +120,6 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
-
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
                 .withStatus(AppointmentStatus.MISSED).build();
 
@@ -177,9 +170,6 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
                 .withStatus(AppointmentStatus.MISSED).build();
 

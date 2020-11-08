@@ -15,10 +15,10 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_ID1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_1HR;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_TAG_DRGOH;
-import static team.baymax.testutil.patient.PatientUtil.VALID_NAME_BOB;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.appointment.TypicalAppointments.ALICE_APT;
+import static team.baymax.testutil.patient.PatientUtil.VALID_NAME_BOB;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Optional;

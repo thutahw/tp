@@ -2,12 +2,6 @@ package team.baymax.logic.commands.patient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 import static team.baymax.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -21,7 +15,6 @@ import team.baymax.model.Model;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.Patient;
-import team.baymax.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.

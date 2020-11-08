@@ -1,6 +1,10 @@
 package team.baymax.logic.parser.patient;
 
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.patient.PatientUtil.GENDER_DESC_AMY;
 import static team.baymax.testutil.patient.PatientUtil.GENDER_DESC_BOB;
 import static team.baymax.testutil.patient.PatientUtil.INVALID_GENDER_DESC;
@@ -22,10 +26,6 @@ import static team.baymax.testutil.patient.PatientUtil.VALID_PHONE_BOB;
 import static team.baymax.testutil.patient.PatientUtil.VALID_REMARK_AMY;
 import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_LTP;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
-import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.baymax.testutil.Assert.assertThrows;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PATIENT;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_SECOND_PATIENT;
 import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_THIRD_PATIENT;

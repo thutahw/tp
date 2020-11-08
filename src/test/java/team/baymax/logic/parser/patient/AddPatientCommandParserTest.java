@@ -2,6 +2,12 @@ package team.baymax.logic.parser.patient;
 
 import static team.baymax.commons.core.Messages.MESSAGE_DUPLICATE_PARAM;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
+import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.patient.PatientUtil.GENDER_DESC_AMY;
 import static team.baymax.testutil.patient.PatientUtil.GENDER_DESC_BOB;
 import static team.baymax.testutil.patient.PatientUtil.INVALID_GENDER_DESC;
@@ -26,12 +32,6 @@ import static team.baymax.testutil.patient.PatientUtil.VALID_PHONE_BOB;
 import static team.baymax.testutil.patient.PatientUtil.VALID_REMARK_BOB;
 import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_LTP;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
-import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
-import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.patient.TypicalPatients.AMY;
 import static team.baymax.testutil.patient.TypicalPatients.BOB;
 

@@ -6,6 +6,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Set;
 
 import team.baymax.logic.commands.patient.AddPatientCommand;

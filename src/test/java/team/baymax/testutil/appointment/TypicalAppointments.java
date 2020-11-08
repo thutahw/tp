@@ -57,7 +57,7 @@ public class TypicalAppointments {
 
     // Variant 2 - same patient, but different datetime and tags
     public static final Appointment ALICE_APT_VAR_2 = new Appointment(ALICE,
-            DateTime.fromString("28-12-2020 12:30"),
+            DateTime.fromString("12-01-2020 12:30"),
             new Duration(60), new Description("desc 2"),
             new HashSet<>(), AppointmentStatus.UPCOMING);
 
