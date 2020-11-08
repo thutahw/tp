@@ -2,6 +2,7 @@ package team.baymax.logic.commands.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
+import static team.baymax.logic.commands.appointment.AddAppointmentCommand.MESSAGE_CLASH_APPOINTMENT;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
@@ -76,6 +77,10 @@ public class EditAppointmentCommand extends Command {
 
         if (!appointmentToEdit.isSame(editedAppointment) && model.hasAppointment(editedAppointment)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
+        }
+
+        if (editAppointmentDescriptor.isDateTimeEdited() && model.doesAppointmentClash(editedAppointment)) {
+            throw new CommandException(MESSAGE_CLASH_APPOINTMENT);
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);

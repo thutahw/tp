@@ -433,12 +433,13 @@ February, 2020 without having to enter a date into the command fields. This make
 and more user-friendly.
 
 ![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
-Figure X. Workflow of an `addappt` with the use of date set in the calendar
+Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
 `year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
-present year, month and day. Rather, it is dependent on what the user set them to be. 
+present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
+constructs a YearCommand, MonthCommand and DayCommand respectively. When 
 
 #### 4.4.3. Design Consideration
 
