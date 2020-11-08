@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AppointmentBookParser" as AppointmentBookParser LOGIC_COLOR
+participant ":AddAppointmentCommandParser" as AddAppointmentCommandParser LOGIC_COLOR
+participant "d:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
+participant "a:Appointment" as Appointment MODEL_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addappt 1 at/12:30 \ndur/60 desc/removal of \nbraces")
+activate LogicManager
+
+note left
+note that only the time
+is supplied in the user
+input
+end note
+
+LogicManager -> AppointmentBookParser : parseCommand("addappt 1 \nat/12:30 dur/60 \ndesc/removal of braces")
+activate AppointmentBookParser
+
+create AddAppointmentCommandParser
+AppointmentBookParser -> AddAppointmentCommandParser
+activate AddAppointmentCommandParser
+
+AddAppointmentCommandParser --> AppointmentBookParser
+deactivate AddAppointmentCommandParser
+
+AppointmentBookParser -> AddAppointmentCommandParser : parse("1 at/12:30 dur/60 \ndesc/removal of braces")
+activate AddAppointmentCommandParser
+
+create AddAppointmentCommand
+AddAppointmentCommandParser -> AddAppointmentCommand
+activate AddAppointmentCommand
+
+AddAppointmentCommand --> AddAppointmentCommandParser
+deactivate AddAppointmentCommand
+
+AddAppointmentCommandParser --> AppointmentBookParser
+destroy AddAppointmentCommandParser
+
+AppointmentBookParser --> LogicManager
+deactivate AppointmentBookParser
+
+LogicManager -> AddAppointmentCommand : execute()
+activate AddAppointmentCommand
+
+create Model
+AddAppointmentCommand -> Model : getAppointmentCalendar()
+activate Model
+
+Model --> AddAppointmentCommand : date
+
+create Appointment
+AddAppointmentCommand -> Appointment : Appointment(p, dt, dur, \ndesc, tags, s)
+activate Appointment
+
+note left
+""dt"" is the datetime
+constructed
+from the date retrieved
+from the calendar and
+the time given.
+end note
+
+Appointment --> AddAppointmentCommand : a
+deactivate Appointment
+
+AddAppointmentCommand -> Model : addAppointment(a)
+Model --> AddAppointmentCommand
+deactivate Model
+
+create CommandResult
+AddAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAppointmentCommand : r
+deactivate CommandResult
+
+AddAppointmentCommand --> LogicManager : r
+destroy AddAppointmentCommand
+
+[<--LogicManager : ""r""
+deactivate LogicManager
+
+@enduml
