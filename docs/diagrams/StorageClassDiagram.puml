@@ -3,10 +3,13 @@
 skinparam Class {
     BorderColor BACKGROUND_COLOR
     FontColor BACKGROUND_COLOR
-    BackgroundColor STORAGE_COLOR
+    BackgroundColor STORAGE_COLOR_T2
     StereotypeFontColor BACKGROUND_COLOR
 }
-skinparam ArrowColor STORAGE_COLOR_T3
+skinparam ArrowColor STORAGE_COLOR_T2
+
+hide method
+hide attribute
 
 package Storage <<Rectangle>> {
 Interface Storage<<Interface>>
