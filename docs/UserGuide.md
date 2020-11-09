@@ -61,11 +61,11 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 1. Managing appointments - scheduling new appointments, changing appointments, cancelling appointments,
    marking appointments as done etc.
 2. Managing patient information - phone number, special remarks etc. 
-3. Viewing appointments in a calendar format.
+3. Viewing appointments in a `schedule` view.
+4. A built-in calendar for greater convenience.
 
 All of these can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
-calendar view -- it shows you how busy a particular day or week is at a glance, so that you can help patients make 
-quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
+calendar view which can help patients make quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
 
 --------------------------------------------------------------------------------
 
@@ -769,7 +769,7 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
     *Figure 5.2.8a. Finding an appointment by description*
 
 **Example:**<br>
-1. Type `findappt dr` into the command box.
+1. Type `findappt follow` into the command box.
 2. Press `Enter` on your keyboard. 
 
 **Outcome:**
@@ -778,6 +778,11 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
     
     ![findappt](images/findapptbytagsuccess.png)<br>
     *Figure 5.2.8b. Finding an appointment by tag*
+
+**Note:**
+
+1. If the `TAG_KEYWORD` is present in the **description** of another appointment, that appointment will be listed as well.
+2. If the `DESCRIPTION_KEYWORD` is present in the **tag** of another appointment, that appointment will be listed as well.
     
 -------------------------------------------------------------------------------
 
