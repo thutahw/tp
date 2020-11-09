@@ -66,7 +66,7 @@ public class AppointmentBuilder {
     }
 
     /**
-     * Sets the status of the appointment we are building to the input
+     * Sets the missed status of the appointment we are building to the input
      * @param isMissed
      */
     public AppointmentBuilder withIsMissed(Boolean isMissed) {

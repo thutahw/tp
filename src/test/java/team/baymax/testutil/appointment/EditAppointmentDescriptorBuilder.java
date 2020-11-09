@@ -32,8 +32,8 @@ public class EditAppointmentDescriptorBuilder {
         descriptor = new EditAppointmentDescriptor();
         descriptor.setDateTime(appointment.getDateTime());
         descriptor.setDescription(appointment.getDescription());
-        descriptor.setStatus(appointment.getStatus());
         descriptor.setTags(appointment.getTags());
+
     }
 
 

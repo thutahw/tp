@@ -29,7 +29,7 @@ import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.appointment.AppointmentBuilder;
 
-public class MarkAppointmentDoneCommandTest {
+public class MarkAppointmentMissedCommandTest {
 
     private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
@@ -38,28 +38,29 @@ public class MarkAppointmentDoneCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new MarkAppointmentDoneCommand(null));
+        assertThrows(NullPointerException.class, () -> new MarkAppointmentMissedCommand(null));
     }
 
     @Test
     public void constructor_nullDatetime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new MarkAppointmentDoneCommand(null, FIRST_NAME_ALICE));
+        assertThrows(NullPointerException.class, () -> new MarkAppointmentMissedCommand(null, FIRST_NAME_ALICE));
     }
 
     @Test
     public void constructor_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new MarkAppointmentDoneCommand(DATETIME1, null));
+        assertThrows(NullPointerException.class, () -> new MarkAppointmentMissedCommand(DATETIME1, null));
     }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Appointment appt = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(INDEX_FIRST_APPOINTMENT);
+        MarkAppointmentMissedCommand markAppointmentDoneCommand =
+                new MarkAppointmentMissedCommand(INDEX_FIRST_APPOINTMENT);
 
-        String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
+        String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(false).build();
+        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(true).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -70,7 +71,7 @@ public class MarkAppointmentDoneCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 outOfBoundIndex);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
@@ -82,11 +83,12 @@ public class MarkAppointmentDoneCommandTest {
         showAppointmentAtIndex(model, INDEX_SECOND_APPOINTMENT);
 
         Appointment appt = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(INDEX_FIRST_APPOINTMENT);
+        MarkAppointmentMissedCommand markAppointmentDoneCommand =
+                new MarkAppointmentMissedCommand(INDEX_FIRST_APPOINTMENT);
 
-        String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
+        String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(false).build();
+        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(true).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -102,7 +104,7 @@ public class MarkAppointmentDoneCommandTest {
 
         // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAppointmentManager().getReadOnlyList().size());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(outOfBoundIndex);
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(outOfBoundIndex);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
                 Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
@@ -112,13 +114,13 @@ public class MarkAppointmentDoneCommandTest {
     public void execute_validDateTimeAndNameUnfilteredList_success() {
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 appointmentChosen.getDateTime(), appointmentChosen.getPatient().getName());
 
-        String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
+        String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
-                .withIsMissed(false).build();
+                .withIsMissed(true).build();
 
         expectedModel.setAppointment(appointmentChosen, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -128,7 +130,7 @@ public class MarkAppointmentDoneCommandTest {
 
     @Test
     public void execute_invalidDatetimeAndInvalidNameUnfilteredList_throwsCommandException() {
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 DATETIME1, FIRST_NAME_HANSON);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
@@ -138,7 +140,7 @@ public class MarkAppointmentDoneCommandTest {
 
     @Test
     public void execute_invalidDatetimeUnfilteredList_throwsCommandException() {
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 DATETIME1, FIRST_NAME_ALICE);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
@@ -149,7 +151,7 @@ public class MarkAppointmentDoneCommandTest {
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
         Appointment existingAppt = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 existingAppt.getDateTime(), FIRST_NAME_HANSON);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
@@ -162,13 +164,13 @@ public class MarkAppointmentDoneCommandTest {
 
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 appointmentChosen.getDateTime(), appointmentChosen.getPatient().getName());
 
-        String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
+        String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
-                .withIsMissed(false).build();
+                .withIsMissed(true).build();
 
         expectedModel.setAppointment(appointmentChosen, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -183,7 +185,7 @@ public class MarkAppointmentDoneCommandTest {
 
         // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAppointmentManager().getReadOnlyList().size());
-        MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
+        MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
                 DATETIME1, FIRST_NAME_GEORGE);
 
         assertAppointmentCommandFailure(markAppointmentDoneCommand, model,
@@ -192,20 +194,21 @@ public class MarkAppointmentDoneCommandTest {
 
     @Test
     public void equals() {
-        MarkAppointmentDoneCommand markDoneCommand1 = new MarkAppointmentDoneCommand(INDEX_FIRST_APPOINTMENT);
-        MarkAppointmentDoneCommand markDoneCommand2 = new MarkAppointmentDoneCommand(INDEX_SECOND_APPOINTMENT);
-        MarkAppointmentDoneCommand markDoneCommand3 = new MarkAppointmentDoneCommand(DATETIME1, FIRST_NAME_ALICE);
-        MarkAppointmentDoneCommand markDoneCommand4 = new MarkAppointmentDoneCommand(DATETIME2, FIRST_NAME_BENSON);
+        MarkAppointmentMissedCommand markDoneCommand1 = new MarkAppointmentMissedCommand(INDEX_FIRST_APPOINTMENT);
+        MarkAppointmentMissedCommand markDoneCommand2 = new MarkAppointmentMissedCommand(INDEX_SECOND_APPOINTMENT);
+        MarkAppointmentMissedCommand markDoneCommand3 = new MarkAppointmentMissedCommand(DATETIME1, FIRST_NAME_ALICE);
+        MarkAppointmentMissedCommand markDoneCommand4 = new MarkAppointmentMissedCommand(DATETIME2, FIRST_NAME_BENSON);
 
         // same object -> returns True
         assertTrue(markDoneCommand1.equals(markDoneCommand1));
 
         // same values (index constructor) -> returns True
-        MarkAppointmentDoneCommand markDoneCommand1Copy = new MarkAppointmentDoneCommand(INDEX_FIRST_APPOINTMENT);
+        MarkAppointmentMissedCommand markDoneCommand1Copy = new MarkAppointmentMissedCommand(INDEX_FIRST_APPOINTMENT);
         assertTrue(markDoneCommand1.equals(markDoneCommand1Copy));
 
         // same values (dateTime and name constructor) -> returns True
-        MarkAppointmentDoneCommand markDoneCommand3Copy = new MarkAppointmentDoneCommand(DATETIME1, FIRST_NAME_ALICE);
+        MarkAppointmentMissedCommand markDoneCommand3Copy =
+                new MarkAppointmentMissedCommand(DATETIME1, FIRST_NAME_ALICE);
         assertTrue(markDoneCommand3.equals(markDoneCommand3Copy));
 
         // different types -> returns False

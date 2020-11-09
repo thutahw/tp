@@ -242,8 +242,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {
-        System.out.println("In model.getFilteredAppointmentlist()");
-        System.out.println(filteredAppointmentsList);
         return filteredAppointmentsList;
     }
 

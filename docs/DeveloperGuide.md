@@ -588,10 +588,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful receptionist of a clinic         | display all available commands | refer to the list of commands when I forget them            |
 | `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
 | `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
-| `* * *`  | receptionist of a clinic                   | add a patient's contact information | contact them if needed                                 |
-| `* * *`  | receptionist of a clinic                   | add a patient's emergency contact information | contact the patient's family members in times of emergencies |
-| `* * *`  | receptionist of a clinic                   | view a patient's profile       |                                                             |
-| `* * *`  | receptionist of a clinic                   | delete a patient profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | update a patient's contact information after they change it | contact them if needed         |
+| `* * *`  | receptionist of a clinic                   | find a patient by their name  |  easily view their details when needed          |
+| `* * *`  | receptionist of a clinic                   | delete a patient               |            |
 | `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
 | `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
 | `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
@@ -615,7 +614,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix C: Use cases**
 (Contributed by Li Jianhan and Shi Hui Ling)
 
-For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
+For all use cases below, unless specified otherwise,
+
+**System:** Baymax
+
+**Actor:** User (Clinic Receptionist)
 
 #### Patient Profile Management
 

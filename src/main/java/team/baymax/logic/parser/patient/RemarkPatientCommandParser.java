@@ -30,7 +30,6 @@ public class RemarkPatientCommandParser implements Parser<RemarkPatientCommand> 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            System.out.println(args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemarkPatientCommand.MESSAGE_USAGE), ive);
         }

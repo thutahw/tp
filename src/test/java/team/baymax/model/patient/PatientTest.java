@@ -8,8 +8,8 @@ import static team.baymax.testutil.patient.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.testutil.patient.PatientBuilder;
+import team.baymax.testutil.patient.PatientUtil;
 
 public class PatientTest {
 
@@ -28,26 +28,26 @@ public class PatientTest {
         assertFalse(ALICE.isSame(null));
 
         // different phone and gender -> returns true
-        Patient editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
-                .withGender(PatientCommandTestUtil.VALID_GENDER_BOB).build();
+        Patient editedAlice = new PatientBuilder(ALICE).withPhone(PatientUtil.VALID_PHONE_BOB)
+                .withGender(PatientUtil.VALID_GENDER_BOB).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // different name -> returns true
-        editedAlice = new PatientBuilder(ALICE).withName(PatientCommandTestUtil.VALID_NAME_BOB).build();
+        editedAlice = new PatientBuilder(ALICE).withName(PatientUtil.VALID_NAME_BOB).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withGender(PatientCommandTestUtil.VALID_GENDER_BOB)
-                .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
+        editedAlice = new PatientBuilder(ALICE).withGender(PatientUtil.VALID_GENDER_BOB)
+                .withTags(PatientUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same gender, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
-                .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
+        editedAlice = new PatientBuilder(ALICE).withPhone(PatientUtil.VALID_PHONE_BOB)
+                .withTags(PatientUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
 
         // same name, same phone, same gender, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
+        editedAlice = new PatientBuilder(ALICE).withTags(PatientUtil.VALID_TAG_DIABETIC).build();
         assertTrue(ALICE.isSame(editedAlice));
     }
 
@@ -70,19 +70,19 @@ public class PatientTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Patient editedAlice = new PatientBuilder(ALICE).withName(PatientCommandTestUtil.VALID_NAME_BOB).build();
+        Patient editedAlice = new PatientBuilder(ALICE).withName(PatientUtil.VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PatientBuilder(ALICE).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB).build();
+        editedAlice = new PatientBuilder(ALICE).withPhone(PatientUtil.VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different gender -> returns false
-        editedAlice = new PatientBuilder(ALICE).withGender(PatientCommandTestUtil.VALID_GENDER_BOB).build();
+        editedAlice = new PatientBuilder(ALICE).withGender(PatientUtil.VALID_GENDER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC).build();
+        editedAlice = new PatientBuilder(ALICE).withTags(PatientUtil.VALID_TAG_DIABETIC).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

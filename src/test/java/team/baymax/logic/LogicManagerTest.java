@@ -16,7 +16,6 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.logic.commands.patient.AddPatientCommand;
 import team.baymax.logic.commands.patient.ListPatientCommand;
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.logic.parser.exceptions.ParseException;
 import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
@@ -29,6 +28,7 @@ import team.baymax.storage.appointment.JsonAppointmentManagerStorage;
 import team.baymax.storage.patient.JsonPatientManagerStorage;
 import team.baymax.storage.userprefs.JsonUserPrefsStorage;
 import team.baymax.testutil.patient.PatientBuilder;
+import team.baymax.testutil.patient.PatientUtil;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -84,9 +84,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddPatientCommand.COMMAND_WORD + PatientCommandTestUtil.NRIC_DESC_AMY
-                + PatientCommandTestUtil.NAME_DESC_AMY + PatientCommandTestUtil.PHONE_DESC_AMY
-                + PatientCommandTestUtil.GENDER_DESC_AMY + PatientCommandTestUtil.REMARK_DESC_AMY;
+        String addCommand = AddPatientCommand.COMMAND_WORD + PatientUtil.NRIC_DESC_AMY
+                + PatientUtil.NAME_DESC_AMY + PatientUtil.PHONE_DESC_AMY
+                + PatientUtil.GENDER_DESC_AMY + PatientUtil.REMARK_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPatient(expectedPatient);
