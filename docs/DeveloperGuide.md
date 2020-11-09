@@ -418,7 +418,25 @@ even if the methods simply call a `UniqueList` method that fulfills the exact pu
 
 #### 4.3.2. Current Implementation
 
-Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+The appointment package in the Model component contains the necessary information related to a patient. The current implementation of AppointmentManager allows the user to keep track of a list of appointments, as seen in Figure 13 below.
+
+![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
+<br>Figure 13. Object diagram of AppointmentManager
+
+When the user enters a Command, the input undergoes the same parsing as described in [Section 3.3, “Logic component”](#33-logic-component). Similar to the workflow when a Patient-related command is executed (detailed in [Section 4.1.2 Patient Manager Current Implementation](#422-current-implementation)).
+
+The following table shows the commands related to managing an appointment's details.<br>
+
+| Command | Purpose
+| --------- | ------------------------------------------
+| `addappt` | Adds a new appointment.
+| `cancel` | Deletes an appointment.
+| `listappts` | Lists all appointments.
+| `listapptsof` | Lists all appointments belonging to a patient of the given index, nric, or name.
+| `editappt` | Edits a appointment's details.
+| `findappt` | Finds a appointment with the given keyword in it's description or tag(s).
+| `done` | Marks an appointment as DONE.
+| `missed` | Marks an appointment as MISSED.
 
 #### 4.3.3. Design Consideration
 
