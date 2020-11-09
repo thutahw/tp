@@ -567,7 +567,7 @@ For all use cases below, unless specified otherwise,
 
 #### Patient Profile Management
 
-> **Use case 1: Add a patient**
+**Use case 1: Add a patient**
 
 **MSS**
 
@@ -584,7 +584,7 @@ For all use cases below, unless specified otherwise,
     * 1a1. Baymax displays an invalid command message that details all the fields needed for the command
     Use case ends.
 
-> **Use case 2: Edit a patient’s information**
+**Use case 2: Edit a patient’s information**
 
 **MSS**
 
@@ -605,7 +605,7 @@ For all use cases below, unless specified otherwise,
     * 1b1. Baymax displays an "at least one field must be specified" invalid input message
     Use case ends.
 
-> **Use case 3: Delete a patient**
+**Use case 3: Delete a patient**
 
 **MSS**
 
@@ -622,7 +622,7 @@ For all use cases below, unless specified otherwise,
 	* 1a1. Baymax displays an invalid input message
     Use case ends.
     
-> **Use case 4: Find patient(s) by name**
+**Use case 4: Find patient(s) by name**
 
 **MSS**
 
@@ -633,7 +633,7 @@ and a list of all these patients with their details
 
     Use case ends.
     
-> **Use case 5: List all patients**
+**Use case 5: List all patients**
 
 **MSS**
 
@@ -644,7 +644,7 @@ and a list of all these patients with their details
 
 #### Appointment Management
 
-> **Use case 6: Add an appointment**
+**Use case 6: Add an appointment**
 
 **MSS**
 
@@ -662,10 +662,10 @@ and a list of all these patients with their details
     Use case ends.
 
 * 1b. Missing information for a field, e.g. Duration, Description
-    * 1a1. Baymax displays an invalid command message that details the fields needed for the command
+    * 1b1. Baymax displays an invalid command message that details the fields needed for the command
     Use case ends.
 
-> **Use case 7: List all appointments of a patient**
+**Use case 7: List all appointments of a patient**
 
 **MSS**
 
@@ -676,12 +676,13 @@ and a list of all these patients with their details
 
 **Extensions**
 
-*1a. Patient specified does not exist
+* 1a. Patient specified does not exist
     * 1a1. Baymax displays an invalid input message specific to how the patient was specified 
     (by Name, Nric, or Index in the list)
+    
     Use case ends.
 
-> **Use case 8: Mark an appointment as missed**
+**Use case 8: Mark an appointment as missed**
 
 **MSS**
 
@@ -694,36 +695,37 @@ show only the appointment that has just been marked as missed
     
 **Extensions**
 
-*1a. Appointment specified does not exist
-    *1a1. Baymax displays an invalid input message
+* 1a. Appointment specified does not exist
+    * 1a1. Baymax displays an invalid input message
+    
     Use case ends.
 
-> **Use case 9: Mark an appointment as done**
+**Use case 9: Mark an appointment as done**
 
 Similar to `Use case 8: Mark an appointment as missed` except there is a **precondition**.
 
 **Precondition:** Appointment has already past (i.e. the date and time is past current date and time). 
 
-> **Use case 10: Edit an appointment**
+**Use case 10: Edit an appointment**
 
 Similar to `Use case 2: Edit a patient's information` except for an appointment instead of a patient
 
-> **Use case 11: Cancel an appointment**
+**Use case 11: Cancel an appointment**
 
 Similar to `Use case 3: Delete a patient` except for an appointment instead of a patient
 
-> **Use case 12: Find appointment(s) by keyword**
+**Use case 12: Find appointment(s) by keyword**
 
 Similar to `Use case 4: Find patient(s) by name` except Baymax finds all appointments that contain 
 the search string in their remark or tags. 
 
-> **Use case 13: List all appointments**
+**Use case 13: List all appointments**
 
 Similar to `Use case 5: List all patients` except for appointments instead of patients.
 
 #### Calendar
 
-> **Use case 14: View appointment schedule on a particular day**
+**Use case 14: View appointment schedule on a particular day**
 
 **MSS**
 
@@ -738,14 +740,17 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
     
 **Extensions**
 
-*1a. Year specified is beyond the limits allowed by Baymax
-    *1a1. Baymax displays an invalid input message specifying the allowed input
+* 1a. Year specified is beyond the limits allowed by Baymax
+    * 1a1. Baymax displays an invalid input message specifying the allowed input
+    
     Use case ends.
-*3a. Month specified is not a valid month (e.g. 13)
-    *1a1. Baymax displays an invalid input message specifying the allowed input
+* 3a. Month specified is not a valid month (e.g. 13)
+    * 3a1. Baymax displays an invalid input message specifying the allowed input
+    
     Use case ends.
-*5a. Day specified is not a valid day in the month (e.g. 30 when in February)
-    *1a1. Baymax displays an invalid input message specifying the allowed input
+* 5a. Day specified is not a valid day in the month (e.g. 30 when in February)
+    * 5a1. Baymax displays an invalid input message specifying the allowed input
+    
     Use case ends.
 
 
