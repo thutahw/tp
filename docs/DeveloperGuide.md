@@ -140,7 +140,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
 Figure 6. Delete Appointment Sequence Diagram
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### 3.4. Model component
@@ -523,6 +523,11 @@ The following sequence diagram illustrates how the `Logic` component interacts w
 
 ![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
 Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
+
+**Note:**
+
+1. The lifeline for the `YearCommandParser` and `YearCommand` should end at the destroy mark (X). However, due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
 
 #### 4.4.3. Design Consideration
 
