@@ -417,10 +417,10 @@ Option 2: Check `Datetime` of `Appointment` against current `Datetime` only when
 
 * Pros: Computation is performed when the value of `status` is needed, resulting in reduced performance cost.
 
-* Cons: `status` of `Appointment` stored within the application may be outdated, depending on when getStatus() was called.
+* Cons: Architecture becomes less intuitive as `status` is no longer stored.
 
 Reason for choosing Option 2:
-The only way for the `status` of an `Appointment` to be displayed is for `getStatus()` to be called, ensuring that even if stored `status` is outdated, it will be updated before it is displayed.
+While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
 **Aspect 4: Backdated `Appointment`s**
 
