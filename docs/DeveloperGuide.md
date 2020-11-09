@@ -78,10 +78,10 @@ Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletepatient 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-Figure 3. Architecture Sequence Diagram<br><br>
+Figure 3. Architecture Sequence Diagram
 
 The sections below give more details of each component.
 
@@ -125,6 +125,8 @@ The `UI` component,
 
 This segment will explain the structure and responsibilities of the Logic component.
 
+#### 3.3.1 Structure
+
 ![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
 Figure 5. Structure of the Logic Component
 
@@ -136,6 +138,8 @@ Figure 5. Structure of the Logic Component
 3. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on AppointmentManager).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
+
+#### 3.3.2 Responsibilities
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
 

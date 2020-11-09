@@ -7,7 +7,6 @@ import static team.baymax.testutil.patient.TypicalPatientIndexes.INDEX_FIRST_PAT
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.commons.core.Messages;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 
 /**

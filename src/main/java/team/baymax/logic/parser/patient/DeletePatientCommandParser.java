@@ -2,7 +2,7 @@ package team.baymax.logic.parser.patient;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.baymax.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
+
 import team.baymax.commons.core.index.Index;
 import team.baymax.logic.commands.patient.DeletePatientCommand;
 import team.baymax.logic.parser.ArgumentMultimap;
