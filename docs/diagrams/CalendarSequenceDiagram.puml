@@ -38,7 +38,10 @@ activate YearCommand
 YearCommand --> YearCommandParser : y
 deactivate YearCommand
 
-YearCommandParser -[hidden]-> AppointmentBookParser : y
+YearCommandParser --> AppointmentBookParser : y
+deactivate
+
+YearCommandParser -[hidden]-> AppointmentBookParser
 destroy YearCommandParser
 
 AppointmentBookParser --> LogicManager : y
@@ -73,6 +76,9 @@ CommandResult --> YearCommand : r
 deactivate CommandResult
 
 YearCommand --> LogicManager : r
+deactivate YearCommand
+
+YearCommand -[hidden]-> LogicManager
 destroy YearCommand
 
 [<--LogicManager : r

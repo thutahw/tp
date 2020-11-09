@@ -2,30 +2,8 @@
 layout: page
 title: Baymax - Developer Guide
 ---
-## Table of Contents
-1. [Introduction](#1-introduction)<br>
-2. [Setting up](#2-setting-up-getting-started)<br>
-3. [Design](#3-design)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. [Architecture](#31-architecture)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. [UI Component](#32-ui-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
-4. [Implementation](#4-implementation)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-manager)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
-5. [Documentation](#5-documentation)<br>
-6. [Testing](#6-testing)<br>
-7. [Dev Ops](#7-dev-ops)<br>
-[Appendix A: Product Scope](#appendix-a-product-scope)<br>
-[Appendix B: User Stories](#appendix-b-user-stories)<br>
-[Appendix C: Use Cases](#appendix-c-use-cases)<br>
-[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
-[Appendix E: Glossary](#appendix-e-glossary)<br>
-[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
+* Table of Contents
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
 
@@ -113,6 +91,7 @@ Each of these classes (except InfoPage) displays data from the `Model` to the us
 For example, The PatientInfoPage and AppointmentInfoPage display lists of patients and appointments respectively. Hence they contain `XYZListPanel` (shown in the diagram below), which in turn contains a collection of `XYZCard` that displays each data field in the Patient and Appointment class.
 
 ![Structure of an XYZPage](images/UiXYZPageClassDiagram.png)<br>
+Figure 5. Structure of Generic XYZPage Class Diagram
 
 #### 3.2.2. Responsibilities
 
@@ -124,7 +103,7 @@ The `UI` component,
 ### 3.3. Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
-Figure 5. Structure of the Logic Component
+Figure 6. Structure of the Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -138,7 +117,7 @@ Figure 5. Structure of the Logic Component
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
-Figure 6. Delete Appointment Sequence Diagram
+Figure 7. Delete Appointment Sequence Diagram
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -149,7 +128,7 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
-Figure 7. Structure of the Model Component
+Figure 8. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -181,7 +160,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
-Figure 8. Structure of the Storage Component
+Figure 9. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -325,7 +304,7 @@ The parameters of the `findpatient` command are keywords in the patient's name t
 E.g. `findpatient alex` will search and list all patients whose name has the word `alex`. 
 
 ![FindPatientActivityDiagram](images/FindPatientActivityDiagram.png)<br>
-Figure 9. Workflow of a `findpatient` command
+Figure 10. Workflow of a `findpatient` command
 
 When the user enters the `findpatient` command to search for a patient, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
 During the parsing, a predicate is created. This predicate checks if a given Patient contains the user input keywords. The `FindPatientCommand` will then receive this predicate when it is created.
@@ -341,7 +320,7 @@ The following steps will describe the execution of the `FindPatientCommand` in d
 The *Sequence Diagram* below summarises the aforementioned steps.
 
 ![FindPatientSequenceDiagram](images/FindPatientSequenceDiagram.png)<br>
-Figure . Execution of the `FindPatientCommand`
+Figure 11. Execution of the `FindPatientCommand`
 
 **Note**:
 
@@ -441,7 +420,7 @@ These methods are used by the `AppointmentCommand` classes to execute their logi
 The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
 
 ![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
-Figure . Object diagram of `AppointmentManager`
+Figure 12. Object diagram of `AppointmentManager`
 
 
 #### 4.3.1 Rationale
@@ -508,24 +487,24 @@ February, 2020 without having to enter a date into the command fields. This make
 and more user-friendly.
 
 ![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
-Figure X. Workflow of an AddAppointment command with the help of CalendarManager
+Figure 13. Add Appointment Sequence Diagram involving the `CalendarManager`
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
-year, month and day. Note that the year, month and day attributes may not necessarily be storing the 
+year, month and day. Note that the `Year`, `Month` and `Day` attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
-constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
-`CalendarManager` to update the year, month and day within the `AppointmentCalendar`.
+constructs a `YearCommand`, `MonthCommand` and `DayCommand` respectively. Upon execution, the `ModelManager` calls upon the
+`CalendarManager` to update the `Year`, `Month` and `Day` within the `AppointmentCalendar`.
 
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
-`year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
+`Year` in the `AppointmentCalendar` managed by the `CalendarManager`.
 
 ![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
-Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
+Figure 14. Switch Year Sequence Diagram
 
 #### 4.4.3. Design Consideration
 
-**Aspect:** The necessity of an AppointmentCalendar class in the model
+**Aspect:** The necessity of an `AppointmentCalendar` class in the model
 
 Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
 Pros:
