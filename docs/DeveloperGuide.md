@@ -127,7 +127,7 @@ The `UI` component,
 Figure 5. Structure of the Logic Component
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -151,7 +151,7 @@ This segment will explain the structure and responsibilities of the Model compon
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 Figure 7. Structure of the Model Component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
 
 The `Model` component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
 Each type of data is handled by a separate `ListManager` (`PatientManager` and `AppointmentManager`). A `ModelManager` facade class then exposes the methods 
@@ -183,7 +183,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 Figure 8. Structure of the Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
 
 The `Storage` component contains interfaces for `Patient` data (`PatientManagerStorage`) and 
 `Appointment` data (`AppointmentManagerStorage`) which defines methods for reading and saving the `Model` components
