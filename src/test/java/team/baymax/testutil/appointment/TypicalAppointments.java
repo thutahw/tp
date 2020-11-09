@@ -32,11 +32,6 @@ import team.baymax.model.util.datetime.Duration;
  * A utility class containing a list of {@code Appointment} objects to be used in tests.
  */
 public class TypicalAppointments {
-    private static final List<Tag> tagsAsList = Arrays.asList(new Tag("Xray"), new Tag("DrGoh"));
-    public static final HashSet<Tag> TAGS_VAR_1 = new HashSet<>(tagsAsList);
-    private static final List<Tag> tagsAsList2 = Arrays.asList(new Tag("Followup"), new Tag("DrTan"));
-    public static final HashSet<Tag> TAGS_VAR_2 = new HashSet<>(tagsAsList2);
-
     public static final Appointment ALICE_APT = new Appointment(ALICE,
             DateTime.fromString("30-12-2020 12:45"),
             new Duration(60), new Description("desc 1"),
@@ -82,11 +77,11 @@ public class TypicalAppointments {
 
     public static final Appointment DANIEL_APT = new Appointment(DANIEL, DATETIME2,
             new Duration(60), new Description("Follow up on broken arm"),
-            TAGS_VAR_1, false);
+            new HashSet<>(Arrays.asList(new Tag("Xray"), new Tag("DrGoh"))), false);
 
     public static final Appointment ELLE_APT = new Appointment(ELLE, DATETIME3,
             new Duration(60), new Description("Blood test needed"),
-            TAGS_VAR_2, false);
+            new HashSet<>(Arrays.asList(new Tag("Followup"), new Tag("DrTan"))), false);
 
     public static final AppointmentContainsKeywordsPredicate KEYWORDS_PREDICATE =
             new AppointmentContainsKeywordsPredicate(List.of("Diabetes", "LTP"));

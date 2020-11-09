@@ -608,7 +608,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix C: Use cases**
 (Contributed by Li Jianhan and Shi Hui Ling)
 
-For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
+For all use cases below, unless specified otherwise,
+
+**System:** Baymax
+
+**Actor:** User (Clinic Receptionist)
 
 #### Patient Profile Management
 

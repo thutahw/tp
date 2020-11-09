@@ -25,7 +25,6 @@ import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentIdenticalPredicate;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.modelmanagers.CalendarManager;
 import team.baymax.model.userprefs.UserPrefs;
 import team.baymax.testutil.appointment.AppointmentBuilder;

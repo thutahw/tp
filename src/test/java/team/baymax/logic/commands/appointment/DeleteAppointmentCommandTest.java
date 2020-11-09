@@ -30,6 +30,8 @@ public class DeleteAppointmentCommandTest {
 
     private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
+    private Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -41,8 +43,6 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -69,9 +69,6 @@ public class DeleteAppointmentCommandTest {
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
 
         expectedModel.deleteAppointment(appointmentToDelete);
         showNoAppointment(expectedModel);
@@ -124,13 +121,11 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentChosen.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentChosen.getDateTime()), Optional.of(appointmentChosen.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentChosen);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentChosen);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -152,13 +147,10 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentChosen.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentChosen.getDateTime()), Optional.of(appointmentChosen.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentChosen);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
 
         expectedModel.deleteAppointment(appointmentChosen);
         showNoAppointment(expectedModel);
@@ -185,13 +177,12 @@ public class DeleteAppointmentCommandTest {
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentToDelete.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentToDelete.getDateTime()),
+                Optional.of(appointmentToDelete.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
