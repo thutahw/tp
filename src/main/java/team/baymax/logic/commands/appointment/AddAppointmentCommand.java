@@ -19,7 +19,6 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
@@ -132,7 +131,7 @@ public class AddAppointmentCommand extends Command {
         }
 
         Appointment toAdd = new Appointment(patient, dt, duration, description, tags,
-                AppointmentStatus.UPCOMING);
+                false);
 
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
@@ -145,9 +144,7 @@ public class AddAppointmentCommand extends Command {
         model.addAppointment(toAdd);
 
         // switches calendar to the day of the appointment
-        model.setDay(dt.getDay());
-        model.setMonth(dt.getMonth());
-        model.setYear(dt.getYear());
+        model.setDate(dt.getDate());
 
         model.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(dt.getDate()));
 

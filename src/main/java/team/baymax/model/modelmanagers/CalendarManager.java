@@ -3,6 +3,7 @@ package team.baymax.model.modelmanagers;
 import static java.util.Objects.requireNonNull;
 
 import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -28,6 +29,11 @@ public class CalendarManager {
         return appointmentCalendar;
     }
 
+    public void setDate(Date date) {
+        requireNonNull(date);
+        appointmentCalendar.setDate(date);
+    }
+
     public void setDay(Day day) {
         requireNonNull(day);
         appointmentCalendar.setDay(day);
@@ -48,6 +54,8 @@ public class CalendarManager {
      *
      */
     public void resetCalendar(CalendarManager newCalendar) {
+        requireNonNull(newCalendar);
+
         AppointmentCalendar appointmentCalendar = newCalendar.getAppointmentCalendar();
 
         setYear(appointmentCalendar.getYear());

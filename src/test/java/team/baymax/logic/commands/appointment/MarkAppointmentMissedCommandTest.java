@@ -61,7 +61,7 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.MISSED).build();
+        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(true).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -89,7 +89,7 @@ public class MarkAppointmentMissedCommandTest {
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appt);
-        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withStatus(AppointmentStatus.MISSED).build();
+        Appointment markedAsDoneAppointment = new AppointmentBuilder(appt).withIsMissed(true).build();
 
         expectedModel.setAppointment(appt, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -121,7 +121,7 @@ public class MarkAppointmentMissedCommandTest {
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
-                .withStatus(AppointmentStatus.MISSED).build();
+                .withIsMissed(true).build();
 
         expectedModel.setAppointment(appointmentChosen, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -171,7 +171,7 @@ public class MarkAppointmentMissedCommandTest {
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
         Appointment markedAsDoneAppointment = new AppointmentBuilder(appointmentChosen)
-                .withStatus(AppointmentStatus.MISSED).build();
+                .withIsMissed(true).build();
 
         expectedModel.setAppointment(appointmentChosen, markedAsDoneAppointment);
         expectedModel.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));

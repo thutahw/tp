@@ -13,6 +13,7 @@ import team.baymax.model.patient.Name;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -183,6 +184,8 @@ public interface Model {
     CalendarManager getCalendarManager();
 
     AppointmentCalendar getAppointmentCalendar();
+
+    void setDate(Date date);
 
     void setDay(Day day);
 

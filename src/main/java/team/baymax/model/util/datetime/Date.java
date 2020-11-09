@@ -2,6 +2,7 @@ package team.baymax.model.util.datetime;
 
 import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.AppUtil.checkArgument;
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +34,7 @@ public class Date {
      *
      */
     public Date(Day day, Month month, Year year) {
+        requireAllNonNull(day, month, year);
         date = LocalDate.of(year.getValue(), month.getValue(), day.getValue());
     }
 
@@ -76,6 +78,39 @@ public class Date {
 
     public Day getDay() {
         return new Day(date.getDayOfMonth());
+    }
+
+    /**
+     * Checks if this {@code Date} is after the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isAfter(Date other) {
+        requireAllNonNull(other);
+        return date.isAfter(other.date);
+    }
+
+    /**
+     * Checks if this {@code Date} is before the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isBefore(Date other) {
+        requireAllNonNull(other);
+        return date.isBefore(other.date);
+    }
+
+    /**
+     * Checks if this {@code Date} is equal to the specified date.
+     *
+     * @param other
+     * @return
+     */
+    public boolean isEqual(Date other) {
+        requireAllNonNull(other);
+        return date.isEqual(other.date);
     }
 
     @Override

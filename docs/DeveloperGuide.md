@@ -362,7 +362,68 @@ The following table shows the commands related to managing a patient's details.<
 
 #### 4.2.3. Design Consideration
 
+**Aspect: Find matching names using substrings (E.g. ale) vs using exact words (E.g. alex)**
+
+Option 1 (Current Choice): Match by substring
+
+*Pros:* 
+
+* Shorter keywords to type, therefore increases user typing speed. 
+
+*Cons:* 
+
+* Lower accuracy. The filtered list is longer and takes longer time to find the patient you are looking for. 
+
+Option 2: Match by the exact word
+
+*Pros:* 
+
+* Higher accuracy. 
+
+*Cons:* 
+
+* Longer names are harder for the user to find the exact match. It is also difficult for the user to remember and type out the exact keyword.
  
+Reason for choosing Option 1:
+
+* Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
+ 
+**Aspect: Whether the Patient class should contain a list of Appointments**
+
+Option 1 (Current Choice): Patient class does not contain a list of Appointments.
+
+*Pros:* 
+
+* Avoids cyclic dependency since the Appointment class already contains a Patient. 
+
+* Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class) 
+
+*Cons:* 
+
+* More tedious to find a list of appointments belonging to a specific patient and there is more overhead from 
+having to filter the appointment list by a predicate. 
+
+Option 2: Patient class will contain a list of Appointments.
+
+*Pros:* 
+
+* A list of appointment belonging to a specific patient can be directly retrieved from the patient object 
+which is faster than having the extra step to filter the list.
+
+*Cons:* 
+
+* Cyclic dependency is present. (Patient and Appointment depend on each other). 
+
+* Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing
+both the lists inside the ModelManager and the Patient class.
+
+Reason for choosing Option 1:
+
+* Option 1 follows good coding principles by avoiding cyclic dependency.
+
+* When the list of appointments increase in size, Option 1 performs better because Baymax involves a lot of "update/set"
+operations such as marking an appointment as done/missed and adding/editing an appointment.
+
 ### **4.3 Appointment Manager**
 (Contributed by Shi Hui Ling & Reuben Teng)
 

@@ -13,6 +13,7 @@ import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 
+
 public class DayCommand extends Command {
 
     public static final String COMMAND_WORD = "day";

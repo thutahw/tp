@@ -1,10 +1,10 @@
 package team.baymax.model.calendar;
 
+import static java.util.Objects.requireNonNull;
 import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Calendar;
 
 import javafx.beans.property.SimpleStringProperty;
 import team.baymax.model.util.datetime.Date;
@@ -22,91 +22,70 @@ public class AppointmentCalendar {
     protected final SimpleStringProperty yearProperty;
     protected final SimpleStringProperty dateProperty;
 
-    private Day day;
-    private Month month;
-    private Year year;
+    private Date date;
 
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public AppointmentCalendar() {
-        this(new Day(getCurrentDay()), new Month(getCurrentMonth()), new Year(getCurrentYear()));
+        this(DateTimeUtil.getCurrentDate());
     }
 
     /**
      * Constructs an {@code AppointmentCalendar} given the {@code day}, {@code month} and {@code year}.
      *
      */
-    public AppointmentCalendar(Day day, Month month, Year year) {
-        requireAllNonNull(day, month, year);
+    public AppointmentCalendar(Date date) {
+        requireAllNonNull(date);
 
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.date = date;
 
-        this.dayProperty = new SimpleStringProperty(day.toString());
-        this.monthProperty = new SimpleStringProperty(month.toString());
-        this.yearProperty = new SimpleStringProperty(year.toString());
-        this.dateProperty = new SimpleStringProperty(new Date(day, month, year).toString());
+        this.dayProperty = new SimpleStringProperty(date.getDay().toString());
+        this.monthProperty = new SimpleStringProperty(date.getMonth().toString());
+        this.yearProperty = new SimpleStringProperty(date.getYear().toString());
+        this.dateProperty = new SimpleStringProperty(date.toString());
     }
 
-    public static int getCurrentDay() {
-        return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-    }
-
-    public static int getCurrentMonth() {
-        return Calendar.getInstance().get(Calendar.MONTH) + 1;
-    }
-
-    public static int getCurrentYear() {
-        return Calendar.getInstance().get(Calendar.YEAR);
+    public Date getDate() {
+        return date;
     }
 
     public Day getDay() {
-        return day;
+        return date.getDay();
     }
 
     public Month getMonth() {
-        return month;
+        return date.getMonth();
     }
 
     public Year getYear() {
-        return year;
+        return date.getYear();
     }
 
-    /**
-     * Updates the value of the {@code day} attribute stored in the {@code AppointmentCalendar}.
-     */
-    public void updateDay() {
-        int maxNumOfDays = DateTimeUtil.getNumOfDays(this.month, this.year);
-        if (day.getValue() > maxNumOfDays) {
-            setDay(new Day(maxNumOfDays));
-        }
+    public void setDate(Date date) {
+        requireNonNull(date);
+        this.date = date;
+        updateDateProperty(date);
     }
 
     public void setDay(Day day) {
-        Day prev = this.day;
-        Date newDate = new Date(day, month, year);
-        this.day = day;
-        updateDateProperty(newDate);
-        pcs.firePropertyChange("day", prev, day);
+        requireNonNull(day);
+        Day prev = getDay();
+        setDate(new Date(day, getMonth(), getYear()));
+        pcs.firePropertyChange("day", prev, getDay());
     }
 
     public void setMonth(Month month) {
-        Month prev = this.month;
-        Date newDate = new Date(day, month, year);
-        this.month = month;
-        updateDateProperty(newDate);
-        pcs.firePropertyChange("month", prev, month);
-        updateDay();
+        requireNonNull(month);
+        Month prev = getMonth();
+        setDate(DateTimeUtil.getClosestValidDate(getDay(), month, getYear()));
+        pcs.firePropertyChange("month", prev, getMonth());
     }
 
     public void setYear(Year year) {
-        Year prev = this.year;
-        Date newDate = new Date(day, month, year);
-        this.year = year;
-        updateDateProperty(newDate);
+        requireNonNull(year);
+        Year prev = getYear();
+        setDate(DateTimeUtil.getClosestValidDate(getDay(), getMonth(), year));
         pcs.firePropertyChange("year", prev, year);
-        updateDay();
     }
 
     /**
@@ -114,10 +93,10 @@ public class AppointmentCalendar {
      *
      */
     public void updateDateProperty(Date date) {
-        dateProperty.set(date.toString());
-        dayProperty.set(date.getDay().toString());
-        monthProperty.set(date.getMonth().toString());
-        yearProperty.set(date.getYear().toString());
+        dateProperty.set(getDate().toString());
+        dayProperty.set(getDay().toString());
+        monthProperty.set(getMonth().toString());
+        yearProperty.set(getYear().toString());
     }
 
     public SimpleStringProperty getDayProperty() {
@@ -148,8 +127,6 @@ public class AppointmentCalendar {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AppointmentCalendar // instanceof handles nulls
-                && day.equals(((AppointmentCalendar) other).day)
-                && month.equals(((AppointmentCalendar) other).month)
-                && year.equals(((AppointmentCalendar) other).year));
+                && date.equals(((AppointmentCalendar) other).getDate()));
     }
 }

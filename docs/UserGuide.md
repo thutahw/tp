@@ -808,12 +808,12 @@ January by default.
 
 Parameter Name | Description
 ---------------|------------
-MONTH          | The month you want to switch to. It must be a <ins>positive</ins> number from 1 (January) to 12 (December).
+MONTH          | The month you want to switch to. It must be a <ins>positive</ins> number from 1 (January) to 12 (December), or the name of the month (full or short, i.e. Jan, Feb, Mar)
 
 **Example:**<br>
 
 1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
-2. Type `month 9` into the command box.
+2. Type `month 9` or `month september` or `month sep` into the command box.
 3. Press Enter on your keyboard.
 
 **Outcome:**<br>
