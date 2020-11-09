@@ -6,11 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.util.datetime.Date;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Year;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.ui.UiPart;
 import team.baymax.ui.appointment.AppointmentListPanel;
 
@@ -42,9 +39,9 @@ public class Dashboard extends UiPart<Region> {
         timePanel.getChildren().add(clock);
 
         Date currentDate = new Date(
-                new Day(AppointmentCalendar.getCurrentDay()),
-                new Month(AppointmentCalendar.getCurrentMonth()),
-                new Year(AppointmentCalendar.getCurrentYear()));
+                DateTimeUtil.getCurrentDay(),
+                DateTimeUtil.getCurrentMonth(),
+                DateTimeUtil.getCurrentYear());
 
         dateLabel.setText(currentDate.toString());
 
