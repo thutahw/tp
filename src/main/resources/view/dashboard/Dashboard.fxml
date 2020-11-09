@@ -27,11 +27,7 @@
             <VBox fx:id="rightPanel" minWidth="300">
                 <VBox styleClass="clock-container" minWidth="150" minHeight="80">
                     <StackPane fx:id="timePanel" styleClass="time-panel"/>
-                    <HBox styleClass="date-panel">
-                        <Label fx:id="dayLabel"/>
-                        <Label fx:id="monthLabel"/>
-                        <Label fx:id="yearLabel"/>
-                    </HBox>
+                    <Label fx:id="dateLabel"/>
                 </VBox>
                 <VBox fx:id="stats" styleClass="stats-container">
 

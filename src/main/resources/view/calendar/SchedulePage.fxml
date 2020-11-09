@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ScrollPane?>
 
 <?import javafx.scene.control.Label?>
 <StackPane fx:id="schedulePage" xmlns:fx="http://javafx.com/fxml/1">
@@ -11,7 +10,7 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <Label text="Schedule"></Label>
+        <Label text="Schedule"/>
         <Label fx:id="dateLabel" styleClass="date-label"/>
         <StackPane fx:id="schedulePanelPlaceholder" VBox.vgrow="ALWAYS"/>
     </VBox>

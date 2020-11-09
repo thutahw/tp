@@ -1,13 +1,16 @@
 package team.baymax.ui.dashboard;
 
-import java.util.Calendar;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import team.baymax.model.appointment.Appointment;
+import team.baymax.model.calendar.AppointmentCalendar;
+import team.baymax.model.util.datetime.Date;
+import team.baymax.model.util.datetime.Day;
+import team.baymax.model.util.datetime.Month;
+import team.baymax.model.util.datetime.Year;
 import team.baymax.ui.UiPart;
 import team.baymax.ui.appointment.AppointmentListPanel;
 
@@ -23,11 +26,7 @@ public class Dashboard extends UiPart<Region> {
     @FXML
     private StackPane appointmentListPanelPlaceholder;
     @FXML
-    private Label yearLabel;
-    @FXML
-    private Label monthLabel;
-    @FXML
-    private Label dayLabel;
+    private Label dateLabel;
 
     private AppointmentListPanel appointmentListPanel;
     private DigitalClock clock;
@@ -42,9 +41,12 @@ public class Dashboard extends UiPart<Region> {
         clock = new DigitalClock();
         timePanel.getChildren().add(clock);
 
-        dayLabel.setText(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/");
-        monthLabel.setText(Calendar.getInstance().get(Calendar.MONTH) + 1 + "/");
-        yearLabel.setText(Calendar.getInstance().get(Calendar.YEAR) + "");
+        Date currentDate = new Date(
+                new Day(AppointmentCalendar.getCurrentDay()),
+                new Month(AppointmentCalendar.getCurrentMonth()),
+                new Year(AppointmentCalendar.getCurrentYear()));
+
+        dateLabel.setText(currentDate.toString());
 
         appointmentListPanel = new AppointmentListPanel(appointmentsToday);
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());

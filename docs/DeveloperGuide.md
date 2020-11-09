@@ -470,10 +470,28 @@ constructs a YearCommand, MonthCommand and DayCommand respectively. Upon executi
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
-
-
 #### 4.4.3. Design Consideration
 
+Aspect: The necessity of an AppointmentCalendar class in the model
+
+Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
+Pros:
+- Greater modularity
+- Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object
+- More extensible at it does not overcomplicate the CalendarManager class
+
+Cons:
+- Harder to implement (a new class is need)
+
+Option 2: Store the day, month and year directly inside the CalendarManager 
+Pros: 
+- Simpler to implement
+
+Cons:
+- More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object
+- If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class
+
+By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains.
 
 --------------------------------------------------------------------------------------------------------------------
 
