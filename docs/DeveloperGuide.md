@@ -254,7 +254,7 @@ Figure 8. Structure of PatientManager
 | Option 1 (Current Choice): Split into separate lists (Current)                  | Increases modularity of the code by separating it into distinct sections to handle data whose  operations do not often require interaction  between them.  <br><br>Allows for more straightforward implementations in other components by ensuring each data type is handled with the class architecture. | A lot of boilerplate code for implementing  the list managers as separate classes  but with similar functionalities                               |
 | Option 2: Store all the information in a single  `DataManager` | Easier to implement, as only one manager class is needed.                                                                                                                                                                                                                                                 | Violates the Separation of Concerns principle, making it difficult to implement future extensions without significant change to other components. |
   
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
@@ -269,7 +269,8 @@ to unnecessary dependencies between data types.
 | Option 1 (Current Choice): Extract common CRUD functionalities of the `ListManager`s into a single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top of the generic CRUD operations from the class. | Reduces amount of repeated code as all the lists of data essentially perform the same functions.                                                                               | Generics can be harder to comprehend, thus making it harder for other programmers to understand and use the component. |
 | Option 2: Do not extract any common functionalities                                                                                                                                                                                              | Easier for programmers to work on each code related to each data item completely separately, and implement methods specific to the data item in a more straightforward manner. | Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.                       |
 
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
+
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
@@ -348,7 +349,7 @@ The following table shows the commands related to managing a patient's details.<
 | Option 1 (Current Choice): Match by substring | Shorter keywords to type, therefore increases user typing speed. | Lower accuracy. The filtered list is longer and takes longer time to find the patient you are looking for.                                  |
 | Option 2: Match by the exact word             | Higher accuracy.                                                 | Longer names are harder for the user to find the exact match. It is also difficult for the user to remember and type out the exact keyword. |
 
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 * Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
  
@@ -359,7 +360,7 @@ Reason for choosing Option 1:
 | Option 1 (Current Choice): Patient class does not contain a list of Appointments. | Avoids cyclic dependency since the Appointment class already contains a Patient.   <br><br>Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
 | Option 2: Patient class will contain a list of Appointments.                      | A list of appointment belonging to a specific patient can be directly retrieved from the patient object  which is faster than having the extra step to filter the list.                         | Cyclic dependency is present. (Patient and Appointment depend on each other).   <br><br>Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing both the lists inside the ModelManager and the Patient class. |
 
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 * Option 1 follows good coding principles by avoiding cyclic dependency.
 
@@ -415,7 +416,8 @@ Automated the marking of an `Appointment` as `DONE` after the deadline has passe
 | Option 1: Periodically check the `Datetime` of an `Appointment` that is still marked  `UPCOMING` against the current `Datetime`, marking it as `DONE` if the current  `Datetime` is after that of the `Appointment` . | Keeps stored data perpetually up-to-date.                                                                | Constant comparision become computationally intensive when there are many  `UPCOMING` appointments. |
 | Option 2 (Current Choice): Check `Datetime` of `Appointment` against current `Datetime`  only when `getStatus()` method is called.                                                                                    | Computation is performed when the value of  `status` is needed, resulting in reduced computational cost. | Architecture becomes less intuitive as `status` is no longer stored.                                |
 
-Reason for choosing Option 2:
+<br>Reason for choosing Option 2:
+
 While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
 **Aspect 4: Backdated `Appointment`s**
@@ -474,8 +476,10 @@ Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
 | Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year | Allows for greater modularity. Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object,  making it more extensible at it does not overcomplicate the CalendarManager class. <br><br> By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains. | Harder to implement (a new class is needed).                                                                                                                                                                                               |
 | Option 2: Store the day, month and year directly inside the CalendarManager                         | Simpler to implement.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object.  If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class. |
 
-Reason for choosing Option 1: 
+<br>Reason for choosing Option 1: 
+
 * Option 1 follows good coding principles by adhering to the principle of encapsulation.
+
 * As two UI views (`ScheduleView` and `CalendarView`) depend on the `AppointmentCalendar`, abstracting the contents of 
   the Calendar out into an `AppointmentCalendar` class that is managed by the `CalendarManager` makes more intuitive
   sense, as the UI views can now just observe for changes to the `AppointmentCalendar` by the manager and update the
