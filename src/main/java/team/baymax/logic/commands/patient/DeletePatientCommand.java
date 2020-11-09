@@ -31,6 +31,7 @@ public class DeletePatientCommand extends Command {
     private final Index targetIndex;
 
     public DeletePatientCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -38,8 +39,6 @@ public class DeletePatientCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
-
-        assert targetIndex != null;
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);

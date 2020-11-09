@@ -486,11 +486,8 @@ DURATION       | The <ins>integer</ins> duration of the appointment in minutes, 
 
 **Format:**<br>
 `addappt INDEX on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
-
 `addappt nric/NRIC on/DATETIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
-
 `addappt INDEX at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
-
 `addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
 **Example:**<br>
@@ -527,7 +524,7 @@ Parameter Name | Description
 ---------------|------------
 INDEX     | The index of the patient in the most recently displayed list. It must be a <ins>positive</ins> integer.
 NRIC           | The nric of the patient.
-NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
+NAME           | The name by which to search for the patient. It must be the patient's full name. E.g. Alex Yeoh
 
 **Example:**<br>
 1. Type `listapptsof 1` into the command box.
@@ -623,7 +620,7 @@ or the `DATETIME` of the appointment with the `NAME` of the patient.
 Parameter Name | Description
 ---------------|------------
 INDEX          | The index of the target appointment in the most recently displayed list. It must be a <ins>positive</ins> integer.
-NAME           | The name by which to search for the patient. It can be an incomplete part of the patient's name. E.g. Alice
+NAME           | The name by which to search for the patient. It must be the patient's full name. E.g. Alex Yeoh
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 
 **Example:**<br>
