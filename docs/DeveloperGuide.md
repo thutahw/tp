@@ -3,29 +3,29 @@ layout: page
 title: Baymax - Developer Guide
 ---
 ## Table of Contents
-1. [Introduction](#1-introduction)<br>
-2. [Setting up](#2-setting-up-getting-started)<br>
-3. [Design](#3-design)<br>
+1. [**Introduction**](#1-introduction)<br>
+2. [**Setting up**](#2-setting-up-getting-started)<br>
+3. [**Design**](#3-design)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. [Architecture](#31-architecture)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. [UI Component](#32-ui-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
-4. [Implementation](#4-implementation)<br>
+4. [**Implementation**](#4-implementation)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-manager)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
-5. [Documentation](#5-documentation)<br>
-6. [Testing](#6-testing)<br>
-7. [Dev Ops](#7-dev-ops)<br>
-[Appendix A: Product Scope](#appendix-a-product-scope)<br>
-[Appendix B: User Stories](#appendix-b-user-stories)<br>
-[Appendix C: Use Cases](#appendix-c-use-cases)<br>
-[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
-[Appendix E: Glossary](#appendix-e-glossary)<br>
-[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
+5. [**Documentation**](#5-documentation)<br>
+6. [**Testing**](#6-testing)<br>
+7. [**Dev Ops**](#7-dev-ops)<br>
+[**Appendix A: Product Scope**](#appendix-a-product-scope)<br>
+[**Appendix B: User Stories**](#appendix-b-user-stories)<br>
+[**Appendix C: Use Cases**](#appendix-c-use-cases)<br>
+[**Appendix D: Non-functional Requirements**](#appendix-d-non-functional-requirements)<br>
+[**Appendix E: Glossary**](#appendix-e-glossary)<br>
+[**Appendix F: Instructions for Manual Testing**](#appendix-f-instructions-for-manual-testing)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
@@ -124,6 +124,7 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 ### 3.3. Logic component
+(Contributed by Li Jianhan and Shi Hui Ling)
 
 This segment will explain the structure and responsibilities of the Logic component.
 
@@ -136,19 +137,25 @@ Figure 6. Structure of the Logic Component
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on AppointmentManager).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
+2. `AppointmentBookParser` creates a specific `XYZCommandParser` instance to parse the arguments for the `XYZ` command.
+3. This results in a `Command` object which is executed by the `LogicManager`.
+4. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on `AppointmentManager`).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `LogicManager` and passed back to the `Ui`.
+6. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
 #### 3.3.2 Responsibilities
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
+The `Logic` component
+* Parses user commands and arguments using `Parser` classes
+* Executes user commands using `Command` classes -- this changes `Model` as required for the command, saves any changes to `Storage`, and 
+reflects changes to `Ui` to display.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call to illustrate.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
 Figure 7. Delete Appointment Sequence Diagram
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### 3.4. Model component
@@ -185,6 +192,7 @@ The `Model` component,
 * Represents data in `ObservableList` to automatically update the GUI when there is a change
 
 ### 3.5. Storage component
+(Contributed by Kaitlyn Ng)
 
 This segment will explain the structure and responsibilities of the Storage component.
 
@@ -206,14 +214,14 @@ json files. The path to these files are obtained from the `UserPref` object.
 #### 3.5.2. Responsibilities
 
 The `Storage` component,
-* can save `UserPref` objects in json format.
-* can parse a json file in the correct format to get a `UserPref` object.  
-* can save `Patient` and `Appointment` data in json format. 
-* can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
+* Saves `UserPref` objects in json format.
+* Parses a json file in the correct format to get a `UserPref` object.  
+* Saves `Patient` and `Appointment` data in json format. 
+* Parses a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `team.baymax.commons` package.
+Classes used by multiple components are in the `team.baymax.commons` package. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -289,12 +297,12 @@ which facilitates future extensions and reduce effort in maintenance and testing
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
 a single patient's information can be managed at one time. A user can:
 
-* Add a new patient
-* Delete an existing patient
-* Edit a patient's details
-* Add a remark to a patient
-* List all the patients in the system
-* Find a patient by using a keyword from his/her name
+1. Add a new patient
+2. Delete an existing patient
+3. Edit a patient's details
+4. Add a remark to a patient
+5. List all the patients in the system
+6. Find a patient by using a keyword from his/her name
 
 #### 4.2.1. Rationale
 
@@ -348,7 +356,7 @@ The following table shows the commands related to managing a patient's details.<
 | `findpatient` | Finds a patient with the given keyword in his/her name.
 | `remark` | Adds/Edits the remark of a patient.
 
-#### 4.2.3. Design Consideration
+#### 4.2.3. Design Considerations
 
 **Aspect: Find matching names using substrings (E.g. ale) vs using exact words (E.g. alex)**
 
@@ -361,11 +369,11 @@ The following table shows the commands related to managing a patient's details.<
 
 * Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
  
-**Aspect: Whether the Patient class should contain a list of Appointments**
+**Aspect: Whether the `Patient` class should contain a list of `Appointment`s**
 
 |                                                                                   | Pros                                                                                                                                                                                            | Cons                                                                                                                                                                                                                                                                                                                  |
 |-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Option 1 (Current Choice): Patient class does not contain a list of Appointments. | Avoids cyclic dependency since the Appointment class already contains a Patient.   <br><br>Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
+| Option 1 (Current Choice): `Patient` class does not contain a list of `Appointment`s. | Avoids cyclic dependency since the `Appointment` class already contains a `Patient`.   <br><br>Reduces overhead from having to update 2 lists (1 from `ModelManager` and 1 from the `Patient` class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
 | Option 2: Patient class will contain a list of Appointments.                      | A list of appointment belonging to a specific patient can be directly retrieved from the patient object  which is faster than having the extra step to filter the list.                         | Cyclic dependency is present. (Patient and Appointment depend on each other).   <br><br>Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing both the lists inside the ModelManager and the Patient class. |
 
 <br>Reason for choosing Option 1:
@@ -375,10 +383,11 @@ The following table shows the commands related to managing a patient's details.<
 * When the list of appointments increase in size, Option 1 performs better because Baymax involves a lot of "update/set"
 operations such as marking an appointment as done/missed and adding/editing an appointment.
 
-### **4.3 Appointment Manager**
+### **4.3 Appointment Management Features**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
-Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. 
+`AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
 
 `AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
  1. Adding an appointment
@@ -397,7 +406,10 @@ Figure 12. Object diagram of `AppointmentManager`
 
 #### 4.3.1 Rationale
 
-The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's 
+`UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands 
+can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, 
+even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
 
 #### 4.3.2. Current Implementation
 
@@ -405,19 +417,10 @@ Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`,
 
 #### 4.3.3. Design Consideration
 
-**Aspect 1: `cancel` Command** 
- 
-For this command, we only required the specifying of `DateTime` of the appointment, and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+**Aspect 1: Marking of Appointment `status` attribute**
 
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
-
-**Aspect 2: `nric` field**
-
-To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
-
-**Aspect 3: Marking of Appointment `status` attribute**
-
-Automated the marking of an `Appointment` as `DONE` after the deadline has passed, and giving receptionists the ability to mark `Appointment`s as missed.
+Automated the marking of an `Appointment` as `DONE` after the deadline has passed, 
+and giving receptionists the ability to mark `Appointment`s as missed or done (if accidentally marked as missed).
 
 |                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
@@ -428,11 +431,28 @@ Automated the marking of an `Appointment` as `DONE` after the deadline has passe
 
 While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
-**Aspect 4: Backdated `Appointment`s**
+**Aspect 2: Backdated `Appointment`s**
 
-To provide flexibility for users, `Appointment`s beforSe the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
+To provide flexibility for users, `Appointment`s before the current `Datetime` can be added to Baymax. 
+They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
 
-Such appointments are marked `DONE` automatically as it is assumed that it is more important for receptionists to know what `Appointment`s patients have gone for, and thus it is more likely for them to be backdated.
+Such appointments are marked `DONE` automatically as it is assumed that it is unlikely for receptionists to
+ have to keep track of appointments a patient has missed, and hence it is unlikely for missed appointments to be backdated.
+
+**Aspect 3: `listapptsof` Command**
+
+|                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Option 1: (Current choice): Filtering global appointment list by matching `Patient` of the appointment with `Patient` specified | Simpler implementation of other commands: `add`, `edit`, `delete` only need to change one list. Also, the `listapptsof` Command will make use of `AppointmentManager`'s `findByPredicate` method, which is the same method used by other `find` commands and hence making the codebase more uniform. | Slower in returning the list of appointments belonging to the patient. |
+| Option 2 Storing an appointment list inside of each `Patient` (in addition to the global list) | Faster and more intuitive way of returning the list of appointments belonging to a patient. | Creates additional work for other appointment commands, which complicates implementation. |
+
+**Aspect 4: `cancel` Command** 
+ 
+For this command, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those 
+two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and 
+easy to use for receptionists. It is also easier implementation-wise. 
+
+
 
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
@@ -474,6 +494,11 @@ The following sequence diagram illustrates how the `Logic` component interacts w
 
 ![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
 Figure 14. Switch Year Sequence Diagram
+
+**Note:**
+
+1. The lifeline for the `YearCommandParser` and `YearCommand` should end at the destroy mark (X). However, due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
 
 #### 4.4.3. Design Consideration
 
