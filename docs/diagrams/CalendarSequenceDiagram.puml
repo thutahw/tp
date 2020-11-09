@@ -47,7 +47,7 @@ destroy YearCommandParser
 AppointmentBookParser --> LogicManager : y
 deactivate AppointmentBookParser
 
-LogicManager -> YearCommand : execute()
+LogicManager -> YearCommand : execute(m)
 activate YearCommand
 
 YearCommand -> ModelManager : setYear(yr)
