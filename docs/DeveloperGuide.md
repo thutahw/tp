@@ -240,7 +240,7 @@ An example of a the `ListManager` implementation is shown below using the `Patie
 `UniqueList` of `Patient`s. A similar structure is implemented for the `AppointmentManager` class, that manages a 
 `UniqueList` of `Appointment`s.
 
-![Structure of PatientManager](images/PatientManagerClassDiagram.png)
+![Structure of PatientManager](images/PatientManagerClassDiagram.png)<br>
 Figure 8. Structure of PatientManager
 
 **API** : [`PatientManager.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/blob/master/src/main/java/team/baymax/model/modelmanagers/PatientManager.java)
@@ -268,6 +268,7 @@ to unnecessary dependencies between data types.
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | Option 1 (Current Choice): Extract common CRUD functionalities of the `ListManager`s into a single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top of the generic CRUD operations from the class. | Reduces amount of repeated code as all the lists of data essentially perform the same functions.                                                                               | Generics can be harder to comprehend, thus making it harder for other programmers to understand and use the component. |
 | Option 2: Do not extract any common functionalities                                                                                                                                                                                              | Easier for programmers to work on each code related to each data item completely separately, and implement methods specific to the data item in a more straightforward manner. | Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.                       |
+
 Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
