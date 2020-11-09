@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.baymax.commons.exceptions.IllegalValueException;
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Nric;
@@ -32,7 +31,7 @@ class JsonAdaptedAppointment {
     private final String patientNric;
     private final String dateTime;
     private final Integer duration;
-    private final AppointmentStatus status;
+    private final Boolean isMissed;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String description;
 
@@ -43,13 +42,13 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(@JsonProperty("patientNRIC") String patientNric,
                                   @JsonProperty("dateTime") String dateTime,
                                   @JsonProperty("duration") Integer duration,
-                                  @JsonProperty("status") AppointmentStatus status,
+                                  @JsonProperty("isMissed") Boolean isMissed,
                                   @JsonProperty("description") String description,
                                   @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.patientNric = patientNric;
         this.dateTime = dateTime;
         this.duration = duration;
-        this.status = status;
+        this.isMissed = isMissed;
         this.description = description;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -63,7 +62,7 @@ class JsonAdaptedAppointment {
         this.patientNric = source.getPatient().getNric().getValue();
         this.dateTime = source.getDateTime().getStorageFormat();
         this.duration = source.getDuration().value;
-        this.status = source.getStatus();
+        this.isMissed = source.checkIfMissed();
         this.description = source.getDescription().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -118,13 +117,11 @@ class JsonAdaptedAppointment {
         }
         Duration modelDuration = new Duration(duration);
 
-
-        if (status == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    AppointmentStatus.class.getSimpleName()));
+        if (isMissed == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isMissed"));
         }
 
-        AppointmentStatus modelStatus = status;
+        Boolean modelIsMissed = isMissed;
 
 
         if (description == null) {
@@ -136,6 +133,6 @@ class JsonAdaptedAppointment {
 
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Appointment(modelPatient, modelDateTime, modelDuration, modelDescription, modelTags, modelStatus);
+        return new Appointment(modelPatient, modelDateTime, modelDuration, modelDescription, modelTags, modelIsMissed);
     }
 }

@@ -1,5 +1,7 @@
 package team.baymax.model.appointment;
 
+import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.function.Predicate;
 
 import team.baymax.model.patient.Patient;
@@ -18,6 +20,7 @@ public class SameDatetimeAndPatientPredicate implements Predicate<Appointment> {
      * @param patient   Patient object
      */
     public SameDatetimeAndPatientPredicate(DateTime dateTime, Patient patient) {
+        requireAllNonNull(dateTime, patient);
         this.dateTime = dateTime;
         this.patient = patient;
     }

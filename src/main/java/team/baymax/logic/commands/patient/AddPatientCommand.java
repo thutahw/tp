@@ -5,6 +5,7 @@ import static team.baymax.logic.parser.CliSyntax.PREFIX_GENDER;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_NRIC;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_PHONE;
+import static team.baymax.logic.parser.CliSyntax.PREFIX_REMARK;
 import static team.baymax.logic.parser.CliSyntax.PREFIX_TAG;
 
 import team.baymax.logic.commands.Command;
@@ -30,6 +31,7 @@ public class AddPatientCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_GENDER + "GENDER "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S9771234F "
