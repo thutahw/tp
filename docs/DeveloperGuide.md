@@ -50,7 +50,7 @@ In this section, you will learn about the general design and structure of the Ba
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 <img src="images/ArchitectureDiagram.png" width="450" /><br>
-Figure 1. Architecture Diagram of Baymax
+<br>Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -74,14 +74,14 @@ Each of the four components,
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
 ![Class Diagram of the Logic Component](images/LogicClassDiagram.png)<br>
-Figure 2. Class Diagram of the Logic Component
+<br>Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletepatient 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-Figure 3. Architecture Sequence Diagram
+<br>Figure 3. Architecture Sequence Diagram
 
 The sections below give more details of each component.
 
@@ -92,7 +92,7 @@ This segment will explain the structure and responsibilities of the `UI` compone
 
 #### 3.2.1. Structure
 ![Structure of the UI Component](images/UiClassDiagram.png)<br>
-Figure 4. Structure of the UI component
+<br>Figure 4. Structure of the UI component
 
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/ui/Ui.java)
@@ -128,7 +128,7 @@ This segment will explain the structure and responsibilities of the Logic compon
 #### 3.3.1 Structure
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
-Figure 5. Structure of the Logic Component
+<br>Figure 5. Structure of the Logic Component
 
 **API** :
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
@@ -144,7 +144,7 @@ Figure 5. Structure of the Logic Component
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
-Figure 6. Delete Appointment Sequence Diagram
+<br>Figure 6. Delete Appointment Sequence Diagram
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -156,7 +156,7 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### 3.4.1. Structure
 ![Structure of the Model Component](images/ModelClassDiagram.png)
-Figure 7. Structure of the Model Component
+<br>Figure 7. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
 
@@ -188,7 +188,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### 3.5.1. Structure
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
-Figure 8. Structure of the Storage Component
+<br>Figure 8. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
 
@@ -199,7 +199,14 @@ json, csv, plaintext. A facade class `StorageManager` is used to expose these re
 
 The `JsonPatientManagerStorage` and `JsonAppointmentManagerStorage` are specific implementations of 
 `PatientManagerStorage` and `AppointmentManagerStorage` that saves the `Patient` and `Appointment` data to 
-json files. The path to these files are obtained from the `UserPref` object. 
+json files. The path to these files are obtained from the `UserPref` object. The following class diagram illustrates
+the implementation of a `JsonPatientManagerStorage`, and a similar architecture can be found for the storage of
+appointments in json format.
+
+![Structure of `JsonPatientManagerStorage`](images/PatientManagerStorageClassDiagram.png)
+<br>Figure 9. Structure of `JsonPatientManagerStorage`
+
+
 
 #### 3.5.2. Responsibilities
 
@@ -247,7 +254,7 @@ An example of a the `ListManager` implementation is shown below using the `Patie
 `UniqueList` of `Appointment`s.
 
 ![Structure of PatientManager](images/PatientManagerClassDiagram.png)<br>
-Figure 8. Structure of PatientManager
+<br>Figure 10. Structure of PatientManager
 
 **API** : [`PatientManager.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/blob/master/src/main/java/team/baymax/model/modelmanagers/PatientManager.java)
 
@@ -311,7 +318,7 @@ The parameters of the `findpatient` command are keywords in the patient's name t
 E.g. `findpatient alex` will search and list all patients whose name has the word `alex`. 
 
 ![FindPatientActivityDiagram](images/FindPatientActivityDiagram.png)<br>
-Figure 9. Workflow of a `findpatient` command
+<br>Figure 11. Workflow of a `findpatient` command
 
 When the user enters the `findpatient` command to search for a patient, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
 During the parsing, a predicate is created. This predicate checks if a given Patient contains the user input keywords. The `FindPatientCommand` will then receive this predicate when it is created.
@@ -327,7 +334,7 @@ The following steps will describe the execution of the `FindPatientCommand` in d
 The *Sequence Diagram* below summarises the aforementioned steps.
 
 ![FindPatientSequenceDiagram](images/FindPatientSequenceDiagram.png)<br>
-Figure . Execution of the `FindPatientCommand`
+<br>Figure 12. Execution of the `FindPatientCommand`
 
 **Note**:
 
@@ -390,7 +397,7 @@ These methods are used by the `AppointmentCommand` classes to execute their logi
 The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
 
 ![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
-Figure . Object diagram of `AppointmentManager`
+<br>Figure 13. Object diagram of `AppointmentManager`
 
 
 #### 4.3.1 Rationale
@@ -458,7 +465,7 @@ Below is an example of the sequence diagram when the user executes an AddAppoint
 The diagram illustrates how the CalendarManager is used to automatically set the date of the appointment.
 
 ![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
-Figure X. Execution of an AddAppointment command with the help of CalendarManager
+<br>Figure 14. Execution of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
@@ -471,7 +478,7 @@ The following sequence diagram illustrates how the `Logic` component interacts w
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
 ![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
-Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
+<br>Figure 15. Sequence Diagram for Switching to a Particular Year in the Calendar
 
 #### 4.4.3. Design Consideration
 
