@@ -82,7 +82,7 @@ public class DeleteAppointmentCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
             }
             toDelete = model.getFilteredAppointmentList().get(targetIndex.get().getZeroBased());
-        } else if (targetIndex.isEmpty() && !dateTime.isEmpty() && !name.isEmpty()) {
+        } else if (targetIndex.isEmpty() && dateTime.isPresent() && name.isPresent()) {
             try {
                 Patient patientOfAppointment = model.getPatient(name.get());
                 SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
@@ -92,9 +92,7 @@ public class DeleteAppointmentCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
             }
         } else {
-            Patient patient = model.getPatient(name.get());
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(), patient);
-            toDelete = model.findAppointmentByPredicate(predicate);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         model.deleteAppointment(toDelete);
