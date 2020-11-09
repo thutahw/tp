@@ -3,29 +3,29 @@ layout: page
 title: Baymax - Developer Guide
 ---
 ## Table of Contents
-1. [Introduction](#1-introduction)<br>
-2. [Setting up](#2-setting-up-getting-started)<br>
-3. [Design](#3-design)<br>
+1. [**Introduction**](#1-introduction)<br>
+2. [**Setting up**](#2-setting-up-getting-started)<br>
+3. [**Design**](#3-design)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. [Architecture](#31-architecture)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. [UI Component](#32-ui-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
-4. [Implementation](#4-implementation)<br>
+4. [**Implementation**](#4-implementation)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-manager)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
-5. [Documentation](#5-documentation)<br>
-6. [Testing](#6-testing)<br>
-7. [Dev Ops](#7-dev-ops)<br>
-[Appendix A: Product Scope](#appendix-a-product-scope)<br>
-[Appendix B: User Stories](#appendix-b-user-stories)<br>
-[Appendix C: Use Cases](#appendix-c-use-cases)<br>
-[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
-[Appendix E: Glossary](#appendix-e-glossary)<br>
-[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
+5. [**Documentation**](#5-documentation)<br>
+6. [**Testing**](#6-testing)<br>
+7. [**Dev Ops**](#7-dev-ops)<br>
+[**Appendix A: Product Scope**](#appendix-a-product-scope)<br>
+[**Appendix B: User Stories**](#appendix-b-user-stories)<br>
+[**Appendix C: Use Cases**](#appendix-c-use-cases)<br>
+[**Appendix D: Non-functional Requirements**](#appendix-d-non-functional-requirements)<br>
+[**Appendix E: Glossary**](#appendix-e-glossary)<br>
+[**Appendix F: Instructions for Manual Testing**](#appendix-f-instructions-for-manual-testing)<br>
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
 
@@ -359,11 +359,11 @@ The following table shows the commands related to managing a patient's details.<
 
 * Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
  
-**Aspect: Whether the Patient class should contain a list of Appointments**
+**Aspect: Whether the `Patient` class should contain a list of `Appointment`s**
 
 |                                                                                   | Pros                                                                                                                                                                                            | Cons                                                                                                                                                                                                                                                                                                                  |
 |-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Option 1 (Current Choice): Patient class does not contain a list of Appointments. | Avoids cyclic dependency since the Appointment class already contains a Patient.   <br><br>Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
+| Option 1 (Current Choice): `Patient` class does not contain a list of `Appointment`s. | Avoids cyclic dependency since the `Appointment` class already contains a `Patient`.   <br><br>Reduces overhead from having to update 2 lists (1 from `ModelManager` and 1 from the `Patient` class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
 | Option 2: Patient class will contain a list of Appointments.                      | A list of appointment belonging to a specific patient can be directly retrieved from the patient object  which is faster than having the extra step to filter the list.                         | Cyclic dependency is present. (Patient and Appointment depend on each other).   <br><br>Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing both the lists inside the ModelManager and the Patient class. |
 
 <br>Reason for choosing Option 1:
