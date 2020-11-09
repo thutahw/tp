@@ -520,9 +520,12 @@ constructs a YearCommand, MonthCommand and DayCommand respectively. Upon executi
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
+![AddAppointmentSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
+Figure X. Workflow of an AddAppointment command with the help of CalendarManager
+
 #### 4.4.3. Design Consideration
 
-Aspect: The necessity of an AppointmentCalendar class in the model
+**Aspect:** The necessity of an AppointmentCalendar class in the model
 
 Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
 Pros:

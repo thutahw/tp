@@ -223,7 +223,7 @@ This feature allows you to manage patient information. You can:
 3. Delete a patient 
 4. Edit a patient's details
 5. Add a remark to a patient
-6. Finds patients by name
+6. Find patients by name
 
 #### 5.1.1. Add a new patient: `addpatient`
 You can use this command to add a new patient who has not yet been registered.
