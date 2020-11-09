@@ -493,10 +493,6 @@ DURATION       | The <ins>integer</ins> duration of the appointment in minutes, 
 
 `addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
-**Note:** 
-1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
-2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
-
 **Example:**<br>
 1. Type `addappt 1 on/11-11-2020 12:30 dur/60 desc/Removal of braces. tag/Dental` into the command box.
 2. Press `Enter` on your keyboard.
@@ -508,6 +504,12 @@ If the command is valid (i.e. the user keyed in the valid fields):
 
     ![addappt](images/addapptsuccess.png)<br>
     *Figure 5.2.1a. Scheduling a new appointment for a patient*
+
+**Note:** 
+
+1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
+2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
+3. Newly added appointments with `DATETIME` before the current `DATETIME` will be automatically marked as `done`. 
 
 #### 5.2.2. List all appointments of a patient: `listapptsof`
 You can use this command to list all the appointments belonging to a certain patient.
@@ -587,14 +589,14 @@ TAG            | The tag related to the appointment. It must only be <ins>alphan
 DURATION       | The <ins>integer</ins> duration of the appointment in minutes, not spanning more than <ins>one</ins> day and must <ins>not</ins> extend to the next day. <br> E.g. <br> 1. A new appointment at 23:58 can have maximum duration of 1 minute. <br> 2. An appointment at 00:00 can have a maximum duration of 1439 minutes.
 
 **Example:**<br>
-1. Type `editappt 11 on/12-10-2020 12:00` into the command box.
+1. Type `editappt 10 on/12-11-2020 12:00` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the INDEX (i.e 11) is valid:
+If the INDEX (i.e 10) is valid:
 1. A success message will be displayed as shown below.
-2. The `DATETIME` of the appointment at index 11 in the recent list will be edited.
+2. The `DATETIME` of the appointment at index 10 in the recent list will be edited.
     
     ![editappt](images/beforeeditappt.png)<br>
     *Figure 5.2.4a. Before editing an appointment*
