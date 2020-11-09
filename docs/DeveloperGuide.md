@@ -284,9 +284,21 @@ Baymax allows the user to manage patient information. A user can only deal with 
 
 The Patient Management Features are included in Baymax because it is one of the core features of the application. If the user wants to keep track of the patient's information, he/she has to record the details of the patient and be able to look up a patient in the system easily.
 
+The class `PatientManager` is the "central" of patient management. It maintains a `UniqueList` of all `Patient`s in the app, and executes the logic of most patient commands. The `PatientManager` class contains a summary of all the "back-end" logic of patient commands on the app's `UniqueList` of `Patient`s. This follows the SRP, as everything related to the execution of patient commands can be found here. This also forces the customising of code to fit exactly the purposes needed for patient commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+
+
 #### 4.2.2. Current Implementation
 
 The `patient` package in the `Model` component contains the necessary information related to a patient. The current implementation of the Patient Management Features allows the user to keep track of a list of patients in the appointment book.
+
+`PatientManager` contains the methods necessary to operate on the `UniqueList` of `Patient`s. These include:
+ 1. Adding a patient
+ 2. Editing a patient
+ 3. Deleting a patient
+ 4. Finding a specific patient by any `Predicate`, e.g. name contains a search keyword
+ 5. Sorting the list of patients
+ 
+These methods are used by the `PatientCommand` classes to execute their logic.
 
 In this section, we will outline the `findpatient` command from the Patient Management Features which is summarised by the Activity Diagram in Figure 12 below.
 
@@ -357,13 +369,33 @@ The following table shows the commands related to managing a patient's details.<
 ### **4.3 Appointment Management Features**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
-Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. The class `AppointmentManager` is the key to appointment management. It maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+Baymax allows the user to manage appointment information. A user can:
+
+1. Add a new appointment
+2. Delete an existing appointment
+3. Edit an appointment's details
+4. List all the appointments belonging to a patient
+5. List all appointments
+6. Find all appointments containing a keyword in their remark or tags
+7. Mark an appointment as missed
+8. Mark an appointment as done
+
+
+#### 4.3.1 Rationale
+
+Scheduling, editing, viewing, and otherwise dealing with appointments is a key feature area for Baymax. 
+
+The class `AppointmentManager` is the "central" of appointment management. It maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+
+#### 4.3.2. Current Implementation
+
+The `appointment` package in the Model component contains the necessary information related to a patient. The current implementation of the Patient Management Features allows the user to keep track of a list of patients in the appointment book.
 
 `AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
  1. Adding an appointment
  2. Editing an appointment
  3. Deleting an appointment
- 4. Finding a specific appointment by `Patient` and `DateTime`
+ 4. Finding a specific appointment by any `Predicate`, e.g. same `DateTime` and `Patient`
  5. Sorting the list of appointments
  
 These methods are used by the `AppointmentCommand` classes to execute their logic.
@@ -373,19 +405,7 @@ The *Object Diagram* below summarises the interactions between AppointmentManage
 ![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
 Figure 14. Object diagram of `AppointmentManager`
 
-
-#### 4.3.1 Rationale
-
-The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
-
-#### 4.3.2. Current Implementation
-
-The appointment package in the Model component contains the necessary information related to a patient. The current implementation of AppointmentManager allows the user to keep track of a list of appointments, as seen in Figure 13 below.
-
-![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
-<br>Figure 13. Object diagram of AppointmentManager
-
-When the user enters a Command, the input undergoes the same parsing as described in [Section 3.3, “Logic component”](#33-logic-component). Similar to the workflow when a Patient-related command is executed (detailed in [Section 4.1.2 Patient Manager Current Implementation](#422-current-implementation)).
+When the user enters a Command, the input undergoes the same parsing and execution as described in [Section 3.3, “Logic component”](#33-logic-component). Refer to Figure 7 in [Section 3.3.2. "Responsibilities of the Logic component"](#332-responsibilities) for an example of how an Appointment command is executed. In general, Appointment commands have a similar workflow to Patient commands (detailed in [Section 4.1.2 Patient Manager Current Implementation](#422-current-implementation)). 
 
 The following table shows the commands related to managing an appointment's details.<br>
 
@@ -395,8 +415,8 @@ The following table shows the commands related to managing an appointment's deta
 | `cancel` | Deletes an appointment.
 | `listappts` | Lists all appointments.
 | `listapptsof` | Lists all appointments belonging to a patient of the given index, nric, or name.
-| `editappt` | Edits a appointment's details.
-| `findappt` | Finds a appointment with the given keyword in it's description or tag(s).
+| `editappt` | Edits an appointment's details.
+| `findappt` | Finds an appointment with the given keyword in its description or tag(s).
 | `done` | Marks an appointment as DONE.
 | `missed` | Marks an appointment as MISSED.
 
