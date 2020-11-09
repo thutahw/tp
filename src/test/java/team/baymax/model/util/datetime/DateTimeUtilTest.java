@@ -9,13 +9,16 @@ import static team.baymax.testutil.calendar.TypicalMonths.JANUARY;
 import static team.baymax.testutil.calendar.TypicalYears.YEAR_2020;
 import static team.baymax.testutil.calendar.TypicalYears.YEAR_2021;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 
 public class DateTimeUtilTest {
     @Test
     void getMonthForInt_validInt() {
         //check it it should be 1 or 2
-        assertEquals(DateTimeUtil.getMonthForInt(1), FEBRUARY.toString());
+        assertEquals(DateTimeUtil.getMonthStringFromInt(1), JANUARY.toString());
     }
 
     @Test
@@ -40,5 +43,11 @@ public class DateTimeUtilTest {
     void isLeapYear_validYear() {
         assertTrue(DateTimeUtil.isLeapYear(YEAR_2020));
         assertFalse(DateTimeUtil.isLeapYear(YEAR_2021));
+    }
+
+    @Test
+    void getCurrentDateTime() {
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mma")),
+                DateTimeUtil.getCurrentDateTime().toString());
     }
 }

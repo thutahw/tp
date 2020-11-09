@@ -18,9 +18,6 @@ import static team.baymax.testutil.datetime.TypicalTimes.TIME1;
 import static team.baymax.testutil.datetime.TypicalTimes.TIME2;
 import static team.baymax.testutil.datetime.TypicalTimes.TIME3;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 class DateTimeTest {
@@ -28,12 +25,6 @@ class DateTimeTest {
     @Test
     void constructor() {
         assertEquals(new DateTime(), DATETIME1);
-    }
-
-    @Test
-    void current() {
-        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mma")),
-                DateTime.current().toString());
     }
 
     @Test

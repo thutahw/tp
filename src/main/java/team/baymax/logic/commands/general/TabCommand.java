@@ -10,12 +10,9 @@ import team.baymax.logic.commands.CommandResult;
 import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.AppointmentMatchesDatePredicate;
-import team.baymax.model.calendar.AppointmentCalendar;
 import team.baymax.model.util.TabId;
 import team.baymax.model.util.datetime.Date;
-import team.baymax.model.util.datetime.Day;
-import team.baymax.model.util.datetime.Month;
-import team.baymax.model.util.datetime.Year;
+import team.baymax.model.util.datetime.DateTimeUtil;
 
 public class TabCommand extends Command {
 
@@ -43,10 +40,7 @@ public class TabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         TabId tabId = TabId.valueOf(tabNumber.getOneBased());
 
-        Date today = new Date(
-                new Day(AppointmentCalendar.getCurrentDay()),
-                new Month(AppointmentCalendar.getCurrentMonth()),
-                new Year(AppointmentCalendar.getCurrentYear()));
+        Date today = DateTimeUtil.getCurrentDate();
 
         if (tabId == null) {
             throw new CommandException(MESSAGE_INVALID_TAB);

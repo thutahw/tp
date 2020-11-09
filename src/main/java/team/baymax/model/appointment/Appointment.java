@@ -10,6 +10,7 @@ import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.DateTime;
+import team.baymax.model.util.datetime.DateTimeUtil;
 import team.baymax.model.util.datetime.Duration;
 import team.baymax.model.util.datetime.Time;
 import team.baymax.model.util.uniquelist.UniqueListElement;
@@ -22,7 +23,7 @@ public class Appointment implements UniqueListElement {
     private final Patient patient;
     private final DateTime dateTime;
     private final Duration duration;
-    private final AppointmentStatus status;
+    private final Boolean isMissed;
     private final Set<Tag> tags;
     private final Description description;
 
@@ -30,14 +31,14 @@ public class Appointment implements UniqueListElement {
      * Every field must be present and not null.
      */
     public Appointment(Patient patient, DateTime dateTime, Duration duration, Description description,
-                       Set<Tag> tags, AppointmentStatus status) {
+                       Set<Tag> tags, boolean isMissed) {
         requireAllNonNull(patient, dateTime, tags, description, duration);
         this.patient = patient;
         this.dateTime = dateTime;
         this.duration = duration;
         this.description = description;
         this.tags = tags;
-        this.status = status;
+        this.isMissed = isMissed;
     }
 
     public Patient getPatient() {
@@ -68,8 +69,20 @@ public class Appointment implements UniqueListElement {
         return description;
     }
 
+    public boolean checkIfMissed() {
+        return isMissed;
+    }
+
     public AppointmentStatus getStatus() {
-        return status;
+        if (isMissed) {
+            return AppointmentStatus.MISSED;
+        }
+
+        if (dateTime.isBefore(DateTimeUtil.getCurrentDateTime())) {
+            return AppointmentStatus.DONE;
+        } else {
+            return AppointmentStatus.UPCOMING;
+        }
     }
 
     /**
@@ -100,10 +113,6 @@ public class Appointment implements UniqueListElement {
                 && otherAppointment.getPatient().equals(patient);
     }
 
-    public int compare(Appointment a1, Appointment a2) {
-        return a2.getDateTime().compareTo(a1.getDateTime());
-    }
-
     /**
      * Returns true if both patients have the same identity and data fields.
      * This defines a stronger notion of equality between two patients.
@@ -129,7 +138,7 @@ public class Appointment implements UniqueListElement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(patient, dateTime, status, tags, description);
+        return Objects.hash(patient, dateTime, isMissed, tags, description);
     }
 
     @Override

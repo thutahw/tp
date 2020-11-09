@@ -57,7 +57,7 @@ class DateTest {
 
     @Test
     void fromCalendar_validAppointmentCalendar() {
-        AppointmentCalendar test = new AppointmentCalendar(FIRST, JANUARY, YEAR_2020);
+        AppointmentCalendar test = new AppointmentCalendar(new Date(FIRST, JANUARY, YEAR_2020));
         assertEquals(Date.fromCalendar(test), Date.fromString("01-01-2020"));
     }
 
@@ -98,4 +98,3 @@ class DateTest {
         assertEquals(DATE1.toString(), "01 Jan 2020");
     }
 }
-
