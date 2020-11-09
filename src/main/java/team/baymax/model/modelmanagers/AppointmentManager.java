@@ -10,10 +10,9 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentClashPredicate;
-import team.baymax.model.appointment.AppointmentStatus;
+import team.baymax.model.appointment.AppointmentSortByDateAndNameComparator;
 import team.baymax.model.appointment.BelongsToPatientPredicate;
 import team.baymax.model.patient.Patient;
-import team.baymax.model.util.datetime.DateTime;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
@@ -47,6 +46,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void setAppointments(List<Appointment> appointments) {
         this.appointments.setElements(appointments);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -55,6 +55,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public void resetData(ReadOnlyListManager<Appointment> newData) {
         requireNonNull(newData);
         setAppointments(newData.getReadOnlyList());
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -90,6 +91,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
      */
     public void addAppointment(Appointment p) {
         appointments.add(p);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -101,6 +103,7 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
     public void setAppointment(Appointment target, Appointment editedAppointment) {
         requireNonNull(editedAppointment);
         appointments.setElement(target, editedAppointment);
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -136,9 +139,10 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
                     toEdit.getDuration(),
                     toEdit.getDescription(),
                     toEdit.getTags(),
-                    toEdit.getStatus());
+                    toEdit.checkIfMissed());
             appointments.setElement(toEdit, edited);
         }
+        sortAppointmentList(new AppointmentSortByDateAndNameComparator());
     }
 
     /**
@@ -157,28 +161,6 @@ public class AppointmentManager implements ReadOnlyListManager<Appointment> {
         return "AppointmentManager:\n"
                 + appointments.stream().map(Appointment::toString).collect(Collectors.joining("\n"))
                 + "\nTotal number of appointments: " + appointments.size();
-    }
-
-    /**
-     * Modifies appointments list to mark all appointments that have passed as DONE if they
-     * are not explicitly marked as MISSING
-     */
-    private void markAllPastAppointmentsAsDone() {
-        Predicate<Appointment> apptPastButMarkedAsUpcoming = new Predicate<Appointment>() {
-            @Override
-            public boolean test(Appointment appointment) {
-                return appointment.getDateTime().compareTo(DateTime.current()) < 0
-                        && appointment.getStatus() == AppointmentStatus.UPCOMING;
-            }
-        };
-
-        while (appointments.contains(apptPastButMarkedAsUpcoming)) {
-            Appointment pastAppt = appointments.getByPredicate(apptPastButMarkedAsUpcoming);
-            Appointment markedAsDoneAppt = new Appointment(pastAppt.getPatient(),
-                    pastAppt.getDateTime(), pastAppt.getDuration(), pastAppt.getDescription(),
-                    pastAppt.getTags(), AppointmentStatus.DONE);
-            setAppointment(pastAppt, markedAsDoneAppt);
-        }
     }
 
     @Override

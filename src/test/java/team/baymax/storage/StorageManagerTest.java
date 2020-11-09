@@ -58,7 +58,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonPatientManagerStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonPatientManagerStorageTest} class.
          */
         PatientManager original = TypicalPatients.getTypicalPatientManager();
         storageManager.savePatients(original);

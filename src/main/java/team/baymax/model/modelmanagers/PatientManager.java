@@ -2,16 +2,16 @@ package team.baymax.model.modelmanagers;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.baymax.model.patient.Name;
-import team.baymax.model.patient.NameContainsKeywordsPredicate;
+import team.baymax.model.patient.NameMatchPredicate;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
+import team.baymax.model.patient.PatientSortByNameComparator;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 
@@ -34,6 +34,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     public PatientManager(ReadOnlyListManager<Patient> toBeCopied) {
         this();
         resetData(toBeCopied);
+        sortPatientList(new PatientSortByNameComparator());
     }
 
     // list overwrite operations
@@ -44,6 +45,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      */
     public void setPatients(List<Patient> patients) {
         this.patients.setElements(patients);
+        sortPatientList(new PatientSortByNameComparator());
     }
 
     /**
@@ -52,6 +54,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
     public void resetData(ReadOnlyListManager<Patient> newData) {
         requireNonNull(newData);
         setPatients(newData.getReadOnlyList());
+        sortPatientList(new PatientSortByNameComparator());
     }
 
     /**
@@ -85,6 +88,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      */
     public void addPatient(Patient p) {
         patients.add(p);
+        sortPatientList(new PatientSortByNameComparator());
     }
 
     /**
@@ -97,6 +101,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
         requireNonNull(editedPatient);
 
         patients.setElement(target, editedPatient);
+        sortPatientList(new PatientSortByNameComparator());
     }
 
     /**
@@ -119,9 +124,7 @@ public class PatientManager implements ReadOnlyListManager<Patient> {
      * otherwise throws an {@code ElementNotFoundException}
      */
     public Patient getPatient(Name name) throws ElementNotFoundException {
-        String[] nameKeywords = name.getFullName().split("\\s+");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
-        return patients.getByPredicate(predicate);
+        return patients.getByPredicate(new NameMatchPredicate(name));
     }
 
     // util methods

@@ -38,6 +38,8 @@ public class MarkAppointmentDoneCommand extends Command {
 
     public static final String MESSAGE_MARK_AS_DONE_SUCCESS = "Appointment marked as done: %1$s";
 
+    public static final String MESSAGE_UPCOMING_APPOINTMENT = "This appointment has not passed yet, "
+            + "it cannot be marked as done.";
     public static final TabId TAB_ID = TabId.NONE;
 
     private final Index index;
@@ -89,9 +91,9 @@ public class MarkAppointmentDoneCommand extends Command {
             }
             appointmentToEdit = lastShownList.get(index.getZeroBased());
         } else if (isFindByNameAndTime()) {
-            patient = model.getPatient(patientName);
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
             try {
+                patient = model.getPatient(patientName);
+                SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
                 appointmentToEdit = model.findAppointmentByPredicate(predicate);
             } catch (ElementNotFoundException e) {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
@@ -100,9 +102,13 @@ public class MarkAppointmentDoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
         }
 
+        if (appointmentToEdit.getStatus().equals(AppointmentStatus.UPCOMING)) {
+            throw new CommandException(MESSAGE_UPCOMING_APPOINTMENT);
+        }
+
         Appointment markedAsDoneAppointment = new Appointment(appointmentToEdit.getPatient(),
                 appointmentToEdit.getDateTime(), appointmentToEdit.getDuration(),
-                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), AppointmentStatus.DONE);
+                appointmentToEdit.getDescription(), appointmentToEdit.getTags(), false);
 
         model.setAppointment(appointmentToEdit, markedAsDoneAppointment);
         model.updateFilteredAppointmentList(new AppointmentIdenticalPredicate(markedAsDoneAppointment));
@@ -129,8 +135,9 @@ public class MarkAppointmentDoneCommand extends Command {
 
         // state check
         MarkAppointmentDoneCommand m = (MarkAppointmentDoneCommand) other;
-        return index.equals(m.index)
-                && dateTime.equals(m.dateTime)
-                && patientName.equals(m.patientName);
+        return index == null
+            ? dateTime.equals(m.dateTime)
+                && patientName.equals(m.patientName)
+            : index.equals(m.index);
     }
 }

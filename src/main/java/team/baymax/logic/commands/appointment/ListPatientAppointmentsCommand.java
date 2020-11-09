@@ -24,7 +24,7 @@ import team.baymax.model.util.TabId;
  */
 public class ListPatientAppointmentsCommand extends Command {
 
-    public static final String COMMAND_WORD = "listapptof";
+    public static final String COMMAND_WORD = "listapptsof";
     public static final TabId TAB_ID = TabId.APPOINTMENT;
 
     public static final String MESSAGE_SUCCESS = "Listed all the appointments of the patient";
@@ -46,7 +46,9 @@ public class ListPatientAppointmentsCommand extends Command {
     private final Name name;
 
     /**
-     * Creates a ListPatientAppointmentsCommand with the specified {@code Index}
+     * Creates a ListPatientAppointmentsCommand that will list all appointments
+     * belonging to the patient at the specified {@code Index}
+     * @param targetIndex  index of the patient in the filtered patient list whose appointments are to be listed
      */
     public ListPatientAppointmentsCommand (Index targetIndex) {
         requireNonNull(targetIndex);
@@ -56,7 +58,9 @@ public class ListPatientAppointmentsCommand extends Command {
     }
 
     /**
-     * Creates a ListPatientAppointmentsCommand with the specified {@code Nric}
+     * Creates a ListPatientAppointmentsCommand that will list all appointments
+     * belonging to the patient with the specified {@code Nric}
+     * @param nric  Nric of the patient whose appointments are to be listed
      */
     public ListPatientAppointmentsCommand (Nric nric) {
         requireNonNull(nric);
@@ -66,7 +70,9 @@ public class ListPatientAppointmentsCommand extends Command {
     }
 
     /**
-     * Creates a ListPatientAppointmentsCommand with the specified {@code Name}
+     * Creates a ListPatientAppointmentsCommand that will list all appointments
+     * belonging to the patient with the specified {@code Name}
+     * @param name  Name of the patient whose appointments are to be listed
      */
     public ListPatientAppointmentsCommand (Name name) {
         requireNonNull(name);

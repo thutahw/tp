@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.patient.FindPatientCommand.MESSAGE_PATIENTS_LISTED_SUCCESS;
+import static team.baymax.testutil.patient.TypicalPatients.ALICE;
 import static team.baymax.testutil.patient.TypicalPatients.CARL;
 import static team.baymax.testutil.patient.TypicalPatients.ELLE;
 import static team.baymax.testutil.patient.TypicalPatients.FIONA;
@@ -65,8 +66,31 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_partialKeyword_correctPatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Al");
+        FindPatientCommand command = new FindPatientCommand(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_differentCapitalisationKeyword_onePatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_SUCCESS, 1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("FIONA");
+        FindPatientCommand command = new FindPatientCommand(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(FIONA), model.getFilteredPatientList());
     }
 
     @Test
@@ -75,6 +99,7 @@ public class FindPatientCommandTest {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }

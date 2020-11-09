@@ -22,6 +22,7 @@ import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.userprefs.ReadOnlyUserPrefs;
 import team.baymax.model.userprefs.UserPrefs;
+import team.baymax.model.util.datetime.Date;
 import team.baymax.model.util.datetime.Day;
 import team.baymax.model.util.datetime.Month;
 import team.baymax.model.util.datetime.Year;
@@ -241,8 +242,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {
-        System.out.println("In model.getFilteredAppointmentlist()");
-        System.out.println(filteredAppointmentsList);
         return filteredAppointmentsList;
     }
 
@@ -262,6 +261,12 @@ public class ModelManager implements Model {
     @Override
     public AppointmentCalendar getAppointmentCalendar() {
         return calendarManager.getAppointmentCalendar();
+    }
+
+    @Override
+    public void setDate(Date date) {
+        requireNonNull(date);
+        calendarManager.setDate(date);
     }
 
     @Override

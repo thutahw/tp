@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import team.baymax.model.appointment.Appointment;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.modelmanagers.AppointmentManager;
 import team.baymax.model.modelmanagers.PatientManager;
@@ -55,19 +54,19 @@ public class SampleDataUtil {
         Patient[] patients = getSamplePatients();
         return new Appointment[] {
             new Appointment(patients[0], DateTime.fromString("13-11-2020 09:00"), new Duration(60),
-                    new Description("Full body checkup"), getTagSet("Xray"), AppointmentStatus.UPCOMING),
+                    new Description("Full body checkup"), getTagSet("Xray"), false),
             new Appointment(patients[3], DateTime.fromString("13-11-2020 10:00"), new Duration(60),
-                    new Description("Diabetes checkup"), getTagSet(), AppointmentStatus.UPCOMING),
+                    new Description("Diabetes checkup"), getTagSet(), false),
             new Appointment(patients[0], DateTime.fromString("13-11-2021 11:00"), new Duration(60),
-                    new Description("Blood pressure checkup"), getTagSet(), AppointmentStatus.UPCOMING),
+                    new Description("Blood pressure checkup"), getTagSet(), false),
             new Appointment(patients[2], DateTime.fromString("13-11-2020 13:00"), new Duration(60),
-                    new Description("Wrist fracture checkup"), getTagSet("Xray"), AppointmentStatus.UPCOMING),
+                    new Description("Wrist fracture checkup"), getTagSet("Xray"), false),
             new Appointment(patients[1], DateTime.fromString("14-11-2020 09:00"), new Duration(60),
                     new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
-                    AppointmentStatus.UPCOMING),
+                    false),
             new Appointment(patients[1], DateTime.fromString("15-11-2021 10:00"), new Duration(60),
                     new Description("Pregnancy checkup"), getTagSet("Gynaecology"),
-                    AppointmentStatus.UPCOMING)
+                    false)
         };
     }
 

@@ -20,7 +20,6 @@ import team.baymax.logic.commands.exceptions.CommandException;
 import team.baymax.model.Model;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.appointment.AppointmentIdenticalPredicate;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.patient.Patient;
 import team.baymax.model.tag.Tag;
@@ -56,6 +55,7 @@ public class EditAppointmentCommand extends Command {
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
+     * Creates an @{code EditAppointmentCommand} to edit the specified {@code Appointment} to the appointment book.
      * @param index of the appointment in the filtered appointment list to edit
      * @param editAppointmentDescriptor details to edit the appointment with
      */
@@ -113,6 +113,7 @@ public class EditAppointmentCommand extends Command {
         assert appointmentToEdit != null;
 
         Patient unchangedPatient = appointmentToEdit.getPatient();
+        Boolean unchangedIsMissed = appointmentToEdit.checkIfMissed();
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
@@ -121,10 +122,9 @@ public class EditAppointmentCommand extends Command {
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
-        AppointmentStatus unchangedStatus = appointmentToEdit.getStatus();
 
         return new Appointment(unchangedPatient, updatedDateTime, updatedDuration, updatedDescription,
-                updatedTags, unchangedStatus);
+                updatedTags, unchangedIsMissed);
     }
 
     @Override

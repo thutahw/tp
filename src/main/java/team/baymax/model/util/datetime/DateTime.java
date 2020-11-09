@@ -22,9 +22,10 @@ public class DateTime implements Comparable<DateTime> {
     private final LocalDateTime dateTime;
 
     /**
-     * DateTime can only be created by calling {@link #fromString(String)}
+     * Constructs a {@DateTime} given a {@code LocalDateTime}.
+     *
      */
-    private DateTime(LocalDateTime dateTime) {
+    public DateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -33,10 +34,6 @@ public class DateTime implements Comparable<DateTime> {
      */
     public DateTime() {
         this.dateTime = LocalDateTime.parse("12-12-2020 23:59", FORMAT_INPUT);
-    }
-
-    public static DateTime current() {
-        return new DateTime(LocalDateTime.now());
     }
 
     /**
@@ -132,14 +129,6 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Checks if this {@code Duration} extends the appointment to the next day.
-     *
-     */
-    public boolean extendsUntilNextDay(Duration duration) {
-        return !(getDate().equals(plusMinutes(duration).getDate()));
-    }
-
-    /**
      * Checks if this {@code DateTime} is equal to the specified date-time.
      *
      * @param other
@@ -148,6 +137,14 @@ public class DateTime implements Comparable<DateTime> {
     public boolean isEqual(DateTime other) {
         requireAllNonNull(other);
         return dateTime.isEqual(other.dateTime);
+    }
+
+    /**
+     * Checks if this {@code Duration} extends the appointment to the next day.
+     *
+     */
+    public boolean extendsUntilNextDay(Duration duration) {
+        return !(getDate().equals(plusMinutes(duration).getDate()));
     }
 
     @Override

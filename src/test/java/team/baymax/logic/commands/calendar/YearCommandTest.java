@@ -4,8 +4,8 @@ import static team.baymax.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.COMMON_YEAR;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.DAY_29;
 import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.LEAP_YEAR;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_JAN;
-import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_MAY;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_JAN_INT;
+import static team.baymax.logic.commands.calendar.CalendarCommandTestUtil.MONTH_MAY_INT;
 import static team.baymax.testutil.calendar.TypicalCalendar.getTypicalCalendarManager;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ public class YearCommandTest {
         Model expectedModel = new ModelManager(new PatientManager(), new AppointmentManager(), new UserPrefs(),
                 model.getCalendarManager());
 
-        expectedModel.setMonth(new Month(MONTH_JAN));
+        expectedModel.setMonth(new Month(MONTH_JAN_INT));
         expectedModel.setYear(validYear);
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
@@ -49,7 +49,7 @@ public class YearCommandTest {
     @Test
     public void execute_switchYear_success() {
         // initialise to a leap year
-        model.setMonth(new Month(MONTH_MAY));
+        model.setMonth(new Month(MONTH_MAY_INT));
         model.setYear(new Year(LEAP_YEAR));
         model.setDay(new Day(DAY_29));
 
@@ -60,7 +60,7 @@ public class YearCommandTest {
         Model expectedModel = new ModelManager(new PatientManager(), new AppointmentManager(), new UserPrefs(),
                 model.getCalendarManager());
         expectedModel.setYear(new Year(COMMON_YEAR));
-        expectedModel.setMonth(new Month(MONTH_JAN));
+        expectedModel.setMonth(new Month(MONTH_JAN_INT));
 
         Date date = Date.fromCalendar(model.getAppointmentCalendar());
         expectedModel.updateFilteredAppointmentList(new AppointmentMatchesDatePredicate(date));

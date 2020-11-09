@@ -9,10 +9,10 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.VALID_DESCRIPTION_1;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.assertAppointmentCommandFailure;
 import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.showAppointmentAtIndex;
-import static team.baymax.logic.commands.patient.PatientCommandTestUtil.VALID_TAG_DIABETIC;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_SECOND_APPOINTMENT;
 import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
+import static team.baymax.testutil.patient.PatientUtil.VALID_TAG_DIABETIC;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,9 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Appointment editedAppointment = new AppointmentBuilder().build();
+        Appointment appointmentToEdit = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
+        Appointment editedAppointment = new AppointmentBuilder().withPatient(appointmentToEdit.getPatient())
+                                        .withIsMissed(appointmentToEdit.checkIfMissed()).build();
 
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(editedAppointment).build();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, descriptor);

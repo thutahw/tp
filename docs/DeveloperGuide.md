@@ -268,7 +268,7 @@ Reason for choosing Option 1:
 
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
-independent development for each data type, limiting the amount of change needed to other components when there are
+<br>independent development for each data type, limiting the amount of change needed to other components when there are
 changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
 to unnecessary dependencies between data types.
 
@@ -362,7 +362,68 @@ The following table shows the commands related to managing a patient's details.<
 
 #### 4.2.3. Design Consideration
 
+**Aspect: Find matching names using substrings (E.g. ale) vs using exact words (E.g. alex)**
+
+Option 1 (Current Choice): Match by substring
+
+*Pros:* 
+
+* Shorter keywords to type, therefore increases user typing speed. 
+
+*Cons:* 
+
+* Lower accuracy. The filtered list is longer and takes longer time to find the patient you are looking for. 
+
+Option 2: Match by the exact word
+
+*Pros:* 
+
+* Higher accuracy. 
+
+*Cons:* 
+
+* Longer names are harder for the user to find the exact match. It is also difficult for the user to remember and type out the exact keyword.
  
+Reason for choosing Option 1:
+
+* Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
+ 
+**Aspect: Whether the Patient class should contain a list of Appointments**
+
+Option 1 (Current Choice): Patient class does not contain a list of Appointments.
+
+*Pros:* 
+
+* Avoids cyclic dependency since the Appointment class already contains a Patient. 
+
+* Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class) 
+
+*Cons:* 
+
+* More tedious to find a list of appointments belonging to a specific patient and there is more overhead from 
+having to filter the appointment list by a predicate. 
+
+Option 2: Patient class will contain a list of Appointments.
+
+*Pros:* 
+
+* A list of appointment belonging to a specific patient can be directly retrieved from the patient object 
+which is faster than having the extra step to filter the list.
+
+*Cons:* 
+
+* Cyclic dependency is present. (Patient and Appointment depend on each other). 
+
+* Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing
+both the lists inside the ModelManager and the Patient class.
+
+Reason for choosing Option 1:
+
+* Option 1 follows good coding principles by avoiding cyclic dependency.
+
+* When the list of appointments increase in size, Option 1 performs better because Baymax involves a lot of "update/set"
+operations such as marking an appointment as done/missed and adding/editing an appointment.
+
 ### **4.3 Appointment Manager**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
@@ -459,10 +520,28 @@ constructs a YearCommand, MonthCommand and DayCommand respectively. Upon executi
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
-
-
 #### 4.4.3. Design Consideration
 
+Aspect: The necessity of an AppointmentCalendar class in the model
+
+Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
+Pros:
+- Greater modularity
+- Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object
+- More extensible at it does not overcomplicate the CalendarManager class
+
+Cons:
+- Harder to implement (a new class is need)
+
+Option 2: Store the day, month and year directly inside the CalendarManager 
+Pros: 
+- Simpler to implement
+
+Cons:
+- More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object
+- If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class
+
+By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -509,10 +588,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful receptionist of a clinic         | display all available commands | refer to the list of commands when I forget them            |
 | `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
 | `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
-| `* * *`  | receptionist of a clinic                   | add a patient's contact information | contact them if needed                                 |
-| `* * *`  | receptionist of a clinic                   | add a patient's emergency contact information | contact the patient's family members in times of emergencies |
-| `* * *`  | receptionist of a clinic                   | view a patient's profile       |                                                             |
-| `* * *`  | receptionist of a clinic                   | delete a patient profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | update a patient's contact information after they change it | contact them if needed         |
+| `* * *`  | receptionist of a clinic                   | find a patient by their name  |  easily view their details when needed          |
+| `* * *`  | receptionist of a clinic                   | delete a patient               |            |
 | `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
 | `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
 | `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
@@ -536,7 +614,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix C: Use cases**
 (Contributed by Li Jianhan and Shi Hui Ling)
 
-For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
+For all use cases below, unless specified otherwise,
+
+**System:** Baymax
+
+**Actor:** User (Clinic Receptionist)
 
 #### Patient Profile Management
 
@@ -726,7 +808,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### F.1. Launch and shutdown
 
 1. Initial launch
 
@@ -741,24 +823,66 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### F.2. Adding Data
+#### F.2.1. Adding Patient
+1. Add a new patient to Baymax
+    1. Prerequisites: Arguments are valid and compulsory parameters are provided. The Patient added must not be a duplicate of existing Patient.
+    1. Test case: `addpatient nric/S9771234F name/John Doe phone/98765432 gender/M tag/asthmatic tag/LTP`<br>
+        Expected: Adds a patient with the name `John Doe`, NRIC `S9771234F`, phone number `98765432`, gender `M` (for male) and tags of `asthmatic` and `LTP`.
+    1. Test case: `addpatient name/Bob Tan`<br>
+        Expected: No patient is added. Error details shown in feedback display.
+    1. Other incorrect commands to try: `addpatient nric/S9765436F`, `addpatient phone/123`, `addpatient tag/test`<br>
+        Expected: Similar to previous test case.
+        
+#### F.2.1. Adding Appointment
+1. Add a new appointment to Baymax
+    1. Prerequisites: Arguments are valid and compulsory parameters are provided. The Appointment added must not be the same as existing Appointment.
+    1. Test case: `addappt 1 on/20-11-2020 12:30 dur/60 desc/Monthly health checkup tag/Xray`<br>
+        Expected: Adds an appointment to the first patient in the displayed list of patients with datetime of `20-11-2020 12:30`, duration of `60` minutes, description `Monthly health checkup` and tag `Xray`.
+    1. Test case: `addappt desc/health checkup`<br>
+        Expected: No appointment is added. Error details shown in feedback display.
+    1. Other incorrect commands to try: `addappt duration/60`, `addappt on/2020-11-12 10:00`, `addappt tag/test`<br>
+        Expected: Similar to previous test case. 
 
-### Deleting a patient
+### F.3. Editing Data
+#### F.3.1. Editing Patient
+1. Edits a current Patient in Baymax
+    1. Prerequisites: Arguments are valid, compulsory parameters are provided and patient must exist in the patient list. The Patient edited must not have the same NRIC as another patient. Multiple patients in the list.
+    1. Test case: `editpatient 1 phone/91017265`<br>
+        Expected: Edits the phone number of the first patient in the displayed patient list to `91017265`.
+    1. Test case: `editpatient 1`<br>
+        Expected: No patient is edited. Error details shown in feedback display.
+    1. Other incorrect commands to try: `editpatient 1 name/@#James`, `editpatient 1 phone/12`, `editpatient 1 gender/mal`<br>
+        Expected: No Patient is edited. Error details shown in feedback display.
 
+#### F.3.2 Editing Appointment
+1. Edits a current Appointment in Baymax
+    1. Prerequisites: Arguments are valid, compulsory parameters are provided and appointment must exist in the appointment list. The datetime of the Appointment edited must not collide with the datetime of another appointment belonging to the same patient. Multiple appointments in the list.
+    1. Test case: `editappt 1 on/16-11-2020 11:00 dur/45`<br>
+        Expected: Edits the first appointment in the displayed appointment list with datetime `16-11-2020 11:00` and duration of `45` minutes.
+    1. Other incorrect commands to try: `editappt 1 on/2020-10-10`, `editappt 1 dur/1600`
+
+### F.4. Deleting Data
+
+#### F.4.1. Deleting Patient
 1. Deleting a patient while all patients are being shown
-
    1. Prerequisites: List all patients using the `listpatients` command. Multiple patients in the list.
-
    1. Test case: `deletepatient 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message.
    1. Test case: `deletepatient 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
+      Expected: No patient is deleted. Error details shown in the status message.
    1. Other incorrect delete commands to try: `deletepatient`, `deletepatient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+      
+#### F.4.2. Deleting Appointment
+1. Deleting an appointment while all appointments are being shown
+   1. Prerequisites: List all appointments using the `listappts` command. Multiple appointments in the list.
+   1. Test case: `cancel 1`<br>
+      Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the status message.
+   1. Test case: `cancel 0`<br>
+      Expected: No appointment is deleted. Error details shown in the status message.
+   1. Other incorrect delete commands to try: `cancel`, `cancel x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
