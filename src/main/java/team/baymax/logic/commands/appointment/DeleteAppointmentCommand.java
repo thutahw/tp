@@ -84,14 +84,9 @@ public class DeleteAppointmentCommand extends Command {
             toDelete = model.getFilteredAppointmentList().get(targetIndex.get().getZeroBased());
         } else if (targetIndex.isEmpty() && !dateTime.isEmpty() && !name.isEmpty()) {
             try {
-                System.out.println("test1");
-                System.out.println(name.get());
                 Patient patientOfAppointment = model.getPatient(name.get());
-                System.out.println("test2");
-                System.out.println(patientOfAppointment);
                 SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime.get(),
                         patientOfAppointment);
-                System.out.println("test3");
                 toDelete = model.findAppointmentByPredicate(predicate);
             } catch (ElementNotFoundException e) {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
