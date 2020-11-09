@@ -73,7 +73,6 @@ CommandResult --> YearCommand : r
 deactivate CommandResult
 
 YearCommand --> LogicManager : r
-YearCommand -[hidden]-> LogicManager
 destroy YearCommand
 
 [<--LogicManager : r

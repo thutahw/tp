@@ -520,8 +520,8 @@ constructs a YearCommand, MonthCommand and DayCommand respectively. Upon executi
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
-![AddAppointmentSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
-Figure X. Workflow of an AddAppointment command with the help of CalendarManager
+![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
+Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
 
 #### 4.4.3. Design Consideration
 
