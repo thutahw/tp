@@ -320,7 +320,7 @@ of the patient and be able to look up a patient in the system easily.
 The `patient` package in the `Model` component contains the necessary information related to a patient.
 The current implementation of the Patient Management Features allows the user to keep track of a list of patients in the appointment book.
 
-In this section, we will outline the `findpatient` command from the Patient Management Features which is summarised by the Activity Diagram in Figure 9 below.
+In this section, we will outline the `findpatient` command from the Patient Management Features which is summarised by the Activity Diagram in Figure 12 below.
 
 The parameters of the `findpatient` command are keywords in the patient's name that the user wants to search for. 
 E.g. `findpatient alex` will search and list all patients whose name has the word `alex`. 
