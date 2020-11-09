@@ -31,9 +31,9 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of many features (adding of relevant pictures) [\#185](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/185)
   * Developer Guide:
     * Added UML class diagrams for Storage and Model, and a sequence diagram for a sample command [\#139](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/139)
-    * Added and updated Glossary [\#75](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/75)
-    * Updated Design details of Model with Kaitlyn [To be added]()
-    * Updated Implementation details of Appointment Management [To be added]()
+    * Added and updated Glossary [\#75](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/75) and
+    * Updated Design details of Model with Kaitlyn [\#297](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/297)
+    * Updated Implementation details of Appointment Management [\#297](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/297)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#256](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/256)

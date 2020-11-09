@@ -52,7 +52,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 <img src="images/ArchitectureDiagram.png" width="450" /><br>
 Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
@@ -95,7 +95,7 @@ This segment will explain the structure and responsibilities of the `UI` compone
 Figure 4. Structure of the UI component
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/ui/Ui.java)
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
