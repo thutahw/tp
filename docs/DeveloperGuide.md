@@ -144,6 +144,7 @@ Figure 6. Delete Appointment Sequence Diagram
 </div>
 
 ### 3.4. Model component
+(Contributed by Kaitlyn Ng & Reuben Teng)
 
 This segment will explain the structure and responsibilities of the Model component.
 
