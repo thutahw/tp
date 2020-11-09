@@ -127,8 +127,9 @@ public class MarkAppointmentMissedCommand extends Command {
 
         // state check
         MarkAppointmentMissedCommand m = (MarkAppointmentMissedCommand) other;
-        return index.equals(m.index)
-                && dateTime.equals(m.dateTime)
-                && patientName.equals(m.patientName);
+        return index == null
+            ? dateTime.equals(m.dateTime)
+                && patientName.equals(m.patientName)
+            : index.equals(m.index);
     }
 }

@@ -31,7 +31,7 @@ public class Appointment implements UniqueListElement {
      * Every field must be present and not null.
      */
     public Appointment(Patient patient, DateTime dateTime, Duration duration, Description description,
-                       Set<Tag> tags, boolean isMissed) {
+                       Set<Tag> tags, Boolean isMissed) {
         requireAllNonNull(patient, dateTime, tags, description, duration);
         this.patient = patient;
         this.dateTime = dateTime;
@@ -132,7 +132,7 @@ public class Appointment implements UniqueListElement {
                 && getDateTime().equals(otherAppointment.getDateTime())
                 && getDuration().equals(otherAppointment.getDuration())
                 && getDescription().equals(otherAppointment.getDescription())
-                && getStatus().equals(otherAppointment.getStatus())
+                && checkIfMissed() == (otherAppointment.checkIfMissed())
                 && getTags().equals(otherAppointment.getTags());
     }
 

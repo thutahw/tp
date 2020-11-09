@@ -135,8 +135,9 @@ public class MarkAppointmentDoneCommand extends Command {
 
         // state check
         MarkAppointmentDoneCommand m = (MarkAppointmentDoneCommand) other;
-        return index.equals(m.index)
-                && dateTime.equals(m.dateTime)
-                && patientName.equals(m.patientName);
+        return index == null
+            ? dateTime.equals(m.dateTime)
+                && patientName.equals(m.patientName)
+            : index.equals(m.index);
     }
 }

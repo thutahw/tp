@@ -35,7 +35,6 @@ public class AppointmentListPanel extends UiPart<Region> {
     public AppointmentListPanel(ObservableList<Appointment> appointments) {
         super(FXML);
         this.appointments = appointments;
-        System.out.println("hellooo");
 
         initialize();
     }

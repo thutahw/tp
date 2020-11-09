@@ -55,6 +55,7 @@ public class EditAppointmentCommand extends Command {
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
+     * Creates an @{code EditAppointmentCommand} to edit the specified {@code Appointment} to the appointment book.
      * @param index of the appointment in the filtered appointment list to edit
      * @param editAppointmentDescriptor details to edit the appointment with
      */
@@ -112,6 +113,7 @@ public class EditAppointmentCommand extends Command {
         assert appointmentToEdit != null;
 
         Patient unchangedPatient = appointmentToEdit.getPatient();
+        Boolean unchangedIsMissed = appointmentToEdit.checkIfMissed();
         DateTime updatedDateTime = editAppointmentDescriptor.getDateTime()
                 .orElse(appointmentToEdit.getDateTime());
         Duration updatedDuration = editAppointmentDescriptor.getDuration()
@@ -120,7 +122,6 @@ public class EditAppointmentCommand extends Command {
                 .orElse(appointmentToEdit.getTags());
         Description updatedDescription = editAppointmentDescriptor.getDescription()
                 .orElse(appointmentToEdit.getDescription());
-        boolean unchangedIsMissed = appointmentToEdit.checkIfMissed();
 
         return new Appointment(unchangedPatient, updatedDateTime, updatedDuration, updatedDescription,
                 updatedTags, unchangedIsMissed);
