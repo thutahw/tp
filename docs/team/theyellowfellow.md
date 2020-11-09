@@ -30,12 +30,13 @@ Given below are my contributions to the project.
     * Added documentation for the modified/added features such as `remark` and `cancel` [\#185](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/185)
     * Did cosmetic tweaks to existing documentation of many features (adding of relevant pictures) [\#185](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/185)
   * Developer Guide:
+    * Removed references linking to AB3 and replaced to links to our own repository [\#298](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/298)
     * Added UML class diagrams for Storage and Model, and a sequence diagram for a sample command [\#139](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/139)
     * Added and updated Glossary [\#75](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/75) and
     * Updated Design details of Model with Kaitlyn [\#297](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/297)
-    * Updated Implementation details of Appointment Management [\#297](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/297)
+    * Updated Implementation details of Appointment Management (Design Considerations) [\#297](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/297)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#256](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/256)
+  * PRs reviewed (with non-trivial review comments): [\#256](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/256), [\#299](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/299)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/theyellowfellow/ped/issues/1), [2](https://github.com/theyellowfellow/ped/issues/9), [3](https://github.com/theyellowfellow/ped/issues/3))
 
