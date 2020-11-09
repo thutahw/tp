@@ -1,4 +1,7 @@
-# About Us
+---
+layout: page
+title: About Us
+---
 
 We are [Team](https://github.com/AY2021S1-CS2103T-W12-3/tp) Baymax.
 
@@ -17,6 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Integration, Git Expert
 * Features: Calendar
 * Components: UI, Logic
+
 ---
 ### Thuta
 
@@ -29,6 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Code Quality, UML Expert
 * Features: Patient Information Management
 * Components: Common, Storage
+
 ---
 ### Kaitlyn
 
@@ -41,6 +46,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Testing, Documentation
 * Features: Calendar
 * Components: Common, Storage
+
 ---
 ### Reuben
 
@@ -53,6 +59,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Deliverables & Deadlines, Scheduling & Tracking
 * Features: Appointment Management
 * Components: UI, Model
+
 ---
 ### Hui Ling
 
@@ -65,4 +72,5 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Documentation, IntelliJ Expert
 * Features: Appointment Management
 * Components: Model, Logic
+
 ---
