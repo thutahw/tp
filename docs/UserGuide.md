@@ -61,11 +61,11 @@ the keyboard itself, no fiddling with the mouse needed! The main features includ
 1. Managing appointments - scheduling new appointments, changing appointments, cancelling appointments,
    marking appointments as done etc.
 2. Managing patient information - phone number, special remarks etc. 
-3. Viewing appointments in a calendar format.
+3. Viewing appointments in a `schedule` view.
+4. A built-in calendar for greater convenience.
 
 All of these can be done easily with just a few keystrokes! Baymax's distinguishing feature is our special built-in
-calendar view -- it shows you how busy a particular day or week is at a glance, so that you can help patients make 
-quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
+calendar view which can help patients make quick decisions on the ground! What are you waiting for? Head on to Section 2, “Quick Start”!
 
 --------------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ REMARK        | Any remarks about the patient. It can be any text -- alphanumeri
 TAG           | The tag for the patient. It must only be <ins>alphanumerical</ins> and must not contain spaces or special characters. Can have multiple tags. E.g. Diabetic, Asthmatic
 
 **Example:**<br>
-1. Type `addpatient nric/S9772234F name/Jason Tan phone/98765432 gender/M` into the command box.
+1. Type `addpatient nric/S9772234F name/Jason Tan phone/98765432 gender/M tag/Asthmatic` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -253,7 +253,7 @@ If the command is valid (i.e. the user keyed in the valid fields):
 In the case where the command entered is invalid (e.g `NRIC` has 8 numbers in the middle):
 1. An invalid command message will be displayed in the *Command Result* box, specifying which field was entered incorrectly. <br>
 
-    ![invalidnric](images/invalidNRIC.png)<br>
+    ![invalidnric](images/addpatientinvalidnric.png)<br>
     *Figure 5.1.1b. Adding a patient - failure*
 
 **Note:**
@@ -299,22 +299,22 @@ Parameter Name | Description
 INDEX     | The index of the patient in the most recently displayed list. It must be a <ins>positive</ins> integer.
 
 **Example:**<br>
-1. Type `deletepatient 1` into the command box.
+1. Type `deletepatient 8` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the `INDEX` (i.e 1) is valid:
+If the `INDEX` (i.e 8) is valid:
 1. A success message will be displayed as shown below.
-2. The patient at index 1 in the previously displayed list will be deleted.
+2. The patient at index 8 in the previously displayed list will be deleted.
 
-    ![deletepatient](images/deletepatientsuccess.png)<br>
+    ![deletepatient](images/deletepatient.png)<br>
     *Figure 5.1.3a. Deleting a patient - success*
 
-In the case where the `INDEX` is invalid (E.g `deletepatient 11` is entered, but there are only 8 patients):
+In the case where the `INDEX` is invalid (E.g `deletepatient 11` is entered, but there are only 9 patients):
 1. "**Invalid patient index**" message will be displayed as shown below.
 
-    ![invaliddelete](images/invaliddeletepatient.png)<br>
+    ![invaliddelete](images/deletepatientfailure.png)<br>
     *Figure 5.1.3b. Deleting a patient - failure*
     
 #### 5.1.4. Edit a patient's information: `editpatient`
@@ -357,15 +357,18 @@ TAG     | The tag for the patient. It must only be <ins>alphanumerical</ins> and
 If the `INDEX` (i.e 2) is valid:
 1. A success message will be displayed as shown below.
 2. The tag of the patient at index 2 in the recent list will be edited.
-
-    ![editpatient](images/editpatientsuccess.png)<br>
+    
+    ![beforeedit](images/beforeeditpatient.png)<br>
+    *Figure . Before editing a patient's tag*
+    
+    ![editpatient](images/aftereditpatient.png)<br>
     *Figure 5.1.4a. Editing a patient's information - success*
     
 In the case where the field to be edited is absent (E.g `editpatient 3` is entered):
 
 1. A message prompting the user to provide at least 1 field to edit will be displayed as shown below.
 
-    ![editfailure](images/editpatientmissingfield.png)<br>
+    ![editfailure](images/editpatientfailure.png)<br>
     *Figure 5.1.4b. Editing a patient's information - failure*
 
 **Note:** 
@@ -401,7 +404,7 @@ NAME_KEYWORD   | The name or keyword by which to search for the patient. It can 
     
 2. If patient is not found, then none will be displayed as shown below.
     
-    ![findpatient](images/findPatientFailure.png)<br>
+    ![findpatient](images/findpatientfailure.png)<br>
     *Figure 5.1.5b. Finding a patient by name - failure*
     
 #### 5.1.6. Add a remark to a patient: `remark`
@@ -418,20 +421,23 @@ INDEX     | The index of the patient in the most recently displayed list. It mus
 REMARK         | The remark to be added to the patient.
 
 **Example:**<br>
-1. Type `remark 2 r/Allergic to penicillin` into the command box.
+1. Type `remark 6 r/Allergic to penicillin` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
 1. If the INDEX entered is valid, a success message will be displayed as shown below.
-
-    ![remark](images/remarkSuccessOutput.png)<br>
-    *Figure 5.1.6a. Adding a remark to a patient - success*
+    
+    ![remark](images/beforeremark.png)<br>
+    *Figure 5.1.6a. Before adding a remark to a patient.*
+    
+    ![remark](images/afterremark.png)<br>
+    *Figure 5.1.6b. Adding a remark to a patient - success*
     
 2. If the INDEX entered is invalid (either beyond the list or negative), an error message will be displayed as shown below.
     
-    ![remark](images/remarkFailureOutput.png)<br>
-    *Figure 5.1.6b. Adding a remark to a patient - failure*
+    ![remark](images/remarkfailure.png)<br>
+    *Figure 5.1.6c. Adding a remark to a patient - failure*
 
 **Note:**
 
@@ -487,12 +493,8 @@ DURATION       | The <ins>integer</ins> duration of the appointment in minutes, 
 
 `addappt nric/NRIC at/TIME dur/DURATION desc/DESCRIPTION [tag/TAG]`<br>
 
-**Note:** 
-1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
-2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
-
 **Example:**<br>
-1. Type `addappt 1 on/11-10-2020 12:30 dur/60 desc/Removal of braces. tag/DrGoh` into the command box.
+1. Type `addappt 1 on/11-11-2020 12:30 dur/60 desc/Removal of braces. tag/Dental` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
@@ -500,8 +502,14 @@ DURATION       | The <ins>integer</ins> duration of the appointment in minutes, 
 If the command is valid (i.e. the user keyed in the valid fields):
 1. A success message will be displayed as shown below. <br>
 
-    ![addappt](images/addappt.png)<br>
+    ![addappt](images/addapptsuccess.png)<br>
     *Figure 5.2.1a. Scheduling a new appointment for a patient*
+
+**Note:** 
+
+1. Either `INDEX` or `NRIC` should be provided. If both are provided, only the `INDEX` will be accepted.
+2. Either `DATETIME` or `TIME` should be provided. If both are provided, only the `DATETIME` will be accepted.
+3. Newly added appointments with `DATETIME` before the current `DATETIME` will be automatically marked as `done`. 
 
 #### 5.2.2. List all appointments of a patient: `listapptsof`
 You can use this command to list all the appointments belonging to a certain patient.
@@ -529,7 +537,7 @@ NAME           | The name by which to search for the patient. It can be an incom
 
 1. All appointments associated with the patient will be displayed as shown below.
 
-    ![listapptsof](images/listApptOf.png)<br>
+    ![listapptsof](images/listapptofsuccess.png)<br>
     *Figure 5.2.2a. Listing the appointments of a patient*
 
 #### 5.2.3. List all appointments: `listappts`
@@ -551,7 +559,7 @@ The appointments in the `listappts` view are **not** sorted by date or time. The
 
 1. All the appointments in the system will be listed as shown below.
 
-    ![listappts](images/listappts.png)<br>
+    ![listappts](images/listapptssuccess.png)<br>
     *Figure 5.2.3a. Listing all appointments*
 
 #### 5.2.4. Edit an appointment: `editappt`
@@ -581,17 +589,20 @@ TAG            | The tag related to the appointment. It must only be <ins>alphan
 DURATION       | The <ins>integer</ins> duration of the appointment in minutes, not spanning more than <ins>one</ins> day and must <ins>not</ins> extend to the next day. <br> E.g. <br> 1. A new appointment at 23:58 can have maximum duration of 1 minute. <br> 2. An appointment at 00:00 can have a maximum duration of 1439 minutes.
 
 **Example:**<br>
-1. Type `editappt 6 on/12-10-2020 12:00` into the command box.
+1. Type `editappt 10 on/12-11-2020 12:00` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Outcome:**
 
-If the INDEX (i.e 6) is valid:
+If the INDEX (i.e 10) is valid:
 1. A success message will be displayed as shown below.
-2. The `DATETIME` of the appointment at index 6 in the recent list will be edited.
-
-    ![editappt](images/editappt.png)<br>
-    *Figure 5.2.4a. Editing an appointment*
+2. The `DATETIME` of the appointment at index 10 in the recent list will be edited.
+    
+    ![editappt](images/beforeeditappt.png)<br>
+    *Figure 5.2.4a. Before editing an appointment*
+    
+    ![editappt](images/aftereditappt.png)<br>
+    *Figure 5.2.4b. Editing an appointment*
 
 **Note:**
 
@@ -621,7 +632,7 @@ Method 1:
 2. Press `Enter` on your keyboard.
 
 Method 2:
-1. Type `cancel on/12-10-2020 12:00 name/Chin` into the command box.
+1. Type `cancel on/12-10-2020 12:00 name/Jackson` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Warning:**
@@ -633,9 +644,12 @@ Method 2 is for convenience only. Use this method only if you are sure that ther
 If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be removed.
-
-    ![cancelappt](images/cancelAppt.png)<br>
-    *Figure 5.2.5a. Cancelling an appointment*
+    
+    ![cancelappt](images/beforecancel.png)<br>
+    *Figure 5.2.5a. Before cancelling an appointment*
+    
+    ![cancelappt](images/aftercancel.png)<br>
+    *Figure 5.2.5b. Cancelling an appointment*
 
 #### 5.2.6. Mark an appointment as done: `done`
 You can use this command to mark an appointment within the system as done either by specifying `INDEX` of the appointment, or the `DATETIME` of the appointment with the `NAME` of the patient.
@@ -654,11 +668,11 @@ DATETIME       | The date followed by the time of the appointment. It must be in
 
 **Example:**<br>
 Method 1:
-1. Type `done 2` into the command box. (Currently, the appointment at Index 2 is Irfan's appointment).
+1. Type `done 7` into the command box.
 2. Press `Enter` on your keyboard.
 
 Method 2:
-1. Type `done on/04-11-2020 20:00 name/Irfan` into the command box.
+1. Type `done on/09-11-2020 13:15 name/Roger` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Warning:**
@@ -670,9 +684,12 @@ Method 2 is for convenience only. Use this method only if you are sure there is 
 If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be marked as done.
-
-    ![markapptdone](images/markApptDone.png)<br>
-    *Figure 5.2.6a. Marking an appointment as done*
+    
+    ![markapptdone](images/beforedone.png)<br>
+    Figure 5.2.6a. Before marking an appointment as done*
+    
+    ![markapptdone](images/afterdone.png)<br>
+    *Figure 5.2.6b. Marking an appointment as done*
    
 **Note:**
 
@@ -697,11 +714,11 @@ DATETIME       | The date followed by the time of the appointment. It must be in
 
 **Example:**<br>
 Method 1:
-1. Type `missed 1` into the command box. (Currently, the appointment at Index 1 is Calvini's appointment).
+1. Type `missed 7` into the command box. (Currently, the appointment at Index 1 is Calvini's appointment).
 2. Press `Enter` on your keyboard.
 
 Method 2:
-1. Type `missed on/31-10-2020 13:30 name/Calvini` into the command box.
+1. Type `missed on/09-11-2020 13:15 name/Roger` into the command box.
 2. Press `Enter` on your keyboard.
 
 **Warning:**
@@ -713,9 +730,12 @@ Method 2 is for convenience only. Use this method only if you are sure that ther
 If the command is valid (i.e. the specified appointment exists):
 1. A success message will be displayed as shown below.
 2. The appointment specified will be marked as missed.
-
-    ![markapptmissed](images/markapptmissed.png)<br>
-    *Figure 5.2.7a. Marking an appointment as missed*
+    
+    ![missed](images/beforemissed.png)<br>
+    *Figure 5.2.7a. Before marking an appointment as missed*
+    
+    ![markapptmissed](images/aftermissed.png)<br>
+    *Figure 5.2.7b. Marking an appointment as missed*
 
 **Note:**
 
@@ -745,19 +765,24 @@ TAG_KEYWORD           | The keyword by which to search for the appointment. It c
 
 1. If the appointment is found, a success message will be displayed as shown below.
 
-    ![findappt](images/findapptbydesc.png)<br>
+    ![findappt](images/findapptsuccess.png)<br>
     *Figure 5.2.8a. Finding an appointment by description*
 
 **Example:**<br>
-1. Type `findappt dr` into the command box.
+1. Type `findappt follow` into the command box.
 2. Press `Enter` on your keyboard. 
 
 **Outcome:**
    
 1. If appointment is found, a succcess message will be displayed as shown below.
     
-    ![findappt](images/findapptbytag.png)<br>
+    ![findappt](images/findapptbytagsuccess.png)<br>
     *Figure 5.2.8b. Finding an appointment by tag*
+
+**Note:**
+
+1. If the `TAG_KEYWORD` is present in the **description** of another appointment, that appointment will be listed as well.
+2. If the `DESCRIPTION_KEYWORD` is present in the **tag** of another appointment, that appointment will be listed as well.
     
 -------------------------------------------------------------------------------
 
@@ -793,7 +818,7 @@ YEAR          | The year you want to switch to. It must be a <ins>4-digit positi
 1. Baymax will switch to the calendar tab.
 2. The year 2019 will be displayed on the top of the window together with the currently selected month.
 
-    ![changeyear](images/changeYear.png)<br>
+    ![changeyear](images/year2019.png)<br>
     *Figure 5.3.1a Changing the year to 2019*
 
 #### 5.3.2. Switch to a particular month: `month`
@@ -812,7 +837,7 @@ MONTH          | The month you want to switch to. It must be a <ins>positive</in
 
 **Example:**<br>
 
-1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
+1. Type `year 2019` into the command box and press Enter to switch to the year 2020.
 2. Type `month 9` or `month september` or `month sep` into the command box.
 3. Press Enter on your keyboard.
 
@@ -820,7 +845,7 @@ MONTH          | The month you want to switch to. It must be a <ins>positive</in
 
 1. The month will be set to September.
 
-    ![changemonth](images/changeMonth.png)<br>
+    ![changemonth](images/month9.png)<br>
     *Figure 5.3.2a. Changing the month to September*
 
 #### 5.3.3. Switch to a particular day: `day`
@@ -836,14 +861,14 @@ DAY            | The day of the month you want to switch to. It must be a <ins>p
 **Example:**<br>
 1. Type `year 2020` into the command box and press Enter to switch to the year 2020.
 2. Type `month 11` into the command box and press enter to switch to the month October.
-3. Type `day 4` into the command box.
+3. Type `day 9` into the command box.
 4. Press Enter on your keyboard.
 
 **Outcome:**<br>
-1. The day 04-11-2020 will be selected.
+1. The day 09-11-2020 will be selected.
 
-    ![changeday](images/scheduleview.png)<br>
-    *Figure 5.3.3a. Viewing the schedule on the 4th November 2020*
+    ![changeday](images/day9.png)<br>
+    *Figure 5.3.3a. Viewing the schedule on the 9th November 2020*
     
 ----------------------------------------------------------------------------------
 
