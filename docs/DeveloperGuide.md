@@ -164,7 +164,9 @@ Figure 7. Delete Appointment Sequence Diagram
 This segment will explain the structure and responsibilities of the Model component.
 
 #### 3.4.1. Structure
+
 ![Structure of the Model Component](images/ModelClassDiagram.png)
+
 Figure 8. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
@@ -197,7 +199,9 @@ The `Model` component,
 This segment will explain the structure and responsibilities of the Storage component.
 
 #### 3.5.1. Structure
+
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
+
 Figure 9. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
@@ -215,8 +219,6 @@ appointments in json format.
 
 ![Structure of `JsonPatientManagerStorage`](images/PatientManagerStorageClassDiagram.png)
 <br>Figure 10. Structure of `JsonPatientManagerStorage`
-
-
 
 #### 3.5.2. Responsibilities
 
@@ -328,7 +330,7 @@ The parameters of the `findpatient` command are keywords in the patient's name t
 E.g. `findpatient alex` will search and list all patients whose name has the word `alex`. 
 
 ![FindPatientActivityDiagram](images/FindPatientActivityDiagram.png)<br>
-<br>Figure 12. Workflow of a `findpatient` command
+Figure 12. Workflow of a `findpatient` command
 
 When the user enters the `findpatient` command to search for a patient, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
 During the parsing, a predicate is created. This predicate checks if a given Patient contains the user input keywords. The `FindPatientCommand` will then receive this predicate when it is created.
@@ -344,7 +346,7 @@ The following steps will describe the execution of the `FindPatientCommand` in d
 The *Sequence Diagram* below summarises the aforementioned steps.
 
 ![FindPatientSequenceDiagram](images/FindPatientSequenceDiagram.png)<br>
-<br>Figure 13. Execution of the `FindPatientCommand`
+Figure 13. Execution of the `FindPatientCommand`
 
 **Note**:
 
@@ -408,7 +410,7 @@ These methods are used by the `AppointmentCommand` classes to execute their logi
 The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
 
 ![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
-<br>Figure 14. Object diagram of `AppointmentManager`
+Figure 14. Object diagram of `AppointmentManager`
 
 
 #### 4.3.1 Rationale
