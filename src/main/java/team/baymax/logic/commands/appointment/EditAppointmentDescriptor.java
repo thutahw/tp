@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import team.baymax.commons.util.CollectionUtil;
-import team.baymax.model.appointment.AppointmentStatus;
 import team.baymax.model.appointment.Description;
 import team.baymax.model.tag.Tag;
 import team.baymax.model.util.datetime.DateTime;

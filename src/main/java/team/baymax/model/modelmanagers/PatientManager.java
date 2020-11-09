@@ -2,14 +2,12 @@ package team.baymax.model.modelmanagers;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.baymax.model.patient.Name;
-import team.baymax.model.patient.NameContainsKeywordsPredicate;
 import team.baymax.model.patient.NameMatchPredicate;
 import team.baymax.model.patient.Nric;
 import team.baymax.model.patient.Patient;

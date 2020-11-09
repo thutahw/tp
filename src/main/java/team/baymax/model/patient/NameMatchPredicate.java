@@ -1,8 +1,6 @@
 package team.baymax.model.patient;
 
-import java.util.List;
 import java.util.function.Predicate;
-import team.baymax.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Patient}'s {@code Name} matches the string given exactly.
