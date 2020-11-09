@@ -377,6 +377,12 @@ Scheduling, viewing, and otherwise dealing with appointments is a key feature ar
  
 These methods are used by the `AppointmentCommand` classes to execute their logic.
 
+The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
+
+![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
+Figure . Object diagram of `AppointmentManager`
+
+
 #### 4.3.1 Rationale
 
 The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
@@ -418,7 +424,7 @@ The only way for the `status` of an `Appointment` to be displayed is for `getSta
 
 **Aspect 4: Backdated `Appointment`s**
 
-To provide flexibility for users, `Appointment`s before the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
+To provide flexibility for users, `Appointment`s beforSe the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
 
 Such appointments are marked `DONE` automatically as it is assumed that it is more important for receptionists to know what `Appointment`s patients have gone for, and thus it is more likely for them to be backdated.
 
@@ -672,11 +678,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 ## **Appendix E: Glossary**
 (Contributed by Reuben Teng)
+
 #### *UI*
 * Abbreviation for User Interface, representing the point of human-computer interaction and communication.
 
 #### *API*
-* Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
+* Abbreviation for Application Programming Interface. It defines interactions between multiple software intermediaries.
 
 #### *OOP*
 * Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
@@ -690,6 +697,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 #### *OS*
 * Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
 
+#### *json*
+* Short for JavaScript Object Notation, referring to a memory-cheap format for storing and transporting data.
+
+#### *csv*
+* Abbreviation for Comma-Separated Values, referring to a plain text file with a list of data, which each value within the data separated by a comma.
+
 #### *Private contact detail*
 * A contact detail that is not meant to be shared with others.
 
@@ -699,6 +712,9 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 #### *Separation of Concerns principle*
 * Principle of separating code into different sections, with each section handling a different concern. This allows for
   a more modular approach to implementation, with changes to one section not affecting another.
+  
+#### *Generics*
+* Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
