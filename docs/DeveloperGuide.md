@@ -52,7 +52,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 <img src="images/ArchitectureDiagram.png" width="450" /><br>
 Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
@@ -95,7 +95,7 @@ This segment will explain the structure and responsibilities of the `UI` compone
 Figure 4. Structure of the UI component
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/ui/Ui.java)
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
@@ -127,7 +127,7 @@ The `UI` component,
 Figure 5. Structure of the Logic Component
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -144,6 +144,7 @@ Figure 6. Delete Appointment Sequence Diagram
 </div>
 
 ### 3.4. Model component
+(Contributed by Kaitlyn Ng & Reuben Teng)
 
 This segment will explain the structure and responsibilities of the Model component.
 
@@ -151,7 +152,7 @@ This segment will explain the structure and responsibilities of the Model compon
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 Figure 7. Structure of the Model Component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
 
 The `Model` component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
 Each type of data is handled by a separate `ListManager` (`PatientManager` and `AppointmentManager`). A `ModelManager` facade class then exposes the methods 
@@ -183,7 +184,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 Figure 8. Structure of the Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
 
 The `Storage` component contains interfaces for `Patient` data (`PatientManagerStorage`) and 
 `Appointment` data (`AppointmentManagerStorage`) which defines methods for reading and saving the `Model` components
@@ -512,17 +513,20 @@ Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
-`year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
+year, month and day. Note that the year, month and day attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
 constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
-`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+`CalendarManager` to update the year, month and day within the `AppointmentCalendar`.
 
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
+![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
+Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
+
 #### 4.4.3. Design Consideration
 
-Aspect: The necessity of an AppointmentCalendar class in the model
+**Aspect:** The necessity of an AppointmentCalendar class in the model
 
 Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
 Pros:
@@ -705,21 +709,6 @@ For all use cases below, unless specified otherwise,
 6. Baymax displays a list of appointments on that given day
 
     Use case ends. <br><br>
-
-> **Use case: List all appointments in the next *n* days**
-
-**MSS**
-
-1. User requests to set the calendar to a particular year
-2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
-4. Baymax calendar switches to the stipulated month in the given year
-5. User requests to list all appointments in the next 7 days
-6. Baymax displays a list of appointments in the next 7 days
-
-    Use case ends. <br><br>
-
-*{More to be added}*
 
 ## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling)
