@@ -113,7 +113,7 @@ public class MarkAppointmentDoneCommandTest {
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         MarkAppointmentDoneCommand markAppointmentDoneCommand = new MarkAppointmentDoneCommand(
-                appointmentChosen.getDateTime(), FIRST_NAME_ALICE);
+                appointmentChosen.getDateTime(), appointmentChosen.getPatient().getName());
 
         String expectedMessage = String.format(MarkAppointmentDoneCommand.MESSAGE_MARK_AS_DONE_SUCCESS,
                 appointmentChosen);

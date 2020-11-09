@@ -24,7 +24,9 @@ import team.baymax.model.Model;
 import team.baymax.model.ModelManager;
 import team.baymax.model.appointment.Appointment;
 import team.baymax.model.modelmanagers.CalendarManager;
+import team.baymax.model.patient.Name;
 import team.baymax.model.userprefs.UserPrefs;
+import team.baymax.model.util.datetime.DateTime;
 
 public class DeleteAppointmentCommandTest {
 
@@ -146,6 +148,7 @@ public class DeleteAppointmentCommandTest {
 
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
+
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
                 Optional.of(appointmentChosen.getDateTime()), Optional.of(appointmentChosen.getPatient().getName()));
 

@@ -38,7 +38,9 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Appointment editedAppointment = new AppointmentBuilder().build();
+        Appointment appointmentToEdit = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
+        Appointment editedAppointment = new AppointmentBuilder().withPatient(appointmentToEdit.getPatient())
+                                        .withIsMissed(appointmentToEdit.checkIfMissed()).build();
 
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(editedAppointment).build();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, descriptor);

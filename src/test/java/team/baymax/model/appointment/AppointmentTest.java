@@ -88,7 +88,7 @@ public class AppointmentTest {
 
     @Test
     public void getStatus() {
-        assertEquals(AppointmentStatus.DONE, ALICE_APT.getStatus());
+        assertEquals(AppointmentStatus.UPCOMING, ALICE_APT.getStatus());
         assertEquals(AppointmentStatus.MISSED, ALICE_APT_VAR_1.getStatus());
         assertEquals(AppointmentStatus.DONE, BOB_APT.getStatus());
     }

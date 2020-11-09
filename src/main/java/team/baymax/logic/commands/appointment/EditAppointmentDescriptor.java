@@ -19,7 +19,6 @@ import team.baymax.model.util.datetime.Duration;
 public class EditAppointmentDescriptor {
     private DateTime dateTime;
     private Duration duration;
-    private AppointmentStatus status;
     private Set<Tag> tags;
     private Description description;
 
@@ -32,7 +31,6 @@ public class EditAppointmentDescriptor {
     public EditAppointmentDescriptor(EditAppointmentDescriptor toCopy) {
         setDateTime(toCopy.dateTime);
         setDuration(toCopy.duration);
-        setStatus(toCopy.status);
         setTags(toCopy.tags);
         setDescription(toCopy.description);
     }
@@ -41,7 +39,7 @@ public class EditAppointmentDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(dateTime, status, tags, description, duration);
+        return CollectionUtil.isAnyNonNull(dateTime, tags, description, duration);
     }
 
     /**
@@ -65,14 +63,6 @@ public class EditAppointmentDescriptor {
 
     public Optional<Duration> getDuration() {
         return Optional.ofNullable(duration);
-    }
-
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
-
-    public Optional<AppointmentStatus> getStatus() {
-        return Optional.ofNullable(status);
     }
 
     /**
@@ -117,7 +107,6 @@ public class EditAppointmentDescriptor {
 
         return getDateTime().equals(e.getDateTime())
                 && getDuration().equals(e.getDuration())
-                && getStatus().equals(e.getStatus())
                 && getTags().equals(e.getTags())
                 && getDescription().equals(e.getDescription());
     }

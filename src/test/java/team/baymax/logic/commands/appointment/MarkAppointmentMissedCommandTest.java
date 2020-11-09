@@ -115,7 +115,7 @@ public class MarkAppointmentMissedCommandTest {
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         MarkAppointmentMissedCommand markAppointmentDoneCommand = new MarkAppointmentMissedCommand(
-                appointmentChosen.getDateTime(), FIRST_NAME_ALICE);
+                appointmentChosen.getDateTime(), appointmentChosen.getPatient().getName());
 
         String expectedMessage = String.format(MarkAppointmentMissedCommand.MESSAGE_MARK_AS_MISSED_SUCCESS,
                 appointmentChosen);
