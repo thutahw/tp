@@ -78,10 +78,10 @@ Figure 2. Class Diagram of the Logic Component
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteappt 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletepatient 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-Figure 3. Architecture Sequence Diagram<br><br>
+Figure 3. Architecture Sequence Diagram
 
 The sections below give more details of each component.
 
@@ -123,6 +123,10 @@ The `UI` component,
 
 ### 3.3. Logic component
 
+This segment will explain the structure and responsibilities of the Logic component.
+
+#### 3.3.1 Structure
+
 ![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
 Figure 5. Structure of the Logic Component
 
@@ -135,7 +139,9 @@ Figure 5. Structure of the Logic Component
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
+#### 3.3.2 Responsibilities
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
 Figure 6. Delete Appointment Sequence Diagram
@@ -532,46 +538,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
 | `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
 | `* * *`  | receptionist of a clinic                   | update a patient's contact information after they change it | contact them if needed         |
-| `* * *`  | receptionist of a clinic                   | find a patient by their name  |  easily view their details when needed          |
-| `* * *`  | receptionist of a clinic                   | delete a patient               |            |
+| `* * *`  | receptionist of a clinic                   | find a patient by their name  |  easily view their information when needed          |
+| `* * *`  | receptionist of a clinic                   | delete a patient               | remove accidentally-added patients         |
 | `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
-| `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
-| `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
+| `* * *`  | receptionist of a clinic                   | list all appointments of a patient | track patient's medical progress, check how long ago the patient's previous appointment was, check for future appointments etc. |
 | `* * *`  | receptionist of a clinic                   | delete an existing appointment | remove cancelled appointments                               |
-| `* *`    | busy receptionist of a clinic              | find patients by name          | quickly retrieve the patient's information given just the patient's name |
-| `* *`    | receptionist of a busy clinic              | find patient by NRIC           | find patients using a unique ID if there are multiple patients with the same name |
-| `* *`    | receptionist of a clinic using the app for the first time | clear all current patient data | get rid of sample/experimental data I used for exploring the app |
-| `* *`    | receptionist of a clinic with busy patients | change a patient's appointment date | accommodate for last-minute changes in the patient's schedule |
-| `* *`    | receptionist of a clinic                   | delete all existing appointments of a patient | change all of a patient's appointments in the case of recovery or a serious change in medical condition |
+| `* * *`    | receptionist of a clinic                   | list all the appointments of the clinic | have a detailed view of all the appointments in any period I want to look at |
 | `* *`    | receptionist of a clinic                   | mark an appointment as missed | keep track of which appointments did not occur due to various circumstances, and possibly arrange for other appointments in its place |
-| `*`      | receptionist of a patient-centric clinic     | add preferred but currently unavailable slots for patient's appointments | give patients their more preferred slot if it is becomes available |
-| `*`      | careless receptionist in the clinic          | undo appointment deletion       | restore appointments that I accidentally delete           |
-| `*`      | careless receptionist in the clinic          | backdate an appointment         | add in appointments that I accidentally missed out        |
-| `* *`    | receptionist of a clinic                   | view all the coming appointments in a particular year | have a gauge of the business of the clinic over that year |
-| `* *`    | receptionist of a clinic                   | display daily availability status of a month |                                                |
-| `* *`    | receptionist of a clinic                   | display the coming appointments in the next n days | gauge the business of the clinic in the next few days |
-| `* *`    | receptionist of a clinic                   | display all the appointments on a particular day | check the availability of the clinic on that day to arrange for other appointments |
+| `* *`    | receptionist of a busy clinic              | display an overview of the availability status of each day in a month | quickly advise patients on when they can book an appointment |
+| `* *`    | receptionist of a clinic with busy patients | change an appointment's date and time | accommodate for last-minute changes in the patient's schedule |
+| `* *`    | receptionist of a clinic using the app for the first time | clear all current patient data | get rid of sample/experimental data I used for exploring the app |
+| `* *`    | receptionist of a clinic                   | view the schedule for a particular day | check the availability of the clinic on that day to arrange for other appointments, or to check what time the appointments for the current day are |
+| `* *`      | careless receptionist in the clinic          | backdate an appointment         | add in appointments that I accidentally missed out        |
 | `*`      | receptionist of a clinic using the app for the first time | see sample data in the app | visualise how the app looks like when it is in use and interact with existing data |
-
+| `*`    | receptionist of a clinic                   | display the coming appointments in the next n days | gauge the business of the clinic in the next few days |
+| `*`      | receptionist of a patient-centric clinic     | add preferred but currently unavailable slots for patient's appointments | give patients their more preferred slot if it becomes available |
+| `*`      | careless receptionist in the clinic          | undo whatever I just did     | correct accidental changes (especially deletions)      |
 
 ## **Appendix C: Use cases**
 (Contributed by Li Jianhan and Shi Hui Ling)
 
 For all use cases below, unless specified otherwise,
 
-**System:** Baymax
-
-**Actor:** User (Clinic Receptionist)
+- **System:** Baymax
+- **Actor:** User (Clinic Receptionist)
 
 #### Patient Profile Management
 
-> **Use case: Edit a patient’s profile**
+> **Use case 1: Add a patient**
 
 **MSS**
 
-1. User requests to displays the patient’s profile
-2. Baymax displays the patient profile
-3. User requests to edit the patient’s profile
+1. User requests to add a patient
+2. Baymax adds the patient
+3. Baymax displays a success message with details of the patient added
+4. Baymax saves the changes
+
+    Use case ends. 
+
+**Extensions**
+
+* 1a. Missing information for a field, e.g. Nric, Phone
+    * 1a1. Baymax displays an invalid command message that details all the fields needed for the command
+    Use case ends.
+
+> **Use case 2: Edit a patient’s information**
+
+**MSS**
+
+1. User requests to edit a patient
+2. Baymax edits the patient's information
+3. Baymax displays the edited patient with details
 4. Baymax saves the changes
 
     Use case ends.
@@ -579,75 +596,156 @@ For all use cases below, unless specified otherwise,
 **Extensions**
 
 * 1a. Patient does not exist
-	* 1a1. Baymax displays a not found message
+	* 1a1. Baymax displays an invalid input message
+    Use case ends.
 
-    Use case ends
+* 1b. No fields specified for editing
+    * 1b1. Baymax displays an "at least one field must be specified" invalid input message
+    Use case ends.
 
-* 2a. The given user ID is invalid
-	* 2a1. Baymax displays an error message
-
-	Use case ends.<br><br>
-
-> **Use case: Delete a patient’s profile**
+> **Use case 3: Delete a patient**
 
 **MSS**
 
-1. User requests to display the patient’s profile
-2. Baymax displays the patient's profile
-3. User requests to delete the patient’s profile
-4. Baymax deletes the patient profile
+1. User requests to delete a patient
+2. Baymax deletes the patient 
+3. Baymax displays success message with details of patient deleted
+4. Baymax saves the changes
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Patient does not exist
-	* 1a1. Baymax displays a not found message
+	* 1a1. Baymax displays an invalid input message
+    Use case ends.
+    
+> **Use case 4: Find patient(s) by name**
 
-    Use case ends
+**MSS**
 
-* 2a. The given user ID is invalid
-	* 2a1. Baymax displays an error message
+1. User requests to find patient by name
+2. Baymax finds all patients that contain the search string in their name
+3. Baymax displays a success message of how many matching patients are found (may be zero)
+and a list of all these patients with their details 
 
-	Use case ends.<br><br>
+    Use case ends.
+    
+> **Use case 5: List all patients**
+
+**MSS**
+
+1. User requests to list all patients to view
+2. Baymax displays a success message and a list of all patients in the system
+
+    Use case ends.
 
 #### Appointment Management
 
-> **Use case: Change the date of an appointment**
+> **Use case 6: Add an appointment**
 
 **MSS**
 
-1. User requests to display an appointment
-2. Baymax displays the requested appointment
-3. User requests to change the date of appointment
-4. Baymax changes the date of the appointment
+1. User requests to add an appointment to a patient
+2. Baymax adds the appointment
+3. Baymax displays a success message with details of the appointment added
+4. Baymax saves the changes
 
-    Use case ends. <br><br>
+    Use case ends. 
 
-> **Use case: Delete an appointment on a particular day**
+**Extensions**
+
+* 1a. Patient does not exist
+    * 1a1. Baymax displays an invalid input message
+    Use case ends.
+
+* 1b. Missing information for a field, e.g. Duration, Description
+    * 1a1. Baymax displays an invalid command message that details the fields needed for the command
+    Use case ends.
+
+> **Use case 7: List all appointments of a patient**
 
 **MSS**
-1. User requests to <ins>list out all appointments on a particular day</ins>
-2. Baymax displays the appointments
-3. User requests to delete the appointment
-4. Baymax deletes the appointment
 
-    Use case ends. <br><br>
+1. User requests to list all appointments of a particular patient
+2. Baymax displays a success message and filters the display list to show all appointments of the patient
+
+    Use case ends.
+
+**Extensions**
+
+*1a. Patient specified does not exist
+    * 1a1. Baymax displays an invalid input message specific to how the patient was specified 
+    (by Name, Nric, or Index in the list)
+    Use case ends.
+
+> **Use case 8: Mark an appointment as missed**
+
+**MSS**
+
+1. User requests to mark a certain appointment as missed
+2. Baymax displays a success message and filters the display list to 
+show only the appointment that has just been marked as missed
+3. Baymax saves the changes
+
+    Use case ends.
+    
+**Extensions**
+
+*1a. Appointment specified does not exist
+    *1a1. Baymax displays an invalid input message
+    Use case ends.
+
+> **Use case 9: Mark an appointment as done**
+
+Similar to `Use case 8: Mark an appointment as missed` except there is a **precondition**.
+
+**Precondition:** Appointment has already past (i.e. the date and time is past current date and time). 
+
+> **Use case 10: Edit an appointment**
+
+Similar to `Use case 2: Edit a patient's information` except for an appointment instead of a patient
+
+> **Use case 11: Cancel an appointment**
+
+Similar to `Use case 3: Delete a patient` except for an appointment instead of a patient
+
+> **Use case 12: Find appointment(s) by keyword**
+
+Similar to `Use case 4: Find patient(s) by name` except Baymax finds all appointments that contain 
+the search string in their remark or tags. 
+
+> **Use case 13: List all appointments**
+
+Similar to `Use case 5: List all patients` except for appointments instead of patients.
 
 #### Calendar
 
-> **Use case: List all appointments on a particular day**
+> **Use case 14: View appointment schedule on a particular day**
 
 **MSS**
 
-1. User requests to set the calendar to a particular year
+1. User requests to view the calendar of a particular year
 2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
+3. User requests to view the calendar of a particular month
 4. Baymax calendar switches to the stipulated month in the given year
-5. User requests to list all appointments on a given day in that month
-6. Baymax displays a list of appointments on that given day
+5. User requests to view the calendar of a particular day
+6. Baymax switches to a schedule / timetable view of all the appointments on the given day
 
-    Use case ends. <br><br>
+    Use case ends.
+    
+**Extensions**
+
+*1a. Year specified is beyond the limits allowed by Baymax
+    *1a1. Baymax displays an invalid input message specifying the allowed input
+    Use case ends.
+*3a. Month specified is not a valid month (e.g. 13)
+    *1a1. Baymax displays an invalid input message specifying the allowed input
+    Use case ends.
+*5a. Day specified is not a valid day in the month (e.g. 30 when in February)
+    *1a1. Baymax displays an invalid input message specifying the allowed input
+    Use case ends.
+
 
 ## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling)
@@ -728,6 +826,7 @@ For all use cases below, unless specified otherwise,
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
+(Contributed by Kaitlyn Ng and Li Jianhan)
 
 Given below are instructions to test the app manually.
 
