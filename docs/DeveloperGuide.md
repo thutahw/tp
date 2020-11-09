@@ -2,8 +2,31 @@
 layout: page
 title: Baymax - Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+1. [Introduction](#1-introduction)<br>
+2. [Setting up](#2-setting-up-getting-started)<br>
+3. [Design](#3-design)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1. [Architecture](#31-architecture)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2. [UI Component](#32-ui-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
+4. [Implementation](#4-implementation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-manager)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
+5. [Documentation](#5-documentation)<br>
+6. [Testing](#6-testing)<br>
+7. [Dev Ops](#7-dev-ops)<br>
+[Appendix A: Product Scope](#appendix-a-product-scope)<br>
+[Appendix B: User Stories](#appendix-b-user-stories)<br>
+[Appendix C: Use Cases](#appendix-c-use-cases)<br>
+[Appendix D: Non-functional Requirements](#appendix-d-non-functional-requirements)<br>
+[Appendix E: Glossary](#appendix-e-glossary)<br>
+[Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)<br>
+
 --------------------------------------------------------------------------------------------------------------------
 ## **1. Introduction**
 
@@ -91,7 +114,7 @@ Each of these classes (except InfoPage) displays data from the `Model` to the us
 For example, The PatientInfoPage and AppointmentInfoPage display lists of patients and appointments respectively. Hence they contain `XYZListPanel` (shown in the diagram below), which in turn contains a collection of `XYZCard` that displays each data field in the Patient and Appointment class.
 
 ![Structure of an XYZPage](images/UiXYZPageClassDiagram.png)<br>
-Figure 5. Structure of Generic XYZPage Class Diagram
+Figure 5. Structure of Generic `XYZPage` Class Diagram
 
 #### 3.2.2. Responsibilities
 
