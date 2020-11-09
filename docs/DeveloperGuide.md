@@ -163,7 +163,9 @@ Figure 7. Delete Appointment Sequence Diagram
 This segment will explain the structure and responsibilities of the Model component.
 
 #### 3.4.1. Structure
-![Structure of the Model Component](images/ModelClassDiagram.png)<br>
+
+![Structure of the Model Component](images/ModelClassDiagram.png)
+
 Figure 8. Structure of the Model Component
 
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
@@ -192,7 +194,9 @@ The `Model` component,
 This segment will explain the structure and responsibilities of the Storage component.
 
 #### 3.5.1. Structure
-![Structure of the Storage Component](images/StorageClassDiagram.png)<br>
+
+![Structure of the Storage Component](images/StorageClassDiagram.png)
+
 Figure 9. Structure of the Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
@@ -450,9 +454,11 @@ Implementation of obtaining patient from `name` supplied:
 | Option 1: (Current choice): Require matching of full name | Much less likely to only have one Patient of that name. As we only want to display the appointments of one Patient, this is important. | Longer for user to type. |
 | Option 2: Matching via keyword (i.e. name only has to *contain* the search string) | More user-friendly. | Much more likely to end up with appointments of multiple patients. For example, matching of keywords like "Alex Yeoh" will return appointments belonging to all Patients with "Alex" as well as with "Yeoh" in their names, which is most likely not what users want. |
 
-<br>Reason for choosing Option 1:
+
+Reason for choosing Option 1: 
 
 Users are more likely to want a list of appointments of a single patient whose name matches their search, as appointments mixed from multiple patients can be confusing. As such, we will sacrifice a bit of user-friendliness for accuracy.
+
 
 **Aspect 4: `cancel` Command** 
  
@@ -473,8 +479,12 @@ The Calendar feature also helps to shorten commands by allowing the user to only
 
 Below is an example of the sequence diagram when the user executes an AddAppointment command without specifying a date. The diagram illustrates how the CalendarManager is used to automatically set the date of the appointment.
 
-![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)
-<br>Figure 15. Execution of an AddAppointment command with the help of CalendarManager
+![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
+<br>Figure 15. Add Appointment Sequence Diagram involving the `CalendarManager`
+
+**Note:**
+
+1. The lifeline for the `AddAppointmentCommandParser` and `AddAppointmentCommand` should end at the destroy mark (X). However, due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set year, month and day. Note that the `Year`, `Month` and `Day` attributes may not necessarily be storing the present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and constructs a `YearCommand`, `MonthCommand` and `DayCommand` respectively. Upon execution, the `ModelManager` calls upon the `CalendarManager` to update the `Year`, `Month` and `Day` within the `AppointmentCalendar`.
@@ -482,7 +492,7 @@ The `CalendarManager` class in the `Model` component contains an `AppointmentCal
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the `Year` in the `AppointmentCalendar` managed by the `CalendarManager`.
 
 ![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
-Figure 16. Sequence Diagram for Switching to a Particular Year in the Calendar
+<br>Figure 16. Switch Year Sequence Diagram
 
 **Note:**
 
@@ -850,7 +860,7 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
 #### *Generics*
 * Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
 
-
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
@@ -939,19 +949,22 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `cancel`, `cancel x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Saving data
+### F.5. Saving data
 
-1. Saving patient data
+#### F.5.1. Saving Patient Data
+1. Ensuring that patient data is saved when application is closed and re-opened
     1. Prerequisites: Perform one of the tests for adding, deleting or editing patient data above.
     1. Close the application. Open the application again.
        Expected: Patients listed in the application should be updated to reflect the latest change made.
 
-2. Saving appointment data
+#### F.5.2. Saving Appointment Data
+1. Ensuring that appointment data is saved when application is closed and re-opened
     1. Prerequisites: Perform one of the tests for adding, deleting or editing appointment data above.
     1. Close the application. Open the application again.
        Expected: Appointments listed in the application should be updated to reflect the latest change made.
-       
-2. Dealing with missing/corrupted data files 
+
+#### F.5.3. Dealing with missing/corrupted data
+1.  Ensure that the application is able to function normally even with missing or corrupted data files
    1. Test case: Delete `patients.json` and `appointments.json` files in the Baymax application in `/data` folder. Start up the application as usual.
       Expected: Baymax application is populated with sample data.
    1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
