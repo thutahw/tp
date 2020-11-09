@@ -17,7 +17,7 @@ Given below are my contributions to the project.
   for cases where a patient cancels an appointment.
   * Highlights: The implementation of this was very challenging as it required first figuring out / setting up the functionalities for finding an appointment by its matching `DateTime` and `Patient`,
   and finding a `Patient` by a supplied `Name` or `Nric` (originally -- this was reduced to just `Name` to simplify the command). 
-  These required adding new methods in `AppointmentManager` and `ModelManager`, making use of existing methods in `UniqueList` (such as `getByPredicate`). These were very helpful for commands that were then added in the future.
+  These required adding new `Predicate` classes and new methods in `AppointmentManager` and `ModelManager`, as well as making use of existing methods in `UniqueList` (such as `getByPredicate`). These were helpful for commands added in the future.
 
 * **New Feature**: Added the ability to find appointment(s) by keywords matching their remark or tags
   * [\#175](https://github.com/AY2021S1-CS2103T-W12-3/tp/pull/175)
