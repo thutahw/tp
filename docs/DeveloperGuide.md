@@ -122,6 +122,7 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 ### 3.3. Logic component
+(Contributed by Li Jianhan and Shi Hui Ling)
 
 This segment will explain the structure and responsibilities of the Logic component.
 
@@ -134,14 +135,20 @@ Figure 5. Structure of the Logic Component
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
-2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on AppointmentManager).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
+2. `AppointmentBookParser` creates a specific `XYZCommandParser` instance to parse the arguments for the `XYZ` command.
+3. This results in a `Command` object which is executed by the `LogicManager`.
+4. The command execution can affect the `Model` (e.g. adding an appointment, which is executed by the `ModelManager`, calling on `AppointmentManager`).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `LogicManager` and passed back to the `Ui`.
+6. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
 #### 3.3.2 Responsibilities
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
+The `Logic` component
+* Parses user commands and arguments using `Parser` classes
+* Executes user commands using `Command` classes -- this changes `Model` as required for the command, saves any changes to `Storage`, and 
+reflects changes to `Ui` to display.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call to illustrate.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
 Figure 6. Delete Appointment Sequence Diagram
@@ -183,6 +190,7 @@ The `Model` component,
 * Represents data in `ObservableList` to automatically update the GUI when there is a change
 
 ### 3.5. Storage component
+(Contributed by Kaitlyn Ng)
 
 This segment will explain the structure and responsibilities of the Storage component.
 
@@ -204,14 +212,14 @@ json files. The path to these files are obtained from the `UserPref` object.
 #### 3.5.2. Responsibilities
 
 The `Storage` component,
-* can save `UserPref` objects in json format.
-* can parse a json file in the correct format to get a `UserPref` object.  
-* can save `Patient` and `Appointment` data in json format. 
-* can parse a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
+* Saves `UserPref` objects in json format.
+* Parses a json file in the correct format to get a `UserPref` object.  
+* Saves `Patient` and `Appointment` data in json format. 
+* Parses a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
 ### 3.6. Common classes
 
-Classes used by multiple components are in the `team.baymax.commons` package.
+Classes used by multiple components are in the `team.baymax.commons` package. 
 
 --------------------------------------------------------------------------------------------------------------------
 
