@@ -408,17 +408,10 @@ To ensure that `Appointment`s are json serialisable for `Storage` in the same wa
 
 Automated the marking of an `Appointment` as `DONE` after the deadline has passed, and giving receptionists the ability to mark `Appointment`s as missed.
 
-Option 1: Periodically check the `Datetime` of an `Appointment` that is still marked `UPCOMING` against the current `Datetime`, marking it as `DONE` if the current `Datetime` is after that of the `Appointment`.
-
-* Pros: Keeps stored data perpetually up-to-date.
-
-* Cons: Constant comparision become computationally intensive when there are many `UPCOMING` appointments. 
-  
-Option 2: Check `Datetime` of `Appointment` against current `Datetime` only when `getStatus()` method called
-
-* Pros: Computation is performed when the value of `status` is needed, resulting in reduced performance cost.
-
-* Cons: Architecture becomes less intuitive as `status` is no longer stored.
+|                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Option 1: Periodically check the `Datetime` of an `Appointment` that is still marked  `UPCOMING` against the current `Datetime`, marking it as `DONE` if the current  `Datetime` is after that of the `Appointment` . | Keeps stored data perpetually up-to-date.                                                                | Constant comparision become computationally intensive when there are many  `UPCOMING` appointments. |
+| Option 2 (Current Choice): Check `Datetime` of `Appointment` against current `Datetime`  only when `getStatus()` method is called.                                                                                    | Computation is performed when the value of  `status` is needed, resulting in reduced computational cost. | Architecture becomes less intuitive as `status` is no longer stored.                                |
 
 Reason for choosing Option 2:
 While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
@@ -815,8 +808,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Saving patient data
+    1. Prerequisites: Perform one of the tests for adding, deleting or editing patient data above.
+    1. Close the application. Open the application again.
+       Expected: Patients listed in the application should be updated to reflect the latest change made.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Saving appointment data
+    1. Prerequisites: Perform one of the tests for adding, deleting or editing appointment data above.
+    1. Close the application. Open the application again.
+       Expected: Appointments listed in the application should be updated to reflect the latest change made.
+       
+2. Dealing with missing/corrupted data files 
+   1. Test case: Delete `patients.json` and `appointments.json` files in the Baymax application in `/data` folder. Start up the application as usual.
+      Expected: Baymax application is populated with sample data.
+   1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
+    Expected: Baymax application is populated with sample data.
