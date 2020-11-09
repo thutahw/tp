@@ -439,10 +439,17 @@ Such appointments are marked `DONE` automatically as it is assumed that it is un
 
 **Aspect 3: `listapptsof` Command**
 
+Maintaining appointment lists:
 |                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | Option 1: (Current choice): Filtering global appointment list by matching `Patient` of the appointment with `Patient` specified | Simpler implementation of other commands: `add`, `edit`, `delete` only need to change one list. Also, the `listapptsof` Command will make use of `AppointmentManager`'s `findByPredicate` method, which is the same method used by other `find` commands and hence making the codebase more uniform. | Slower in returning the list of appointments belonging to the patient. |
-| Option 2 Storing an appointment list inside of each `Patient` (in addition to the global list) | Faster and more intuitive way of returning the list of appointments belonging to a patient. | Creates additional work for other appointment commands, which complicates implementation. |
+| Option 2: Storing an appointment list inside of each `Patient` (in addition to the global list) | Faster and more intuitive way of returning the list of appointments belonging to a patient. | Creates additional work for other appointment commands, which complicates implementation. |
+
+Searching of patient by name:
+|                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Option 1: (Current choice): Matching of full name | Much less likely to only have one Patient of that name. As we only want to display the appointments of one Patient, this is important. | Longer for user to type. |
+| Option 2: Matching via keyword (i.e. name only has to *contain* the search string) | More user-friendly. | Much more likely to end up with appointments of multiple patients. For example, matching of keywords like "Alex Yeoh" will return appointments belonging to all Patients with "Alex" as well as with "Yeoh" in their names. |
 
 **Aspect 4: `cancel` Command** 
  
