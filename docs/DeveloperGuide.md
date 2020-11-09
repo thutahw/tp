@@ -45,7 +45,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-### **3.1. Architecture**
+### **3.1 Architecture**
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -261,7 +261,7 @@ future. Option 1 increases modularity of the code to create more opportunities f
 changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
 to unnecessary dependencies between data types.
 
-**Aspect: Extract common CRUD operations with a generic class**
+**Aspect 2: Extract common CRUD operations with a generic class**
 
 |                                                                                                                                                                                                                                                  | Pros                                                                                                                                                                           | Cons                                                                                                                   |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
@@ -378,6 +378,12 @@ Scheduling, viewing, and otherwise dealing with appointments is a key feature ar
  
 These methods are used by the `AppointmentCommand` classes to execute their logic.
 
+The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
+
+![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
+Figure . Object diagram of `AppointmentManager`
+
+
 #### 4.3.1 Rationale
 
 The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
@@ -388,58 +394,40 @@ Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`,
 
 #### 4.3.3. Design Consideration
 
-**Aspect 1: `deleteappt` Command** 
+**Aspect 1: `cancel` Command** 
  
-For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+For this command, we only required the specifying of `DateTime` of the appointment, and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
 
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
+Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
 
 **Aspect 2: `nric` field**
 
 To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
-### **4.3 Appointment Manager**
-(Contributed by Shi Hui Ling & Reuben Teng)
+**Aspect 3: Marking of Appointment `status` attribute**
 
-Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+Automated the marking of an `Appointment` as `DONE` after the deadline has passed, and giving receptionists the ability to mark `Appointment`s as missed.
 
-`AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
- 1. Adding an appointment
- 2. Editing an appointment
- 3. Deleting an appointment
- 4. Finding a specific appointment by `Patient` and `DateTime`
- 5. Sorting the list of appointments
- 
-These methods are used by the `AppointmentCommand` classes to execute their logic.
+Option 1: Periodically check the `Datetime` of an `Appointment` that is still marked `UPCOMING` against the current `Datetime`, marking it as `DONE` if the current `Datetime` is after that of the `Appointment`.
 
-#### 4.3.1 Rationale
+* Pros: Keeps stored data perpetually up-to-date.
 
-The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+* Cons: Constant comparision become computationally intensive when there are many `UPCOMING` appointments. 
+  
+Option 2: Check `Datetime` of `Appointment` against current `Datetime` only when `getStatus()` method called
 
-#### 4.3.2. Current Implementation
+* Pros: Computation is performed when the value of `status` is needed, resulting in reduced performance cost.
 
-Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+* Cons: Architecture becomes less intuitive as `status` is no longer stored.
 
-#### 4.3.3. Design Consideration
+Reason for choosing Option 2:
+While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
-**Aspect 1: `deleteappt` Command** 
- 
-For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the 
-`Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt 
-for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed 
-correct" way (by `nric`).
+**Aspect 4: Backdated `Appointment`s**
 
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have 
-those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command 
-more succinct and easy to use for receptionists. It is also easier implementation-wise.
+To provide flexibility for users, `Appointment`s beforSe the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
 
-**Aspect 2: `nric` field**
-
-To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the 
-`Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely 
-identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the 
-`nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the 
-existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
+Such appointments are marked `DONE` automatically as it is assumed that it is more important for receptionists to know what `Appointment`s patients have gone for, and thus it is more likely for them to be backdated.
 
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
@@ -471,18 +459,20 @@ Figure X. Execution of an AddAppointment command with the help of CalendarManage
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
-`year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
+year, month and day. Note that the year, month and day attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
 constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
-`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+`CalendarManager` to update the year, month and day within the `AppointmentCalendar`.
 
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
+![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
+Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
 
 #### 4.4.3. Design Consideration
 
-Aspect: The necessity of an AppointmentCalendar class in the model
+**Aspect:** The necessity of an AppointmentCalendar class in the model
 
 |                                                                                                     | Pros                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Cons                                                                                                                                                                                                                                       |
 |-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -542,10 +532,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | forgetful receptionist of a clinic         | display all available commands | refer to the list of commands when I forget them            |
 | `* * *`  | receptionist of a clinic                   | add a new patient              |                                                             |
 | `* * *`  | receptionist of a clinic                   | list out all patients          |                                                             |
-| `* * *`  | receptionist of a clinic                   | add a patient's contact information | contact them if needed                                 |
-| `* * *`  | receptionist of a clinic                   | add a patient's emergency contact information | contact the patient's family members in times of emergencies |
-| `* * *`  | receptionist of a clinic                   | view a patient's profile       |                                                             |
-| `* * *`  | receptionist of a clinic                   | delete a patient profile       |                                                             |
+| `* * *`  | receptionist of a clinic                   | update a patient's contact information after they change it | contact them if needed         |
+| `* * *`  | receptionist of a clinic                   | find a patient by their name  |  easily view their details when needed          |
+| `* * *`  | receptionist of a clinic                   | delete a patient               |            |
 | `* * *`  | receptionist of a clinic                   | add an appointment for a patient |                                                           |
 | `* * *`  | receptionist of a clinic                   | list a patient's appointment history | keep track of it in case of future reference (like to track patient's medical progress through frequency of appointments) |
 | `* * *`  | receptionist of a clinic                   | list a patient's future appointments | remind them of the appointments that they have made   |
@@ -569,7 +558,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix C: Use cases**
 (Contributed by Li Jianhan and Shi Hui Ling)
 
-For all use cases below, the **System** is `Baymax` and the **Actor** is the `user`, unless specified otherwise.
+For all use cases below, unless specified otherwise,
+
+**System:** Baymax
+
+**Actor:** User (Clinic Receptionist)
 
 #### Patient Profile Management
 
@@ -657,21 +650,6 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
     Use case ends. <br><br>
 
-> **Use case: List all appointments in the next *n* days**
-
-**MSS**
-
-1. User requests to set the calendar to a particular year
-2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
-4. Baymax calendar switches to the stipulated month in the given year
-5. User requests to list all appointments in the next 7 days
-6. Baymax displays a list of appointments in the next 7 days
-
-    Use case ends. <br><br>
-
-*{More to be added}*
-
 ## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling)
 
@@ -711,11 +689,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 
 ## **Appendix E: Glossary**
 (Contributed by Reuben Teng)
+
 #### *UI*
 * Abbreviation for User Interface, representing the point of human-computer interaction and communication.
 
 #### *API*
-* Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
+* Abbreviation for Application Programming Interface. It defines interactions between multiple software intermediaries.
 
 #### *OOP*
 * Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
@@ -729,6 +708,12 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 #### *OS*
 * Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
 
+#### *json*
+* Short for JavaScript Object Notation, referring to a memory-cheap format for storing and transporting data.
+
+#### *csv*
+* Abbreviation for Comma-Separated Values, referring to a plain text file with a list of data, which each value within the data separated by a comma.
+
 #### *Private contact detail*
 * A contact detail that is not meant to be shared with others.
 
@@ -738,6 +723,9 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 #### *Separation of Concerns principle*
 * Principle of separating code into different sections, with each section handling a different concern. This allows for
   a more modular approach to implementation, with changes to one section not affecting another.
+  
+#### *Generics*
+* Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**

@@ -13,11 +13,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.model.util.uniquelist.UniqueList;
 import team.baymax.model.util.uniquelist.exceptions.DuplicateElementException;
 import team.baymax.model.util.uniquelist.exceptions.ElementNotFoundException;
 import team.baymax.testutil.patient.PatientBuilder;
+import team.baymax.testutil.patient.PatientUtil;
 
 public class UniquePatientListTest {
 
@@ -42,7 +42,7 @@ public class UniquePatientListTest {
     @Test
     public void contains_patientWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientUtil.VALID_TAG_DIABETIC)
                 .build();
         assertTrue(uniquePatientList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniquePatientListTest {
     @Test
     public void setPatient_editedPatientHasSameIdentity_success() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC)
+        Patient editedAlice = new PatientBuilder(ALICE).withTags(PatientUtil.VALID_TAG_DIABETIC)
                 .build();
         uniquePatientList.setElement(ALICE, editedAlice);
         UniqueList<Patient> expectedUniquePatientList = new UniqueList<>();

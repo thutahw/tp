@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import team.baymax.logic.commands.patient.PatientCommandTestUtil;
 import team.baymax.model.modelmanagers.PatientManager;
 import team.baymax.model.patient.Patient;
 
@@ -83,18 +82,16 @@ public class TypicalPatients {
             .build();
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
-    public static final Patient AMY = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_AMY)
-            .withName(PatientCommandTestUtil.VALID_NAME_AMY).withPhone(PatientCommandTestUtil.VALID_PHONE_AMY)
-            .withGender(PatientCommandTestUtil.VALID_GENDER_AMY).withTags(PatientCommandTestUtil.VALID_TAG_LTP)
-            .withRemark(PatientCommandTestUtil.VALID_REMARK_AMY).build();
+    public static final Patient AMY = new PatientBuilder().withNric(PatientUtil.VALID_NRIC_AMY)
+            .withName(PatientUtil.VALID_NAME_AMY).withPhone(PatientUtil.VALID_PHONE_AMY)
+            .withGender(PatientUtil.VALID_GENDER_AMY).withTags(PatientUtil.VALID_TAG_LTP)
+            .withRemark(PatientUtil.VALID_REMARK_AMY).build();
 
-    public static final Patient BOB = new PatientBuilder().withNric(PatientCommandTestUtil.VALID_NRIC_BOB)
-            .withName(PatientCommandTestUtil.VALID_NAME_BOB).withPhone(PatientCommandTestUtil.VALID_PHONE_BOB)
-            .withGender(PatientCommandTestUtil.VALID_GENDER_BOB)
-            .withTags(PatientCommandTestUtil.VALID_TAG_DIABETIC, PatientCommandTestUtil.VALID_TAG_LTP)
-            .withRemark(PatientCommandTestUtil.VALID_REMARK_BOB).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final Patient BOB = new PatientBuilder().withNric(PatientUtil.VALID_NRIC_BOB)
+            .withName(PatientUtil.VALID_NAME_BOB).withPhone(PatientUtil.VALID_PHONE_BOB)
+            .withGender(PatientUtil.VALID_GENDER_BOB)
+            .withTags(PatientUtil.VALID_TAG_DIABETIC, PatientUtil.VALID_TAG_LTP)
+            .withRemark(PatientUtil.VALID_REMARK_BOB).build();
 
     private TypicalPatients() {} // prevents instantiation
 

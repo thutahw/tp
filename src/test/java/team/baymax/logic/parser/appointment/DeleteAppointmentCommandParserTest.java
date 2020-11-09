@@ -7,7 +7,7 @@ import static team.baymax.logic.commands.appointment.AppointmentCommandTestUtil.
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.baymax.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_FIRST_APPOINTMENT;
-import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME6;
+import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME5;
 import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_ALICE;
 import static team.baymax.testutil.patient.TypicalFirstNames.VALID_FIRST_NAME_ALICE;
 
@@ -37,7 +37,7 @@ public class DeleteAppointmentCommandParserTest {
     public void parse_validArgsDateTimeAndName_returnsDeleteCommand() {
 
         assertParseSuccess(parser, VALID_DESC_DATETIME_1 + VALID_FIRST_NAME_ALICE,
-                new DeleteAppointmentCommand(Optional.of(DATETIME6), Optional.of(FIRST_NAME_ALICE)));
+                new DeleteAppointmentCommand(Optional.of(DATETIME5), Optional.of(FIRST_NAME_ALICE)));
 
     }
 

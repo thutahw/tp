@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+Object "__m:AppointmentManager__" as AppointmentManager MODEL_COLOR_T1  {
+}
+
+Object "__u:UniqueList__" as UniqueList MODEL_COLOR_T1  {
+}
+
+Object "__a1:Appointment__" as Appointment1 MODEL_COLOR_T1  {
+    - isMissed = true
+}
+
+Object "__a2:Appointment__" as Appointment2 MODEL_COLOR_T1  {
+    - isMissed = false
+}
+
+Object "__p1:Patient__" as Patient1 MODEL_COLOR_T1 {
+}
+
+Object "__dt1:DateTime__" as DateTime1 MODEL_COLOR_T1 {
+}
+
+Object "__dt2:DateTime__" as DateTime2 MODEL_COLOR_T1 {
+}
+
+Object "__d1:Duration__" as Duration1 MODEL_COLOR_T1 {
+}
+
+Object "__d2:Duration__" as Duration2 MODEL_COLOR_T1 {
+}
+
+Object "__desc1:Description__" as Description1 MODEL_COLOR_T1 {
+}
+
+Object "__desc2:Description__" as Description2 MODEL_COLOR_T1 {
+}
+
+Object "__s1:Set__" as Set1 MODEL_COLOR_T1 {
+}
+
+Object "__s2:Set__" as Set2 MODEL_COLOR_T1 {
+}
+
+Object "__t1:Tag__" as Tag1 MODEL_COLOR_T1 {
+}
+
+Object "__t2:Tag__" as Tag2 MODEL_COLOR_T1 {
+}
+
+Object "__t3:Tag__" as Tag3 MODEL_COLOR_T1 {
+}
+
+AppointmentManager -- UniqueList
+UniqueList -- Appointment1
+UniqueList -- Appointment2
+
+Appointment1 -- Patient1
+Appointment1 -- DateTime1
+Appointment1 -- Duration1
+Appointment1 -- Description1
+Appointment1 -- Set1
+Set1 -- Tag1
+Set1 -- Tag2
+
+Appointment2 -- Patient1
+Appointment2 -- DateTime2
+Appointment2 -- Duration2
+Appointment2 -- Description2
+Appointment2 -- Set2
+Set2 -- Tag3
+
+@enduml

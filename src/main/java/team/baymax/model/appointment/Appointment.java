@@ -20,10 +20,10 @@ import team.baymax.model.util.uniquelist.UniqueListElement;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Appointment implements UniqueListElement {
+    private final Boolean isMissed;
     private final Patient patient;
     private final DateTime dateTime;
     private final Duration duration;
-    private final Boolean isMissed;
     private final Set<Tag> tags;
     private final Description description;
 
@@ -31,7 +31,7 @@ public class Appointment implements UniqueListElement {
      * Every field must be present and not null.
      */
     public Appointment(Patient patient, DateTime dateTime, Duration duration, Description description,
-                       Set<Tag> tags, boolean isMissed) {
+                       Set<Tag> tags, Boolean isMissed) {
         requireAllNonNull(patient, dateTime, tags, description, duration);
         this.patient = patient;
         this.dateTime = dateTime;
@@ -132,7 +132,7 @@ public class Appointment implements UniqueListElement {
                 && getDateTime().equals(otherAppointment.getDateTime())
                 && getDuration().equals(otherAppointment.getDuration())
                 && getDescription().equals(otherAppointment.getDescription())
-                && getStatus().equals(otherAppointment.getStatus())
+                && checkIfMissed() == (otherAppointment.checkIfMissed())
                 && getTags().equals(otherAppointment.getTags());
     }
 

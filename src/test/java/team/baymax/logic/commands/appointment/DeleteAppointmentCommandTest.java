@@ -8,7 +8,6 @@ import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_F
 import static team.baymax.testutil.appointment.TypicalAppointmentIndexes.INDEX_SECOND_APPOINTMENT;
 import static team.baymax.testutil.appointment.TypicalAppointments.getTypicalAppointmentManager;
 import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME1;
-import static team.baymax.testutil.datetime.TypicalDateTimes.DATETIME5;
 import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_ALICE;
 import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_GEORGE;
 import static team.baymax.testutil.patient.TypicalFirstNames.FIRST_NAME_HANSON;
@@ -31,6 +30,8 @@ public class DeleteAppointmentCommandTest {
 
     private Model model = new ModelManager(getTypicalPatientManager(), getTypicalAppointmentManager(),
             new UserPrefs(), new CalendarManager());
+    private Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
+            new UserPrefs(), new CalendarManager());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -42,8 +43,6 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -71,9 +70,6 @@ public class DeleteAppointmentCommandTest {
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
 
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
-
         expectedModel.deleteAppointment(appointmentToDelete);
         showNoAppointment(expectedModel);
 
@@ -97,7 +93,6 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void equals() {
-
         DeleteAppointmentCommand deleteFirstAppointment = new DeleteAppointmentCommand(
                 Optional.of(INDEX_FIRST_APPOINTMENT));
         DeleteAppointmentCommand deleteSecondAppointment = new DeleteAppointmentCommand(
@@ -123,17 +118,14 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validDateTimeAndNameUnfilteredList_success() {
-
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentChosen.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentChosen.getDateTime()), Optional.of(appointmentChosen.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentChosen);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentChosen);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -141,7 +133,6 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidDateTimeAndNameUnfilteredList_throwsCommandException() {
-
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
                 Optional.of(DATETIME1), Optional.of(FIRST_NAME_HANSON));
 
@@ -151,19 +142,16 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validDateTimeAndNameFilteredList_success() {
-
         showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
 
         Appointment appointmentChosen = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
+
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentChosen.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentChosen.getDateTime()), Optional.of(appointmentChosen.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentChosen);
-
-        Model expectedModel = new ModelManager(model.getPatientManager(), model.getAppointmentManager(),
-                new UserPrefs(), new CalendarManager());
 
         expectedModel.deleteAppointment(appointmentChosen);
         showNoAppointment(expectedModel);
@@ -173,14 +161,13 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidDateTimeAndNameFilteredList_throwsCommandException() {
-
         showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
         Index outOfBoundIndex = INDEX_SECOND_APPOINTMENT;
 
         // ensures that outOfBoundIndex is still in bounds of appointment book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAppointmentManager().getReadOnlyList().size());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(DATETIME5), Optional.of(FIRST_NAME_GEORGE));
+                Optional.of(DATETIME1), Optional.of(FIRST_NAME_GEORGE));
 
         assertAppointmentCommandFailure(deleteAppointmentCommand, model,
                 Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
@@ -188,17 +175,15 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_allValidUnfilteredList_success() {
-
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
-                Optional.of(appointmentToDelete.getDateTime()), Optional.of(FIRST_NAME_ALICE));
+                Optional.of(appointmentToDelete.getDateTime()),
+                Optional.of(appointmentToDelete.getPatient().getName()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 appointmentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPatientManager(),
-                model.getAppointmentManager(), new UserPrefs(), new CalendarManager());
         expectedModel.deleteAppointment(appointmentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -206,7 +191,6 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidDatetimeUnfilteredList_throwsCommandException() {
-
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
                 Optional.of(DATETIME1), Optional.of(FIRST_NAME_ALICE));
 
@@ -216,7 +200,6 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-
         Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT
                 .getZeroBased());
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(
@@ -224,7 +207,6 @@ public class DeleteAppointmentCommandTest {
 
         assertAppointmentCommandFailure(deleteAppointmentCommand, model,
                 Messages.MESSAGE_APPOINTMENT_NOT_FOUND);
-
     }
 
     /**
