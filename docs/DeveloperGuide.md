@@ -295,12 +295,12 @@ which facilitates future extensions and reduce effort in maintenance and testing
 Baymax allows the user to manage patient information. A user can only deal with a single patient at any time. i.e. Only
 a single patient's information can be managed at one time. A user can:
 
-* Add a new patient
-* Delete an existing patient
-* Edit a patient's details
-* Add a remark to a patient
-* List all the patients in the system
-* Find a patient by using a keyword from his/her name
+1. Add a new patient
+2. Delete an existing patient
+3. Edit a patient's details
+4. Add a remark to a patient
+5. List all the patients in the system
+6. Find a patient by using a keyword from his/her name
 
 #### 4.2.1. Rationale
 
@@ -354,7 +354,7 @@ The following table shows the commands related to managing a patient's details.<
 | `findpatient` | Finds a patient with the given keyword in his/her name.
 | `remark` | Adds/Edits the remark of a patient.
 
-#### 4.2.3. Design Consideration
+#### 4.2.3. Design Considerations
 
 **Aspect: Find matching names using substrings (E.g. ale) vs using exact words (E.g. alex)**
 
@@ -381,10 +381,11 @@ The following table shows the commands related to managing a patient's details.<
 * When the list of appointments increase in size, Option 1 performs better because Baymax involves a lot of "update/set"
 operations such as marking an appointment as done/missed and adding/editing an appointment.
 
-### **4.3 Appointment Manager**
+### **4.3 Appointment Management Features**
 (Contributed by Shi Hui Ling & Reuben Teng)
 
-Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. 
+`AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
 
 `AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
  1. Adding an appointment
@@ -403,7 +404,10 @@ Figure . Object diagram of `AppointmentManager`
 
 #### 4.3.1 Rationale
 
-The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's 
+`UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands 
+can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, 
+even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
 
 #### 4.3.2. Current Implementation
 
@@ -411,19 +415,10 @@ Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`,
 
 #### 4.3.3. Design Consideration
 
-**Aspect 1: `cancel` Command** 
- 
-For this command, we only required the specifying of `DateTime` of the appointment, and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+**Aspect 1: Marking of Appointment `status` attribute**
 
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
-
-**Aspect 2: `nric` field**
-
-To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
-
-**Aspect 3: Marking of Appointment `status` attribute**
-
-Automated the marking of an `Appointment` as `DONE` after the deadline has passed, and giving receptionists the ability to mark `Appointment`s as missed.
+Automated the marking of an `Appointment` as `DONE` after the deadline has passed, 
+and giving receptionists the ability to mark `Appointment`s as missed or done (if accidentally marked as missed).
 
 |                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
@@ -434,11 +429,28 @@ Automated the marking of an `Appointment` as `DONE` after the deadline has passe
 
 While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
-**Aspect 4: Backdated `Appointment`s**
+**Aspect 2: Backdated `Appointment`s**
 
-To provide flexibility for users, `Appointment`s beforSe the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
+To provide flexibility for users, `Appointment`s before the current `Datetime` can be added to Baymax. 
+They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
 
-Such appointments are marked `DONE` automatically as it is assumed that it is more important for receptionists to know what `Appointment`s patients have gone for, and thus it is more likely for them to be backdated.
+Such appointments are marked `DONE` automatically as it is assumed that it is unlikely for receptionists to
+ have to keep track of appointments a patient has missed, and hence it is unlikely for missed appointments to be backdated.
+
+**Aspect 3: `listapptsof` Command**
+
+|                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Option 1: (Current choice): Filtering global appointment list by matching `Patient` of the appointment with `Patient` specified | Simpler implementation of other commands: `add`, `edit`, `delete` only need to change one list. Also, the `listapptsof` Command will make use of `AppointmentManager`'s `findByPredicate` method, which is the same method used by other `find` commands and hence making the codebase more uniform. | Slower in returning the list of appointments belonging to the patient. |
+| Option 2 Storing an appointment list inside of each `Patient` (in addition to the global list) | Faster and more intuitive way of returning the list of appointments belonging to a patient. | Creates additional work for other appointment commands, which complicates implementation. |
+
+**Aspect 4: `cancel` Command** 
+ 
+For this command, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those 
+two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and 
+easy to use for receptionists. It is also easier implementation-wise. 
+
+
 
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
