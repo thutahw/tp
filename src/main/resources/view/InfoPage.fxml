@@ -48,7 +48,7 @@
                     <VBox styleClass="gridbox" VBox.vgrow="ALWAYS">
                         <Label styleClass="heading" text="Appointment Management"/>
                         <Label styleClass="command-label" text="addappt"/>
-                        <Label styleClass="command-label" text="listapptof"/>
+                        <Label styleClass="command-label" text="listapptsof"/>
                         <Label styleClass="command-label" text="listappts"/>
                         <Label styleClass="command-label" text="editappt"/>
                         <Label styleClass="command-label" text="cancel"/>

@@ -8,14 +8,14 @@ public class AppointmentStatusTest {
     @Test
     void getColorCode() {
         assertEquals("#3e9149", AppointmentStatus.DONE.getColorCode());
-        assertEquals("transparent", AppointmentStatus.UPCOMING.getColorCode());
+        assertEquals("#4d66bc", AppointmentStatus.UPCOMING.getColorCode());
         assertEquals("#ac4848", AppointmentStatus.MISSED.getColorCode());
     }
 
     @Test
     void text() {
         assertEquals("done", AppointmentStatus.DONE.text());
-        assertEquals("", AppointmentStatus.UPCOMING.text());
+        assertEquals("upcoming", AppointmentStatus.UPCOMING.text());
         assertEquals("missed", AppointmentStatus.MISSED.text());
     }
 }

@@ -5,7 +5,7 @@ import static team.baymax.commons.util.CollectionUtil.requireAllNonNull;
 public enum AppointmentStatus {
     DONE("done", "#3e9149"),
     MISSED("missed", "#ac4848"),
-    UPCOMING("", "transparent");
+    UPCOMING("upcoming", "#4d66bc");
 
     private String status;
     private String colorCode;

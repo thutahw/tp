@@ -46,7 +46,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_DATETIME + "11-10-2020 12:30 "
             + PREFIX_DURATION + "60 "
             + PREFIX_DESCRIPTION + "Monthly health checkup. "
-            + PREFIX_TAG + "DrGoh\n"
+            + PREFIX_TAG + "Xray\n"
             + "Alternatively, " + COMMAND_WORD + " "
             + PREFIX_NRIC + "S0123456A "
             + PREFIX_TIME + "12:30 "

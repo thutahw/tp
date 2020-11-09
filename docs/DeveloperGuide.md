@@ -268,7 +268,7 @@ Reason for choosing Option 1:
 
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
-independent development for each data type, limiting the amount of change needed to other components when there are
+<br>independent development for each data type, limiting the amount of change needed to other components when there are
 changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
 to unnecessary dependencies between data types.
 
@@ -531,10 +531,28 @@ constructs a YearCommand, MonthCommand and DayCommand respectively. Upon executi
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
-
-
 #### 4.4.3. Design Consideration
 
+Aspect: The necessity of an AppointmentCalendar class in the model
+
+Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
+Pros:
+- Greater modularity
+- Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object
+- More extensible at it does not overcomplicate the CalendarManager class
+
+Cons:
+- Harder to implement (a new class is need)
+
+Option 2: Store the day, month and year directly inside the CalendarManager 
+Pros: 
+- Simpler to implement
+
+Cons:
+- More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object
+- If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class
+
+By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -788,7 +806,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### F.1. Launch and shutdown
 
 1. Initial launch
 
@@ -803,24 +821,66 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### F.2. Adding Data
+#### F.2.1. Adding Patient
+1. Add a new patient to Baymax
+    1. Prerequisites: Arguments are valid and compulsory parameters are provided. The Patient added must not be a duplicate of existing Patient.
+    1. Test case: `addpatient nric/S9771234F name/John Doe phone/98765432 gender/M tag/asthmatic tag/LTP`<br>
+        Expected: Adds a patient with the name `John Doe`, NRIC `S9771234F`, phone number `98765432`, gender `M` (for male) and tags of `asthmatic` and `LTP`.
+    1. Test case: `addpatient name/Bob Tan`<br>
+        Expected: No patient is added. Error details shown in feedback display.
+    1. Other incorrect commands to try: `addpatient nric/S9765436F`, `addpatient phone/123`, `addpatient tag/test`<br>
+        Expected: Similar to previous test case.
+        
+#### F.2.1. Adding Appointment
+1. Add a new appointment to Baymax
+    1. Prerequisites: Arguments are valid and compulsory parameters are provided. The Appointment added must not be the same as existing Appointment.
+    1. Test case: `addappt 1 on/20-11-2020 12:30 dur/60 desc/Monthly health checkup tag/Xray`<br>
+        Expected: Adds an appointment to the first patient in the displayed list of patients with datetime of `20-11-2020 12:30`, duration of `60` minutes, description `Monthly health checkup` and tag `Xray`.
+    1. Test case: `addappt desc/health checkup`<br>
+        Expected: No appointment is added. Error details shown in feedback display.
+    1. Other incorrect commands to try: `addappt duration/60`, `addappt on/2020-11-12 10:00`, `addappt tag/test`<br>
+        Expected: Similar to previous test case. 
 
-### Deleting a patient
+### F.3. Editing Data
+#### F.3.1. Editing Patient
+1. Edits a current Patient in Baymax
+    1. Prerequisites: Arguments are valid, compulsory parameters are provided and patient must exist in the patient list. The Patient edited must not have the same NRIC as another patient. Multiple patients in the list.
+    1. Test case: `editpatient 1 phone/91017265`<br>
+        Expected: Edits the phone number of the first patient in the displayed patient list to `91017265`.
+    1. Test case: `editpatient 1`<br>
+        Expected: No patient is edited. Error details shown in feedback display.
+    1. Other incorrect commands to try: `editpatient 1 name/@#James`, `editpatient 1 phone/12`, `editpatient 1 gender/mal`<br>
+        Expected: No Patient is edited. Error details shown in feedback display.
 
+#### F.3.2 Editing Appointment
+1. Edits a current Appointment in Baymax
+    1. Prerequisites: Arguments are valid, compulsory parameters are provided and appointment must exist in the appointment list. The datetime of the Appointment edited must not collide with the datetime of another appointment belonging to the same patient. Multiple appointments in the list.
+    1. Test case: `editappt 1 on/16-11-2020 11:00 dur/45`<br>
+        Expected: Edits the first appointment in the displayed appointment list with datetime `16-11-2020 11:00` and duration of `45` minutes.
+    1. Other incorrect commands to try: `editappt 1 on/2020-10-10`, `editappt 1 dur/1600`
+
+### F.4. Deleting Data
+
+#### F.4.1. Deleting Patient
 1. Deleting a patient while all patients are being shown
-
    1. Prerequisites: List all patients using the `listpatients` command. Multiple patients in the list.
-
    1. Test case: `deletepatient 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
+      Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message.
    1. Test case: `deletepatient 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
+      Expected: No patient is deleted. Error details shown in the status message.
    1. Other incorrect delete commands to try: `deletepatient`, `deletepatient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+      
+#### F.4.2. Deleting Appointment
+1. Deleting an appointment while all appointments are being shown
+   1. Prerequisites: List all appointments using the `listappts` command. Multiple appointments in the list.
+   1. Test case: `cancel 1`<br>
+      Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the status message.
+   1. Test case: `cancel 0`<br>
+      Expected: No appointment is deleted. Error details shown in the status message.
+   1. Other incorrect delete commands to try: `cancel`, `cancel x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
