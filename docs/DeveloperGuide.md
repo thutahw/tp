@@ -45,14 +45,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 In this section, you will learn about the general design and structure of the Baymax application. This section explains how each component in Baymax works individually. Baymax is created with the Object-Oriented Programming Paradigm in mind, and follows the Facade Pattern and Command Pattern in software design.
 
-### **3.1. Architecture**
+### **3.1 Architecture**
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 <img src="images/ArchitectureDiagram.png" width="450" /><br>
 Figure 1. Architecture Diagram of Baymax
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 The following table provides a quick overview of each component of Baymax. More details about each individual component can be found in the following subsections.
@@ -95,7 +95,7 @@ This segment will explain the structure and responsibilities of the `UI` compone
 Figure 4. Structure of the UI component
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/ui/Ui.java)
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
 
@@ -123,11 +123,13 @@ The `UI` component,
 
 ### 3.3. Logic component
 
+This segment will explain the structure and responsibilities of the Logic component.
+
 ![Structure of the Logic Component](images/LogicClassDiagram.png)<br>
 Figure 5. Structure of the Logic Component
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/logic/Logic.java)
 
 1. `Logic` uses the `AppointmentBookParser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
@@ -135,7 +137,7 @@ Figure 5. Structure of the Logic Component
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 5. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user and jumping to relevant tabs.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteappt 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("cancel 1")` API call.
 
 ![Interactions Inside the Logic Component for the `deleteappt 1` Command](images/DeleteAppointmentSequenceDiagram.png)<br>
 Figure 6. Delete Appointment Sequence Diagram
@@ -144,6 +146,7 @@ Figure 6. Delete Appointment Sequence Diagram
 </div>
 
 ### 3.4. Model component
+(Contributed by Kaitlyn Ng & Reuben Teng)
 
 This segment will explain the structure and responsibilities of the Model component.
 
@@ -151,7 +154,7 @@ This segment will explain the structure and responsibilities of the Model compon
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 Figure 7. Structure of the Model Component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/model/Model.java)
 
 The `Model` component contains `ListManager`s that handle two main types of data in Baymax, `Patient` and `Appointment`. 
 Each type of data is handled by a separate `ListManager` (`PatientManager` and `AppointmentManager`). A `ModelManager` facade class then exposes the methods 
@@ -183,7 +186,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 Figure 8. Structure of the Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/tree/master/src/main/java/team/baymax/storage/Storage.java)
 
 The `Storage` component contains interfaces for `Patient` data (`PatientManagerStorage`) and 
 `Appointment` data (`AppointmentManagerStorage`) which defines methods for reading and saving the `Model` components
@@ -235,36 +238,25 @@ extend the `UniqueListElement` interface, which ensures data items contain the n
 Each ListManager implements the `ReadOnlyListManager` interface. This interface has the `getReadOnlyList()` method 
 which returns an `ObservableList` of data items, to be monitored by the GUI.
 
+An example of a the `ListManager` implementation is shown below using the `PatientManager` class, that manages a
+`UniqueList` of `Patient`s. A similar structure is implemented for the `AppointmentManager` class, that manages a 
+`UniqueList` of `Appointment`s.
+
+![Structure of PatientManager](images/PatientManagerClassDiagram.png)<br>
+Figure 8. Structure of PatientManager
+
+**API** : [`PatientManager.java`](https://github.com/AY2021S1-CS2103T-W12-3/tp/blob/master/src/main/java/team/baymax/model/modelmanagers/PatientManager.java)
+
+
 #### 4.1.3. Design Consideration
 **Aspect: Separation into distinct list managers for each type of data.**
 
-Option 1: Split into separate lists (Current)
-
-*Pros:*
-
-* Increases modularity of the code by separating it into distinct sections to handle data whose operations do not
-often require interaction between them.
+|                                                                | Pros                                                                                                                                                                                                                                                                                                      | Cons                                                                                                                                              |
+|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Option 1 (Current Choice): Split into separate lists (Current)                  | Increases modularity of the code by separating it into distinct sections to handle data whose  operations do not often require interaction  between them.  <br><br>Allows for more straightforward implementations in other components by ensuring each data type is handled with the class architecture. | A lot of boilerplate code for implementing  the list managers as separate classes  but with similar functionalities                               |
+| Option 2: Store all the information in a single  `DataManager` | Easier to implement, as only one manager class is needed.                                                                                                                                                                                                                                                 | Violates the Separation of Concerns principle, making it difficult to implement future extensions without significant change to other components. |
   
-* Allows for more straightforward implementations in other components by ensuring each data type is handled with the
-class architecture.
-
-*Cons:*
-  
-* A lot of boilerplate code for implementing the list managers as separate classes but with similar 
-  functionalities
-  
-Option 2: Store all the information in a single `DataManager` 
-
-*Pros:*
-
-* Easier to implement, as only one manager class is needed.
-
-*Cons:*
-
-* Violates the Separation of Concerns principle, making it difficult to implement future extensions without
-significant change to other components.
-  
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 Sound design principles are key to ensuring that the program is bug-free, easily testable and easily extendable in the 
 future. Option 1 increases modularity of the code to create more opportunities for module upgrade, reuse and
@@ -272,25 +264,15 @@ future. Option 1 increases modularity of the code to create more opportunities f
 changes in the `Model`. This will save time in the long run and reduce the possibility of introducing breaking bugs due
 to unnecessary dependencies between data types.
 
-**Aspect: Extract common CRUD operations with a generic class**
+**Aspect 2: Extract common CRUD operations with a generic class**
 
-Option 1: Extract common CRUD functionalities of the `ListManager`s into a
-single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top
-of the generic CRUD operations from the class. 
+|                                                                                                                                                                                                                                                  | Pros                                                                                                                                                                           | Cons                                                                                                                   |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Option 1 (Current Choice): Extract common CRUD functionalities of the `ListManager`s into a single `UniqueList` class. The `ListManager`s will store data items in the `UniqueList` generic class and build on top of the generic CRUD operations from the class. | Reduces amount of repeated code as all the lists of data essentially perform the same functions.                                                                               | Generics can be harder to comprehend, thus making it harder for other programmers to understand and use the component. |
+| Option 2: Do not extract any common functionalities                                                                                                                                                                                              | Easier for programmers to work on each code related to each data item completely separately, and implement methods specific to the data item in a more straightforward manner. | Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.                       |
 
-* Pros: Reduces amount of repeated code as all the lists of data essentially perform the same functions.
+<br>Reason for choosing Option 1:
 
-* Cons: Generics can be harder to comprehend, thus making it harder for other programmers to understand and
-use the component. 
-  
-Option 2: Do not extract any common functionalities
-
-* Pros: Easier for programmers to work on each code related to each data item completely separately, and implement 
-methods specific to the data item in a more straightforward manner.
-
-* Cons: Violates the Don't Repeat Yourself principle as there will be a lot of repeated CRUD operations.
-
-Reason for choosing Option 1:
 Following the Don't Repeat Yourself design principle will allow for more abstraction and less duplication in the code,
 which facilitates future extensions and reduce effort in maintenance and testing by reducing repeated code. 
 
@@ -364,60 +346,23 @@ The following table shows the commands related to managing a patient's details.<
 
 **Aspect: Find matching names using substrings (E.g. ale) vs using exact words (E.g. alex)**
 
-Option 1 (Current Choice): Match by substring
+|                                               | Pros                                                             | Cons                                                                                                                                        |
+|-----------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Option 1 (Current Choice): Match by substring | Shorter keywords to type, therefore increases user typing speed. | Lower accuracy. The filtered list is longer and takes longer time to find the patient you are looking for.                                  |
+| Option 2: Match by the exact word             | Higher accuracy.                                                 | Longer names are harder for the user to find the exact match. It is also difficult for the user to remember and type out the exact keyword. |
 
-*Pros:* 
-
-* Shorter keywords to type, therefore increases user typing speed. 
-
-*Cons:* 
-
-* Lower accuracy. The filtered list is longer and takes longer time to find the patient you are looking for. 
-
-Option 2: Match by the exact word
-
-*Pros:* 
-
-* Higher accuracy. 
-
-*Cons:* 
-
-* Longer names are harder for the user to find the exact match. It is also difficult for the user to remember and type out the exact keyword.
- 
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 * Option 1 is more flexible for the user. If the user wants higher accuracy, he/she can type longer keywords to filter out more patients. 
  
 **Aspect: Whether the Patient class should contain a list of Appointments**
 
-Option 1 (Current Choice): Patient class does not contain a list of Appointments.
+|                                                                                   | Pros                                                                                                                                                                                            | Cons                                                                                                                                                                                                                                                                                                                  |
+|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Option 1 (Current Choice): Patient class does not contain a list of Appointments. | Avoids cyclic dependency since the Appointment class already contains a Patient.   <br><br>Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class)  . | More tedious to find a list of appointments belonging to a specific patient and there is more overhead from  having to filter the appointment list by a predicate.                                                                                                                                                    |
+| Option 2: Patient class will contain a list of Appointments.                      | A list of appointment belonging to a specific patient can be directly retrieved from the patient object  which is faster than having the extra step to filter the list.                         | Cyclic dependency is present. (Patient and Appointment depend on each other).   <br><br>Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing both the lists inside the ModelManager and the Patient class. |
 
-*Pros:* 
-
-* Avoids cyclic dependency since the Appointment class already contains a Patient. 
-
-* Reduces overhead from having to update 2 lists (1 from ModelManager and 1 from the Patient class) 
-
-*Cons:* 
-
-* More tedious to find a list of appointments belonging to a specific patient and there is more overhead from 
-having to filter the appointment list by a predicate. 
-
-Option 2: Patient class will contain a list of Appointments.
-
-*Pros:* 
-
-* A list of appointment belonging to a specific patient can be directly retrieved from the patient object 
-which is faster than having the extra step to filter the list.
-
-*Cons:* 
-
-* Cyclic dependency is present. (Patient and Appointment depend on each other). 
-
-* Whenever any update is made to the list of appointments, such as adding a new appointment or editing an appointment, extra overhead is incurred from processing
-both the lists inside the ModelManager and the Patient class.
-
-Reason for choosing Option 1:
+<br>Reason for choosing Option 1:
 
 * Option 1 follows good coding principles by avoiding cyclic dependency.
 
@@ -438,6 +383,12 @@ Scheduling, viewing, and otherwise dealing with appointments is a key feature ar
  
 These methods are used by the `AppointmentCommand` classes to execute their logic.
 
+The *Object Diagram* below summarises the interactions between AppointmentManager and Appointments.
+
+![AppointmentManagerObjectDiagram](images/AppointmentObjectDiagram.png)<br>
+Figure . Object diagram of `AppointmentManager`
+
+
 #### 4.3.1 Rationale
 
 The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
@@ -448,57 +399,34 @@ Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`,
 
 #### 4.3.3. Design Consideration
 
-**Aspect 1: `deleteappt` Command** 
+**Aspect 1: `cancel` Command** 
  
-For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
+For this command, we only required the specifying of `DateTime` of the appointment, and we allowed specifying the `Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed correct" way (by `nric`).
 
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
+Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have those two fields exactly the same. By reducing the number of arguments needed for the command, we make the command more succinct and easy to use for receptionists. It is also easier implementation-wise.
 
 **Aspect 2: `nric` field**
 
 To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the `Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the `nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
 
-### **4.3 Appointment Manager**
-(Contributed by Shi Hui Ling & Reuben Teng)
-Scheduling, viewing, and otherwise dealing with appointments is a key feature area for Baymax. `AppointmentManager` maintains a `UniqueList` of all `Appointment`s in the app, and executes the logic of most appointment commands. 
+**Aspect 3: Marking of Appointment `status` attribute**
 
-`AppointmentManager` contains the methods necessary to operate on the `UniqueList` of `Appointment`s. These include:
- 1. Adding an appointment
- 2. Editing an appointment
- 3. Deleting an appointment
- 4. Finding a specific appointment by `Patient` and `DateTime`
- 5. Sorting the list of appointments
- 
-These methods are used by the `AppointmentCommand` classes to execute their logic.
+Automated the marking of an `Appointment` as `DONE` after the deadline has passed, and giving receptionists the ability to mark `Appointment`s as missed.
 
-#### 4.3.1 Rationale
+|                                                                                                                                                                                                                       | Pros                                                                                                     | Cons                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Option 1: Periodically check the `Datetime` of an `Appointment` that is still marked  `UPCOMING` against the current `Datetime`, marking it as `DONE` if the current  `Datetime` is after that of the `Appointment` . | Keeps stored data perpetually up-to-date.                                                                | Constant comparision become computationally intensive when there are many  `UPCOMING` appointments. |
+| Option 2 (Current Choice): Check `Datetime` of `Appointment` against current `Datetime`  only when `getStatus()` method is called.                                                                                    | Computation is performed when the value of  `status` is needed, resulting in reduced computational cost. | Architecture becomes less intuitive as `status` is no longer stored.                                |
 
-The `AppointmentManager` class contains a summary of all the "back-end" logic of appointment commands on the app's `UniqueList` of `Appointment`s. This follows the SRP, as everything related to the execution of appointment commands can be found here. This also forces the customising of code to fit exactly the purposes needed for appointment commands, even if the methods simply call a `UniqueList` method that fulfills the exact purpose.
+<br>Reason for choosing Option 2:
 
-#### 4.3.2. Current Implementation
+While the architecture might become less intuitive, computing `status` only when needed is much more efficient.
 
-Makes use of many methods from `UniqueList`, e.g. `add`, `setElement`, `remove`, `sort`.
+**Aspect 4: Backdated `Appointment`s**
 
-#### 4.3.3. Design Consideration
+To provide flexibility for users, `Appointment`s beforSe the current `Datetime` can be added to Baymax. They are marked as `DONE` automatically, but receptionist will be able to change the status to `MISSED` as well.
 
-**Aspect 1: `deleteappt` Command** 
- 
-For this command, we only required the specifying of `DateTime` of the appointment and we allowed specifying the 
-`Patient` by `name`, `nric`, or `index` (in the currently displayed list). This is to ensure that receptionists can opt 
-for either a more intuitive way to specify a `Patient` (by `name` or `index`) or a quicker and more "guaranteed 
-correct" way (by `nric`).
-
-Additionally, we only require matching of `DateTime` and `Patient` of appointment as no two appointments should have 
-those two fields exactly the same. By paring down the command's arguments to the minimum possible, we make the command 
-more succinct and easy to use for receptionists. It is also easier implementation-wise.
-
-**Aspect 2: `nric` field**
-
-To ensure that `Appointment`s are json serialisable for `Storage` in the same way as `Patient`s, all fields of the 
-`Appointment` class have to be serialisable. To achieve this, an `nric` field is added to each `Patient` to uniquely 
-identify patients currently stored in the system. When serialising an `Appointment`, the patient field stores the 
-`nric` string of the patient instead, and when reading an `Appointment` from memory a lookup is performed on the 
-existing list of patients before a valid `Appointment` object is created containing an existing Patient object.
+Such appointments are marked `DONE` automatically as it is assumed that it is more important for receptionists to know what `Appointment`s patients have gone for, and thus it is more likely for them to be backdated.
 
 ### **4.4 Calendar Feature**
 (Contributed by Li Jianhan & Kaitlyn Ng)
@@ -510,7 +438,11 @@ all appointments on the chosen day, laid out chronologically on a timeline.
 
 #### 4.4.1 Rationale
 
-The Calendar feature is included in Baymax because it can shorten some commands by allowing the user to only specify
+The Calendar feature is included in Baymax because it offers greater convenience in terms of viewing and adding
+appointments. The calendar view and schedule view offer a quick Month and Day overview of all the appointments
+respectively, such that the user can quickly tell at a glance which days or timings are booked and which are free.
+
+The Calendar feature also helps to shorten commands by allowing the user to only specify
 the time of appointments, as the date can be inferred from the calendar. For example, in the Calendar 
 Manager, a user can set a custom year, month and day. This influences the execution of the `addappt` command shown 
 in the sequence diagram below. In this example, suppose the user has set year to 2020, 
@@ -518,41 +450,43 @@ month to February and day to 1, he can directly enter an `addappt` command that 
 February, 2020 without having to enter a date into the command fields. This makes the command shorter, more convenient
 and more user-friendly.
 
+Below is an example of the sequence diagram when the user executes an AddAppointment command without specifying a date.
+The diagram illustrates how the CalendarManager is used to automatically set the date of the appointment.
+
 ![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)<br>
-Figure X. Workflow of an AddAppointment command with the help of CalendarManager
+Figure X. Execution of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
-`year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
+year, month and day. Note that the year, month and day attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
 constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
-`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+`CalendarManager` to update the year, month and day within the `AppointmentCalendar`.
 
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
 
+![CalendarSequenceDiagram](images/CalendarSequenceDiagram.png)<br>
+Figure X. Sequence Diagram for Switching to a Particular Year in the Calendar
+
 #### 4.4.3. Design Consideration
 
-Aspect: The necessity of an AppointmentCalendar class in the model
+**Aspect:** The necessity of an AppointmentCalendar class in the model
 
-Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year
-Pros:
-- Greater modularity
-- Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object
-- More extensible at it does not overcomplicate the CalendarManager class
+|                                                                                                     | Pros                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Cons                                                                                                                                                                                                                                       |
+|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Option 1 (Current Choice): New AppointmentCalendar class in the model to store the day, month, year | Allows for greater modularity. Whenever the Logic component requests for the day/month/year, the ModelManager can directly pass it a single AppointmentCalendar object,  making it more extensible at it does not overcomplicate the CalendarManager class. <br><br> By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains. | Harder to implement (a new class is needed).                                                                                                                                                                                               |
+| Option 2: Store the day, month and year directly inside the CalendarManager                         | Simpler to implement.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object.  If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class. |
 
-Cons:
-- Harder to implement (a new class is need)
+<br>Reason for choosing Option 1: 
 
-Option 2: Store the day, month and year directly inside the CalendarManager 
-Pros: 
-- Simpler to implement
+* Option 1 follows good coding principles by adhering to the principle of encapsulation.
 
-Cons:
-- More cumbersome to pass around three objects (Year, Month and Day) compared to a single AppointmentCalendar object
-- If more features were to be implemented in the CalendarManager, it will quickly clutter up the CalendarManager class
+* As two UI views (`ScheduleView` and `CalendarView`) depend on the `AppointmentCalendar`, abstracting the contents of 
+  the Calendar out into an `AppointmentCalendar` class that is managed by the `CalendarManager` makes more intuitive
+  sense, as the UI views can now just observe for changes to the `AppointmentCalendar` by the manager and update the
+  views accordingly.
 
-By hiding the year, month and day in the AppointmentCalendar class, it adheres to the OOP principle of Encapsulation, as the CalendarManager only needs to be aware of the AppointmentCalendar object and not what it contains.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -848,11 +782,12 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
 
 ## **Appendix E: Glossary**
 (Contributed by Reuben Teng)
+
 #### *UI*
 * Abbreviation for User Interface, representing the point of human-computer interaction and communication.
 
 #### *API*
-* Abbreviation for Application Programming Interface, which defines interactions between multiple software intermediaries.
+* Abbreviation for Application Programming Interface. It defines interactions between multiple software intermediaries.
 
 #### *OOP*
 * Abbreviation Object-Oriented Programming, in which programmers organise software design around data (objects), rather than functions and logic.
@@ -866,6 +801,12 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
 #### *OS*
 * Abbreviation Operating System, referring to mainstream Operating Systems Windows, Linux, OS-X.
 
+#### *json*
+* Short for JavaScript Object Notation, referring to a memory-cheap format for storing and transporting data.
+
+#### *csv*
+* Abbreviation for Comma-Separated Values, referring to a plain text file with a list of data, which each value within the data separated by a comma.
+
 #### *Private contact detail*
 * A contact detail that is not meant to be shared with others.
 
@@ -875,9 +816,13 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
 #### *Separation of Concerns principle*
 * Principle of separating code into different sections, with each section handling a different concern. This allows for
   a more modular approach to implementation, with changes to one section not affecting another.
+  
+#### *Generics*
+* Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
+(Contributed by Kaitlyn Ng and Li Jianhan)
 
 Given below are instructions to test the app manually.
 
@@ -964,8 +909,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Saving patient data
+    1. Prerequisites: Perform one of the tests for adding, deleting or editing patient data above.
+    1. Close the application. Open the application again.
+       Expected: Patients listed in the application should be updated to reflect the latest change made.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Saving appointment data
+    1. Prerequisites: Perform one of the tests for adding, deleting or editing appointment data above.
+    1. Close the application. Open the application again.
+       Expected: Appointments listed in the application should be updated to reflect the latest change made.
+       
+2. Dealing with missing/corrupted data files 
+   1. Test case: Delete `patients.json` and `appointments.json` files in the Baymax application in `/data` folder. Start up the application as usual.
+      Expected: Baymax application is populated with sample data.
+   1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
+    Expected: Baymax application is populated with sample data.
