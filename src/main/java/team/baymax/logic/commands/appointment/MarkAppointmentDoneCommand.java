@@ -91,9 +91,9 @@ public class MarkAppointmentDoneCommand extends Command {
             }
             appointmentToEdit = lastShownList.get(index.getZeroBased());
         } else if (isFindByNameAndTime()) {
-            patient = model.getPatient(patientName);
-            SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
             try {
+                patient = model.getPatient(patientName);
+                SameDatetimeAndPatientPredicate predicate = new SameDatetimeAndPatientPredicate(dateTime, patient);
                 appointmentToEdit = model.findAppointmentByPredicate(predicate);
             } catch (ElementNotFoundException e) {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENT_NOT_FOUND);

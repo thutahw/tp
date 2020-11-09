@@ -3,17 +3,17 @@ layout: page
 title: Li Jianhan's Project Portfolio Page
 ---
 
-## Project: AddressBook Level 3
+## Project: Baymax
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Baymax is a desktop appointment book application that helps small clinics manage patient and appointment information. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Appointment Calendar
+  * What it does: allows the user to visualise date and time, coupled with a schedule view which displays appointments chronologically on a timeline.
+  * Justification: This feature improves the user's experience as they can hop between different dates inside the Calendar view, and zoom into a particular day for all the appointments on that day using a single command.
+  * Highlights: This enhancement revolutionized the way dates are handled in our CLI application. For example, with the use of the calendar, the user can add appointments to a day without having to enter the date itself since it has been captured by the Calendar. This shortens commands and quickens the process of appointment scheduling.
+  It required an in-depth analysis of design alternatives. The implementation too was challenging as it required the implementation of an entirely new Calendar Manager that is very different from the traditionally used List Managers.
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 

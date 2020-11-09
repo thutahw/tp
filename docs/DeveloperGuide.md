@@ -523,10 +523,10 @@ Figure X. Workflow of an AddAppointment command with the help of CalendarManager
 
 #### 4.4.2. Current Implementation
 The `CalendarManager` class in the `Model` component contains an `AppointmentCalendar` object, storing the currently set 
-`year`, `month` and `day`. Note that the `year`, `month` and `day` attributes may not necessarily be storing the 
+year, month and day. Note that the year, month and day attributes may not necessarily be storing the 
 present year, month and day. When a user sets the year, month and day, the `Logic` Component parses the user input and
 constructs a YearCommand, MonthCommand and DayCommand respectively. Upon execution, the `ModelManager` calls upon the
-`CalendarManager` to update the `year`, `month` and `day` within the `AppointmentCalendar`.
+`CalendarManager` to update the year, month and day within the `AppointmentCalendar`.
 
 The following sequence diagram illustrates how the `Logic` component interacts with the `ModelManager` to influence the
 `year` value in the `AppointmentCalendar` managed by the `CalendarManager`.
@@ -713,21 +713,6 @@ For all use cases below, the **System** is `Baymax` and the **Actor** is the `us
 6. Baymax displays a list of appointments on that given day
 
     Use case ends. <br><br>
-
-> **Use case: List all appointments in the next *n* days**
-
-**MSS**
-
-1. User requests to set the calendar to a particular year
-2. Baymax calendar switches to the stipulated year
-3. User requests to set the calendar to a particular month
-4. Baymax calendar switches to the stipulated month in the given year
-5. User requests to list all appointments in the next 7 days
-6. Baymax displays a list of appointments in the next 7 days
-
-    Use case ends. <br><br>
-
-*{More to be added}*
 
 ## **Appendix D: Non-Functional Requirements**
 (Contributed by Shi Hui Ling)
