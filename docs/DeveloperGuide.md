@@ -860,6 +860,8 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
   
 #### *Generics*
 * Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
