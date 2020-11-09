@@ -835,10 +835,18 @@ Similar to `Use case 5: List all patients` except for appointments instead of pa
 #### *Boilerplate code*
 * Code that is reused without significant changes. Usually a sign of poor coding practices.
 
-#### *Separation of Concerns principle*
-* Principle of separating code into different sections, with each section handling a different concern. This allows for
-  a more modular approach to implementation, with changes to one section not affecting another.
-  
+#### *Separation of Concerns Principle*
+* Software engineering principle of separating code into different sections, with each section handling a different concern. This allows for a more modular approach to implementation, with changes to one section not affecting another.
+
+#### *Single Responsibility Principle (SRC)*
+* Software engineering principle of modularising code that states every module, class or function in a program should encapsulate and have responsibility over only one single part of the program's functionality, i.e. have only "one reason to change".
+
+#### *UniqueList*
+* A class inherited from addressbook-3 that maintains a JavaFX `ObservableList` while enforcing uniqueness between its elements and ensuring no nulls. Also supports a limited set of operations.
+
+#### *JavaFX*
+* A standard GUI library for Java with graphics and media packages, used to create Java GUI applications.
+
 #### *Generics*
 * Generic classes, interfaces and methods are used to allow programmers to perform similar operations on multiple data types.
 
