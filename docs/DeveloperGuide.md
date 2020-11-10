@@ -964,8 +964,8 @@ testers are expected to do more *exploratory* testing.
        Expected: Appointments listed in the application should be updated to reflect the latest change made.
 
 #### F.5.3. Dealing with missing/corrupted data
-1.  Ensure that the application is able to function normally even with missing or corrupted data files
-   1. Test case: Delete `patients.json` and `appointments.json` files in the Baymax application in `/data` folder. Start up the application as usual.
-      Expected: Baymax application is populated with sample data.
-   1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
-    Expected: Baymax application is populated with sample data.
+1. Ensure that the application is able to function normally even with missing or corrupted data files
+    1. Test case: Delete `patients.json` and `appointments.json` files in the Baymax application in `/data` folder. Start up the application as usual.
+       Expected: Baymax application is populated with sample data.
+    1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
+       Expected: Baymax application is populated with sample data.
