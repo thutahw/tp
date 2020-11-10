@@ -11,12 +11,12 @@ title: Baymax - Developer Guide
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.3. [Logic Component](#33-logic-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.4. [Model Component](#34-model-component)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.5. [Storage Component](#35-storage-component)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Storage Component](#36-common-classes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.6. [Common Classes](#36-common-classes)<br>
 4. [**Implementation**](#4-implementation)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 [List Managers](#41-list-managers)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 [Patient Manager](#42-patient-management-features)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3 [Apointment Manager](#43-appointment-management-features)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4 [Calendar Feature](#44-calendar-feature)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1. [List Managers](#41-list-managers)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2. [Patient Management Features](#42-patient-management-features)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.3. [Appointment Management Features](#43-appointment-management-features)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.4. [Calendar Feature](#44-calendar-feature)<br>
 5. [**Documentation**](#5-documentation)<br>
 6. [**Testing**](#6-testing)<br>
 7. [**Dev Ops**](#7-dev-ops)<br>
@@ -216,7 +216,7 @@ The `Storage` component,
 * Saves `Patient` and `Appointment` data in json format. 
 * Parses a json file in the correct format to get a `PatientManager` or `AppointmentManager` object.
 
-### 3.6. Common classes
+### 3.6. Common Classes
 
 Classes used by multiple components are in the `team.baymax.commons` package. 
 
