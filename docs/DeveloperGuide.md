@@ -969,3 +969,5 @@ testers are expected to do more *exploratory* testing.
        Expected: Baymax application is populated with sample data.
     1. Test case: Open `patients.json` or `appointments.json` and corrupt the file by adding gibberish text or deleting part of the file to destroy the json formatting.
        Expected: Baymax application is populated with sample data.
+
+<div style="page-break-after: always;"></div>

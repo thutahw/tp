@@ -985,3 +985,5 @@ View help: `help` | `help`
 Switch between tabs: `TAB_NAME` | `calendar`
 Exit the program : `exit` | `exit`
 Clear all data: `clear`   | `clear`
+
+<div style="page-break-after: always;"></div>
