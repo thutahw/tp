@@ -87,7 +87,7 @@ document, in order to make it easier for you to read it.
 We will be referring to certain parts of the application window by their names as shown in the image below:
 
 ![addpatient](images/gui.png)<br>
-*Figure 2.2.1a Sections of the Application Window*
+*Figure 2.2.1a. Sections of the Application Window*
 
 Section of Window | Description
 --------------|--------------
@@ -166,12 +166,12 @@ Most of the commands take the following format:
    This is your dashboard.
    
    ![Ui](images/Dashboard.png)<br>
-   *Figure 3a Baymax Dashboard*
+   *Figure 3a. Baymax Dashboard*
 
 5. When the app is first started, it will contain some sample patients and appointments for you to explore. If you want to take a look at the appointments, for instance, you can type `listappts` into the Command Box and press Enter. You will then be brought to the appointment information tab. 
    
    ![Ui](images/Ui.png)<br>
-   *Figure 3b Baymax Graphical User Interface*
+   *Figure 3b. Baymax Graphical User Interface*
    
    Tip: Typing **`help`** and pressing Enter will open up the help tab, which allows you to learn more commands.
 
@@ -699,7 +699,7 @@ KEYWORD  | The keyword(s) by which to search for appointments. It can be an inco
 You will see a list of all appointments with description or tags that contain the keyword 'check'.<br>
     
    ![findappt](images/findapptbytagsuccess.png)<br>
-   *Figure 5.2.7b. Finding an appointment by tag*
+   *Figure 5.2.7a. Finding an appointment by tag*
 
 #### 5.2.8. Cancel an appointment: `cancel`
 You can use this command to cancel an existing appointment. To specify the appointment, use either its `INDEX` in the most recently displayed appointment list, or its `DATETIME` with the full `NAME` of the patient it belongs to. 
@@ -768,7 +768,7 @@ YEAR          | The year you want to switch Calendar to. It must be a <ins>4-dig
 1. You will see the Calendar Tab displayed, with a view of the currently selected month in the year 2019.
 
     ![changeyear](images/year2019.png)<br>
-    *Figure 5.3.1a Switching the year to 2019*
+    *Figure 5.3.1a. Switching the year to 2019*
 
 #### 5.3.2. Switch to a particular month: `month`
 You can use this command to switch to a particular month and view the appointments in a calendar format.
