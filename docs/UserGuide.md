@@ -48,6 +48,7 @@ title: Baymax - User Guide
     7.4. [Utility Commands](#74-utility-commands)<br>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 (Contributed by Li Jianhan & Shi Hui Ling)
@@ -67,6 +68,7 @@ designing our User Interface so that it feels as intuitive to first-time users a
 you can achieve with Baymax through a clean and simple User Interface. What are you waiting for? Head on to [Section 3 Quick Start](#3-quick-start)!
 
 --------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. About
 (Contributed by Li Jianhan, Thuta Htun Wai, Kaitlyn Ng, Reuben & Shi Hui Ling)
@@ -153,6 +155,7 @@ Most of the commands take the following format:
 </div>
 
 ------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick Start
 
@@ -178,6 +181,7 @@ Most of the commands take the following format:
 6. Refer to the [Features](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Navigation Between Tabs
 
@@ -454,6 +458,7 @@ If the `INDEX` entered is invalid (E.g `deletepatient 11` is entered, but there 
     *Figure 5.1.6b. Deleting a patient - failure*
     
 ----------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.2. Appointment Information Management
 
@@ -737,6 +742,7 @@ If the command entered is valid:
 The current version of Baymax **does not support undoing/redoing**. Be careful when using the `cancel` command as this action removes the appointment from the system permanently and is irreversible. 
     
 -------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.3. Calendar 
 Baymax Calendar allows you to easily visualise the availability of all the days within a month, and to see the schedule of a particular day. When switching to the Calendar Tab, Baymax will display the current month and year by default, until you specify something else.
@@ -823,6 +829,7 @@ DAY            | The day of the month you want to switch to. It must be a <ins>p
 For the `addappt` command, where the `at/TIME` field can be specified in place of the `on/DATETIME` field, the appointment will be set on the current selected date of the Calendar. E.g. if the schedule for 09-11-2020 was last displayed in Calendar, the command `addappt 1 at/13:00 ...` will set the date and time of the appointment as 9 November 2020, 1.00PM (even if you had run other Patient and Appointment commands after).
     
 ----------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.4. Utilities
 
@@ -884,6 +891,7 @@ This is a command to be used with **caution** as it permanently removes all data
     *Figure 5.4.3c. Appointment List when `listappts` is entered*
     
 ---------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.5. Features coming in Version 2.0
 
@@ -914,6 +922,8 @@ This feature will allow you to view all the appointments within a specified peri
  will automatically load your data upon launching.
 
 ---------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 7. Command Summary
 (Contributed by Hui Ling and Reuben)
 
