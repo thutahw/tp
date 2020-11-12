@@ -217,7 +217,7 @@ help       | Help / Additional Information: displays list of commands
 ## 5. Features
 (Contributed by Thuta and Reuben)
 
-You can find detailed here all of Baymax's main features and how to use their associated commands. Each subsection will guide you with brief notes about the specific feature, as well as the command's format, explanations of its inputs, an example and the expected outcome of running it. 
+Here you can find details on all of Baymax's main features and how to use their associated commands. Each subsection will guide you with brief notes about the specific feature, as well as the command's format, explanations of its inputs, an example and the expected outcome of running it. 
 
 ### 5.1. Patient Information Management
 
