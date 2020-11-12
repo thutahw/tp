@@ -154,6 +154,26 @@ Most of the commands take the following format:
     
 </div>
 
+Some of the commands also take the following format instead:
+
+`command_word INDEX prefix/INPUT`, e.g. `addappt 2 on/11-02-2020 14:00 dur/60 desc/Regular checkup`
+
+In these commands, you specify a patient or appointment using its `INDEX`. For instance, in the above 
+`addappt` command, the `INDEX` value `2` is used to refer to a particular patient. You can find the `INDEX`
+of a patient by looking at the number next to their name in the Patient Tab. 
+
+![diffindex1](images/diffindex1.jpeg)<br>
+
+Note that the `INDEX` of a patient can change based on the current list of patients displayed. As shown above, 
+the patient Charlotte Oliveiro has the `INDEX` 3, but in the filtered list below, the same patient
+has the `INDEX` 1. The `INDEX` of the patient will follow the <ins>most recent list of patients being displayed</ins>.
+
+![diffindex2](images/diffindex2.jpeg)<br>
+
+You can obtain the `INDEX` of appointments in the same manner.
+
+
+
 ------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -221,7 +241,7 @@ help       | Help / Additional Information: displays list of commands
 ## 5. Features
 (Contributed by Thuta and Reuben)
 
-You can find detailed here all of Baymax's main features and how to use their associated commands. Each subsection will guide you with brief notes about the specific feature, as well as the command's format, explanations of its inputs, an example and the expected outcome of running it. 
+Here you can find details on all of Baymax's main features and how to use their associated commands. Each subsection will guide you with brief notes about the specific feature, as well as the command's format, explanations of its inputs, an example and the expected outcome of running it. 
 
 ### 5.1. Patient Information Management
 
