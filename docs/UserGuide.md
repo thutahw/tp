@@ -340,7 +340,7 @@ If the field to be edited is absent (e.g. `editpatient 3` is entered):
 
 :bulb: **Note:** 
 
-1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. If you wish to view the whole patient list again, you can use the `listpatients` command from [Section 5.1.2 List all patients](#512-list-all-patients-listpatients).   
+1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. 
 
 2. You can **clear all** existing tags of a patient by entering `editpatient INDEX tag/`
 
