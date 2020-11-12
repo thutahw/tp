@@ -48,6 +48,7 @@ title: Baymax - User Guide
     7.4. [Utility Commands](#74-utility-commands)<br>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 (Contributed by Li Jianhan & Shi Hui Ling)
@@ -67,6 +68,7 @@ designing our User Interface so that it feels as intuitive to first-time users a
 you can achieve with Baymax through a clean and simple User Interface. What are you waiting for? Head on to [Section 3 Quick Start](#3-quick-start)!
 
 --------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2. About
 (Contributed by Li Jianhan, Thuta Htun Wai, Kaitlyn Ng, Reuben & Shi Hui Ling)
@@ -87,7 +89,7 @@ document, in order to make it easier for you to read it.
 We will be referring to certain parts of the application window by their names as shown in the image below:
 
 ![addpatient](images/gui.png)<br>
-*Figure 2.2.1a Sections of the Application Window*
+*Figure 2.2.1a. Sections of the Application Window*
 
 Section of Window | Description
 --------------|--------------
@@ -154,25 +156,24 @@ Most of the commands take the following format:
 
 Some of the commands also take the following format instead:
 
-`command_word INDEX prefix/INPUT`, e.g. `addappt 2 on/11-02-2020 14:00 dur/60 desc/Regular checkup`
+`command_word INDEX prefix/INPUT`, e.g. `addappt 3 on/11-02-2020 14:00 dur/60 desc/Regular checkup`
 
-In these commands, you specify a patient or appointment using its `INDEX`. For instance, in the above 
-`addappt` command, the `INDEX` value `2` is used to refer to a particular patient. You can find the `INDEX`
-of a patient by looking at the number next to their name in the Patient Tab. 
+In these commands, you specify a patient or appointment using its `INDEX`. For instance, in the above `addappt` command, the `INDEX` value `3` is used to refer to a particular patient. You can find the `INDEX` of a patient by looking at the number next to their name in the Patient Tab. 
 
-![diffindex1](images/diffindex1.jpeg)<br>
+   ![diffindex1](images/diffindex1.jpeg)<br>
+   *Figure 2.2.3b. Charlotte Oliveiro with index 3*
 
-Note that the `INDEX` of a patient can change based on the current list of patients displayed. As shown above, 
-the patient Charlotte Oliveiro has the `INDEX` 3, but in the filtered list below, the same patient
-has the `INDEX` 1. The `INDEX` of the patient will follow the <ins>most recent list of patients being displayed</ins>.
+Note that the `INDEX` of a patient can change based on the current list of patients displayed. As shown above, the patient Charlotte Oliveiro has the `INDEX` 3, but in the filtered list below, the same patient has the `INDEX` 1. The `INDEX` of the patient will follow the <ins>most recent list of patients being displayed</ins>.
 
-![diffindex2](images/diffindex2.jpeg)<br>
+   ![diffindex2](images/diffindex2.jpeg)<br>
+   *Figure 2.2.3c. Charlotte Oliveiro with index 1*
 
 You can obtain the `INDEX` of appointments in the same manner.
 
 
 
 ------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick Start
 
@@ -186,18 +187,19 @@ You can obtain the `INDEX` of appointments in the same manner.
    This is your dashboard.
    
    ![Ui](images/Dashboard.png)<br>
-   *Figure 3a Baymax Dashboard*
+   *Figure 3a. Baymax Dashboard*
 
 5. When the app is first started, it will contain some sample patients and appointments for you to explore. If you want to take a look at the appointments, for instance, you can type `listappts` into the Command Box and press Enter. You will then be brought to the appointment information tab. 
    
    ![Ui](images/Ui.png)<br>
-   *Figure 3b Baymax Graphical User Interface*
+   *Figure 3b. Baymax Graphical User Interface*
    
    Tip: Typing **`help`** and pressing Enter will open up the help tab, which allows you to learn more commands.
 
 6. Refer to the [Features](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Navigation Between Tabs
 
@@ -327,7 +329,7 @@ Here are some examples of valid `editpatient` commands:
 
 Input | Description
 ---------|------------
-INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. This is also the list shown in the Patients Tab and/or the current Main Display. Hence, the index of a patient can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 NRIC          | The nric of the patient. It must start with either 'S', 'T', 'F' or 'G' and end with an alphabet <ins>(both case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
 NAME          | The name of the patient. It must only consist of <ins>alphabets and/or numbers (case-insensitive)</ins>. E.g. Alice Tan, Alice1
 PHONE         | The hand phone number that the patient wishes to be contacted by. It must be <ins>at least 3 digits</ins> long. It must only consist of numbers. E.g. 91234567
@@ -360,7 +362,7 @@ If the field to be edited is absent (e.g. `editpatient 3` is entered):
 
 :bulb: **Note:** 
 
-1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. If you wish to view the whole patient list again, you can use the `listpatients` command from [Section 5.1.2 List all patients](#512-list-all-patients-listpatients).   
+1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. 
 
 2. You can **clear all** existing tags of a patient by entering `editpatient INDEX tag/`
 
@@ -374,7 +376,7 @@ You can use this command to add or replace a patient's remark using their `INDEX
 
 Input | Description
 ----------|------------
-INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. This is also the list shown in the Patients Tab and/or the current Main Display. Hence, the index of a patient can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 REMARK    | Any additional information about the patient. Alphabets, numbers, spaces, and special characters (like /*@#) are all allowed. <ins>A blank remark will remove any existing remarks.</ins> E.g. Only available on Mon / Tues
 
 **Example:**<br>
@@ -452,7 +454,7 @@ You can use this command to delete a patient using their `INDEX` in the most rec
 
 Input | Description
 ---------------|------------
-INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. This is also the list shown in the Patients Tab and/or the current Main Display. Hence, the index of a patient can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 
 **Example:**<br>
 1. Type `deletepatient 8` into the Command Box.
@@ -474,6 +476,7 @@ If the `INDEX` entered is invalid (E.g `deletepatient 11` is entered, but there 
     *Figure 5.1.6b. Deleting a patient - failure*
     
 ----------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.2. Appointment Information Management
 
@@ -501,7 +504,7 @@ You can use this command to add a new appointment for an existing patient. To sp
 
 Input | Description
 ---------------|------------
-INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. This is also the list shown in the Patients Tab and/or the current Main Display. Hence, the index of a patient can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 NRIC          | The nric of the patient. It must start with either 'S', 'T', 'F' or 'G' and end with an alphabet <ins>(both case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 TIME           | The time of the appointment. It must be in <ins>HH:MM</ins> format following the 24-hour system. E.g. 15:00. The date will be inferred from the date set in the calendar (see [Section 5.3 Calendar](#53-calendar).
@@ -563,7 +566,7 @@ One tip for this command is to first find patients by name using the `findpatien
 
 Input | Description
 ----------|------------
-INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. This is also the list shown in the Patients Tab and/or the current Main Display. Hence, the index of a patient can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the patient's name in the <ins>most recently displayed</ins> patient list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 NRIC      | The nric of the patient. It must start with either 'S', 'T', 'F' or 'G' and end with an alphabet <ins>(both case-insensitive)</ins> and contain 7 numbers in between them. E.g. S1234567A, s1234567a
 NAME      | The name by which to search for the patient. It must be the <ins>exact full name</ins> of the patient.
 
@@ -597,7 +600,7 @@ Here are some examples of valid `editappt` commands:
 
 Input | Description
 ---------------|------------
-INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. This is also the list shown in the Appointments Tab and/or the current Main Display. Hence, the index of an appointment can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 DURATION       | The duration of the appointment in <ins>minutes</ins>. It must be a positive whole number, and the appointment must not extend to the next day. E.g. 60
 DESCRIPTION    | The description of the appointment. Alphabets, numbers, spaces, and special characters (like /*@#) are all allowed. E.g. Wrist fracture check-up #3
@@ -638,7 +641,7 @@ You can use this command to mark an existing appointment as done. To specify the
 
 Input | Description
 ---------------|------------
-INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. This is also the list shown in the Appointments Tab and/or the current Main Display. Hence, the index of an appointment can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 NAME           | The name by which to search for the patient. It must be the <ins>exact full name</ins> of the patient.
 
@@ -673,7 +676,7 @@ You can use this command to mark an existing appointment as missed. To specify t
 
 Input | Description
 ---------------|------------
-INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. This is also the list shown in the Appointments Tab and/or the current Main Display. Hence, the index of an appointment can change after running certain commands. It must be a positive number.
+INDEX     | The number shown beside the appointment in the <ins>most recently displayed</ins> appointment list. It must be a positive number within the length of the list. See [Section 2.2.3 Command Format](#223-command-format) for more details.
 DATETIME       | The date followed by the time of the appointment. It must be in <ins>DD-MM-YYYY HH:MM</ins> format. E.g. 20-01-2020 15:00
 NAME           | The name by which to search for the patient. It must be the <ins>exact full name</ins> of the patient.
 
@@ -757,6 +760,7 @@ If the command entered is valid:
 The current version of Baymax **does not support undoing/redoing**. Be careful when using the `cancel` command as this action removes the appointment from the system permanently and is irreversible. 
     
 -------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.3. Calendar 
 Baymax Calendar allows you to easily visualise the availability of all the days within a month, and to see the schedule of a particular day. When switching to the Calendar Tab, Baymax will display the current month and year by default, until you specify something else.
@@ -788,7 +792,7 @@ YEAR          | The year you want to switch Calendar to. It must be a <ins>4-dig
 1. You will see the Calendar Tab displayed, with a view of the currently selected month in the year 2019.
 
     ![changeyear](images/year2019.png)<br>
-    *Figure 5.3.1a Switching the year to 2019*
+    *Figure 5.3.1a. Switching the year to 2019*
 
 #### 5.3.2. Switch to a particular month: `month`
 You can use this command to switch to a particular month and view the appointments in a calendar format.
@@ -843,6 +847,7 @@ DAY            | The day of the month you want to switch to. It must be a <ins>p
 For the `addappt` command, where the `at/TIME` field can be specified in place of the `on/DATETIME` field, the appointment will be set on the current selected date of the Calendar. E.g. if the schedule for 09-11-2020 was last displayed in Calendar, the command `addappt 1 at/13:00 ...` will set the date and time of the appointment as 9 November 2020, 1.00PM (even if you had run other Patient and Appointment commands after).
     
 ----------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.4. Utilities
 
@@ -904,6 +909,7 @@ This is a command to be used with **caution** as it permanently removes all data
     *Figure 5.4.3c. Appointment List when `listappts` is entered*
     
 ---------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 5.5. Features coming in Version 2.0
 
@@ -934,6 +940,8 @@ This feature will allow you to view all the appointments within a specified peri
  will automatically load your data upon launching.
 
 ---------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 7. Command Summary
 (Contributed by Hui Ling and Reuben)
 
