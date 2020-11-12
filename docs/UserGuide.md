@@ -699,7 +699,7 @@ KEYWORD  | The keyword(s) by which to search for appointments. It can be an inco
 You will see a list of all appointments with description or tags that contain the keyword 'check'.<br>
     
    ![findappt](images/findapptbytagsuccess.png)<br>
-   *Figure 5.2.7b. Finding an appointment by tag*
+   *Figure 5.2.7a. Finding an appointment by tag*
 
 #### 5.2.8. Cancel an appointment: `cancel`
 You can use this command to cancel an existing appointment. To specify the appointment, use either its `INDEX` in the most recently displayed appointment list, or its `DATETIME` with the full `NAME` of the patient it belongs to. 
