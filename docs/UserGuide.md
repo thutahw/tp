@@ -4,46 +4,46 @@ title: Baymax - User Guide
 ---
 ## Table of Contents
 1. [**Introduction**](#1-introduction)<br>
-2. [**Quick Start**](#2-quick-start)<br>
-3. [**About**](#3-about)<br>
-    3.1. [Structure of this Document](#31-structure-of-this-document)<br>
-    3.2. [Reading this Document](#32-reading-this-document)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1. [GUI Terminology](#321-gui-terminology)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2. [General Symbols](#322-general-symbols)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3. [Command Format & Syntax](#323-command-format-syntax)<br>
-4. [**Navigating Between Tabs**](#4-navigating-between-tabs)<br>
+2. [**About**](#2-about)<br>
+    2.1. [Structure of this Document](#21-structure-of-this-document)<br>
+    2.2. [Reading this Document](#22-reading-this-document)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1. [Sections of the Application Window](#221-sections-of-the-application-window)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2. [Special Formats](#222-special-formats)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3. [Command Format](#223-command-format)<br>
+3. [**Quick Start**](#3-quick-start)<br>
+4. [**Navigation Between Tabs**](#4-navigation-between-tabs)<br>
 5. [**Features**](#5-features)<br>
     5.1. [Patient Information Management](#51-patient-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.1. [Add a new patient: `addpatient`](#511-add-a-new-patient-addpatient)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.2. [List all patients: `listpatients`](#512-list-all-patients-listpatients)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.3. [Delete a patient profile: `deletepatient`](#513-delete-a-patient-deletepatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.4. [Edit a patient profile: `editpatient`](#514-edit-a-patients-information-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.3. [Edit a patient's information: `editpatient`](#513-edit-a-patients-information-editpatient)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.4. [Add a remark to a patient: `remark`](#514-add-a-remark-to-a-patient-remark)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.5. [Find patient by name: `findpatient`](#515-find-patient-by-name-findpatient)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.6. [Add a remark to a patient: `remark`](#516-add-a-remark-to-a-patient-remark)<br>
-    5.2. [Appointment Management](#52-appointment-management)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1.6. [Delete a patient profile: `deletepatient`](#516-delete-a-patient-deletepatient)<br>
+    5.2. [Appointment Information Management](#52-appointment-information-management)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.1. [Add a new appointment: `addappt`](#521-add-a-new-appointment-addappt)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. [List all appointments of a patient: `listapptsof`](#522-list-all-appointments-of-a-patient-listapptsof)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.3. [List all appointments: `listappts`](#523-list-all-appointments-listappts)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. [List all appointments: `listappts`](#522-list-all-appointments-listappts)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.3. [List all appointments of a patient: `listapptsof`](#523-list-all-appointments-of-a-patient-listapptsof)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.4. [Edit an appointment: `editappt`](#524-edit-an-appointment-editappt)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.5. [Cancel an appointment: `cancel`](#525-cancel-an-appointment-cancel)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.6. [Mark an appointment as done: `done`](#526-mark-an-appointment-as-done-done)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.7. [Mark an appointment as missed: `missed`](#527-mark-an-appointment-as-missed-missed)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.8. [Find appointment by keyword: `findappt`](#528-find-appointment-by-keyword-findappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.5. [Mark an appointment as done: `done`](#525-mark-an-appointment-as-done-done)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.6. [Mark an appointment as missed: `missed`](#526-mark-an-appointment-as-missed-missed)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.7. [Find appointment by keyword: `findappt`](#527-find-appointment-by-keyword-findappt)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.8. [Cancel an appointment: `cancel`](#528-cancel-an-appointment-cancel)<br>
     5.3. [Calendar](#53-calendar)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.1. [Switch to a particular year: `year`](#531-switch-to-a-particular-year-year)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.2. [Switch to a particular month: `month`](#532-switch-to-a-particular-month-month)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.3. [Switch to a particular day: `day`](#533-switch-to-a-particular-day-day)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3.3. [Display schedule of a particular day: `day`](#533-display-schedule-of-a-particular-day-day)<br>
     5.4. [Utilities](#54-utilities)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.1. [View help : `help`](#541-view-help-help)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.2. [Exit the program: `exit`](#542-exit-the-program--exit)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4.3. [Clear all data: `clear`](#543-clear-all-data-in-baymax-clear)<br>
-    5.5. [Features coming soon in Version 2.0](#55-features-coming-in-version-20)<br>
+    5.5. [Features coming in Version 2.0](#55-features-coming-in-version-20)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.1. [Undo/Redo v2.0](#551-undoredo-v20)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.2. [Display appointments within a period v2.0](#552-display-appointments-within-a-period-v20)<br>
 6. [**FAQ**](#6-faq)<br>
 7. [**Command Summary**](#7-command-summary)<br>
     7.1. [Patient Information Management Commands](#71-patient-information-management-commands)<br>
-    7.2. [Appointment Management Commands](#72-appointment-management-commands)<br>
+    7.2. [Appointment Information Management Commands](#72-appointment-information-management-commands)<br>
     7.3. [Calendar Commands](#73-calendar-commands)<br>
     7.4. [Utility Commands](#74-utility-commands)<br>
 
@@ -93,7 +93,7 @@ Section of Window | Description
 --------------|--------------
 Command Box   | Commands are entered here.
 Command Result Box | Success and error messages after running commands are displayed here.
-Tabs | Dashboard, Calendar, Schedule, Patient, Appointment, and Additional Information tabs can be accessed here. Note that the tabs are **not** clickable. See [Section 4 Navigating Between Tabs](#4-navigating-between-tabs) to find out how to navigate between tabs.
+Tabs | Dashboard, Calendar, Schedule, Patient, Appointment, and Additional Information tabs can be accessed here. Note that the tabs are **not** clickable. See [Section 4 Navigation Between Tabs](#4-navigation-between-tabs) to find out how to navigate between tabs.
 Main Display | Calendar views, Patient lists and Appointment lists are displayed here in their respective tabs.
 
 #### 2.2.2. Special Formats
@@ -179,7 +179,7 @@ Most of the commands take the following format:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Navigating Between Tabs
+## 4. Navigation Between Tabs
 
 You can use these commands to switch between tabs by specifying the tab name.
 
@@ -196,7 +196,7 @@ TAB_NAME   | Tab that Baymax will switch to
 -----------|----------------------------
 dashboard  | Dashboard: default view, shows current date and time, and today's appointments
 calendar   | Calendar: see [Section 5.3 Calendar](#53-calendar)
-schedule   | Schedule: see [Section 5.3.3 Display schedule of a particular day](#533-display-schedule-of-a-particular-day)
+schedule   | Schedule: see [Section 5.3.3 Display schedule of a particular day](#533-display-schedule-of-a-particular-day-day)
 patient    | Patients: displays current list of patients
 appt       | Appointments: displays current list of appointments
 help       | Help / Additional Information: displays list of commands
@@ -340,7 +340,7 @@ If the field to be edited is absent (e.g. `editpatient 3` is entered):
 
 :bulb: **Note:** 
 
-1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. If you wish to view the whole patient list again, you can use the `listpatients` command from [Section 5.1.2 List All Patients](#512-list-all-patients-listpatients).   
+1. When a patient is edited successfully, the Main Display only shows the recently edited patient. This makes it easier for you to verify that you have edited the patient's details correctly without having to search through the entire list. If you wish to view the whole patient list again, you can use the `listpatients` command from [Section 5.1.2 List all patients](#512-list-all-patients-listpatients).   
 
 2. You can **clear all** existing tags of a patient by entering `editpatient INDEX tag/`
 
@@ -382,7 +382,7 @@ If the `INDEX` entered is invalid (E.g. `remark 11` is entered, but there are on
 
 :bulb: **Note:**
 
-1. When a patient's remark is added or replaced successfully, the Main Display only shows the patient with the edited remark. This makes it easier for you to verify that you have edited the patient's remark correctly without having to search through the entire list. If you wish to view the whole patient list again, you can use the `listpatients` command from [Section 5.1.2 List All Patients](#512-list-all-patients-listpatients).   
+1. When a patient's remark is added or replaced successfully, the Main Display only shows the patient with the edited remark. This makes it easier for you to verify that you have edited the patient's remark correctly without having to search through the entire list.  
 
 2. Each patient can only have one remark. Using this command when a patient already has a remark will **replace** the existing remark with the new one entered.
 
@@ -601,7 +601,7 @@ If the command is valid:
 
 :bulb: **Note:**
 
-When an appointment is edited successfully, the Main Display only shows the recently edited appointment. This makes it easier for you to verify that you have edited the appointment's details correctly without having to search through the entire list. If you wish to view the whole appointment list again, you can use the `listappts` command from [Section 5.2.3 List All Appointments](#523-list-all-appointments-listappts).
+When an appointment is edited successfully, the Main Display only shows the recently edited appointment. This makes it easier for you to verify that you have edited the appointment's details correctly without having to search through the entire list.   
 
 #### 5.2.5. Mark an appointment as done: `done`
 You can use this command to mark an existing appointment as done. To specify the appointment, use either its `INDEX` in the most recently displayed appointment list, or its `DATETIME` with the full `NAME` of the patient it belongs to. 
@@ -930,7 +930,7 @@ Edit a Patient's Information| `editpatient INDEX <at least 1 patient information
 Find a Patient| `findpatient NAME_KEYWORD` | `findpatient Alex`
 Add a Remark| `remark INDEX r/REMARK` | `remark 2 r/Not free on Fridays`
 
-### 7.2. Appointment Management Commands
+### 7.2. Appointment Information Management Commands
 
 **Purpose** |**Command**             | **Example**
 -------------|-----------|--------------------
