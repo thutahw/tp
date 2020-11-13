@@ -176,6 +176,7 @@ You can obtain the `INDEX` of appointments in the same manner.
 <div style="page-break-after: always;"></div>
 
 ## 3. Quick Start
+(Contributed by Kaitlyn)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -202,6 +203,7 @@ You can obtain the `INDEX` of appointments in the same manner.
 <div style="page-break-after: always;"></div>
 
 ## 4. Navigation Between Tabs
+(Contributed by Jianhan and Thuta)
 
 You can use these commands to switch between tabs by specifying the tab name.
 
@@ -237,7 +239,7 @@ help       | Help / Additional Information: displays list of commands
 <div style="page-break-after: always;"></div>
 
 ## 5. Features
-(Contributed by Thuta and Reuben)
+(Contributed by Thuta, Reuben and Kaitlyn)
 
 Here you can find details on all of Baymax's main features and how to use their associated commands. Each subsection will guide you with brief notes about the specific feature, as well as the command's format, explanations of its inputs, an example and the expected outcome of running it. 
 
